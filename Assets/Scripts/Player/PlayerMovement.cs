@@ -90,9 +90,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 position = transform.position;
         Vector3 localScale = transform.localScale;
-        float distance = 1.5f * localScale.x;
+        float distance = .4f * localScale.y;
         Bounds spriteBounds = _spriteRenderer.bounds;
-        Vector3 playerBottomCenter = position + new Vector3(0, spriteBounds.min.y, 0) * localScale.x;  // fix
+        Vector3 playerBottomCenter = position - new Vector3(0, (spriteBounds.max.y - spriteBounds.min.y) / 2, 0);
         Vector3 playerBottomLeftCorner = playerBottomCenter + new Vector3(-.2f, .15f, 0);
         Vector3 playerBottomRightCorner = playerBottomCenter + new Vector3(.2f, .15f, 0);
         var leftHit = Physics2D.Raycast(playerBottomLeftCorner, Vector2.down, distance, _groundLayerMask);
