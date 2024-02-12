@@ -304,11 +304,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee826474b0037b4481df10b0c4b3adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingForce: 20
+  shootingForce: 5
   aimDistance: 20
   aimPoint: {fileID: 1218942819}
   shootingPoint: {fileID: 1492824685}
   gun: {fileID: 1037843130}
+  trajectoryPointPrefab: {fileID: 566844179695401612, guid: d0277e5989220ea47a321014d9772f70,
+    type: 3}
+  trajectoryPointsCount: 20
   beanPrefab: {fileID: 59112727644043306, guid: e02811d407c6c5042b1d12a5a4fa9a9f,
     type: 3}
   platformLayerMask:
@@ -401,7 +404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0011269882, y: -0.000000017206498, z: -1.9391537e-11, w: 0.9999994}
+  m_LocalRotation: {x: -0.0011269683, y: 0.0000000172065, z: 1.9391197e-11, w: 0.9999994}
   m_LocalPosition: {x: -1.21, y: 2.58, z: -13.860001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1073,7 +1076,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436032559}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0011269882, y: -0.000000017206498, z: -1.9391537e-11, w: 0.9999994}
+  m_LocalRotation: {x: -0.0011269683, y: 0.0000000172065, z: 1.9391197e-11, w: 0.9999994}
   m_LocalPosition: {x: -1.21, y: 2.58, z: -13.860001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
