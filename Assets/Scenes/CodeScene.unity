@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 48291944}
   - component: {fileID: 48291943}
   - component: {fileID: 48291945}
+  - component: {fileID: 48291946}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -209,7 +210,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 74544619}
+  - {fileID: 1037843131}
   - {fileID: 1218942820}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -291,38 +292,28 @@ MonoBehaviour:
   maxJumpHeight: 1.5
   maxJumpTime: 1
   minVelocity: 8
---- !u!1 &74544618
-GameObject:
+--- !u!114 &48291946
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 74544619}
-  m_Layer: 0
-  m_Name: Arm Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &74544619
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 74544618}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.5292833, w: 0.84844524}
-  m_LocalPosition: {x: 0.42623532, y: -0.16924667, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1037843131}
-  m_Father: {fileID: 48291942}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 63.914}
+  m_GameObject: {fileID: 48291940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee826474b0037b4481df10b0c4b3adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingForce: 20
+  aimDistance: 20
+  aimPoint: {fileID: 1218942819}
+  shootingPoint: {fileID: 1492824685}
+  gun: {fileID: 1037843130}
+  beanPrefab: {fileID: 59112727644043306, guid: e02811d407c6c5042b1d12a5a4fa9a9f,
+    type: 3}
+  platformLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +614,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1037843131}
   - component: {fileID: 1037843132}
-  - component: {fileID: 1037843133}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -639,14 +629,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037843130}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.054000113, y: 0.36900002, z: 0}
-  m_LocalScale: {x: 1, y: 0.34099996, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.2801574, w: 0.95995414}
+  m_LocalPosition: {x: 0.08159566, y: -0.0915277, z: 0}
+  m_LocalScale: {x: 1, y: 0.341, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1492824686}
-  m_Father: {fileID: 74544619}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_Father: {fileID: 48291942}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 32.539}
 --- !u!212 &1037843132
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -700,27 +690,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1037843133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1037843130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eee826474b0037b4481df10b0c4b3adb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootingForce: 20
-  aimDistance: 20
-  aimPoint: {fileID: 0}
-  shootingPoint: {fileID: 0}
-  gun: {fileID: 0}
-  beanPrefab: {fileID: 0}
-  platformLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &1218942819
 GameObject:
   m_ObjectHideFlags: 0

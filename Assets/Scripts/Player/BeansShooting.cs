@@ -31,7 +31,7 @@ public class BeansShooting : MonoBehaviour
     
 
    
-    private void FixedUpdate()
+    private void Update()
     {
         ShootBeans();
     }
@@ -48,6 +48,11 @@ public class BeansShooting : MonoBehaviour
             // transform.Rotate(Vector3.up * speed * Time.deltaTime);
             GameObject projectile = Instantiate(beanPrefab, shootingPoint.transform.position, Quaternion.identity);
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+            // use the gun rotation to determine the direction of the projectile
+            
+            
+            Debug.Log(gun.transform.eulerAngles);
+            Vector3 direction = (transform.localScale.x>=0)? new Vector3(1,1,0): new Vector3(-1,1,0);
             rb.velocity = transform.forward * shootingForce;        
         }
     }
