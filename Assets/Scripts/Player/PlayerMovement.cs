@@ -62,15 +62,27 @@ public class PlayerMovement : MonoBehaviour
         // player's facing direction
         if (_inputAxis > 0f)
         {
+            ChangeDirection(_spriteRenderer.flipX,false);
             _spriteRenderer.flipX = false;
         }
         else if (_inputAxis < 0f)
         {
+            ChangeDirection(_spriteRenderer.flipX,true);
             _spriteRenderer.flipX = true;
         }
         if (Turning)
         {
             _velocity.x =0;  // i.e. disables turning for now
+        }
+    }
+
+    private void ChangeDirection(bool currentFlipX, bool newFlipX)
+    {
+        if (currentFlipX!=newFlipX)
+        {
+            Vector3 flipScale = transform.localScale;
+            flipScale.x *= -1;
+            transform.localScale = flipScale;
         }
     }
     
