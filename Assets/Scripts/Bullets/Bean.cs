@@ -9,9 +9,9 @@ public class Bean : MonoBehaviour
     public bool Grounded { get; private set; }
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _VineLayerMask;
+    [SerializeField] private GameObject _vinePrefab;
 
     [SerializeField] private float distanceToUpperPlatform = 20f;
-    [SerializeField] private float platformWidth = 5f;
     
     void Awake()
     {
@@ -47,18 +47,23 @@ public class Bean : MonoBehaviour
     
     private void GrowVine()
     {
+        float vineWidth = _vinePrefab.gameObject.transform.lossyScale.x;
+        float vineHeight = _vinePrefab.gameObject.transform.lossyScale.y/2;
+
         Vector3 position = transform.position + new Vector3(0,transform.localScale.y,0);
         var hit = Physics2D.Raycast(position, Vector2.up, distanceToUpperPlatform, _groundLayerMask);
-        var hitLeft = Physics2D.Raycast(position, Vector2.left, platformWidth/2, _VineLayerMask);
-        var hitRight = Physics2D.Raycast(position, Vector2.right, platformWidth/2, _VineLayerMask);
+        var hitLeft = Physics2D.Raycast(position, Vector2.left, vineWidth*0.67f, _VineLayerMask);
+        var hitRight = Physics2D.Raycast(position, Vector2.right, vineWidth*0.67f, _VineLayerMask);
 
         if (hit&& !hitLeft && !hitRight)
         {
-            Destroy(gameObject,1f);
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Instantiate(_vinePrefab, transform.position+new Vector3(0,vineHeight,0), Quaternion.identity);
+            // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Debug.Log("Vine Grown");
 
         }
+        Destroy(gameObject);
+
     }
 }
