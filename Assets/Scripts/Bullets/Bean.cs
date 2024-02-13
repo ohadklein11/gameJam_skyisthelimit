@@ -47,14 +47,15 @@ public class Bean : MonoBehaviour
     
     private void GrowVine()
     {
-        Vector3 position = transform.position;
-
+        Vector3 position = transform.position + new Vector3(0,transform.localScale.y,0);
         var hit = Physics2D.Raycast(position, Vector2.up, distanceToUpperPlatform, _groundLayerMask);
         var hitLeft = Physics2D.Raycast(position, Vector2.left, platformWidth/2, _VineLayerMask);
         var hitRight = Physics2D.Raycast(position, Vector2.right, platformWidth/2, _VineLayerMask);
 
         if (hit&& !hitLeft && !hitRight)
         {
+            Destroy(gameObject,1f);
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Debug.Log("Vine Grown");
 

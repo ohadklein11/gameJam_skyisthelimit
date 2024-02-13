@@ -167,6 +167,6 @@ MonoBehaviour:
     m_Bits: 8
   _VineLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   distanceToUpperPlatform: 20
   platformWidth: 5
