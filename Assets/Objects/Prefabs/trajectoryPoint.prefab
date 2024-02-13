@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 511393385079105108}
   - component: {fileID: 7747730938174805595}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: trajectoryPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

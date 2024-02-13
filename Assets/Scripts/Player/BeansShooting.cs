@@ -14,12 +14,12 @@ public class BeansShooting : MonoBehaviour
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject trajectoryPointPrefab;
     [SerializeField] private int trajectoryPointsCount = 20;
+    [SerializeField] private LayerMask _platformLayerMask;
     private GameObject[] trajectoryPoints;
 
 
     [SerializeField] private GameObject beanPrefab;
 
-    [SerializeField] private LayerMask platformLayerMask;
 
     private Camera _mainCamera;
     private Rigidbody2D _rigidBody;
@@ -51,7 +51,7 @@ public class BeansShooting : MonoBehaviour
         Vector3 direction = (transform.localScale.x >= 0) ? new Vector3(1, 1, 0) : new Vector3(-1, 1, 0);
 
         Vector2 currentPointPosition = (Vector2)shootingPoint.transform.position +
-                                       ((Vector2)direction * (shootingForce * t)+_rigidBody.velocity) +
+                                       ((Vector2)direction * (shootingForce * t) + _rigidBody.velocity) +
                                        (Physics2D.gravity * (t * t * 0.5f));
         return currentPointPosition;
     }
@@ -62,6 +62,14 @@ public class BeansShooting : MonoBehaviour
         for (int i = 0; i < trajectoryPoints.Length; i++)
         {
             trajectoryPoints[i].transform.position = TrajectoryPointsPosition(i * timeStep);
+            if (i >= 1)
+            {
+                var hit = Physics2D.Linecast(trajectoryPoints[i].transform.position,
+                    trajectoryPoints[i - 1].transform.position, _platformLayerMask);
+                if (hit)
+                    return;
+            }
+
             trajectoryPoints[i].SetActive(true);
         }
     }
