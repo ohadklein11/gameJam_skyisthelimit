@@ -6,9 +6,14 @@ using UnityEngine;
 public class BeansShooting : MonoBehaviour
 {
     // [SerializeField] private float gunShootingDistance = 20f;
-    [SerializeField] private float shootingForce = 20f;
+    private float _shootingForce;
+    private bool _shootingForceRising;
 
-    [SerializeField] private float aimDistance = 20f;
+    [SerializeField] private float minShootingForce = 10f;
+    [SerializeField] private float maxShootingForce = 20f;
+    [SerializeField] private float shootingSpeedChange = 0.5f;
+
+
     [SerializeField] private GameObject aimPoint;
     [SerializeField] private GameObject shootingPoint;
     [SerializeField] private GameObject gun;
@@ -44,17 +49,17 @@ public class BeansShooting : MonoBehaviour
     private void Update()
     {
         ShootBeans();
-    }
+    }Vector2 TrajectoryPointsPosition(float t)
+         {
+             Vector3 direction = (transform.localScale.x >= 0) ? new Vector3(1, 1, 0) : new Vector3(-1, 1, 0);
+     
+             Vector2 currentPointPosition = (Vector2)shootingPoint.transform.position +
+                                            ((Vector2)direction * (_shootingForce * t) + _rigidBody.velocity) +
+                                            (Physics2D.gravity * (t * t * 0.5f));
+             return currentPointPosition;
+         }
 
-    Vector2 TrajectoryPointsPosition(float t)
-    {
-        Vector3 direction = (transform.localScale.x >= 0) ? new Vector3(1, 1, 0) : new Vector3(-1, 1, 0);
-
-        Vector2 currentPointPosition = (Vector2)shootingPoint.transform.position +
-                                       ((Vector2)direction * (shootingForce * t) + _rigidBody.velocity) +
-                                       (Physics2D.gravity * (t * t * 0.5f));
-        return currentPointPosition;
-    }
+    
 
     private void ShowTrajectoryPoints()
     {
@@ -73,19 +78,53 @@ public class BeansShooting : MonoBehaviour
             trajectoryPoints[i].SetActive(true);
         }
     }
+    
+    private void DeleteTrajectoryPoints()
+    {
+        for (int i = 0; i < trajectoryPoints.Length; i++)
+        {
+            trajectoryPoints[i].SetActive(false);
+        }
+    }
 
     void ShootBeans()
     {
         if (Input.GetButtonDown("Fire1"))
         {
             // transform.Rotate(Vector3.up * speed * Time.deltaTime);
+            _shootingForce= minShootingForce;
+            _shootingForceRising = true;
+            
+        }
+
+        if (Input.GetButton("Fire1"))
+        {
+            ShowTrajectoryPoints();
+            if (_shootingForceRising)
+            {
+                _shootingForce += Time.deltaTime*shootingSpeedChange;
+                if (_shootingForce >= maxShootingForce)
+                {
+                    _shootingForceRising = false;
+                }
+            }
+            else
+            {
+                _shootingForce -= Time.deltaTime*shootingSpeedChange;
+                if (_shootingForce <= minShootingForce)
+                {
+                    _shootingForceRising = true;
+                }
+            }
+        }
+
+        if (Input.GetButtonUp("Fire1"))
+        {
             GameObject projectile = Instantiate(beanPrefab, shootingPoint.transform.position, gun.transform.rotation);
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-
-
             Vector3 direction = (transform.localScale.x >= 0) ? new Vector3(1, 1, 0) : new Vector3(-1, 1, 0);
-            rb.velocity = direction * shootingForce + (Vector3)_rigidBody.velocity;
-            ShowTrajectoryPoints();
+            rb.velocity = direction * _shootingForce + (Vector3)_rigidBody.velocity;
+            DeleteTrajectoryPoints();
         }
     }
 }

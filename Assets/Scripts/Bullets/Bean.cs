@@ -25,7 +25,6 @@ public class Bean : MonoBehaviour
 
     void Update()
     {
-
         CheckGrounded();
     }
     
@@ -37,7 +36,6 @@ public class Bean : MonoBehaviour
         Bounds spriteBounds = _spriteRenderer.bounds;
         Vector3 BeanBottomCenter = position - new Vector3(0, (spriteBounds.max.y - spriteBounds.min.y) / 2, 0);
         var hit = Physics2D.Raycast(BeanBottomCenter, Vector2.down, distance, _groundLayerMask);
-        Debug.DrawRay(BeanBottomCenter, Vector3.down * distance, Color.red);
         if (hit&& !Grounded)
         {
             GrowVine();
