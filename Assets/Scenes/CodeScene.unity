@@ -333,7 +333,6 @@ GameObject:
   - component: {fileID: 48291941}
   - component: {fileID: 48291944}
   - component: {fileID: 48291943}
-  - component: {fileID: 48291945}
   - component: {fileID: 48291947}
   - component: {fileID: 48291946}
   m_Layer: 0
@@ -475,23 +474,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &48291945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48291940}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd774d0f17eaa7d43b7fa4f144afaa82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 8
-  maxJumpHeight: 1.5
-  maxJumpTime: 0.8
-  maxSlopeAngle: 40
-  minVelocity: 8
 --- !u!114 &48291946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 6
   groundCheckRadius: 0.25
-  jumpForce: 3
+  jumpForce: 4
   slopeCheckDistance: 0.6
   maxSlopeAngle: 50
   groundCheck: {fileID: 938603030}
