@@ -1,23 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class VineScript : MonoBehaviour, IClimable
+namespace Vines
 {
-    // Start is called before the first frame update
-    void Start()
+    public class VineScript : MonoBehaviour, IClimbable
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
-    
-    public void Climb()
-    {
+        public float GetXPosition()
+        {
+            return transform.position.x;
+        }
+        // need to implement growth over time
     }
 }

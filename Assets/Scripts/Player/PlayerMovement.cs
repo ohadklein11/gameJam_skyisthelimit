@@ -1,131 +1,315 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Vines;
 
-public class PlayerMovement : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private float moveSpeed = 8f;
-    [SerializeField] private float maxJumpHeight = 3f;
-    [SerializeField] private float maxJumpTime = 1f;
-    
-    private Rigidbody2D _rigidBody;
-    
-    private float _inputAxis;
-    private Vector2 _velocity;
-    [SerializeField] private float minVelocity;
-    private float _velocityMultiplier = 1f;
-    private SpriteRenderer _spriteRenderer;
-    private int _groundLayerMask;
-
-    private float JumpForce => (2f * maxJumpHeight) / (maxJumpTime / 2f);
-    private float Gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2);
-    
-    public bool CanMove { get; set; } = true;
-    public bool Grounded { get; private set; }
-    public bool Jumping { get; private set; }
-    public bool Turning => (_inputAxis > 0f && _velocity.x < 0f) || (_inputAxis < 0f && _velocity.x > 0f);
-    public bool Running => Mathf.Abs(_velocity.x) > .25f || Mathf.Abs(_inputAxis) > .25f;
-    
-    
-    private void Awake()
+    public class PlayerMovement : MonoBehaviour
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _rigidBody = GetComponent<Rigidbody2D>();
-        _groundLayerMask = LayerMask.GetMask("Ground");
-    }
-    
-    private void Update()
-    {
-        HorizontalMovement();
-        CheckGrounded();
-        if (Grounded)
-        {
-            GroundedMovement();
-        }
-        ApplyGravity();
-    }
-
-    private void FixedUpdate()
-    {
-        Vector2 position = _rigidBody.position;
-        position += _velocity * Time.fixedDeltaTime;
-        _rigidBody.MovePosition(position);
-    }
-
-    private void HorizontalMovement()
-    {
-        _inputAxis = CanMove ? Input.GetAxis("Horizontal") : 0f;
-        _velocity.x = Mathf.MoveTowards(_velocity.x, _inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
-        _velocity.x *= _velocityMultiplier;
-        _velocity.x = _inputAxis * Mathf.Max(minVelocity, Mathf.Abs(_velocity.x));
+        [SerializeField]
+        private float movementSpeed;
+        [SerializeField] 
+        private int numFramesUntilMaxSlowdown;  // e.g. after 20 frames of moving, the player will slide to a stop upon releasing the movement key
+        [SerializeField]
+        private float groundCheckRadius;
+        [SerializeField]
+        private float jumpForce;
+        [SerializeField]
+        private float slopeCheckDistance;
+        [SerializeField]
+        private float maxSlopeAngle;
+        [SerializeField]
+        private Transform groundCheck;
+        [SerializeField]
+        private LayerMask whatIsGround;
+        [SerializeField] 
+        private LayerMask whatIsVine;
+        [SerializeField]
+        private PhysicsMaterial2D noFriction;
+        [SerializeField]
+        private PhysicsMaterial2D fullFriction;
+        [SerializeField]
+        private float climbSpeed;
+        [SerializeField] 
+        private int minNumFramesForClimbing;
         
-        // player's facing direction
-        if (_inputAxis > 0f)
-        {
-            ChangeDirection(_spriteRenderer.flipX,false);
-            _spriteRenderer.flipX = false;
-        }
-        else if (_inputAxis < 0f)
-        {
-            ChangeDirection(_spriteRenderer.flipX,true);
-            _spriteRenderer.flipX = true;
-        }
-        if (Turning)
-        {
-            _velocity.x =0;  // i.e. disables turning for now
-        }
-    }
+        private float _xInput;
+        private float _yInput;
+        private float _slopeDownAngle;
+        private float _slopeSideAngle;
+        private float _lastSlopeAngle;
+        private float _playerXradius;
 
-    private void ChangeDirection(bool currentFlipX, bool newFlipX)
-    {
-        if (currentFlipX!=newFlipX)
+        private int _facingDirection = 1;
+
+        private bool _isGrounded;
+        private bool _isOnSlope;
+        private bool _isJumping;
+        private bool _canWalkOnSlope;
+        private bool _canJump;
+        private bool _canClimb;
+        private bool _isClimbing;
+        private bool _isEnteringClimbing;
+        private int _numFramesSinceEnteringClimbing;
+        private IClimbable _climbable;
+        private bool IsTryingToClimb => (_isGrounded && _yInput > 0.0f) || (!_isGrounded && _yInput != 0.0f);
+
+        private Vector2 _newVelocity;
+        private Vector2 _newForce;
+
+        private Vector2 _slopeNormalPerp;
+
+        private Rigidbody2D _rb;
+        private SpriteRenderer _spriteRenderer;
+        private float _velocityMultiplier = 1f;
+        private float _timeMultiplier;
+        [SerializeField] private float highJumpGravity;
+        [SerializeField] private float jumpGravity;
+        [SerializeField] private float fallGravity;
+
+        private void Start()
         {
+            _rb = GetComponent<Rigidbody2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _playerXradius = _spriteRenderer.bounds.extents.x;
+            _timeMultiplier = 0;
+        }
+
+        private void Update()
+        {
+            CheckInput();     
+        }
+
+        private void FixedUpdate()
+        {
+            CheckGround();
+            SlopeCheck();
+            CheckClimb();
+            ApplyMovement();
+        }
+
+        private void CheckInput()
+        {
+            _xInput = Input.GetAxisRaw("Horizontal");
+            _yInput = Input.GetAxisRaw("Vertical");
+
+            if (Math.Abs(_xInput - 1) < .01f && _facingDirection == -1)
+            {
+                Flip();
+            }
+            else if (Math.Abs(_xInput - (-1)) < .01f && _facingDirection == 1)
+            {
+                Flip();
+            }
+
+            HandleClimbing();
+            
+            if (Input.GetButtonDown("Jump"))
+            {
+                Jump();
+            }
+
+        }
+
+        private void HandleClimbing()
+        {
+            if (_canClimb && (IsTryingToClimb || (_isClimbing && !_isGrounded && !_isJumping)))
+            {  // climb
+                if (!_isClimbing)
+                {
+                    _numFramesSinceEnteringClimbing = minNumFramesForClimbing;
+                }
+                _isClimbing = true;
+                var position = transform.position;
+                position = new Vector3(_climbable.GetXPosition(), position.y, position.z);
+                transform.position = position;
+                _rb.velocity = new Vector2(0, _yInput * climbSpeed);
+            }
+            else
+            {
+                _isClimbing = false;
+            }
+            _isEnteringClimbing = _numFramesSinceEnteringClimbing > 0;
+            _numFramesSinceEnteringClimbing = Mathf.Max(0, _numFramesSinceEnteringClimbing - 1);
+        }
+
+        private void CheckGround()
+        {
+            _isGrounded = !_isEnteringClimbing && Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+
+            if(_rb.velocity.y <= 0.0f)
+            {
+                _isJumping = false;
+            }
+
+            if(!_isJumping && (_isClimbing || (_isGrounded && _slopeDownAngle <= maxSlopeAngle)))
+            {
+                _canJump = true;
+            }
+
+        }
+
+        private void SlopeCheck()
+        {
+            Bounds spriteBounds = _spriteRenderer.bounds;
+            Vector2 checkPos = transform.position - new Vector3(0, (spriteBounds.max.y - spriteBounds.min.y) / 2, 0);
+            Debug.Log((spriteBounds.max.y - spriteBounds.min.y) / 2);
+
+            SlopeCheckHorizontal(checkPos);
+            SlopeCheckVertical(checkPos);
+        }
+
+        private void SlopeCheckHorizontal(Vector2 checkPos)
+        {
+            RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
+            RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
+        
+            if (slopeHitFront)
+            {
+                _isOnSlope = true;
+
+                _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+
+            }
+            else if (slopeHitBack)
+            {
+                _isOnSlope = true;
+
+                _slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+            }
+            else
+            {
+                _slopeSideAngle = 0.0f;
+                _isOnSlope = false;
+            }
+
+        }
+
+        private void SlopeCheckVertical(Vector2 checkPos)
+        {      
+            RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
+            Debug.DrawRay(checkPos, Vector2.down, Color.red);
+
+            if (hit)
+            {
+
+                _slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;            
+
+                _slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+                if(_slopeDownAngle != _lastSlopeAngle)
+                {
+                    _isOnSlope = true;
+                }                       
+
+                _lastSlopeAngle = _slopeDownAngle;
+           
+                Debug.DrawRay(hit.point, _slopeNormalPerp, Color.blue);
+                Debug.DrawRay(hit.point, hit.normal, Color.green);
+
+            }
+
+            if (_slopeDownAngle > maxSlopeAngle || _slopeSideAngle > maxSlopeAngle)
+            {
+                _canWalkOnSlope = false;
+            }
+            else
+            {
+                _canWalkOnSlope = true;
+            }
+
+            if (_isOnSlope && _canWalkOnSlope && _xInput == 0.0f)
+            {
+                _rb.sharedMaterial = fullFriction;
+            }
+            else
+            {
+                _rb.sharedMaterial = noFriction;
+            }
+        }
+
+        private void CheckClimb()
+        {
+            RaycastHit2D vineHit = Physics2D.Raycast(
+                new Vector2(transform.position.x - _playerXradius * _facingDirection, transform.position.y), 
+                Vector2.right * _facingDirection, 2*_playerXradius, whatIsVine);
+            if (vineHit.collider != null && vineHit.collider.TryGetComponent(out IClimbable climbable))
+            {
+                _canClimb = true;
+                _climbable = climbable;
+            }
+            else
+            {
+                _canClimb = false;
+                _climbable = null;
+            }
+        }
+
+        private void Jump()
+        {
+            if (_canJump)
+            {
+                _canJump = false;
+                _isJumping = true;
+                var newJumpForce = _isGrounded? jumpForce - _newVelocity.y*.8f : jumpForce;
+                _newForce.Set(0.0f, newJumpForce);
+                _rb.AddForce(_newForce, ForceMode2D.Impulse);
+            }
+        }
+
+        private void ApplyMovement()
+        {
+            if (_xInput != 0)
+            {
+                _velocityMultiplier = _xInput;
+                _timeMultiplier = Mathf.Min(1f, _timeMultiplier + 1f / numFramesUntilMaxSlowdown);
+            }
+            else
+            {
+                var reduce = _isGrounded ? .1f : .05f;
+                _velocityMultiplier -= reduce * Mathf.Sign(_velocityMultiplier);
+                if (Mathf.Abs(_velocityMultiplier) <= reduce)
+                {
+                    _velocityMultiplier = 0.0f;
+                    _timeMultiplier = 0.0f;
+                }
+                _velocityMultiplier *= _timeMultiplier;
+            }
+            if (_isGrounded && !_isOnSlope && !_isJumping) //if not on slope
+            {
+                _newVelocity.Set(movementSpeed * _velocityMultiplier, 0.0f);
+                _rb.velocity = _newVelocity;
+            }
+            else if (_isGrounded && _isOnSlope && _canWalkOnSlope && !_isJumping) //If on slope
+            {
+                _newVelocity.Set(movementSpeed * _slopeNormalPerp.x * -_velocityMultiplier, movementSpeed * _slopeNormalPerp.y * -_velocityMultiplier);
+                _rb.velocity = _newVelocity;
+            }
+            else if (!_isGrounded && !_isClimbing) //If in air
+            {
+                _newVelocity.Set(movementSpeed * _velocityMultiplier, _rb.velocity.y);
+                _rb.velocity = _newVelocity;
+            }
+        
+            // gravity handling
+            var gravity = _isClimbing? 0f : _isJumping? Input.GetButton("Jump") ? highJumpGravity : jumpGravity : fallGravity;
+            _rb.gravityScale = gravity;
+
+        }
+
+        private void Flip()
+        {
+            _facingDirection *= -1;
             Vector3 flipScale = transform.localScale;
             flipScale.x *= -1;
             transform.localScale = flipScale;
         }
-    }
-    
-    private void CheckGrounded()
-    {
-        Vector3 position = transform.position;
-        Vector3 localScale = transform.localScale;
-        float distance = .4f * localScale.y;
-        Bounds spriteBounds = _spriteRenderer.bounds;
-        Vector3 playerBottomCenter = position - new Vector3(0, (spriteBounds.max.y - spriteBounds.min.y) / 2, 0);
-        Vector3 playerBottomLeftCorner = playerBottomCenter + new Vector3(-.2f, .15f, 0);
-        Vector3 playerBottomRightCorner = playerBottomCenter + new Vector3(.2f, .15f, 0);
-        var leftHit = Physics2D.Raycast(playerBottomLeftCorner, Vector2.down, distance, _groundLayerMask);
-        var rightHit = Physics2D.Raycast(playerBottomRightCorner, Vector2.down, distance, _groundLayerMask);
-        Debug.DrawRay(playerBottomLeftCorner, Vector3.down * distance, Color.red);
-        Debug.DrawRay(playerBottomRightCorner, Vector3.down * distance, Color.red);
 
-        var touchesGround = leftHit || rightHit;
-        if (!Grounded && touchesGround)
+        private void OnDrawGizmos()
         {
-            Debug.Log("Landed");
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
-        Grounded = touchesGround;
-    }
-    
-    private void GroundedMovement()
-    {
-        _velocity.y = Mathf.Max(_velocity.y, 0f);
-        Jumping = _velocity.y > 0f;
-        
-        if (CanMove && Input.GetButtonDown("Jump"))
-        {
-            _velocity.y = JumpForce * _velocityMultiplier;
-            Debug.Log("Velocity: " + _velocity.y);
-            Jumping = true;
-        }
-    }
-    
-    private void ApplyGravity()
-    {
-        bool falling = _velocity.y < 0f || !Input.GetButton("Jump");
-        float multiplier = falling ? 2f : 1f;
-        _velocity.y += multiplier * Gravity * Time.deltaTime;
-        _velocity.y = Mathf.Max(_velocity.y, Gravity / 2f);
     }
 }
+
