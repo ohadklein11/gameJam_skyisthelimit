@@ -1,9 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Vines;
 
-public class VineScript : MonoBehaviour, IClimable
+namespace Vines
 {
-    // need to implement growth over time
+    public class VineScript : MonoBehaviour, IClimbable
+    {
+        public float GetXPosition()
+        {
+            return transform.position.x;
+        }
+        // need to implement growth over time
+    }
 }
