@@ -56,8 +56,10 @@ public class Bean : MonoBehaviour
 
         if (!hitLeft && !hitRight)
         {
+            // GameObject vine=Instantiate(_vinePrefab, new Vector3(transform.position
+            //     .x,vineHeight+growthPositionY,0), Quaternion.identity);
             GameObject vine=Instantiate(_vinePrefab, new Vector3(transform.position
-                .x,vineHeight+growthPositionY,0), Quaternion.identity);
+                .x,bottomPlatform.point.y+vineHeight,0), Quaternion.identity);
             if (hitUpperPlatform)
             {
                 vine.transform.parent = hitUpperPlatform.transform;
