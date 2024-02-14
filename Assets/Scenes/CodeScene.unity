@@ -652,9 +652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee826474b0037b4481df10b0c4b3adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minShootingForce: 5
+  minShootingForce: 3
   maxShootingForce: 7
-  shootingSpeedChange: 5
+  shootingSpeedChange: 7
   aimPoint: {fileID: 0}
   shootingPoint: {fileID: 1492824685}
   gun: {fileID: 1037843130}
