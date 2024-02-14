@@ -50,14 +50,18 @@ public class Bean : MonoBehaviour
         float vineHeight = _vinePrefab.gameObject.transform.localScale.y/2;
 
         Vector3 position = transform.position + new Vector3(0,transform.localScale.y,0);
-        var hit = Physics2D.Raycast(position, Vector2.up, distanceToUpperPlatform, _groundLayerMask);
+        var hitUpperPlatform = Physics2D.Raycast(position, Vector2.up, distanceToUpperPlatform, _groundLayerMask);
         var hitLeft = Physics2D.Raycast(position, Vector2.left, vineWidth*0.67f, _VineLayerMask);
         var hitRight = Physics2D.Raycast(position, Vector2.right, vineWidth*0.67f, _VineLayerMask);
 
-        if (hit&& !hitLeft && !hitRight)
+        if (!hitLeft && !hitRight)
         {
-            Instantiate(_vinePrefab, new Vector3(transform.position
+            GameObject vine=Instantiate(_vinePrefab, new Vector3(transform.position
                 .x,vineHeight+growthPositionY,0), Quaternion.identity);
+            if (hitUpperPlatform)
+            {
+                vine.transform.parent = hitUpperPlatform.transform;
+            }
             // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Debug.Log("Vine Grown");
