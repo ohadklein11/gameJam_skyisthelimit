@@ -1,4 +1,4 @@
-public interface IClimable
+namespace Vines
 {
-    void Climb();
+    public interface IClimable  { }
 }
