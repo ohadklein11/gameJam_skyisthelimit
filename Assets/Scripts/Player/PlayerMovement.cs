@@ -103,32 +103,37 @@ namespace Player
                 Flip();
             }
 
-            if (_canClimb && (IsTryingToClimb || (_isClimbing && !_isGrounded && !_isJumping)))
-            {
-                _isEnteringClimbing = !_isClimbing || _numFramesSinceEnteringClimbing > 0;
-                if (!_isClimbing && _isEnteringClimbing)
-                {
-                    _numFramesSinceEnteringClimbing = minNumFramesForClimbing;
-                }
-                else
-                {
-                    _numFramesSinceEnteringClimbing = Mathf.Max(0, _numFramesSinceEnteringClimbing - 1);
-                }
-                _isClimbing = true;
-                transform.position = new Vector3(_climbable.GetXPosition(), transform.position.y, transform.position.z);
-                _rb.velocity = new Vector2(0, _yInput * climbSpeed);
-            }
-            else
-            {
-                _isClimbing = false;
-            }
-
+            HandleClimbing();
+            
             if (Input.GetButtonDown("Jump"))
             {
                 Jump();
             }
 
         }
+
+        private void HandleClimbing()
+        {
+            if (_canClimb && (IsTryingToClimb || (_isClimbing && !_isGrounded && !_isJumping)))
+            {  // climb
+                if (!_isClimbing)
+                {
+                    _numFramesSinceEnteringClimbing = minNumFramesForClimbing;
+                }
+                _isClimbing = true;
+                var position = transform.position;
+                position = new Vector3(_climbable.GetXPosition(), position.y, position.z);
+                transform.position = position;
+                _rb.velocity = new Vector2(0, _yInput * climbSpeed);
+            }
+            else
+            {
+                _isClimbing = false;
+            }
+            _isEnteringClimbing = _numFramesSinceEnteringClimbing > 0;
+            _numFramesSinceEnteringClimbing = Mathf.Max(0, _numFramesSinceEnteringClimbing - 1);
+        }
+
         private void CheckGround()
         {
             _isGrounded = !_isEnteringClimbing && Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
