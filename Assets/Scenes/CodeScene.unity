@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -593,7 +593,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -680,7 +680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 6
   groundCheckRadius: 0.25
-  jumpForce: 4
+  jumpForce: 5
   slopeCheckDistance: 0.6
   maxSlopeAngle: 50
   groundCheck: {fileID: 938603030}
@@ -689,6 +689,7 @@ MonoBehaviour:
     m_Bits: 8
   noFriction: {fileID: 6200000, guid: a4bdca4b67f40e44b92cd2769f40204e, type: 2}
   fullFriction: {fileID: 6200000, guid: fafd4a3d7955c2f4f913bd7db1e32678, type: 2}
+  climbSpeed: 6
 --- !u!1 &210525247
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ namespace Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-
         [SerializeField]
         private float movementSpeed;
         [SerializeField]
@@ -24,7 +23,9 @@ namespace Player
         private PhysicsMaterial2D noFriction;
         [SerializeField]
         private PhysicsMaterial2D fullFriction;
-
+        [SerializeField]
+        private float climbSpeed;
+        
         private float _xInput;
         private float _slopeDownAngle;
         private float _slopeSideAngle;
@@ -37,6 +38,7 @@ namespace Player
         private bool _isJumping;
         private bool _canWalkOnSlope;
         private bool _canJump;
+        private bool _isClimbing;
 
         private Vector2 _newVelocity;
         private Vector2 _newForce;
@@ -46,6 +48,9 @@ namespace Player
         private Rigidbody2D _rb;
         private SpriteRenderer _spriteRenderer;
         private float _velocityMultiplier = 1f;
+        [SerializeField] private float highJumpGravity;
+        [SerializeField] private float jumpGravity;
+        [SerializeField] private float fallGravity;
 
         private void Start()
         {
@@ -222,8 +227,7 @@ namespace Player
             }
         
             // gravity
-            var gravity = _isJumping? 1.0f : 2.0f;
-            gravity = Input.GetButton("Jump") ? .5f * gravity : gravity;
+            var gravity = _isJumping? (Input.GetButton("Jump") ? highJumpGravity : jumpGravity) : fallGravity;
             _rb.gravityScale = gravity;
 
         }
