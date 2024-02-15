@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GunType
+{
+    BeansGun,
+    EggsGun
+}
+
 public class BeansShooting : MonoBehaviour
 {
     // [SerializeField] private float gunShootingDistance = 20f;
@@ -12,20 +18,20 @@ public class BeansShooting : MonoBehaviour
     [SerializeField] private float minShootingForce = 10f;
     [SerializeField] private float maxShootingForce = 20f;
     [SerializeField] private float shootingSpeedChange = 0.5f;
+    [SerializeField] private float eggShootingSpeed = 10f;
 
 
-    [SerializeField] private GameObject aimPoint;
+
     [SerializeField] private GameObject shootingPoint;
     [SerializeField] private GameObject gun;
     // [SerializeField] private GameObject trajectoryPointPrefab;
     // [SerializeField] private int trajectoryPointsCount = 20;
     [SerializeField] private LayerMask _platformLayerMask;
     // private GameObject[] trajectoryPoints;
+    private GameObject _beanPrefab;
+    // private GameObject eggPrefab;
 
-
-    [SerializeField] private GameObject beanPrefab;
-
-
+    private GunType _gunType;
     private Camera _mainCamera;
     private Rigidbody2D _rigidBody;
 
@@ -37,18 +43,24 @@ public class BeansShooting : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _mainCamera = Camera.main;
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        _gunType= GunType.EggsGun;
         // trajectoryPoints = new GameObject[trajectoryPointsCount];
         // for (int i = 0; i < trajectoryPoints.Length; i++)
         // {
         //     trajectoryPoints[i] = Instantiate(trajectoryPointPrefab, transform.position, Quaternion.identity);
         //     trajectoryPoints[i].SetActive(false);
         // }
+        _beanPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Bean");
+        // eggPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Egg");
     }
 
 
     private void Update()
     {
-        ShootBeans();
+        if (_gunType == GunType.BeansGun)
+            ShootBeans();
+        else if(_gunType == GunType.EggsGun)
+            ShootEggs();
     }
     // Vector2 TrajectoryPointsPosition(float t)
     //      {
@@ -123,14 +135,27 @@ public class BeansShooting : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1"))
         {
-            // GameObject projectile = Instantiate(beanPrefab, shootingPoint.transform.position, gun.transform.rotation);
-            GameObject projectile = Instantiate(beanPrefab, shootingPoint.transform.position, Quaternion.identity);
-            projectile.GetComponent<Bean>().Init(gameObject);
-            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-            Vector3 direction = (transform.localScale.x >= 0) ? Vector2.right : Vector2.left;
-            // rb.velocity = direction * _shootingForce;
-            rb.AddForce(direction * _shootingForce, ForceMode2D.Impulse);
-            // DeleteTrajectoryPoints();
+            InstantiateBullet(_beanPrefab);
+        }
+    }
+    
+    void InstantiateBullet(GameObject bulletPrefab)
+    {
+        GameObject projectile = Instantiate(bulletPrefab, shootingPoint.transform.position, Quaternion.identity);
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        Vector3 direction = (transform.localScale.x >= 0) ? Vector2.right : Vector2.left;
+        rb.AddForce(direction * _shootingForce, ForceMode2D.Impulse);
+    }
+
+    void ShootEggs()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            _shootingForce = eggShootingSpeed;
+        }
+        if (Input.GetButton("Fire1"))
+        {
+            InstantiateBullet(_beanPrefab);
         }
     }
 }

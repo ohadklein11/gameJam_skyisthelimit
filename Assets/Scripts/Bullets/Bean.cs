@@ -10,6 +10,7 @@ public class Bean : MonoBehaviour
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _VineLayerMask;
     [SerializeField] private GameObject _vinePrefab;
+    private Camera _mainCamera;
 
     [SerializeField] private float distanceToUpperPlatform = 20f;
     
@@ -17,21 +18,31 @@ public class Bean : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Grounded = false;
-    }
-
-    public void Init(GameObject player)
-    {
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
-    }
-    
-    private void OnBecameInvisible()
-    {
-        Destroy(gameObject);
+        _mainCamera = Camera.main;
     }
 
     void Update()
     {
         CheckGrounded();
+
+        // if camera is 1.5 screens on the left of the bean, destroy the bean
+        if (transform.position.x < _mainCamera.transform.position.x - _mainCamera.orthographicSize * _mainCamera.aspect * 1.5f)
+        {
+            Destroy(gameObject);
+        }
+        // if camera is 1.5 screens on the right of the bean, destroy the bean
+        if (transform.position.x > _mainCamera.transform.position.x + _mainCamera.orthographicSize * _mainCamera.aspect * 1.5f)
+        {
+            Destroy(gameObject);
+        }
+        // if camera is 1.5 screens above the bean, destroy the bean
+        if (transform.position.y > _mainCamera.transform.position.y + _mainCamera.orthographicSize * 1.5f)
+        {
+            Destroy(gameObject);
+        }
+
+        
+        
     }
     
     private void CheckGrounded()
@@ -68,8 +79,10 @@ public class Bean : MonoBehaviour
                 .x,bottomPlatform.point.y+vineHeight,0), Quaternion.identity);
             if (hitUpperPlatform)
             {
-                vine.transform.parent = hitUpperPlatform.transform;
+
+                vine.transform.SetParent(hitUpperPlatform.transform,false);
             }
+
             // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Debug.Log("Vine Grown");
