@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BeansShooting : MonoBehaviour
@@ -121,6 +122,7 @@ public class BeansShooting : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             GameObject projectile = Instantiate(beanPrefab, shootingPoint.transform.position, gun.transform.rotation);
+            projectile.GetComponent<Bean>().Init(gameObject);
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             Vector3 direction = (transform.localScale.x >= 0) ? new Vector3(1, 1, 0) : new Vector3(-1, 1, 0);
             rb.velocity = direction * _shootingForce + (Vector3)_rigidBody.velocity;
