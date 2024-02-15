@@ -14,14 +14,13 @@ public class BeansShooting : MonoBehaviour
     // [SerializeField] private float gunShootingDistance = 20f;
     private float _shootingForce;
     // private bool _shootingForceRising;
+    [SerializeField] private KeyCode switchKey = KeyCode.Q;
 
     [SerializeField] private float minShootingForce = 10f;
     [SerializeField] private float maxShootingForce = 20f;
     [SerializeField] private float shootingSpeedChange = 0.5f;
     [SerializeField] private float eggShootingSpeed = 10f;
-
-
-
+    [SerializeField] private float eggShootingCooldown = 0.4f;
     [SerializeField] private GameObject shootingPoint;
     [SerializeField] private GameObject gun;
     // [SerializeField] private GameObject trajectoryPointPrefab;
@@ -29,12 +28,12 @@ public class BeansShooting : MonoBehaviour
     [SerializeField] private LayerMask _platformLayerMask;
     // private GameObject[] trajectoryPoints;
     private GameObject _beanPrefab;
-    // private GameObject eggPrefab;
+    private GameObject _eggPrefab;
 
     private GunType _gunType;
     private Camera _mainCamera;
     private Rigidbody2D _rigidBody;
-
+    private float _eggShootingCooldownWait;
     private SpriteRenderer _playerSpriteRenderer;
 
 
@@ -43,7 +42,7 @@ public class BeansShooting : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _mainCamera = Camera.main;
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
-        _gunType= GunType.EggsGun;
+        _gunType= GunType.BeansGun;
         // trajectoryPoints = new GameObject[trajectoryPointsCount];
         // for (int i = 0; i < trajectoryPoints.Length; i++)
         // {
@@ -51,7 +50,7 @@ public class BeansShooting : MonoBehaviour
         //     trajectoryPoints[i].SetActive(false);
         // }
         _beanPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Bean");
-        // eggPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Egg");
+        _eggPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Egg");
     }
 
 
@@ -61,6 +60,10 @@ public class BeansShooting : MonoBehaviour
             ShootBeans();
         else if(_gunType == GunType.EggsGun)
             ShootEggs();
+        if (Input.GetKeyDown(switchKey))
+        {
+            _gunType= (_gunType == GunType.BeansGun) ? GunType.EggsGun : GunType.BeansGun;
+        }
     }
     // Vector2 TrajectoryPointsPosition(float t)
     //      {
@@ -141,7 +144,8 @@ public class BeansShooting : MonoBehaviour
     
     void InstantiateBullet(GameObject bulletPrefab)
     {
-        GameObject projectile = Instantiate(bulletPrefab, shootingPoint.transform.position, Quaternion.identity);
+        GameObject projectile =
+            Instantiate(bulletPrefab, shootingPoint.transform.position, bulletPrefab.transform.rotation);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         Vector3 direction = (transform.localScale.x >= 0) ? Vector2.right : Vector2.left;
         rb.AddForce(direction * _shootingForce, ForceMode2D.Impulse);
@@ -152,10 +156,21 @@ public class BeansShooting : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             _shootingForce = eggShootingSpeed;
+            _eggShootingCooldownWait = 0;
         }
         if (Input.GetButton("Fire1"))
         {
-            InstantiateBullet(_beanPrefab);
+            if (_eggShootingCooldownWait <= 0)
+            {
+                InstantiateBullet(_eggPrefab);
+                _eggShootingCooldownWait = eggShootingCooldown;
+            }
+            else
+            {
+                _eggShootingCooldownWait -= Time.deltaTime;
+            }
         }
     }
+    
+    
 }

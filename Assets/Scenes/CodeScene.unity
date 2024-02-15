@@ -836,17 +836,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee826474b0037b4481df10b0c4b3adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchKey: 101
   minShootingForce: 1
   maxShootingForce: 15
   shootingSpeedChange: 40
-  aimPoint: {fileID: 0}
+  eggShootingSpeed: 10
+  eggShootingCooldown: 0.15
   shootingPoint: {fileID: 1492824685}
   gun: {fileID: 1037843130}
   _platformLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  beanPrefab: {fileID: 59112727644043306, guid: e02811d407c6c5042b1d12a5a4fa9a9f,
-    type: 3}
 --- !u!114 &48291947
 MonoBehaviour:
   m_ObjectHideFlags: 0
