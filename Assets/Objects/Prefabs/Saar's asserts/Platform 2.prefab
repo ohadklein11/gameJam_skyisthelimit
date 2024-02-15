@@ -1,5 +1,107 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5461998419816249443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2514669779489903277}
+  - component: {fileID: 9167777801569804724}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2514669779489903277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5461998419816249443}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.17039055, y: -0.34400967, z: 1.2606293}
+  m_LocalScale: {x: 0.39088222, y: 0.3908823, z: 0.39088222}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5007162529238715609}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &9167777801569804724
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5461998419816249443}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 4.391075, y: 0.5563469}
+      - {x: 4.6590195, y: 1.6109333}
+      - {x: 3.884903, y: 2.451563}
+      - {x: 2.9350739, y: 1.852766}
+      - {x: 1.9869576, y: 2.7261467}
+      - {x: 0.95410156, y: 2.248602}
+      - {x: 1.5160103, y: 3.8920546}
+      - {x: 1.27594, y: 4.2602406}
+      - {x: -0.6000824, y: 3.0029545}
+      - {x: -1.10989, y: 3.0842838}
+      - {x: -2.1527252, y: 2.6648712}
+      - {x: -6.163535, y: 3.3903577}
+      - {x: -9.349457, y: -0.13958359}
+      - {x: -9.432533, y: -1.5875607}
+      - {x: -8.385216, y: -2.6655598}
+      - {x: -8.358082, y: -4.000839}
+      - {x: -7.2007256, y: -4.855921}
+      - {x: -5.6589775, y: -4.72797}
+      - {x: -4.18594, y: -4.846037}
+      - {x: -2.7701607, y: -5.6106644}
+      - {x: -0.8979988, y: -4.9107113}
+      - {x: 0.2537613, y: -4.3534927}
+      - {x: 1.547648, y: -4.674755}
+      - {x: 2.4823318, y: -3.846605}
+      - {x: 2.8156652, y: -1.1478577}
+  m_UseDelaunayMesh: 0
 --- !u!1001 &4825530824941562674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -125,6 +227,16 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 40321f9171cd9e749978a13feda53b0f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c055daffaccf7104ab09e5d772f9e798,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2514669779489903277}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c055daffaccf7104ab09e5d772f9e798, type: 3}
+--- !u!4 &5007162529238715609 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c055daffaccf7104ab09e5d772f9e798,
+    type: 3}
+  m_PrefabInstance: {fileID: 4825530824941562674}
+  m_PrefabAsset: {fileID: 0}
