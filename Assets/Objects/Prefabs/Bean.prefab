@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2659741897070392008}
   - component: {fileID: 1140938097139544110}
   - component: {fileID: 5429179135542755409}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -148,7 +148,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &5429179135542755409
 MonoBehaviour:
