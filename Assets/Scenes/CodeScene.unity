@@ -1865,6 +1865,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 607075668}
     m_Modifications:
+    - target: {fileID: 54797149460160192, guid: 6cc6fe9554ce04d43bf5d4f7a1061e2e,
+        type: 3}
+      propertyPath: m_Name
+      value: Platform 1 (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 831333161395192954, guid: 6cc6fe9554ce04d43bf5d4f7a1061e2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1914,11 +1919,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54797149460160192, guid: 6cc6fe9554ce04d43bf5d4f7a1061e2e,
-        type: 3}
-      propertyPath: m_Name
-      value: Platform 1 (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5222,7 +5222,7 @@ Transform:
   m_GameObject: {fileID: 938603029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22, y: -0.78, z: 0}
+  m_LocalPosition: {x: 0.22, y: -0.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -9351,6 +9351,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 607075668}
     m_Modifications:
+    - target: {fileID: 54797149460160192, guid: 6cc6fe9554ce04d43bf5d4f7a1061e2e,
+        type: 3}
+      propertyPath: m_Name
+      value: Platform 1 (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 831333161395192954, guid: 6cc6fe9554ce04d43bf5d4f7a1061e2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9400,11 +9405,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54797149460160192, guid: 6cc6fe9554ce04d43bf5d4f7a1061e2e,
-        type: 3}
-      propertyPath: m_Name
-      value: Platform 1 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

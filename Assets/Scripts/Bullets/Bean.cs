@@ -18,6 +18,12 @@ public class Bean : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Grounded = false;
     }
+
+    public void Init(GameObject player)
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
+    }
+    
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
