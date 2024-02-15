@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2659741897070392008}
   - component: {fileID: 1140938097139544110}
   - component: {fileID: 5429179135542755409}
+  - component: {fileID: -5521679283219029026}
   m_Layer: 9
   m_Name: Bean
   m_TagString: Untagged
@@ -168,6 +169,16 @@ MonoBehaviour:
   _VineLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _vinePrefab: {fileID: 755303601263025156, guid: 43c6ce3375d4f7d4a8984ea3d7a872c6,
-    type: 3}
   distanceToUpperPlatform: 20
+--- !u!114 &-5521679283219029026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59112727644043306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cae711c2f680584c874ab70668de2f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
