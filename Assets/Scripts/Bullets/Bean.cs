@@ -10,6 +10,7 @@ public class Bean : MonoBehaviour
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _VineLayerMask;
     private GameObject _vineHeadPrefab;
+    private const float Epsilon = 0.3f;  // to deal with instantiating vines on slopes 
     
 
     private Camera _mainCamera;
@@ -71,11 +72,10 @@ public class Bean : MonoBehaviour
     GameObject BuildVine(RaycastHit2D bottomPlatform)
     {
         float growthPositionY=bottomPlatform.transform.position.y+bottomPlatform.transform.localScale.y/2;
-        float vineHeadHeight = _vineHeadPrefab.gameObject.transform.localScale.y/2;
+        float vineHeadHeight = _vineHeadPrefab.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size.y;
         
         return Instantiate(_vineHeadPrefab, new Vector3(transform.position
-            .x,bottomPlatform.point.y-vineHeadHeight,transform.position.z), Quaternion.identity);
+            .x,bottomPlatform.point.y-vineHeadHeight,transform.position.z - Epsilon), Quaternion.identity);
     }
 
-    
 }
