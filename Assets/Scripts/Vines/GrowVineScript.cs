@@ -30,7 +30,7 @@ public class GrowVineScript : MonoBehaviour
         Vector2 newPosition =
             new Vector2(transform.position.x, transform.position.y + vineGrowthSpeed * Time.deltaTime);
         transform.position = newPosition;
-
+    
         if (_lastStem.transform.position.y > _startY + _vineBodyPrefab.gameObject.transform.localScale.y)
         {
             _lastStem = GrowNewStem();
@@ -44,18 +44,23 @@ public class GrowVineScript : MonoBehaviour
 
     int ConfigureVineHeight()
     {
+        // get y of bottom of camera
+        // float bottomY = _mainCamera.transform.position.y - _mainCamera.orthographicSize;
+        // float cameraHeight = _mainCamera.orthographicSize * 2 - (_startY-bottomY);
         float cameraHeight = _mainCamera.orthographicSize * 2;
         float vineHeight = _vineBodyPrefab.gameObject.transform.localScale.y;
         int vineCount = (int)(cameraHeight / vineHeight);
         int randomVineCount = Random.Range(vineCount / 2, vineCount);
         return randomVineCount;
+        
+        
     }
 
     GameObject GrowNewStem()
     {
         GameObject newStem = Instantiate(_vineBodyPrefab, new Vector3(transform.position
             .x, _startY, 0), Quaternion.identity);
-        newStem.transform.SetParent(transform.gameObject.transform, false);
+        newStem.transform.SetParent(transform.gameObject.transform, true);
         return newStem;
     }
 }

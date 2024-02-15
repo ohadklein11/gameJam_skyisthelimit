@@ -77,7 +77,7 @@ public class Bean : MonoBehaviour
             // GameObject vine=Instantiate(_vinePrefab, new Vector3(transform.position
             //     .x,vineHeight+growthPositionY,0), Quaternion.identity);
             GameObject vine = BuildVine(bottomPlatform);
-            vine.transform.SetParent(bottomPlatform.transform,false);
+            vine.transform.SetParent(bottomPlatform.transform,true);
 
             // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -93,7 +93,7 @@ public class Bean : MonoBehaviour
         float vineHeadHeight = _vineHeadPrefab.gameObject.transform.localScale.y/2;
         
         return Instantiate(_vineHeadPrefab, new Vector3(transform.position
-            .x,bottomPlatform.point.y-vineHeadHeight,0), Quaternion.identity);
+            .x,bottomPlatform.point.y-vineHeadHeight,transform.position.z), Quaternion.identity);
     }
 
     
