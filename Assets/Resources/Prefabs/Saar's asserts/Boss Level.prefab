@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8263418914459259561}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Boss Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,6 +105,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 15e18928044c2434db3590d860546945,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7541786753167584072, guid: 15e18928044c2434db3590d860546945,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5117700066308340382, guid: 15e18928044c2434db3590d860546945,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -4683669308469848369, guid: 15e18928044c2434db3590d860546945,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -119,6 +134,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boss Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 15e18928044c2434db3590d860546945,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7350235771279096831, guid: 15e18928044c2434db3590d860546945,
         type: 3}

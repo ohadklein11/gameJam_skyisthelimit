@@ -154,7 +154,7 @@ namespace Player
         {
             Bounds spriteBounds = _spriteRenderer.bounds;
             Vector2 checkPos = transform.position - new Vector3(0, (spriteBounds.max.y - spriteBounds.min.y) / 2, 0);
-            Debug.Log((spriteBounds.max.y - spriteBounds.min.y) / 2);
+            // Debug.Log((spriteBounds.max.y - spriteBounds.min.y) / 2);
 
             SlopeCheckHorizontal(checkPos);
             SlopeCheckVertical(checkPos);

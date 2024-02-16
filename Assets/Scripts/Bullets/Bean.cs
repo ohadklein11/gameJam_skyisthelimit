@@ -9,25 +9,29 @@ public class Bean : MonoBehaviour
     public bool Grounded { get; private set; }
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _VineLayerMask;
-    [SerializeField] private GameObject _vinePrefab;
+    [SerializeField] private LayerMask _enemyLayerMask;
+    private GameObject _vineHeadPrefab;
+    private const float Epsilon = 0.3f;  // to deal with instantiating vines on slopes 
+    private CircleCollider2D _collider;  
+
+    private Camera _mainCamera;
 
     [SerializeField] private float distanceToUpperPlatform = 20f;
-    
+
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Grounded = false;
-    }
-    private void OnBecameInvisible()
-    {
-        Destroy(gameObject);
+        _mainCamera = Camera.main;
+        _vineHeadPrefab= Resources.Load<GameObject>("Prefabs/Vines/VineHead");
+        _collider = GetComponent<CircleCollider2D>();
     }
 
     void Update()
     {
         CheckGrounded();
     }
-    
+
     private void CheckGrounded()
     {
         Vector3 position = transform.position;
@@ -45,12 +49,10 @@ public class Bean : MonoBehaviour
     
     private void GrowVine(RaycastHit2D bottomPlatform)
     {
-        float growthPositionY=bottomPlatform.transform.position.y+bottomPlatform.transform.localScale.y/2;
-        float vineWidth = _vinePrefab.gameObject.transform.localScale.x;
-        float vineHeight = _vinePrefab.gameObject.transform.localScale.y/2;
+        float vineWidth = _vineHeadPrefab.gameObject.transform.localScale.x;
 
         Vector3 position = transform.position + new Vector3(0,transform.localScale.y,0);
-        var hitUpperPlatform = Physics2D.Raycast(position, Vector2.up, distanceToUpperPlatform, _groundLayerMask);
+        // var hitUpperPlatform = Physics2D.Raycast(position, Vector2.up, distanceToUpperPlatform, _groundLayerMask);
         var hitLeft = Physics2D.Raycast(position, Vector2.left, vineWidth*0.67f, _VineLayerMask);
         var hitRight = Physics2D.Raycast(position, Vector2.right, vineWidth*0.67f, _VineLayerMask);
 
@@ -58,12 +60,9 @@ public class Bean : MonoBehaviour
         {
             // GameObject vine=Instantiate(_vinePrefab, new Vector3(transform.position
             //     .x,vineHeight+growthPositionY,0), Quaternion.identity);
-            GameObject vine=Instantiate(_vinePrefab, new Vector3(transform.position
-                .x,bottomPlatform.point.y+vineHeight,0), Quaternion.identity);
-            if (hitUpperPlatform)
-            {
-                vine.transform.parent = hitUpperPlatform.transform;
-            }
+            GameObject vine = BuildVine(bottomPlatform);
+            vine.transform.SetParent(bottomPlatform.transform,true);
+
             // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Debug.Log("Vine Grown");
@@ -72,4 +71,21 @@ public class Bean : MonoBehaviour
         Destroy(gameObject);
 
     }
+    GameObject BuildVine(RaycastHit2D bottomPlatform)
+    {
+        float growthPositionY=bottomPlatform.transform.position.y+bottomPlatform.transform.localScale.y/2;
+        float vineHeadHeight = _vineHeadPrefab.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size.y;
+        
+        return Instantiate(_vineHeadPrefab, new Vector3(transform.position
+            .x,bottomPlatform.point.y-vineHeadHeight,transform.position.z - Epsilon), Quaternion.identity);
+    }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
