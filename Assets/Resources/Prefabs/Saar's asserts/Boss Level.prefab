@@ -32,6 +32,116 @@ Transform:
   - {fileID: 4698949092315400545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7861127940921626665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6286831145428163685}
+  - component: {fileID: 7296396226163040137}
+  m_Layer: 3
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6286831145428163685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861127940921626665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4698949092315400545}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &7296396226163040137
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861127940921626665}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 3.0812414, y: 7.912642}
+      - {x: -2.8295448, y: 10.397364}
+      - {x: -8.163132, y: 10.460545}
+      - {x: -11.863203, y: 8.867834}
+      - {x: -17.931517, y: 11.182374}
+      - {x: -24.784283, y: 8.1414585}
+      - {x: -30.559536, y: 7.8013372}
+      - {x: -33.28653, y: 2.5465388}
+      - {x: -38.11266, y: -1.1337535}
+      - {x: -42.865334, y: -3.6549792}
+      - {x: -42.802258, y: -11.972285}
+      - {x: -48.234116, y: -18.482924}
+      - {x: -39.76296, y: -32.847607}
+      - {x: -31.929127, y: -37.94249}
+      - {x: -27.375183, y: -32.126884}
+      - {x: -17.581915, y: -31.44114}
+      - {x: -9.074547, y: -34.971947}
+      - {x: -1.8480728, y: -31.862629}
+      - {x: 3.200928, y: -34.806335}
+      - {x: 8.857877, y: -33.81939}
+      - {x: 11.6853695, y: -25.804995}
+      - {x: 19.760328, y: -25.979233}
+      - {x: 23.802055, y: -22.025429}
+      - {x: 25.69847, y: -14.980212}
+      - {x: 32.594345, y: -14.4395075}
+      - {x: 34.04796, y: -9.299735}
+      - {x: 31.61909, y: -3.1961863}
+      - {x: 26.097507, y: -1.7794024}
+      - {x: 24.604061, y: 0.65361357}
+      - {x: 24.329468, y: 3.238291}
+      - {x: 19.70069, y: 7.4871216}
+      - {x: 12.681712, y: 6.558522}
+      - {x: 10.388792, y: 8.723567}
+  m_UseDelaunayMesh: 0
 --- !u!1001 &5097155796239117962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,7 +257,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 39e4c08e239036c4983c60f03c29cdc2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 15e18928044c2434db3590d860546945,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6286831145428163685}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15e18928044c2434db3590d860546945, type: 3}
 --- !u!4 &4698949092315400545 stripped
