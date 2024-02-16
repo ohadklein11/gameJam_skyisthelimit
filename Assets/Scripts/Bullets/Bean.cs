@@ -15,9 +15,6 @@ public class Bean : MonoBehaviour
     private CircleCollider2D _collider;  
 
     private Camera _mainCamera;
-
-    [SerializeField] private float distanceToUpperPlatform = 20f;
-
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -58,7 +55,7 @@ public class Bean : MonoBehaviour
         if (!hitLeft && !hitRight)
         {
             GameObject vine = BuildVine(bottomPlatform); 
-            // vine.transform.SetParent(bottomPlatform.transform,true); // TODO: make vine a child of the platform without it changing scale
+            // vine.transform.SetParent(bottomPlatform.transform,true); 
             
             Debug.Log("Vine Grown");
 
