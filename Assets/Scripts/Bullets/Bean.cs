@@ -52,19 +52,14 @@ public class Bean : MonoBehaviour
         float vineWidth = _vineHeadPrefab.gameObject.transform.localScale.x;
 
         Vector3 position = transform.position + new Vector3(0,transform.localScale.y,0);
-        // var hitUpperPlatform = Physics2D.Raycast(position, Vector2.up, distanceToUpperPlatform, _groundLayerMask);
         var hitLeft = Physics2D.Raycast(position, Vector2.left, vineWidth*0.67f, _VineLayerMask);
         var hitRight = Physics2D.Raycast(position, Vector2.right, vineWidth*0.67f, _VineLayerMask);
 
         if (!hitLeft && !hitRight)
         {
-            // GameObject vine=Instantiate(_vinePrefab, new Vector3(transform.position
-            //     .x,vineHeight+growthPositionY,0), Quaternion.identity);
-            GameObject vine = BuildVine(bottomPlatform);
-            vine.transform.SetParent(bottomPlatform.transform,true);
-
-            // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GameObject vine = BuildVine(bottomPlatform); 
+            // vine.transform.SetParent(bottomPlatform.transform,true); // TODO: make vine a child of the platform without it changing scale
+            
             Debug.Log("Vine Grown");
 
         }
