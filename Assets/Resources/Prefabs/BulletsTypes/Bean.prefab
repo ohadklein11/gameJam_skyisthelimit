@@ -169,6 +169,9 @@ MonoBehaviour:
   _VineLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  _enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
   distanceToUpperPlatform: 20
 --- !u!114 &-5521679283219029026
 MonoBehaviour:

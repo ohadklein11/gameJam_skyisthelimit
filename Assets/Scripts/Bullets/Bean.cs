@@ -9,27 +9,29 @@ public class Bean : MonoBehaviour
     public bool Grounded { get; private set; }
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _VineLayerMask;
+    [SerializeField] private LayerMask _enemyLayerMask;
     private GameObject _vineHeadPrefab;
     private const float Epsilon = 0.3f;  // to deal with instantiating vines on slopes 
-    
+    private CircleCollider2D _collider;  
 
     private Camera _mainCamera;
 
     [SerializeField] private float distanceToUpperPlatform = 20f;
-    
+
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Grounded = false;
         _mainCamera = Camera.main;
         _vineHeadPrefab= Resources.Load<GameObject>("Prefabs/Vines/VineHead");
+        _collider = GetComponent<CircleCollider2D>();
     }
 
     void Update()
     {
         CheckGrounded();
     }
-    
+
     private void CheckGrounded()
     {
         Vector3 position = transform.position;
@@ -76,6 +78,14 @@ public class Bean : MonoBehaviour
         
         return Instantiate(_vineHeadPrefab, new Vector3(transform.position
             .x,bottomPlatform.point.y-vineHeadHeight,transform.position.z - Epsilon), Quaternion.identity);
+    }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Destroy(gameObject);
+        }
     }
 
 }
