@@ -127,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1510
+        y: 1536
         width: 512
         height: 512
       alignment: 0
@@ -148,7 +148,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 1502
+        y: 1536
         width: 512
         height: 512
       alignment: 0
@@ -168,8 +168,8 @@ TextureImporter:
       name: jack spritesheet_2
       rect:
         serializedVersion: 2
-        x: 983
-        y: 1518
+        x: 1024
+        y: 1536
         width: 512
         height: 512
       alignment: 0
@@ -189,8 +189,8 @@ TextureImporter:
       name: jack spritesheet_3
       rect:
         serializedVersion: 2
-        x: 1463
-        y: 1524
+        x: 1536
+        y: 1536
         width: 512
         height: 512
       alignment: 0
@@ -211,7 +211,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 995
+        y: 1024
         width: 512
         height: 512
       alignment: 0
@@ -223,237 +223,6 @@ TextureImporter:
       bones: []
       spriteID: 82a5acf0b4a01ce4389325ec8361614c
       internalID: 519687468
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_5
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 1024
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b88a13211e621d340a0b1e9f40189ab2
-      internalID: -321108038
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_6
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 1024
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: abfa9b3a84c034b42977b962a3408a02
-      internalID: 212436954
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_7
-      rect:
-        serializedVersion: 2
-        x: 1536
-        y: 1024
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a3a9cec5dac4d745bd558cf66691f3a
-      internalID: -1798278
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 698b37af05e3e4a4a9627ba65b06c3b8
-      internalID: -955452343
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_9
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 031c7607d15a9894c9027b7ea496f154
-      internalID: -1808582821
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_10
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0e60b9b55ab3c9c4996889c34f7c8605
-      internalID: -1721640500
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_11
-      rect:
-        serializedVersion: 2
-        x: 1536
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a2c1f9df471c824f8513f96b65e1139
-      internalID: -467326895
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_12
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84a950eb79b5c0e4b827f8d3dff1c635
-      internalID: 1371978789
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_13
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6f07d04ca419b28439afb0e45d075c13
-      internalID: -1321389154
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_14
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 93e0fe1c6b598f341af5fc1abb612f7c
-      internalID: -953017563
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack spritesheet_15
-      rect:
-        serializedVersion: 2
-        x: 1536
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ceabd3eed2da734b8083d0ff553f03e
-      internalID: -399463818
       vertices: []
       indices: 
       edges: []
@@ -471,20 +240,9 @@ TextureImporter:
     nameFileIdTable:
       jack spritesheet_0: 51870739
       jack spritesheet_1: -2118648497
-      jack spritesheet_10: -1721640500
-      jack spritesheet_11: -467326895
-      jack spritesheet_12: 1371978789
-      jack spritesheet_13: -1321389154
-      jack spritesheet_14: -953017563
-      jack spritesheet_15: -399463818
       jack spritesheet_2: 1480265438
       jack spritesheet_3: -259688243
       jack spritesheet_4: 519687468
-      jack spritesheet_5: -321108038
-      jack spritesheet_6: 212436954
-      jack spritesheet_7: -1798278
-      jack spritesheet_8: -955452343
-      jack spritesheet_9: -1808582821
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
