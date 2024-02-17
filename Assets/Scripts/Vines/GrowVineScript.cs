@@ -15,6 +15,7 @@ public class GrowVineScript : MonoBehaviour
     private float _stemHeight;
     private bool firstGrow = true;
     [SerializeField] private int giantStemCount;
+    private bool _hitCeiling = false;
     private const float Epsilon = .1f;
 
     void Awake()
@@ -35,6 +36,19 @@ public class GrowVineScript : MonoBehaviour
 
     void Update()
     {
+        if (_hitCeiling)
+        {
+            return;
+        }
+        
+        // check if vine has hit the ceiling
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, .3f, LayerMask.GetMask("Ceiling"));
+        if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ceiling"))
+        {
+            _hitCeiling = true;
+            return;
+        }
+        
         Vector2 newPosition =
             new Vector2(transform.position.x, transform.position.y + vineGrowthSpeed * Time.deltaTime);
         transform.position = newPosition;
