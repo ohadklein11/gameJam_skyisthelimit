@@ -11,6 +11,7 @@ namespace Giant
         private GameObject _eye;
         private GameObject _player;
         private PlayerMovement _playerMovement;
+        private Rigidbody2D _rigidBody;
 
         private bool _fighting;  // phase 1
         private bool _crying;  // phase 2
@@ -21,6 +22,7 @@ namespace Giant
             _eye = transform.GetChild(0).gameObject;
             _player = GameObject.FindWithTag("Player");
             _playerMovement = _player.GetComponent<PlayerMovement>();
+            _rigidBody = GetComponent<Rigidbody2D>();
             _fighting = false;
             _crying = false;
             _standing = false;
@@ -55,6 +57,7 @@ namespace Giant
         private Vector3 _throwPosition;
         private float _throwableGravityScale;
         private ObjectPool<GameObject> _throwablePool;
+        [SerializeField] private GiantFightManager giantFightManager;
 
         private Vector2 FindThrowVelocity(Vector3 origin, Vector3 target, float angle)
         {
@@ -86,6 +89,15 @@ namespace Giant
                 _timeToThrow = UnityEngine.Random.Range(minThrowTime, maxThrowTime);
             }
             _timeToThrow -= Time.deltaTime;
+            
+            // check if eye is hit by peas
+            var radius = .6f;
+            RaycastHit2D hit = Physics2D.Raycast(_eye.transform.position - new Vector3(0, radius, 0),
+                Vector2.up, 2*radius, LayerMask.GetMask("Bullets"));
+            if (_fighting && hit.collider != null)
+            {
+                StartCoroutine(ChangePhaseToCrying());
+            }
         }
 
         private void ThrowThrowable()
@@ -96,7 +108,7 @@ namespace Giant
         // ### crying phase ###
         private void CryBehavior()
         {
-            throw new NotImplementedException();
+            return;
         }
     
         // ### standing phase ###
@@ -104,8 +116,6 @@ namespace Giant
         {
             throw new NotImplementedException();
         }
-    
-    
     
         private void Update()
         {
@@ -120,20 +130,16 @@ namespace Giant
                 StandBehavior();
             }
         }
-
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            if (_fighting && other.gameObject.layer == LayerMask.NameToLayer("Bullets"))
-            {
-                // start coroutine to change phase to crying
-                ChangePhaseToCrying();
-            }
-        }
     
         private IEnumerator ChangePhaseToCrying()
         {
             _fighting = false;
             _crying = true;
+            _rigidBody.constraints = RigidbodyConstraints2D.None;
+            _rigidBody.freezeRotation = false;
+            
+            _rigidBody.AddForce(new Vector2(-10, 0), ForceMode2D.Impulse);
+            giantFightManager.EndGiantFight();
         
             yield return new WaitForSeconds(5f);
         }

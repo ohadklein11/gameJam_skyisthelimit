@@ -1,11 +1,12 @@
 using Giant;
 using UnityEngine;
 
-public class GiantFightManager : MonoBehaviour
+public class GiantFightManager : Singleton<MonoBehaviour>
 {
     [SerializeField] private GiantBehavior giantBehavior;
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _giantFightTrigger;
+    [SerializeField] private PathToGoose _pathToGoose;
     
     
     private void Update()
@@ -19,5 +20,10 @@ public class GiantFightManager : MonoBehaviour
     public void StartGiantFight()
     {
         giantBehavior.StartGiantFight();
+    }
+    
+    public void EndGiantFight()
+    {
+        _pathToGoose.gameObject.SetActive(true);
     }
 }
