@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Enemies;
+using Player;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -10,6 +10,7 @@ namespace Giant
     {
         private GameObject _eye;
         private GameObject _player;
+        private PlayerMovement _playerMovement;
 
         private bool _fighting;  // phase 1
         private bool _crying;  // phase 2
@@ -19,6 +20,7 @@ namespace Giant
         {
             _eye = transform.GetChild(0).gameObject;
             _player = GameObject.FindWithTag("Player");
+            _playerMovement = _player.GetComponent<PlayerMovement>();
             _fighting = false;
             _crying = false;
             _standing = false;
@@ -30,7 +32,7 @@ namespace Giant
                 o => {
                     o.SetActive(true);
                     o.transform.position = _throwPosition;
-                    o.GetComponent<GiantThrowableBehavior>().Init(_throwablePool);
+                    o.GetComponent<GiantThrowableBehavior>().Init(_throwablePool, _player);
                     // set throw direction & force so throwable will hit the player
                     float throwAngle = UnityEngine.Random.Range(minThrowAngle, maxThrowAngle);
                     o.GetComponent<Rigidbody2D>().velocity = FindThrowVelocity(
@@ -53,7 +55,7 @@ namespace Giant
         private Vector3 _throwPosition;
         private float _throwableGravityScale;
         private ObjectPool<GameObject> _throwablePool;
-    
+
         private Vector2 FindThrowVelocity(Vector3 origin, Vector3 target, float angle)
         {
             Vector2 velocity = Vector2.zero;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public class GrowVineScript : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GrowVineScript : MonoBehaviour
     private float _headHeight;
     private float _stemHeight;
     private bool firstGrow = true;
+    [SerializeField] private int giantStemCount;
     private const float Epsilon = .1f;
 
     void Awake()
@@ -52,6 +54,10 @@ public class GrowVineScript : MonoBehaviour
 
     int ConfigureVineHeight()
     {
+        if (GameData.Instance.IsGiantFight)
+        {
+            return giantStemCount;
+        }
         // get y of bottom of camera
         // float bottomY = _mainCamera.transform.position.y - _mainCamera.orthographicSize;
         // float cameraHeight = _mainCamera.orthographicSize * 2 - (_startY-bottomY);
