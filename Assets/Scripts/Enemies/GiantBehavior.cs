@@ -9,7 +9,8 @@ public class GiantBehavior : MonoBehaviour
 {
     private GameObject _eye;
     private GameObject _player;
-    
+
+    private bool _idle;  // phase 0
     private bool _sitting;  // phase 1
     private bool _crying;  // phase 2
     private bool _standing;  // phase 3
@@ -29,7 +30,8 @@ public class GiantBehavior : MonoBehaviour
     {
         _eye = transform.GetChild(0).gameObject;
         _player = GameObject.FindWithTag("Player");
-        _sitting = true;
+        _idle = true;
+        _sitting = false;
         _crying = false;
         _standing = false;
         _timeToThrow = maxThrowTime;
@@ -45,10 +47,6 @@ public class GiantBehavior : MonoBehaviour
                 float throwAngle = UnityEngine.Random.Range(minThrowAngle, maxThrowAngle);
                 o.GetComponent<Rigidbody2D>().velocity = FindThrowVelocity(
                     _throwPosition, _player.transform.position, throwAngle);
-                // float throwMagnitude = FindThrowForce(_throwPosition, _playerPosition, throwAngle);
-                // o.GetComponent<Rigidbody2D>().velocity = new Vector2(
-                //     Mathf.Cos(throwAngle) * throwMagnitude, 
-                //     Mathf.Sin(throwAngle) * throwMagnitude);
             }, o => o.SetActive(false));
     }
     
@@ -115,5 +113,22 @@ public class GiantBehavior : MonoBehaviour
         {
             StandBehavior();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (_sitting && other.gameObject.layer == LayerMask.NameToLayer("Bullets"))
+        {
+            // start coroutine to change phase to crying
+            ChangePhaseToCrying();
+        }
+    }
+    
+    private IEnumerator ChangePhaseToCrying()
+    {
+        _sitting = false;
+        _crying = true;
+        
+        yield return new WaitForSeconds(5f);
     }
 }
