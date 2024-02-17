@@ -23,7 +23,7 @@ namespace Enemies
             {
                 return;
             }
-            _throwablePool.Release(this.gameObject);
+            _throwablePool.Release(gameObject);
         }
     }
 }

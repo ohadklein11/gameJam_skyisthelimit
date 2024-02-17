@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiantShooting : MonoBehaviour
+public class GiantShooting
 {
     // void InstantiateBullet(GameObject bulletPrefab)
     //     {
@@ -18,15 +18,16 @@ public class GiantShooting : MonoBehaviour
     //         rb.velocity = velocity;
     //         Debug.Log(rb.velocity);
     //     }
-        Vector3 CalculateVelocityFromAngle(Vector3 origin, Vector3 target, float angle)
+    public static float MagnitudeToReachXYInGravityAtAngle(float x, float y, float g, float ang)
+    {
+        float sin2Theta = Mathf.Sin(2 * ang * Mathf.Deg2Rad);
+        float cosTheta = Mathf.Cos(ang * Mathf.Deg2Rad);
+        float inner = (x * x * g) / (x * sin2Theta - 2 * y * cosTheta * cosTheta);
+        if (inner < 0)
         {
-            Vector3 distance = target - origin;
-            distance.y = 0;
-            float horizontalDistance = distance.magnitude;
-            float angleRad = angle * Mathf.Deg2Rad;
-            float velocity = Mathf.Sqrt(horizontalDistance * Physics.gravity.magnitude / Mathf.Sin(2 * angleRad));
-            float x = velocity * Mathf.Cos(angleRad);
-            float y = velocity * Mathf.Sin(angleRad);
-            return new Vector3(x, y, 0);
+            return float.NaN;
         }
+        float res = Mathf.Sqrt(inner);
+        return res;
+    }
 }
