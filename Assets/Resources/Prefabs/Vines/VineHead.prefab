@@ -193,3 +193,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vineGrowthSpeed: 2
+  giantStemCount: 30

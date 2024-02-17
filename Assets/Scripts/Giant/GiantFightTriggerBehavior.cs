@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 namespace Giant
 {
@@ -9,6 +10,7 @@ namespace Giant
         {
             if (other.CompareTag("Player"))
             {
+                GameData.Instance.StartGiantFight();
                 giantFightManager.StartGiantFight();
                 gameObject.SetActive(false);
             }

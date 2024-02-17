@@ -305,6 +305,12 @@ namespace Player
             flipScale.x *= -1;
             transform.localScale = flipScale;
         }
+        
+        public void StopClimbing()
+        {
+            _canClimb = false;
+            _isClimbing = false;
+        }
 
         private void OnDrawGizmos()
         {
