@@ -6,7 +6,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private GiantBehavior giantBehavior;
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _giantFightTrigger;
-    [SerializeField] private GameObject _stonesTrigger;
+    [SerializeField] private GameObject _stonesGenerator;
 
     [SerializeField] private PathToGoose _pathToGoose;
     
@@ -27,7 +27,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     public void EndGiantFight()
     {
         _pathToGoose.gameObject.SetActive(true);
-        _stonesTrigger.SetActive(true);
+        _stonesGenerator.SetActive(true);
 
     }
 }

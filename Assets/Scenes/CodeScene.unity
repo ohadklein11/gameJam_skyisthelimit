@@ -5352,8 +5352,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   giantBehavior: {fileID: 1139932528}
   _player: {fileID: 48291940}
-  _giantFightTrigger: {fileID: 131913814}
-  _stonesTrigger: {fileID: 0}
+  _giantFightTrigger: {fileID: 789373870}
+  _stonesGenerator: {fileID: 0}
   _pathToGoose: {fileID: 483654062}
 --- !u!1001 &231958257
 PrefabInstance:
@@ -7303,7 +7303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &315925557
 Transform:
   m_ObjectHideFlags: 0
@@ -14247,7 +14247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &789373871
 Transform:
   m_ObjectHideFlags: 0
