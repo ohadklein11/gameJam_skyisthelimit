@@ -10,8 +10,8 @@ namespace Giant
     {
         private GameObject _eye;
         private GameObject _player;
+        private SpriteRenderer _spriteRenderer;
         private PlayerMovement _playerMovement;
-        private Rigidbody2D _rigidBody;
 
         private bool _fighting;  // phase 1
         private bool _crying;  // phase 2
@@ -22,7 +22,7 @@ namespace Giant
             _eye = transform.GetChild(0).gameObject;
             _player = GameObject.FindWithTag("Player");
             _playerMovement = _player.GetComponent<PlayerMovement>();
-            _rigidBody = GetComponent<Rigidbody2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             _fighting = false;
             _crying = false;
             _standing = false;
@@ -135,10 +135,7 @@ namespace Giant
         {
             _fighting = false;
             _crying = true;
-            _rigidBody.constraints = RigidbodyConstraints2D.None;
-            _rigidBody.freezeRotation = false;
-            
-            _rigidBody.AddForce(new Vector2(-10, 0), ForceMode2D.Impulse);
+
             giantFightManager.EndGiantFight();
         
             yield return new WaitForSeconds(5f);

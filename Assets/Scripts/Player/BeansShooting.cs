@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum GunType
 {
@@ -35,6 +36,7 @@ public class BeansShooting : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private float _eggShootingCooldownWait;
     private SpriteRenderer _playerSpriteRenderer;
+    public bool canShoot = true;
 
 
     void Awake()
@@ -105,6 +107,8 @@ public class BeansShooting : MonoBehaviour
 
     void ShootBeans()
     {
+        if (!canShoot)
+            return;
         if (Input.GetButtonDown("Fire1"))
         {
             // transform.Rotate(Vector3.up * speed * Time.deltaTime);
@@ -170,6 +174,11 @@ public class BeansShooting : MonoBehaviour
                 _eggShootingCooldownWait -= Time.deltaTime;
             }
         }
+    }
+    
+    public void SetGunType(GunType gunType)
+    {
+        _gunType = gunType;
     }
     
     

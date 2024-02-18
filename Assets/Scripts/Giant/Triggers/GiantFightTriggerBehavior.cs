@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
 
-namespace Giant
+namespace Giant.Triggers
 {
     public class GiantFightTriggerBehavior : MonoBehaviour
     {

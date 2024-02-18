@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathToGoose : MonoBehaviour
+public class BezierPath : MonoBehaviour
 {
     [SerializeField] private Transform[] points;
     
@@ -12,6 +12,7 @@ public class PathToGoose : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // if we want player to control the movement, we can use PutOnPath instead
             iTween.MoveTo(other.gameObject, iTween.Hash("path", points, "time", 5, "easetype", iTween.EaseType.linear));
         }
     }
