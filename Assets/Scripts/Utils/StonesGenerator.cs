@@ -8,8 +8,10 @@ using UnityEngine.Pool;
 public class StonesGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject throwable;
-
+    [SerializeField] private float timeToThrow = 2f;
+    private float _timeToThrowLeft;
     private int _throwableObjectAmount = 10;
+    
     private GameObject _player;
     private Camera _camera;
     private ObjectPool<GameObject> _throwablePool;
@@ -18,19 +20,13 @@ public class StonesGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        _timeToThrowLeft = timeToThrow;
         _camera = Camera.main;
         _player = GameObject.FindWithTag("Player");
         Vector3 playerPosition = _player.transform.position;
 
         _throwablePool = new ObjectPool<GameObject>(
-            () =>
-            {
-                for (int i = 0; i < _throwableObjectAmount; i++)
-                { 
-                    Instantiate(throwable, _player.transform.position, Quaternion.identity);
-                }
-                return throwable;
-            },
+            () => Instantiate(throwable, _player.transform.position, Quaternion.identity),
             o =>
             {
                 o.SetActive(true);
@@ -38,11 +34,21 @@ public class StonesGenerator : MonoBehaviour
                                throwable.GetComponent<SpriteRenderer>().bounds.size.y;
                 o.transform.position = new Vector3(playerPosition.x, spawnY, playerPosition.z);
                 o.GetComponent<GiantThrowableBehavior>().Init(_throwablePool, _player);
-            }, o => o.SetActive(false));
+            }, o => o.SetActive(false), null,true, _throwableObjectAmount);
+        
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (_timeToThrowLeft<= 0)
+        {
+            _timeToThrowLeft = timeToThrow;
+            _throwablePool.Get();
+        }
+        else
+        {
+            _timeToThrowLeft -= Time.deltaTime;
+        }
     }
+    
 }
