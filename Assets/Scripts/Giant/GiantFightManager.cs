@@ -27,7 +27,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     public void EndGiantFight()
     {
         _pathToGoose.gameObject.SetActive(true);
-        _stonesGenerator.SetActive(true);
+        // _stonesGenerator.SetActive(true);
 
     }
 }
