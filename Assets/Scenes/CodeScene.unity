@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5353,7 +5353,7 @@ MonoBehaviour:
   giantBehavior: {fileID: 1139932528}
   _player: {fileID: 48291940}
   _giantFightTrigger: {fileID: 131913814}
-  _stonesGenerator: {fileID: 789373870}
+  _stonesTrigger: {fileID: 315925556}
   _pathToGoose: {fileID: 483654062}
 --- !u!1001 &231958257
 PrefabInstance:
@@ -7303,7 +7303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &315925557
 Transform:
   m_ObjectHideFlags: 0
@@ -7331,7 +7331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c08154948ff10444bfaef8c573ec50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stonesGenerator: {fileID: 0}
+  _stonesGenerator: {fileID: 8258173}
 --- !u!61 &315925559
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14248,7 +14248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &789373871
 Transform:
   m_ObjectHideFlags: 0

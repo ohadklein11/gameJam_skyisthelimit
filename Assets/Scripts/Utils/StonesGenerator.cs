@@ -23,7 +23,6 @@ public class StonesGenerator : MonoBehaviour
         _timeToThrowLeft = timeToThrow;
         _camera = Camera.main;
         _player = GameObject.FindWithTag("Player");
-        Vector3 playerPosition = _player.transform.position;
 
         _throwablePool = new ObjectPool<GameObject>(
             () => Instantiate(throwable, _player.transform.position, Quaternion.identity),
@@ -32,6 +31,7 @@ public class StonesGenerator : MonoBehaviour
                 o.SetActive(true);
                 float spawnY = _camera.transform.position.y + _camera.orthographicSize +
                                throwable.GetComponent<SpriteRenderer>().bounds.size.y;
+                Vector3 playerPosition = _player.transform.position;
                 o.transform.position = new Vector3(playerPosition.x, spawnY, playerPosition.z);
                 o.GetComponent<GiantThrowableBehavior>().Init(_throwablePool, _player);
             }, o => o.SetActive(false), null,true, _throwableObjectAmount);
