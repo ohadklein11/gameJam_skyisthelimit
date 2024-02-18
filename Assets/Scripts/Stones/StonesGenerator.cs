@@ -28,15 +28,16 @@ public class StonesGenerator : MonoBehaviour
             () => Instantiate(throwable, _player.transform.position, Quaternion.identity),
             o =>
             {
-                o.SetActive(true);
+                o.transform.parent.gameObject.SetActive(true);
                 float spawnY = _camera.transform.position.y + _camera.orthographicSize +
                                throwable.GetComponent<MeshRenderer>().bounds.size.y;
                 float spawnX = _camera.transform.position.x + _camera.orthographicSize * _camera.aspect;
                 Vector3 playerPosition = _player.transform.position;
                 o.transform.position = new Vector3(spawnX, spawnY, playerPosition.z);
                 o.GetComponentInChildren<GiantThrowableBehavior>().Init(_throwablePool, _player);
-                o.GetComponent<Rigidbody>().velocity = new Vector3(-10,-2,0);
-            }, o => o.SetActive(false), null,true, _throwableObjectAmount);
+                Debug.Log(o.transform.parent);
+                o.GetComponentInParent<Rigidbody>().velocity = new Vector3(-10,-2,0);
+            }, o => o.transform.parent.gameObject.SetActive(false), null,true, _throwableObjectAmount);
         
     }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1069610327224989807}
   - component: {fileID: 353358717405326149}
   - component: {fileID: 5983845099535318948}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 2dCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,6 +154,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: stone2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d0806c9c06c647f40bbf447ffaa8b82a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
