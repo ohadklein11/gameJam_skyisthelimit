@@ -163,6 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed471cb6e761efe4489ea849332f0756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeDuration: 0.7
+  shakeMagnitude: 1.3
 --- !u!114 &6606827326418708756
 MonoBehaviour:
   m_ObjectHideFlags: 0
