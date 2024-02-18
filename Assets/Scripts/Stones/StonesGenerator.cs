@@ -34,7 +34,6 @@ public class StonesGenerator : MonoBehaviour
                 float spawnX = _camera.transform.position.x + _camera.orthographicSize * _camera.aspect;
                 Vector3 playerPosition = _player.transform.position;
                 o.transform.position = new Vector3(spawnX, spawnY, playerPosition.z);
-                o.GetComponentInChildren<GiantThrowableBehavior>().Init(_throwablePool, _player);
                 Debug.Log(o.transform.parent);
                 o.GetComponentInParent<Rigidbody>().velocity = new Vector3(-10,-2,0);
             }, o => o.transform.parent.gameObject.SetActive(false), null,true, _throwableObjectAmount);

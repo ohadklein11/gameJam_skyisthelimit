@@ -4,7 +4,7 @@ using Cinemachine;
 using Giant;
 using UnityEngine;
 
-public class FallingStoneBehaviour : GiantThrowableBehavior
+public class FallingStoneBehaviour : MonoBehaviour
 {
     private CinemachineVirtualCamera _virtualCamera;
     [SerializeField] private float shakeDuration = 1f;
@@ -14,7 +14,7 @@ public class FallingStoneBehaviour : GiantThrowableBehavior
         _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
     }
     
-    protected override void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log(other.gameObject.layer);
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -25,7 +25,6 @@ public class FallingStoneBehaviour : GiantThrowableBehavior
         else
         {
             Debug.Log("GiantThrowable");
-            base.OnCollisionEnter2D(other);
         }
     }
 }
