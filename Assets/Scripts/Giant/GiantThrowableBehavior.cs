@@ -8,9 +8,9 @@ namespace Giant
 {
     public class GiantThrowableBehavior : MonoBehaviour
     {
-        private bool _released;
+        protected bool _released;
         
-        private ObjectPool<GameObject> _throwablePool;
+        protected ObjectPool<GameObject> _throwablePool;
         private GameObject _player;
         private PlayerMovement _playerMovement;
         private const float Epsilon = 0.01f;
@@ -28,7 +28,7 @@ namespace Giant
             _released = false;
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        protected virtual void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
