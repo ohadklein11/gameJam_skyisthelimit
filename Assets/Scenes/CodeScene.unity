@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c196a6d69875f8648999636a0e63291f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwable: {fileID: 174113861851377638, guid: 938edc3dd2c87cb42a806a1578e3c556,
+  throwable: {fileID: 4599677588657284737, guid: 4d5287ae2b70d99438a01f2ee54704eb,
     type: 3}
   timeToThrow: 1.5
 --- !u!1 &11076058
@@ -14248,7 +14248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &789373871
 Transform:
   m_ObjectHideFlags: 0

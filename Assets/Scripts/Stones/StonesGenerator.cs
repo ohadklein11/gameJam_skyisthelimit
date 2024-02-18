@@ -30,10 +30,12 @@ public class StonesGenerator : MonoBehaviour
             {
                 o.SetActive(true);
                 float spawnY = _camera.transform.position.y + _camera.orthographicSize +
-                               throwable.GetComponent<SpriteRenderer>().bounds.size.y;
+                               throwable.GetComponent<MeshRenderer>().bounds.size.y;
+                float spawnX = _camera.transform.position.x + _camera.orthographicSize * _camera.aspect;
                 Vector3 playerPosition = _player.transform.position;
-                o.transform.position = new Vector3(playerPosition.x, spawnY, playerPosition.z);
-                o.GetComponent<GiantThrowableBehavior>().Init(_throwablePool, _player);
+                o.transform.position = new Vector3(spawnX, spawnY, playerPosition.z);
+                o.GetComponentInChildren<GiantThrowableBehavior>().Init(_throwablePool, _player);
+                o.GetComponent<Rigidbody>().velocity = new Vector3(-10,-2,0);
             }, o => o.SetActive(false), null,true, _throwableObjectAmount);
         
     }
