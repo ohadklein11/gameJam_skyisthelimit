@@ -10,7 +10,7 @@ public class CameraPath : MonoBehaviour
     
     [SerializeField] private GameObject pointsParent;
     [SerializeField] private GameObject follow;
-
+    [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private float speed = 1f;
     private float timeLeft;
     private float _timeLeftToCurrentMovement;
@@ -72,7 +72,16 @@ public class CameraPath : MonoBehaviour
         }
         else if (player.transform.position.x > follow.transform.position.x)
         {
-            follow.transform.position = player.transform.position;
+            // follow.transform.position = new Vector3(player.transform.position.x, follow.transform.position.y, follow.transform.position.z);
+            var hitGround = Physics2D.Raycast(player.transform.position, Vector2.down,Mathf.Infinity , _groundLayerMask);
+            if (hitGround)
+            {
+                follow.transform.position = new Vector3(player.transform.position.x, hitGround.point.y, player.transform.position.z);
+            }
+            else
+                follow.transform.position = player.transform.position;
+            
+
             if(player.transform.position.x > _points[_currentPoint].position.x)
             {
                 _currentPoint++;
@@ -81,7 +90,6 @@ public class CameraPath : MonoBehaviour
         if (_currentPoint>= _points.Length)
         {
             EndCameraPath();
-            follow.transform.position = player.transform.position;
         }
     }
 
