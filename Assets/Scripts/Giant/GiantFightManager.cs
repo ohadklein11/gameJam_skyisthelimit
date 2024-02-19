@@ -47,12 +47,15 @@ public class GiantFightManager : Singleton<MonoBehaviour>
 
     public void StartGiantFight()
     {
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightStart,"start");
         CloseDoor();
         giantBehavior.StartGiantFight();
     }
     
     public void EndGiantFight()
     {
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,"end");
+
         _giantSpriteRenderer.color = Color.green;  // temp
         _pathToGoose.gameObject.SetActive(true);
         _beansShooting.canShoot = false;

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class EventManagerScript : Singleton<EventManagerScript>
 {
 	public const string GiantFightStart = "GiantFightStart";
+	public const string GiantFightEnd = "GiantFightEnd";
+
 
 	protected EventManagerScript()
     {
