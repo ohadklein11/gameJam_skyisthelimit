@@ -122,9 +122,16 @@ namespace Player
                 }
                 _isClimbing = true;
                 var position = transform.position;
-                position = new Vector3(_climbable.GetXPosition(), position.y, position.z);
-                transform.position = position;
-                _rb.velocity = new Vector2(0, _yInput * climbSpeed);
+                try
+                {
+                    var xPosition = _climbable.GetXPosition();
+                    position = new Vector3(xPosition, position.y, position.z);
+                    transform.position = position;
+                    _rb.velocity = new Vector2(0, _yInput * climbSpeed);
+                } catch (MissingReferenceException e)
+                {
+                    _isClimbing = false;
+                }
             }
             else
             {

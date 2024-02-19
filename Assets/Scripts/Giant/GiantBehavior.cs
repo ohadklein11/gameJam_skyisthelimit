@@ -16,6 +16,17 @@ namespace Giant
         private bool _fighting;  // phase 1
         private bool _crying;  // phase 2
         private bool _standing;  // phase 3
+        
+        [SerializeField] private GameObject throwable;
+        [SerializeField] private float minThrowTime = 2f;
+        [SerializeField] private float maxThrowTime = 5f;
+        [SerializeField] private float minThrowAngle = 120f;
+        [SerializeField] private float maxThrowAngle = 160f;
+        private float _timeToThrow;
+        private Vector3 _throwPosition;
+        private float _throwableGravityScale;
+        private ObjectPool<GameObject> _throwablePool;
+        [SerializeField] private GiantFightManager giantFightManager;
     
         void Awake()
         {
@@ -27,7 +38,7 @@ namespace Giant
             _crying = false;
             _standing = false;
             _timeToThrow = maxThrowTime;
-            _throwPosition = _eye.transform.position;
+            _throwPosition = transform.GetChild(1).gameObject.transform.position;
             _throwableGravityScale = throwable.GetComponent<Rigidbody2D>().gravityScale;
             _throwablePool = new ObjectPool<GameObject>(
                 () => Instantiate(throwable, _throwPosition, Quaternion.identity), 
@@ -46,18 +57,6 @@ namespace Giant
         {
             _fighting = true;
         }
-    
-        // ### fighting phase ###
-        [SerializeField] private GameObject throwable;
-        [SerializeField] private float minThrowTime = 2f;
-        [SerializeField] private float maxThrowTime = 5f;
-        [SerializeField] private float minThrowAngle = 120f;
-        [SerializeField] private float maxThrowAngle = 160f;
-        private float _timeToThrow;
-        private Vector3 _throwPosition;
-        private float _throwableGravityScale;
-        private ObjectPool<GameObject> _throwablePool;
-        [SerializeField] private GiantFightManager giantFightManager;
 
         private Vector2 FindThrowVelocity(Vector3 origin, Vector3 target, float angle)
         {
