@@ -8,14 +8,23 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float giantFightZoomOut = 76f;
     [SerializeField] private CameraPath cameraPath;
     private float _giantFightZoomOutStartValue;
+    [SerializeField] private bool _turnOffCameraPath=false;
 
     void Start()
     {
         _giantFightZoomOutStartValue =
             cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
-        EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightStart, SetGiantBattleCamera);
+        EventManagerScript.Instance.StartListening(EventManagerScript.GiantDoorsOpen, SetGiantBattleCamera);
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, SetGiantBattleCamera);
 
+    }
+
+    void Update()
+    {
+        if (_turnOffCameraPath)
+        {
+            cameraPath.EndCameraPath();
+        }
     }
     public void StartCameraPath()
     {
@@ -43,6 +52,12 @@ public class CameraManager : MonoBehaviour
             "easetype", iTween.EaseType.linear));
 
     }
+
+    void ZoomInOnDoorOpen(object arg0)
+    {
+        
+    }
+
 
     void UpdateGiantBattleCamera(float value)
     {

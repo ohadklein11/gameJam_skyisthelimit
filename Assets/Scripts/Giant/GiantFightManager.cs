@@ -35,6 +35,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
 
     private void OpenDoor()
     {
+
         iTween.RotateTo(_doorPivot.gameObject, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
         _doorCollider.enabled = false;
     }
@@ -47,14 +48,12 @@ public class GiantFightManager : Singleton<MonoBehaviour>
 
     public void StartGiantFight()
     {
-        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightStart,"start");
         CloseDoor();
         giantBehavior.StartGiantFight();
     }
     
     public void EndGiantFight()
     {
-        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,"end");
 
         _giantSpriteRenderer.color = Color.green;  // temp
         _pathToGoose.gameObject.SetActive(true);
@@ -63,6 +62,8 @@ public class GiantFightManager : Singleton<MonoBehaviour>
 
     public void OpenGiantDoors()
     {
+        
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantDoorsOpen,"start");
         OpenDoor();
     }
 
@@ -77,6 +78,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     
     public void StartEscape()
     {
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,"end");
         _chairCollider.enabled = true;
         _pathFromGoose.gameObject.SetActive(false);
         _giantSpriteRenderer.color = Color.red;  // temp

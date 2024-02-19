@@ -4069,8 +4069,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98293363d638b3b4e8dd377df254f3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  giantFightZoomOut: 69
+  giantFightZoomOut: 55
   cameraPath: {fileID: 1436032563}
+  _turnOffCameraPath: 0
 --- !u!1 &131913814
 GameObject:
   m_ObjectHideFlags: 0
