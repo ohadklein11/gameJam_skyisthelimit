@@ -274,8 +274,8 @@ MonoBehaviour:
   throwable: {fileID: 7567359212462748516, guid: 37a0601795ecc664cb9a5547f5d5c946,
     type: 3}
   timeToThrow: 2.2
-  velocityX: -15
-  velocityY: -2
+  velocityX: -20
+  velocityY: -10
 --- !u!1 &11076058
 GameObject:
   m_ObjectHideFlags: 0

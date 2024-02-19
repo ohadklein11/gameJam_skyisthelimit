@@ -29,11 +29,13 @@ public class FallingStoneBehaviour : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("Stone hit the ground");
+            
+            // Debug.Log("Stone hit the ground");
             _virtualCamera.GetComponent<CameraShake>().Shake(shakeMagnitude, shakeDuration);
         }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Player")&&other.gameObject.GetComponent<Rigidbody2D>().velocity.x<0)
+        else if(other.gameObject.layer == LayerMask.NameToLayer("Player")&&gameObject.GetComponent<Rigidbody2D>().velocity.magnitude>5)
         {
+            Debug.Log(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude);
             if (!_released)
             {
                 _throwablePool.Release(gameObject);
