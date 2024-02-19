@@ -72,11 +72,8 @@ public class GrowVineScript : MonoBehaviour
         {
             return giantStemCount;
         }
-        // get y of bottom of camera
-        // float bottomY = _mainCamera.transform.position.y - _mainCamera.orthographicSize;
-        // float cameraHeight = _mainCamera.orthographicSize * 2 - (_startY-bottomY);
         float cameraHeight = _mainCamera.orthographicSize * 2;
-        float vineHeight = _vineBodyPrefab.gameObject.transform.localScale.y;
+        float vineHeight = _vineBodyPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
         int vineCount = (int)(cameraHeight / vineHeight);
         int randomVineCount = Random.Range(vineCount / 2, vineCount);
         return randomVineCount;
