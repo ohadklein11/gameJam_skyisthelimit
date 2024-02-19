@@ -9,6 +9,9 @@ public class StonesGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject throwable;
     [SerializeField] private float timeToThrow = 2f;
+    [SerializeField] private float velocityX = -15f;
+    [SerializeField] private float velocityY = -2f;
+
     private float _timeToThrowLeft;
     private int _throwableObjectAmount = 10;
     
@@ -28,15 +31,19 @@ public class StonesGenerator : MonoBehaviour
             () => Instantiate(throwable, _player.transform.position, Quaternion.identity),
             o =>
             {
-                o.transform.parent.gameObject.SetActive(true);
+                o.SetActive(true);
                 float spawnY = _camera.transform.position.y + _camera.orthographicSize +
-                               throwable.GetComponent<MeshRenderer>().bounds.size.y;
-                float spawnX = _camera.transform.position.x + _camera.orthographicSize * _camera.aspect;
+                               throwable.GetComponent<MeshRenderer>().bounds.size.y+10;
+                float spawnYOffset= Random.Range(spawnY, spawnY+10);
+
+                float spawnX = _camera.transform.position.x + _camera.orthographicSize * _camera.aspect+12;
+                float spawnXOffset= Random.Range(spawnX, spawnX+10);
+                o.GetComponent<FallingStoneBehaviour>().Init(_throwablePool);
                 Vector3 playerPosition = _player.transform.position;
-                o.transform.position = new Vector3(spawnX, spawnY, playerPosition.z);
-                Debug.Log(o.transform.parent);
-                o.GetComponentInParent<Rigidbody>().velocity = new Vector3(-10,-2,0);
-            }, o => o.transform.parent.gameObject.SetActive(false), null,true, _throwableObjectAmount);
+                o.transform.position = new Vector3(spawnXOffset, spawnYOffset, playerPosition.z);
+                o.GetComponent<Rigidbody2D>().velocity= new Vector3(velocityX,velocityY,0);
+                // o.GetComponentInParent<Rigidbody>().velocity = new Vector3(-10,-2,0);
+            }, o =>o.SetActive(false), null,true, _throwableObjectAmount);
         
     }
 

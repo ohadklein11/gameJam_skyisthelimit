@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -243,7 +243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8258174
 Transform:
   m_ObjectHideFlags: 0
@@ -271,9 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c196a6d69875f8648999636a0e63291f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwable: {fileID: 4599677588657284737, guid: 4d5287ae2b70d99438a01f2ee54704eb,
+  throwable: {fileID: 7567359212462748516, guid: 37a0601795ecc664cb9a5547f5d5c946,
     type: 3}
-  timeToThrow: 1.5
+  timeToThrow: 2.2
+  velocityX: -15
+  velocityY: -2
 --- !u!1 &11076058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,7 +1344,7 @@ GameObject:
   - component: {fileID: 48291947}
   - component: {fileID: 48291946}
   - component: {fileID: 48291948}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -14465,7 +14467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &789373871
 Transform:
   m_ObjectHideFlags: 0
@@ -16985,7 +16987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 938603030}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18883,7 +18885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1037843131}
   - component: {fileID: 1037843132}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27111,7 +27113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1492824686}
   - component: {fileID: 1492824687}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Shooting Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
