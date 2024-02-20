@@ -6,6 +6,8 @@ public class EventManagerScript : Singleton<EventManagerScript>
 	public const string GiantFightStart = "GiantFightStart";
 	public const string GiantDoorsOpen = "GiantDoorsOpen";
 	public const string GiantFightEnd = "GiantFightEnd";
+	public const string GiantAttitude = "GiantAttitude";
+
 
 
 	protected EventManagerScript()

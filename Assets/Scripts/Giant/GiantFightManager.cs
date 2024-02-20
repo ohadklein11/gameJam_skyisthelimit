@@ -1,3 +1,4 @@
+using System.Collections;
 using Giant;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -54,7 +55,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     
     public void EndGiantFight()
     {
-
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantAttitude,_giantSpriteRenderer.gameObject);
         _giantSpriteRenderer.color = Color.green;  // temp
         _pathToGoose.gameObject.SetActive(true);
         _beansShooting.canShoot = false;
@@ -78,12 +79,19 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     
     public void StartEscape()
     {
-        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,"end");
         _chairCollider.enabled = true;
         _pathFromGoose.gameObject.SetActive(false);
         _giantSpriteRenderer.color = Color.red;  // temp
-        OpenDoor();
         _stonesTrigger.SetActive(true);
         _beansShooting.canShoot = true;
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,"end");
+        StartCoroutine(OpenGiantDoorsDelay());
+
+    }
+    
+    IEnumerator OpenGiantDoorsDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        OpenDoor();
     }
 }
