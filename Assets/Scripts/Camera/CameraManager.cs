@@ -9,6 +9,11 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CameraPath cameraPath;
     private float _giantFightZoomOutStartValue;
     [SerializeField] private bool _turnOffCameraPath=false;
+    [SerializeField] private float zoomInOnGiant = 30f;
+    [SerializeField] private GameObject follow;
+    [SerializeField] private GameObject player;
+    [SerializeField] private Transform doorPivot;
+
 
 
     void Start()
@@ -60,19 +65,51 @@ public class CameraManager : MonoBehaviour
 
     }
 
-    void ZoomInOnDoorOpen()
-    {
-        cameraPath.ZoomInOnDoorOpen();
-    }
-    
-    void ZoomInOnGiant(object arg0)
-    {
-        cameraPath.ZoomInOnGiant(arg0);
-    }
-
-
     void UpdateGiantBattleCamera(float value)
     {
         cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView= value;
+    }
+    
+    void ZoomIn(Transform transformToZoom, float fieldOfView)
+    {
+        follow.transform.position = player.transform.position;
+        cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().Follow = follow.transform;
+        cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().LookAt = follow.transform;
+        float fieldOfVIewBeforeZoom = cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
+
+        cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView= fieldOfView;
+
+        iTween.MoveTo(follow.transform.gameObject, iTween.Hash("position", transformToZoom.position, "time", 0.5f, "easetype", iTween.EaseType.linear));
+        StartCoroutine(StartDelay(2f,fieldOfVIewBeforeZoom));
+
+    }
+
+    public void ZoomInOnDoorOpen()
+    {
+        float fieldOfView= doorPivot.GetComponentInChildren<BoxCollider2D>().bounds.size.y;
+        ZoomIn(doorPivot, fieldOfView);
+    }
+    
+    public void ZoomInOnGiant(object arg0)
+    {
+        GameObject giant = (GameObject)arg0;
+        // float fieldOfView= giant.GetComponent<PolygonCollider2D>().bounds.size.y;
+
+        ZoomIn(giant.transform,zoomInOnGiant);
+    }
+    
+    IEnumerator StartDelay(float delay,float fieldOfVIewBeforeZoom)
+    {
+        yield return new WaitForSeconds(delay);
+        ZoomOnPlayer(fieldOfVIewBeforeZoom);
+    }
+
+    void ZoomOnPlayer(float fieldOfVIewBeforeZoom)
+    {
+        iTween.MoveTo(follow.transform.gameObject, iTween.Hash("position", player.transform.position, "time", 0.5f, "easetype", iTween.EaseType.linear));
+        cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView=fieldOfVIewBeforeZoom;
+
+        cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
+        cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().LookAt = player.transform;
     }
 }

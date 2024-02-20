@@ -11,10 +11,8 @@ public class CameraPath : MonoBehaviour
     [SerializeField] private GameObject pointsParent;
     [SerializeField] private GameObject follow;
     [SerializeField] private LayerMask _groundLayerMask;
-    [SerializeField] private Transform _doorPivot;
 
     [SerializeField] private float speed = 1f;
-    [SerializeField] private float zoomInOnGiant = 30f;
     private float timeLeft;
     private float _timeLeftToCurrentMovement;
     private int _currentPoint;
@@ -123,46 +121,5 @@ public class CameraPath : MonoBehaviour
         GetComponent<CinemachineVirtualCamera>().LookAt = player.transform;
     }
     
-    public void ZoomIn(Transform transformToZoom, float fieldOfView)
-    {
-        follow.transform.position = player.transform.position;
-        GetComponent<CinemachineVirtualCamera>().Follow = follow.transform;
-        GetComponent<CinemachineVirtualCamera>().LookAt = follow.transform;
-        float fieldOfVIewBeforeZoom = gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
-
-        gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView= fieldOfView;
-
-        iTween.MoveTo(follow.transform.gameObject, iTween.Hash("position", transformToZoom.position, "time", 0.5f, "easetype", iTween.EaseType.linear));
-        StartCoroutine(StartDelay(2f,fieldOfVIewBeforeZoom));
-
-    }
-
-    public void ZoomInOnDoorOpen()
-    {
-        float fieldOfView= _doorPivot.GetComponentInChildren<BoxCollider2D>().bounds.size.y;
-        ZoomIn(_doorPivot, fieldOfView);
-    }
     
-    public void ZoomInOnGiant(object arg0)
-    {
-        GameObject giant = (GameObject)arg0;
-        // float fieldOfView= giant.GetComponent<PolygonCollider2D>().bounds.size.y;
-
-        ZoomIn(giant.transform,zoomInOnGiant);
-    }
-    
-    IEnumerator StartDelay(float delay,float fieldOfVIewBeforeZoom)
-    {
-        yield return new WaitForSeconds(delay);
-        ZoomOnPlayer(fieldOfVIewBeforeZoom);
-    }
-
-    void ZoomOnPlayer(float fieldOfVIewBeforeZoom)
-    {
-        iTween.MoveTo(follow.transform.gameObject, iTween.Hash("position", player.transform.position, "time", 0.5f, "easetype", iTween.EaseType.linear));
-        gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView=fieldOfVIewBeforeZoom;
-
-        GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
-        GetComponent<CinemachineVirtualCamera>().LookAt = player.transform;
-    }
 }
