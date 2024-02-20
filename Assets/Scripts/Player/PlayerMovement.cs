@@ -8,6 +8,8 @@ namespace Player
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField]
+        private float minFallDamage;
+        [SerializeField]
         private float movementSpeed;
         [SerializeField] 
         private int numFramesUntilMaxSlowdown;  // e.g. after 20 frames of moving, the player will slide to a stop upon releasing the movement key
@@ -40,6 +42,7 @@ namespace Player
         private float _slopeSideAngle;
         private float _lastSlopeAngle;
         private float _playerXradius;
+        private float _fallingMaxHeight;
 
         private int _facingDirection = 1;
 
@@ -51,8 +54,13 @@ namespace Player
         private bool _canClimb;
         private bool _isClimbing;
         private bool _isEnteringClimbing;
+        private bool _wasFalling;
+        private bool _wasGrounded;
         private int _numFramesSinceEnteringClimbing;
         private IClimbable _climbable;
+        
+        private bool IsFalling => (!_isGrounded && !_isClimbing && _rb.velocity.y < 0.0f);
+
         private bool IsTryingToClimb => (_isGrounded && _yInput > 0.0f) || (!_isGrounded && _yInput != 0.0f);
 
         private Vector2 _newVelocity;
@@ -87,6 +95,39 @@ namespace Player
             SlopeCheck();
             CheckClimb();
             ApplyMovement();
+            CheckFalling();
+
+        }
+
+        private void CheckFalling()
+        {
+            if (!_wasFalling && IsFalling)
+            {
+                _fallingMaxHeight = transform.position.y;
+            }
+            else if(IsFalling && transform.position.y > _fallingMaxHeight)
+            {
+                _fallingMaxHeight = transform.position.y;
+            }
+            if (!_wasGrounded && _isGrounded)
+            {
+                if (_wasFalling)
+                {
+                    TakeFallDamage();
+                }
+            }
+            _wasFalling = IsFalling;
+            _wasGrounded = _isGrounded;
+        }
+
+        private void TakeFallDamage()
+        {
+            int fallDamage = (int)(_fallingMaxHeight - transform.position.y);
+            if (fallDamage>minFallDamage)
+            {
+                Debug.Log("Player took alot of fall damage");
+                EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerGotHit, fallDamage);
+            }
         }
 
         private void CheckInput()
