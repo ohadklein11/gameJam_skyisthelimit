@@ -11,13 +11,20 @@ public class Bean : MonoBehaviour
     [SerializeField] private LayerMask _VineLayerMask;
     [SerializeField] private LayerMask _enemyLayerMask;
     [SerializeField] private float nonGravityTime;
+    [SerializeField] private float minSpeedMultiplier = 0.5f;
     private GameObject _vineHeadPrefab;
     private const float Epsilon = 0.3f;  // to deal with instantiating vines on slopes 
     private float _initialGravityScale;
     private CircleCollider2D _collider;  
+    private Rigidbody2D _rigidbody2D;
+    private float _maxSpeed;
+    private float _minSpeed;
+    private float _curSpeedInterval;
     
 
     private Camera _mainCamera;
+    private bool _hasGravity = false;
+
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -26,25 +33,45 @@ public class Bean : MonoBehaviour
         _vineHeadPrefab= Resources.Load<GameObject>("Prefabs/Vines/VineHead");
         _collider = GetComponent<CircleCollider2D>();
         _initialGravityScale= GetComponent<Rigidbody2D>().gravityScale;
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _curSpeedInterval = 1f;
     }
 
     void Start()
     {
-        StartCoroutine(ApplyRigidbody());
-    }
-
-
-    IEnumerator ApplyRigidbody()
-    {
         GetComponent<Rigidbody2D>().gravityScale = 0;
-        yield return new WaitForSeconds(nonGravityTime);
-        GetComponent<Rigidbody2D>().gravityScale = _initialGravityScale;
-
+        _maxSpeed = _rigidbody2D.velocity.x;
+        _minSpeed = _maxSpeed * minSpeedMultiplier;
     }
+
+
+    // IEnumerator ApplyRigidbody()
+    // {
+    //     GetComponent<Rigidbody2D>().gravityScale = 0;
+    //     yield return new WaitForSeconds(nonGravityTime);
+    //     GetComponent<Rigidbody2D>().gravityScale = _initialGravityScale;
+    //
+    // }
 
     void Update()
     {
         CheckGrounded();
+        CheckSpeed();
+    }
+
+    private void CheckSpeed()
+    {
+        _curSpeedInterval = Mathf.Max(_curSpeedInterval - Time.deltaTime / nonGravityTime, 0);
+        var curSpeedX = Mathf.Lerp(_minSpeed, _maxSpeed, _curSpeedInterval);
+        if (!_hasGravity && Math.Abs(curSpeedX - _minSpeed) < 0.05f)
+        {
+            GetComponent<Rigidbody2D>().gravityScale = _initialGravityScale;
+            _hasGravity = true;
+        }
+        else
+        {
+            _rigidbody2D.velocity = new Vector2(curSpeedX, _rigidbody2D.velocity.y);
+        }
     }
 
     private void CheckGrounded()
