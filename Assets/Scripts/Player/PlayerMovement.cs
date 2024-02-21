@@ -178,6 +178,14 @@ namespace Player
             {
                 _isClimbing = false;
             }
+            if (_isClimbing && transform.parent != _climbable.GetParentTransform())
+            {
+                transform.SetParent(_climbable.GetParentTransform());
+            }
+            else if (!_isClimbing && transform.parent != null)
+            {
+                transform.SetParent(null);
+            }
             _isEnteringClimbing = _numFramesSinceEnteringClimbing > 0;
             _numFramesSinceEnteringClimbing = Mathf.Max(0, _numFramesSinceEnteringClimbing - 1);
         }

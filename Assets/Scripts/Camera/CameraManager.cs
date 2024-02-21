@@ -56,7 +56,7 @@ public class CameraManager : MonoBehaviour
             "to", endValue,
             "time", 2,
             "onupdate", "UpdateGiantBattleCamera",
-            "easetype", iTween.EaseType.linear));
+            "easetype", iTween.EaseType.easeInOutSine));
         if (arg0.ToString() == "end")
         {
             
