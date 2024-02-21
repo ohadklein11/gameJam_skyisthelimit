@@ -35,10 +35,11 @@ public class Bean : MonoBehaviour
         Vector3 localScale = transform.localScale;
         float distance = .4f * localScale.y;
         Bounds spriteBounds = _spriteRenderer.bounds;
-        Vector3 BeanBottomCenter = position - new Vector3(0, (spriteBounds.max.y - spriteBounds.min.y) / 2, 0);
+        Vector3 BeanBottomCenter = position - new Vector3(0, (spriteBounds.max.y - spriteBounds.min.y) / 2);
         RaycastHit2D hit = Physics2D.Raycast(BeanBottomCenter, Vector2.down, distance, _groundLayerMask);
-        if (hit&& !Grounded)
+        if (hit&& !Grounded && hit.normal.y > 0.8f)
         {
+            Debug.Log(hit.normal);
             GrowVine(hit);
             Grounded = true;
         }
@@ -65,11 +66,11 @@ public class Bean : MonoBehaviour
     }
     GameObject BuildVine(RaycastHit2D bottomPlatform)
     {
-        float growthPositionY=bottomPlatform.transform.position.y+bottomPlatform.transform.localScale.y/2;
         float vineHeadHeight = _vineHeadPrefab.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size.y;
-        
-        return Instantiate(_vineHeadPrefab, new Vector3(transform.position
-            .x,bottomPlatform.point.y-vineHeadHeight,transform.position.z - Epsilon), Quaternion.identity);
+        float growthPositionY = bottomPlatform.point.y - vineHeadHeight / 2 - Epsilon;
+        var position = transform.position;
+        return Instantiate(_vineHeadPrefab, new Vector3(
+            position.x,growthPositionY, position.z), Quaternion.identity);
     }
     
     void OnCollisionEnter2D(Collision2D collision)

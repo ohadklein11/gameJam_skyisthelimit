@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
@@ -16,7 +14,7 @@ public class GrowVineScript : MonoBehaviour
     private bool firstGrow = true;
     [SerializeField] private int giantStemCount;
     private bool _hitCeiling = false;
-    private const float Epsilon = .1f;
+    private const float Epsilon = .05f;
 
     void Awake()
     {
@@ -49,19 +47,20 @@ public class GrowVineScript : MonoBehaviour
             return;
         }
         
-        Vector2 newPosition =
-            new Vector2(transform.position.x, transform.position.y + vineGrowthSpeed * Time.deltaTime);
+        Vector3 newPosition =
+            new Vector3(transform.position.x, transform.position.y + vineGrowthSpeed * Time.deltaTime, transform.position.z);
         transform.position = newPosition;
 
         var curHeight = firstGrow ? _headHeight : _stemHeight;
         if (_lastStem.transform.position.y >= _startY + curHeight - Epsilon)
         {
-            _lastStem = GrowNewStem(_lastStem.transform.position.y - curHeight/2);
             _vineCount--;
-            if (_vineCount <= 0)
+            if (_vineCount < 0)
             {
                 Destroy(GetComponent<GrowVineScript>());
+                return;
             }
+            _lastStem = GrowNewStem(_lastStem.transform.position.y - curHeight/2);
             firstGrow = false;
         }
     }
@@ -84,8 +83,9 @@ public class GrowVineScript : MonoBehaviour
     GameObject GrowNewStem(float yTop)
     {
         var yPos = yTop - _stemHeight / 2;
-        GameObject newStem = Instantiate(_vineBodyPrefab, new Vector3(transform.position
-            .x, yPos, 0), Quaternion.identity);
+        var position = transform.position;
+        GameObject newStem = Instantiate(_vineBodyPrefab, 
+            new Vector3(position.x, yPos, position.z), Quaternion.identity);
         newStem.transform.SetParent(transform.gameObject.transform, true);
         return newStem;
     }

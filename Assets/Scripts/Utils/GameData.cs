@@ -8,9 +8,10 @@ namespace Utils
         private int _curPlayerLifePoints;
         [SerializeField] private int maxPlayerLifePoints = 100;
 
-        private void Start()
+        private void Awake()
         {
             EventManagerScript.Instance.StartListening(EventManagerScript.PlayerGotHit, PlayerGotHit);
+            IsGiantFight = false;
             _curPlayerLifePoints = maxPlayerLifePoints;
         
         }
@@ -34,5 +35,12 @@ namespace Utils
         {
             IsGiantFight = false;
         }
+
+        private void OnRestart()
+        {
+            IsGiantFight = false;
+            _curPlayerLifePoints = maxPlayerLifePoints;
+        }
+        public static void Restart() => Instance.OnRestart();
     }
 }

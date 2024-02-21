@@ -9,9 +9,6 @@ public class EventManagerScript : Singleton<EventManagerScript>
 	public const string GiantAttitude = "GiantAttitude";
 	public const string PlayerGotHit = "PlayerGotHit";
 
-
-
-
 	protected EventManagerScript()
     {
         Init();
