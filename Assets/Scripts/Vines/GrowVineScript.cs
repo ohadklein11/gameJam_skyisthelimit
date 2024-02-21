@@ -1,5 +1,8 @@
+using System;
+using Player;
 using UnityEngine;
 using Utils;
+using Random = UnityEngine.Random;
 
 public class GrowVineScript : MonoBehaviour
 {
@@ -14,6 +17,7 @@ public class GrowVineScript : MonoBehaviour
     private bool firstGrow = true;
     [SerializeField] private int giantStemCount;
     private bool _hitCeiling = false;
+    private bool _growing;
     private const float Epsilon = .05f;
 
     void Awake()
@@ -30,11 +34,12 @@ public class GrowVineScript : MonoBehaviour
         _lastStem = transform.GetChild(0).gameObject;
         _headHeight = _lastStem.GetComponent<SpriteRenderer>().bounds.size.y;
         _stemHeight = _vineBodyPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
+        _growing = true;
     }
 
     void Update()
     {
-        if (_hitCeiling)
+        if (!_growing || _hitCeiling)
         {
             return;
         }
@@ -57,7 +62,7 @@ public class GrowVineScript : MonoBehaviour
             _vineCount--;
             if (_vineCount < 0)
             {
-                Destroy(GetComponent<GrowVineScript>());
+                _growing = false;
                 return;
             }
             _lastStem = GrowNewStem(_lastStem.transform.position.y - curHeight/2);
@@ -88,5 +93,21 @@ public class GrowVineScript : MonoBehaviour
             new Vector3(position.x, yPos, position.z), Quaternion.identity);
         newStem.transform.SetParent(transform.gameObject.transform, true);
         return newStem;
+    }
+
+    private void OnDestroy()
+    {
+        // remove player from children
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("Player"))
+            {
+                var gameObj = child.gameObject;
+                gameObj.GetComponent<PlayerMovement>().enabled = true;
+                gameObj.GetComponent<BeansShooting>().enabled = true;
+                gameObj.GetComponent<Collider2D>().enabled = true;
+                child.SetParent(null);
+            }
+        }
     }
 }

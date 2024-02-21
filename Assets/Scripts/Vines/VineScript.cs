@@ -8,6 +8,10 @@ namespace Vines
         {
             return transform.position.x;
         }
-        // need to implement growth over time
+        
+        public Transform GetParentTransform()
+        {
+            return transform.parent.transform;
+        }
     }
 }
