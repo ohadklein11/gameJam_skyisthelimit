@@ -12,6 +12,7 @@ public class Bean : MonoBehaviour
     [SerializeField] private LayerMask _enemyLayerMask;
     private GameObject _vineHeadPrefab;
     private const float Epsilon = 0.3f;  // to deal with instantiating vines on slopes 
+    private float _initialGravityScale;
     private CircleCollider2D _collider;  
 
     private Camera _mainCamera;
@@ -22,6 +23,21 @@ public class Bean : MonoBehaviour
         _mainCamera = Camera.main;
         _vineHeadPrefab= Resources.Load<GameObject>("Prefabs/Vines/VineHead");
         _collider = GetComponent<CircleCollider2D>();
+        _initialGravityScale= GetComponent<Rigidbody2D>().gravityScale;
+    }
+
+    void Start()
+    {
+        StartCoroutine(ApplyRigidbody());
+    }
+
+
+    IEnumerator ApplyRigidbody()
+    {
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        yield return new WaitForSeconds(1f);
+        GetComponent<Rigidbody2D>().gravityScale = _initialGravityScale;
+
     }
 
     void Update()
@@ -47,16 +63,23 @@ public class Bean : MonoBehaviour
     
     private void GrowVine(RaycastHit2D bottomPlatform)
     {
-        float vineWidth = _vineHeadPrefab.gameObject.transform.localScale.x;
+        float vineWidth = _vineHeadPrefab.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+        float vineHeight = _vineHeadPrefab.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size.y;
 
-        Vector3 position = transform.position + new Vector3(0,transform.localScale.y,0);
-        var hitLeft = Physics2D.Raycast(position, Vector2.left, vineWidth*0.67f, _VineLayerMask);
-        var hitRight = Physics2D.Raycast(position, Vector2.right, vineWidth*0.67f, _VineLayerMask);
+        Vector3 upRayPosition = new Vector3(transform.position.x - vineWidth * 0.67f, _spriteRenderer.bounds.max.y + vineHeight, transform.position.z) ;
+        Vector3 downRayPosition = new Vector3(transform.position.x - vineWidth * 0.67f, _spriteRenderer.bounds.min.y - vineHeight, transform.position.z) ;
 
-        if (!hitLeft && !hitRight)
+        var hitUp = Physics2D.Raycast(upRayPosition, Vector2.right, vineWidth * 1.5f, _VineLayerMask);
+        var hitDown = Physics2D.Raycast(downRayPosition, Vector2.right, vineWidth * 1.5f, _VineLayerMask);
+        Debug.DrawRay(upRayPosition, Vector3.right * vineWidth * 1.5f, Color.red);
+        Debug.DrawRay(downRayPosition, Vector3.right * vineWidth * 1.5f, Color.red);
+
+
+        // if (!hitLeft && !hitRight)
+        if (!hitUp && !hitDown)
         {
             GameObject vine = BuildVine(bottomPlatform); 
-            // vine.transform.SetParent(bottomPlatform.transform,true); 
+            vine.transform.SetParent(bottomPlatform.transform,true); 
             
             Debug.Log("Vine Grown");
 

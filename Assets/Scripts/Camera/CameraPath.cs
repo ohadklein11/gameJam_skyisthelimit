@@ -107,7 +107,6 @@ public class CameraPath : MonoBehaviour
     {
         _isFollowingPath = true;
 
-        Debug.Log("Start of Camera path");
         GetComponent<CinemachineVirtualCamera>().Follow = follow.transform;
         GetComponent<CinemachineVirtualCamera>().LookAt = follow.transform;
     }
@@ -116,7 +115,6 @@ public class CameraPath : MonoBehaviour
     {
         _isFollowingPath = false;
 
-        Debug.Log("End of Camera path");
         GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
         GetComponent<CinemachineVirtualCamera>().LookAt = player.transform;
     }

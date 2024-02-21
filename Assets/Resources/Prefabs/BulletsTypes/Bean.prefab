@@ -168,7 +168,7 @@ MonoBehaviour:
     m_Bits: 8
   _VineLayerMask:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 128
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 2048

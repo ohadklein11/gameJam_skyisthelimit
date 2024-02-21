@@ -45,12 +45,6 @@ public class BeansShooting : MonoBehaviour
         _mainCamera = Camera.main;
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
         _gunType= GunType.BeansGun;
-        // trajectoryPoints = new GameObject[trajectoryPointsCount];
-        // for (int i = 0; i < trajectoryPoints.Length; i++)
-        // {
-        //     trajectoryPoints[i] = Instantiate(trajectoryPointPrefab, transform.position, Quaternion.identity);
-        //     trajectoryPoints[i].SetActive(false);
-        // }
         _beanPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Bean");
         _eggPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Egg");
     }
@@ -67,43 +61,6 @@ public class BeansShooting : MonoBehaviour
             _gunType= (_gunType == GunType.BeansGun) ? GunType.EggsGun : GunType.BeansGun;
         }
     }
-    // Vector2 TrajectoryPointsPosition(float t)
-    //      {
-    //          Vector3 direction = (transform.localScale.x >= 0) ? new Vector3(1, 1, 0) : new Vector3(-1, 1, 0);
-    //  
-    //          Vector2 currentPointPosition = (Vector2)shootingPoint.transform.position +
-    //                                         ((Vector2)direction * (_shootingForce * t) + _rigidBody.velocity) +
-    //                                         (Physics2D.gravity * (t * t * 0.5f));
-    //          return currentPointPosition;
-    //      }
-
-    
-
-    // private void ShowTrajectoryPoints()
-    // {
-    //     float timeStep = 0.1f;
-    //     for (int i = 0; i < trajectoryPoints.Length; i++)
-    //     {
-    //         trajectoryPoints[i].transform.position = TrajectoryPointsPosition(i * timeStep);
-    //         if (i >= 1)
-    //         {
-    //             var hit = Physics2D.Linecast(trajectoryPoints[i].transform.position,
-    //                 trajectoryPoints[i - 1].transform.position, _platformLayerMask);
-    //             if (hit)
-    //                 return;
-    //         }
-    //
-    //         trajectoryPoints[i].SetActive(true);
-    //     }
-    // }
-    
-    // private void DeleteTrajectoryPoints()
-    // {
-    //     for (int i = 0; i < trajectoryPoints.Length; i++)
-    //     {
-    //         trajectoryPoints[i].SetActive(false);
-    //     }
-    // }
 
     void ShootBeans()
     {
@@ -111,31 +68,11 @@ public class BeansShooting : MonoBehaviour
             return;
         if (Input.GetButtonDown("Fire1"))
         {
-            // transform.Rotate(Vector3.up * speed * Time.deltaTime);
             _shootingForce= minShootingForce;
-            // _shootingForceRising = true;
-            
         }
 
         if (Input.GetButton("Fire1"))
         {
-            // ShowTrajectoryPoints();
-            // if (_shootingForceRising)
-            // {
-            //     _shootingForce += Time.deltaTime*shootingSpeedChange;
-            //     if (_shootingForce >= maxShootingForce)
-            //     {
-            //         _shootingForceRising = false;
-            //     }
-            // }
-            // else
-            // {
-            //     _shootingForce -= Time.deltaTime*shootingSpeedChange;
-            //     if (_shootingForce <= minShootingForce)
-            //     {
-            //         _shootingForceRising = true;
-            //     }
-            // }
             if (_shootingForce < maxShootingForce)
                 _shootingForce += Time.deltaTime*shootingSpeedChange;
         }
@@ -152,7 +89,7 @@ public class BeansShooting : MonoBehaviour
             Instantiate(bulletPrefab, shootingPoint.transform.position, bulletPrefab.transform.rotation);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         Vector3 direction = (transform.localScale.x >= 0) ? Vector2.right : Vector2.left;
-        rb.AddForce(direction * _shootingForce, ForceMode2D.Impulse);
+        rb.velocity=direction * _shootingForce;
     }
 
     void ShootEggs()
