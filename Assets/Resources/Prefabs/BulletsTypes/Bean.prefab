@@ -172,6 +172,7 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+  nonGravityTime: 0.5
 --- !u!114 &-5521679283219029026
 MonoBehaviour:
   m_ObjectHideFlags: 0

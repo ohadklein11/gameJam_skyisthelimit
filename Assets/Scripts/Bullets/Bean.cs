@@ -10,10 +10,12 @@ public class Bean : MonoBehaviour
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _VineLayerMask;
     [SerializeField] private LayerMask _enemyLayerMask;
+    [SerializeField] private float nonGravityTime;
     private GameObject _vineHeadPrefab;
     private const float Epsilon = 0.3f;  // to deal with instantiating vines on slopes 
     private float _initialGravityScale;
     private CircleCollider2D _collider;  
+    
 
     private Camera _mainCamera;
     void Awake()
@@ -35,7 +37,7 @@ public class Bean : MonoBehaviour
     IEnumerator ApplyRigidbody()
     {
         GetComponent<Rigidbody2D>().gravityScale = 0;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(nonGravityTime);
         GetComponent<Rigidbody2D>().gravityScale = _initialGravityScale;
 
     }
