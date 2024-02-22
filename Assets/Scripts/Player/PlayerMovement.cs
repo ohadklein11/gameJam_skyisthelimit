@@ -330,8 +330,8 @@ namespace Player
                     _velocityMultiplier = 0.0f;
                     _timeMultiplier = 0.0f;
                 }
-                _velocityMultiplier *= _timeMultiplier;
             }
+            _velocityMultiplier *= _timeMultiplier;
             if (_isGrounded && !_isOnSlope && !_isJumping) //if not on slope
             {
                 _newVelocity.Set(movementSpeed * _velocityMultiplier, 0.0f);
