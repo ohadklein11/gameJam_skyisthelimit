@@ -173,7 +173,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   nonGravityTime: 0.4
-  minSpeedMultiplier: 0.5
+  minSpeedMultiplier: 0.75
 --- !u!114 &-5521679283219029026
 MonoBehaviour:
   m_ObjectHideFlags: 0

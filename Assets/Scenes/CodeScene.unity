@@ -1591,8 +1591,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   switchKey: 101
-  minShootingForce: 0.5
-  maxShootingForce: 28
+  minShootingForce: 0.2
+  maxShootingForce: 20
   shootingSpeedChange: 20
   eggShootingSpeed: 10
   eggShootingCooldown: 0.15
