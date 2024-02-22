@@ -35,7 +35,7 @@ namespace Player
         private float climbSpeed;
         [SerializeField] 
         private int minNumFramesForClimbing;
-        
+
         private float _xInput;
         private float _yInput;
         private float _slopeDownAngle;
@@ -168,6 +168,18 @@ namespace Player
                     var xPosition = _climbable.GetXPosition();
                     position = new Vector3(xPosition, position.y, position.z);
                     transform.position = position;
+                    // prevent climbing up when reaching end of vine
+                    if (_yInput > 0 && !Input.GetButton("Jump"))
+                    {
+                        float playerHalfHeight = _spriteRenderer.bounds.size.y/2;
+                        RaycastHit2D vineHitUp = Physics2D.Raycast(
+                            new Vector2(transform.position.x, transform.position.y+playerHalfHeight+0.1f), 
+                            Vector2.up, .1f, whatIsVine);
+                        if (!vineHitUp)
+                        {
+                            _yInput = 0;
+                        }
+                    }
                     _rb.velocity = new Vector2(0, _yInput * climbSpeed);
                 } catch (MissingReferenceException e)
                 {
@@ -287,6 +299,7 @@ namespace Player
 
         private void CheckClimb()
         {
+            float playerHalfHeight = _spriteRenderer.bounds.size.y/2;
             RaycastHit2D vineHit = Physics2D.Raycast(
                 new Vector2(transform.position.x - _playerXradius * _facingDirection, transform.position.y), 
                 Vector2.right * _facingDirection, 2*_playerXradius, whatIsVine);
