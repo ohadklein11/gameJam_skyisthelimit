@@ -19,6 +19,7 @@ public class GrowVineScript : MonoBehaviour
     private bool _hitCeiling = false;
     private bool _growing;
     private const float Epsilon = .05f;
+    
 
     void Awake()
     {
@@ -45,8 +46,9 @@ public class GrowVineScript : MonoBehaviour
         }
         
         // check if vine has hit the ceiling
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, .3f, LayerMask.GetMask("Ceiling"));
-        if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ceiling"))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, .3f, LayerMask.GetMask("Ceiling","Ground"));
+        Debug.DrawRay( transform.position, Vector2.up * .3f, Color.red);
+        if (hit.collider != null && (hit.collider.gameObject.layer & LayerMask.GetMask("Ceiling","Ground"))>0)
         {
             _hitCeiling = true;
             return;

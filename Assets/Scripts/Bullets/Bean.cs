@@ -84,7 +84,6 @@ public class Bean : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(BeanBottomCenter, Vector2.down, distance, _groundLayerMask);
         if (hit&& !Grounded && hit.normal.y > 0.8f)
         {
-            Debug.Log(hit.normal);
             GrowVine(hit);
             Grounded = true;
         }
@@ -95,13 +94,13 @@ public class Bean : MonoBehaviour
         float vineWidth = _vineHeadPrefab.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
         float vineHeight = _vineHeadPrefab.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size.y;
 
-        Vector3 upRayPosition = new Vector3(transform.position.x - vineWidth * 0.67f, _spriteRenderer.bounds.max.y + vineHeight, transform.position.z) ;
-        Vector3 downRayPosition = new Vector3(transform.position.x - vineWidth * 0.67f, _spriteRenderer.bounds.min.y - vineHeight, transform.position.z) ;
+        Vector3 upRayPosition = new Vector3(transform.position.x - vineWidth * 0.5f, _spriteRenderer.bounds.max.y + vineHeight, transform.position.z) ;
+        Vector3 downRayPosition = new Vector3(transform.position.x - vineWidth * 0.5f, _spriteRenderer.bounds.min.y - vineHeight, transform.position.z) ;
 
-        var hitUp = Physics2D.Raycast(upRayPosition, Vector2.right, vineWidth * 1.5f, _VineLayerMask);
-        var hitDown = Physics2D.Raycast(downRayPosition, Vector2.right, vineWidth * 1.5f, _VineLayerMask);
-        Debug.DrawRay(upRayPosition, Vector3.right * vineWidth * 1.5f, Color.red);
-        Debug.DrawRay(downRayPosition, Vector3.right * vineWidth * 1.5f, Color.red);
+        var hitUp = Physics2D.Raycast(upRayPosition, Vector2.right, vineWidth * 1f, _VineLayerMask);
+        var hitDown = Physics2D.Raycast(downRayPosition, Vector2.right, vineWidth * 1f, _VineLayerMask);
+        Debug.DrawRay(upRayPosition, Vector3.right * vineWidth * 1f, Color.red);
+        Debug.DrawRay(downRayPosition, Vector3.right * vineWidth * 1f, Color.red);
 
 
         // if (!hitLeft && !hitRight)
