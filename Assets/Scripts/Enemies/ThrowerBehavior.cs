@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Enemies;
 using UnityEngine;
+using Utils;
 
-public class RunnerBehavior : MonoBehaviour
+public class ThrowerBehavior : MonoBehaviour, IThrower
 {
     [SerializeField] private float viewDistance;
-    [SerializeField] private float chaseSpeed;
     
     private EnemyMovement _enemyMovement;
     private EnemyHealth _enemyHealth;
-    private bool _chasingPlayer = false;
+    private bool _throwingAtPlayer = false;
     private Transform _playerTransform;
     private SpriteRenderer _spriteRenderer;
-    private Color _originalColor;
+    
+    [SerializeField] private GameObject throwable;
+    [SerializeField] private float minThrowTime = 3f;
+    [SerializeField] private float maxThrowTime = 3f;
+    [SerializeField] private float minThrowAngle = 120f;
+    [SerializeField] private float maxThrowAngle = 120f;
+    [SerializeField] private Transform throwPosition;
+    private ThrowAtPlayerBehavior _throwAtPlayerBehavior;
 
     // Start is called before the first frame update
     void Start()
@@ -22,18 +29,20 @@ public class RunnerBehavior : MonoBehaviour
         _enemyMovement = GetComponent<EnemyMovement>();
         _enemyHealth = GetComponent<EnemyHealth>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _originalColor = _spriteRenderer.color;
+        _throwAtPlayerBehavior = GetComponent<ThrowAtPlayerBehavior>();
+        _throwAtPlayerBehavior.Init(throwable, minThrowTime, maxThrowTime, minThrowAngle, maxThrowAngle, throwPosition, this);
+        _throwAtPlayerBehavior.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_chasingPlayer) return;
+        if (_throwingAtPlayer) return;
         var playerTransform = LookAtPlayer();
         if (playerTransform != null)
         {
             _playerTransform = playerTransform;
-            StartCoroutine(ChasePlayer());
+            StartCoroutine(ThrowAtPlayer());
         }
     }
 
@@ -63,32 +72,34 @@ public class RunnerBehavior : MonoBehaviour
         return null;
     }
 
-    private IEnumerator ChasePlayer()
+    private IEnumerator ThrowAtPlayer()
     {
         if (_enemyHealth.IsDead) yield break;
-        _chasingPlayer = true;
+        _throwingAtPlayer = true;
+        _throwAtPlayerBehavior.enabled = true;
         _enemyMovement.StopMovement(freeze: true);
-        _spriteRenderer.DOColor(new Color(215f/255f, 49f/255f, 38f/255f), 1f);
-        yield return new WaitForSeconds(1f);
-        _enemyMovement.StartMovement(chaseSpeed);
-        // tween to change color to red
-        
         bool seeingPlayer;
         do
         {
-            if (_enemyHealth.IsDead) yield break;
-            if (_enemyMovement.GetDirection() > 0)
+            if (_enemyHealth.IsDead)
             {
-                seeingPlayer = _playerTransform.position.x - transform.position.x > 0;
-            }
-            else
+                _throwingAtPlayer = false;
+                _throwAtPlayerBehavior.enabled = false;
+                yield break;
+            } else
             {
-                seeingPlayer = transform.position.x - _playerTransform.position.x > 0;
+                var playerTransform = LookAtPlayer();
+                seeingPlayer = playerTransform != null;
             }
             yield return null;
         } while (seeingPlayer);
-        _chasingPlayer = false;
-        _spriteRenderer.DOColor(_originalColor, 1f);
+        _throwingAtPlayer = false;
+        _throwAtPlayerBehavior.enabled = false;
         _enemyMovement.StartMovement();
+    }
+
+    public int GetDirection()
+    {
+        return _enemyMovement.GetDirection();
     }
 }

@@ -45,9 +45,9 @@ namespace Enemies
             _enemyMovement.StopMovement();
             _enemyMovement.Push();
             
-            yield return new WaitForSeconds(2f);
-            // fade out animation
-            
+            yield return new WaitForSeconds(1f);
+            _spriteRenderer.DOFade(0, 1f);
+            yield return new WaitForSeconds(1f);
             
             Destroy(gameObject);
         }

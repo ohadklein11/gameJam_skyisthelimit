@@ -1,4 +1,5 @@
-﻿using Stones;
+﻿using Enemies;
+using Stones;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -15,7 +16,7 @@ namespace Utils
         
         private float _timeToThrow;
         
-        public void Init(GameObject throwable, float minThrowTime, float maxThrowTime, float minThrowAngle, float maxThrowAngle, Vector3 throwPosition)
+        public void Init(GameObject throwable, float minThrowTime, float maxThrowTime, float minThrowAngle, float maxThrowAngle, Transform throwPosition, IThrower thrower)
         {
             _throwable = throwable;
             _player = GameObject.FindWithTag("Player");
@@ -24,16 +25,21 @@ namespace Utils
             _timeToThrow = _maxThrowTime;
             _throwableGravityScale = _throwable.GetComponent<Rigidbody2D>().gravityScale;
             _throwablePool = new ObjectPool<GameObject>(
-                () => Instantiate(throwable, throwPosition, Quaternion.identity), 
+                () => Instantiate(throwable, throwPosition.position, Quaternion.identity), 
                 o => {
                     o.SetActive(true);
-                    o.transform.position = throwPosition;
+                    var position = throwPosition.position;
+                    o.transform.position = position;
                     o.TryGetComponent(out IThrowable throwableBehavior);
                     throwableBehavior.Init(_throwablePool, _player);
                     // set throw direction & force so throwable will hit the player
                     float throwAngle = Random.Range(minThrowAngle, maxThrowAngle);
+                    if (thrower.GetDirection() > 0)
+                    {
+                        throwAngle = 180 - throwAngle;
+                    }
                     o.GetComponent<Rigidbody2D>().velocity = FindThrowVelocity(
-                        throwPosition, _player.transform.position, throwAngle);
+                        position, _player.transform.position, throwAngle);
                 }, o => o.SetActive(false));;
         }
         

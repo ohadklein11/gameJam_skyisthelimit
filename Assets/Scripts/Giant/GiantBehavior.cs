@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Enemies;
 using Player;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -7,7 +8,7 @@ using Utils;
 
 namespace Giant
 {
-    public class GiantBehavior : MonoBehaviour
+    public class GiantBehavior : MonoBehaviour, IThrower
     {
         private GameObject _eye;
         private GameObject _player;
@@ -37,9 +38,9 @@ namespace Giant
             _fighting = false;
             _crying = false;
             _standing = false;
-            var throwPosition = transform.GetChild(1).gameObject.transform.position;
+            var throwPosition = transform.GetChild(1).gameObject.transform;
             _throwAtPlayerBehavior = GetComponent<ThrowAtPlayerBehavior>();
-            _throwAtPlayerBehavior.Init(throwable, minThrowTime, maxThrowTime, minThrowAngle, maxThrowAngle, throwPosition);
+            _throwAtPlayerBehavior.Init(throwable, minThrowTime, maxThrowTime, minThrowAngle, maxThrowAngle, throwPosition, this);
             _throwAtPlayerBehavior.enabled = false;
         }
     
@@ -95,6 +96,11 @@ namespace Giant
             giantFightManager.EndGiantFight();
         
             yield return new WaitForSeconds(5f);
+        }
+
+        public int GetDirection()
+        {
+            return -1;  // always throw to the left
         }
     }
 }

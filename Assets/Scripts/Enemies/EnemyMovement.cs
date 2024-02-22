@@ -65,6 +65,9 @@ public class EnemyMovement : MonoBehaviour
         if (freeze)
         {
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        } else
+        {
+            _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
     
