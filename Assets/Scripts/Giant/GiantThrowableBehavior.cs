@@ -1,12 +1,13 @@
 using System;
 using Player;
+using Stones;
 using UnityEngine;
 using UnityEngine.Pool;
 using Vines;
 
 namespace Giant
 {
-    public class GiantThrowableBehavior : MonoBehaviour
+    public class GiantThrowableBehavior : MonoBehaviour, IThrowable
     {
         protected bool _released;
         
@@ -17,7 +18,7 @@ namespace Giant
 
         private void Awake()
         {
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("GiantThrowables"), LayerMask.NameToLayer("Enemy"));
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Throwables"), LayerMask.NameToLayer("Enemy"));
         }
 
         public void Init(ObjectPool<GameObject> throwablePool, GameObject player)
