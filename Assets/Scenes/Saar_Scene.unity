@@ -6555,6 +6555,7 @@ Transform:
   - {fileID: 1033517332}
   - {fileID: 475817723}
   - {fileID: 1136153299}
+  - {fileID: 1969221922}
   m_Father: {fileID: 1434539849}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &200889621
@@ -41030,57 +41031,57 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 198337540}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1016.02545
+      value: 301.25436
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 490.64404
+      value: 145.47726
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 503.48584
+      value: 149.2849
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.423
+      value: 0.1850495
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.273
+      value: -0.124260254
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.77
+      value: -0.10743901
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
         type: 3}
@@ -58959,17 +58960,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 50826e73de11cf741b3aa2eed669d34d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 449.4
+      value: 386.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50826e73de11cf741b3aa2eed669d34d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 54.17
+      value: 7.51
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50826e73de11cf741b3aa2eed669d34d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 48.540005
+      value: 50.45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50826e73de11cf741b3aa2eed669d34d,
         type: 3}
@@ -63930,6 +63931,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85498f6042ce9fd4ebf6dc27bd18c33a,
     type: 3}
   m_PrefabInstance: {fileID: 1969217398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1969221922 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e7dd9642ad4d1904ab6c4710b1deb4f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1212907299}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1969498245 stripped
 Transform:
@@ -69509,4 +69516,3 @@ SceneRoots:
   - {fileID: 1158148463}
   - {fileID: 1325861366}
   - {fileID: 81777985}
-  - {fileID: 1212907299}
