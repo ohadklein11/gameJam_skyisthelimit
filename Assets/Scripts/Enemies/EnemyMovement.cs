@@ -18,6 +18,8 @@ public class EnemyMovement : MonoBehaviour
     private int _direction = 1;
     private Vector3 _positionBefore1Frame;
     private Vector3 _positionBefore2Frames;
+    
+    private Transform _player;
 
     private void Awake()
     {
@@ -26,6 +28,7 @@ public class EnemyMovement : MonoBehaviour
         _positionBefore1Frame = transform.position;
         _positionBefore2Frames = transform.position;
         _originalSpeed = _speed;
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
@@ -42,8 +45,8 @@ public class EnemyMovement : MonoBehaviour
         var bounds = _spriteRenderer.bounds;
         Vector3 raycastOrigin =
             transform.position + new Vector3(_direction * bounds.size.x / 2, -bounds.size.y / 2 - .1f, 0);
-        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector3.down, 2f, LayerMask.GetMask("Ground"));
-        Debug.DrawRay(raycastOrigin, Vector3.down * 2f, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .6f, LayerMask.GetMask("Ground"));
+        Debug.DrawRay(raycastOrigin, Vector3.down * .6f, Color.red);
         if (hit.collider == null)
         {
             TurnAround();
@@ -55,7 +58,10 @@ public class EnemyMovement : MonoBehaviour
     private void TurnAround()
     {
         _direction *= -1;
-        transform.localScale = new Vector3(_direction, 1, 1);
+        var transform1 = transform;
+        var localScale = transform1.localScale;
+        localScale = new Vector3(_direction * Mathf.Abs(localScale.x), localScale.y, localScale.z);
+        transform1.localScale = localScale;
     }
 
     public void StopMovement(bool freeze = false)
@@ -92,5 +98,22 @@ public class EnemyMovement : MonoBehaviour
     public int GetDirection()
     {
         return _direction;
+    }
+    
+    public void FacePlayer()
+    {
+        int direction;
+        if (_player.position.x < transform.position.x)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
+        if (direction != _direction)
+        {
+            TurnAround();
+        }
     }
 }

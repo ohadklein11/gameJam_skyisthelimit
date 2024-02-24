@@ -12,6 +12,8 @@ namespace Enemies
 
         private EnemyMovement _enemyMovement;
         private SpriteRenderer _spriteRenderer;
+        
+        public bool CanTakeDamage { get; set; } = true;
 
         public bool IsDead => _currentHealth <= 0;
 
@@ -54,7 +56,7 @@ namespace Enemies
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Bullets"))
+            if (CanTakeDamage && other.gameObject.layer == LayerMask.NameToLayer("Bullets"))
             {
                 TakeDamage(1);
             }

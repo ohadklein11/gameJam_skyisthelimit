@@ -65,6 +65,8 @@ namespace Player
         [SerializeField] private float highJumpGravity;
         [SerializeField] private float jumpGravity;
         [SerializeField] private float fallGravity;
+        
+        public bool climbing => _isClimbing;
 
         private void Start()
         {
