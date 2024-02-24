@@ -14,11 +14,13 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private Transform doorPivot;
     [SerializeField] private StartCameraPath startCameraPath;
+    
 
 
 
     void Start()
     {
+        cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = false;
         startCameraPath.SetActivePath(_turnOffCameraPath);
         _giantFightZoomOutStartValue =
             cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
@@ -43,11 +45,16 @@ public class CameraManager : MonoBehaviour
         {
             startValue = _giantFightZoomOutStartValue;
             endValue= giantFightZoomOut;
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = true;
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 5f;
         }
         else
         {
             startValue = giantFightZoomOut;
             endValue = _giantFightZoomOutStartValue;
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 0;
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = false;
+
         }
         iTween.ValueTo(gameObject, iTween.Hash(
             "from", startValue,
@@ -90,6 +97,7 @@ public class CameraManager : MonoBehaviour
 
         ZoomIn(giant.transform,zoomInOnGiant);
     }
+
     
     IEnumerator StartDelay(float delay,float fieldOfVIewBeforeZoom)
     {
