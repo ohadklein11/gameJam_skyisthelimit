@@ -3185,10 +3185,11 @@ MonoBehaviour:
   giantFightZoomOut: 55
   cameraPath: {fileID: 1436032563}
   _turnOffCameraPath: 1
-  zoomInOnGiant: 30
+  zoomInOnGiant: 40
   follow: {fileID: 1711899417}
   player: {fileID: 48291940}
   doorPivot: {fileID: 2093709409}
+  startCameraPath: {fileID: 96627716}
 --- !u!1 &131913814
 GameObject:
   m_ObjectHideFlags: 0

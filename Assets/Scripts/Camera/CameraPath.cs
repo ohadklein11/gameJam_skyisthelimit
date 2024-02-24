@@ -44,27 +44,6 @@ public class CameraPath : MonoBehaviour
         {
             FollowingCameraPath();
         }
-        // if (player.transform.position.x > follow.transform.position.x)
-        // {
-        //     // iTween.StopByName("anime"+(_currentPoint-1));
-        //     follow.transform.position = player.transform.position;
-        //     timeLeft = 0;
-        // }
-        //
-        // if (timeLeft <= 0)
-        // {
-        //     if (_currentPoint < _points.Length - 1)
-        //     {
-        //         Debug.Log("Start itween fljdf");
-        //         // iTween.MoveTo(follow, iTween.Hash("position", _points[_currentPoint+1], "time", time, "easetype", iTween.EaseType.linear,"name","anime"+_currentPoint));
-        //         _currentPoint++;
-        //         timeLeft = time;
-        //     }
-        // }
-        // else
-        // {
-        //     timeLeft -= Time.deltaTime;
-        // }
     }
 
     void FollowingCameraPath()

@@ -196,3 +196,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeDuration: 0.3
   shakeMagnitude: 1.3
+  magnitudeStopDamage: 5
+  stoneDamage: 10
