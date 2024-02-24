@@ -108,9 +108,6 @@ public class Bean : MonoBehaviour
         {
             GameObject vine = BuildVine(bottomPlatform); 
             vine.transform.SetParent(bottomPlatform.transform,true); 
-            
-            Debug.Log("Vine Grown");
-
         }
         Destroy(gameObject);
 

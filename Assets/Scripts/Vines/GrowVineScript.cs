@@ -16,6 +16,7 @@ public class GrowVineScript : MonoBehaviour
     private float _stemHeight;
     private bool firstGrow = true;
     [SerializeField] private int giantStemCount;
+    [SerializeField] private int regularStemCount;
     private bool _hitCeiling = false;
     private bool _growing;
     private const float Epsilon = .05f;
@@ -27,7 +28,6 @@ public class GrowVineScript : MonoBehaviour
         _mainCamera = Camera.main;
         _vineCount = ConfigureVineHeight() - 1;
         _startY = transform.position.y;
-        Debug.Log("vine created");
     }
 
     void Start()
@@ -82,13 +82,13 @@ public class GrowVineScript : MonoBehaviour
         {
             return giantStemCount;
         }
-        float cameraHeight = _mainCamera.orthographicSize * 2;
-        float vineHeight = _vineBodyPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
-        int vineCount = (int)(cameraHeight / vineHeight);
-        int randomVineCount = Random.Range(vineCount / 2, vineCount);
-        return randomVineCount;
-        
-        
+        else
+        {
+            int ran = Random.Range(0, 2);
+            if (ran < 1)
+                return regularStemCount - 1;
+            return regularStemCount;
+        }
     }
 
     GameObject GrowNewStem(float yTop)

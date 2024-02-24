@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1475,6 +1475,7 @@ GameObject:
   - component: {fileID: 48291947}
   - component: {fileID: 48291946}
   - component: {fileID: 48291948}
+  - component: {fileID: 48291949}
   m_Layer: 14
   m_Name: Player
   m_TagString: Player
@@ -1523,7 +1524,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: e48388683a58ada48827c45386430ba2, type: 3}
+  m_Sprite: {fileID: 51870739, guid: d75900e3c68008744bfc4ad73b1c2518, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1596,6 +1597,7 @@ MonoBehaviour:
   shootingSpeedChange: 20
   eggShootingSpeed: 10
   eggShootingCooldown: 0.15
+  beanShootingCooldown: 0.3
   shootingPoint: {fileID: 1492824685}
   gun: {fileID: 1037843130}
   _platformLayerMask:
@@ -1670,6 +1672,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.14}
   m_Size: {x: 1.13, y: 2.29}
   m_Direction: 0
+--- !u!95 &48291949
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48291940}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6fea309362c9245498743611e307a4e3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &59908214
 GameObject:
   m_ObjectHideFlags: 0

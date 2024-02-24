@@ -22,6 +22,8 @@ public class BeansShooting : MonoBehaviour
     [SerializeField] private float shootingSpeedChange = 0.5f;
     [SerializeField] private float eggShootingSpeed = 10f;
     [SerializeField] private float eggShootingCooldown = 0.4f;
+    [SerializeField] private float beanShootingCooldown = 0.3f;
+
     [SerializeField] private GameObject shootingPoint;
     [SerializeField] private GameObject gun;
     // [SerializeField] private GameObject trajectoryPointPrefab;
@@ -34,7 +36,7 @@ public class BeansShooting : MonoBehaviour
     private GunType _gunType;
     private Camera _mainCamera;
     private Rigidbody2D _rigidBody;
-    private float _eggShootingCooldownWait;
+    private float _shootingCooldownWait;
     private SpriteRenderer _playerSpriteRenderer;
     public bool canShoot = true;
 
@@ -66,6 +68,8 @@ public class BeansShooting : MonoBehaviour
     {
         if (!canShoot)
             return;
+        
+        _shootingCooldownWait -= Time.deltaTime;
         if (Input.GetButtonDown("Fire1"))
         {
             _shootingForce= minShootingForce;
@@ -79,7 +83,12 @@ public class BeansShooting : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1"))
         {
-            InstantiateBullet(_beanPrefab);
+            if (_shootingCooldownWait<=0)
+            {
+                InstantiateBullet(_beanPrefab);
+                _shootingCooldownWait = beanShootingCooldown;
+            }
+            
         }
     }
     
@@ -94,21 +103,21 @@ public class BeansShooting : MonoBehaviour
 
     void ShootEggs()
     {
+        _shootingCooldownWait -= Time.deltaTime;
+
         if (Input.GetButtonDown("Fire1"))
         {
             _shootingForce = eggShootingSpeed;
-            _eggShootingCooldownWait = 0;
         }
         if (Input.GetButton("Fire1"))
         {
-            if (_eggShootingCooldownWait <= 0)
+            if (_shootingCooldownWait <= 0)
             {
                 InstantiateBullet(_eggPrefab);
-                _eggShootingCooldownWait = eggShootingCooldown;
+                _shootingCooldownWait = eggShootingCooldown;
             }
             else
             {
-                _eggShootingCooldownWait -= Time.deltaTime;
             }
         }
     }
