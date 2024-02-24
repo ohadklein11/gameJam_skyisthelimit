@@ -55,7 +55,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     
     public void EndGiantFight()
     {
-        // EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantAttitude,_giantSpriteRenderer.gameObject);
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantAttitude,_giantSpriteRenderer.gameObject);
         _giantSpriteRenderer.color = Color.green;  // temp
         _pathToGoose.gameObject.SetActive(true);
         _beansShooting.canShoot = false;
@@ -84,14 +84,14 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         _giantSpriteRenderer.color = Color.red;  // temp
         _stonesTrigger.SetActive(true);
         _beansShooting.canShoot = true;
-        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,"end");
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,null);
         StartCoroutine(OpenGiantDoorsDelay());
 
     }
     
     IEnumerator OpenGiantDoorsDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         OpenDoor();
     }
 }

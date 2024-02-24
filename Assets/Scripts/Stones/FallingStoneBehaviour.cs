@@ -14,6 +14,7 @@ public class FallingStoneBehaviour : MonoBehaviour
     [SerializeField] private float shakeDuration = 1f;
     [SerializeField] private float shakeMagnitude = 2f;
     [SerializeField] private float magnitudeStopDamage = 5f;
+    [SerializeField] private int stoneDamage;
 
 
     private bool _released;
@@ -40,7 +41,7 @@ public class FallingStoneBehaviour : MonoBehaviour
         else if (other.gameObject.layer == LayerMask.NameToLayer("Player") &&
                  gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > magnitudeStopDamage)
         {
-            Debug.Log(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude);
+            EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerGotHit, stoneDamage);
             if (!_released)
             {
                 _throwablePool.Release(gameObject);

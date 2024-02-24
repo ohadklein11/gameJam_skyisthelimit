@@ -8,31 +8,29 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float giantFightZoomOut = 76f;
     [SerializeField] private CameraPath cameraPath;
     private float _giantFightZoomOutStartValue;
-    [SerializeField] private bool _turnOffCameraPath=false;
+    [SerializeField] private bool _turnOffCameraPath;
     [SerializeField] private float zoomInOnGiant = 30f;
     [SerializeField] private GameObject follow;
     [SerializeField] private GameObject player;
     [SerializeField] private Transform doorPivot;
+    [SerializeField] private StartCameraPath startCameraPath;
 
 
 
     void Start()
     {
+        startCameraPath.SetActivePath(_turnOffCameraPath);
         _giantFightZoomOutStartValue =
             cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantDoorsOpen, SetGiantBattleCamera);
-        EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, SetGiantBattleCamera);
+        EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, ZoomInOnDoorOpen);
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantAttitude, ZoomInOnGiant);
+        EventManagerScript.Instance.StartListening(EventManagerScript.LeavingGiantTemple, SetGiantBattleCamera);
+
 
     }
 
-    void Update()
-    {
-        if (_turnOffCameraPath)
-        {
-            cameraPath.EndCameraPath();
-        }
-    }
+    
     public void StartCameraPath()
     {
         cameraPath.StartCameraPath();
@@ -57,11 +55,6 @@ public class CameraManager : MonoBehaviour
             "time", 2,
             "onupdate", "UpdateGiantBattleCamera",
             "easetype", iTween.EaseType.easeInOutSine));
-        if (arg0.ToString() == "end")
-        {
-            
-            ZoomInOnDoorOpen();
-        }
 
     }
 
@@ -79,18 +72,18 @@ public class CameraManager : MonoBehaviour
 
         cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView= fieldOfView;
 
-        iTween.MoveTo(follow.transform.gameObject, iTween.Hash("position", transformToZoom.position, "time", 0.5f, "easetype", iTween.EaseType.linear));
+        iTween.MoveTo(follow.transform.gameObject, iTween.Hash("position", transformToZoom.position, "time", 1f, "easetype", iTween.EaseType.easeInOutSine));
         StartCoroutine(StartDelay(2f,fieldOfVIewBeforeZoom));
 
     }
 
-    public void ZoomInOnDoorOpen()
+    void ZoomInOnDoorOpen(object arg0)
     {
-        float fieldOfView= doorPivot.GetComponentInChildren<BoxCollider2D>().bounds.size.y;
+        float fieldOfView= 40f;
         ZoomIn(doorPivot, fieldOfView);
     }
     
-    public void ZoomInOnGiant(object arg0)
+    void ZoomInOnGiant(object arg0)
     {
         GameObject giant = (GameObject)arg0;
         // float fieldOfView= giant.GetComponent<PolygonCollider2D>().bounds.size.y;
@@ -106,7 +99,7 @@ public class CameraManager : MonoBehaviour
 
     void ZoomOnPlayer(float fieldOfVIewBeforeZoom)
     {
-        iTween.MoveTo(follow.transform.gameObject, iTween.Hash("position", player.transform.position, "time", 0.5f, "easetype", iTween.EaseType.linear));
+        iTween.MoveTo(follow.transform.gameObject, iTween.Hash("position", player.transform.position, "time", 1f, "easetype", iTween.EaseType.easeInOutSine));
         cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView=fieldOfVIewBeforeZoom;
 
         cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
