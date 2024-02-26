@@ -1598,7 +1598,7 @@ MonoBehaviour:
   shootingSpeedChange: 20
   eggShootingSpeed: 10
   eggShootingCooldown: 0.15
-  beanShootingCooldown: 0.3
+  beanShootingCooldown: 0.6
   shootingPoint: {fileID: 1492824685}
   gun: {fileID: 1037843130}
   _platformLayerMask:
