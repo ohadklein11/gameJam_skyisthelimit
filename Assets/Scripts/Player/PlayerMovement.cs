@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utils;
 using Vines;
 
 namespace Player
@@ -78,6 +79,7 @@ namespace Player
 
         private void Update()
         {
+            if (GameData.isGameStopped) return;
             CheckInput();
         }
 

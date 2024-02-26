@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utils;
 
 public enum GunType
 {
@@ -54,6 +55,8 @@ public class BeansShooting : MonoBehaviour
 
     private void Update()
     {
+        if (GameData.isGameStopped) return;
+
         if (_gunType == GunType.BeansGun)
             ShootBeans();
         else if(_gunType == GunType.EggsGun)

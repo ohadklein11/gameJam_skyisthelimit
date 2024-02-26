@@ -5,6 +5,8 @@ namespace Utils
     public class GameData: Singleton<GameData>
     {
         public bool IsGiantFight { get; private set; }
+        public static bool isGameStopped=true;
+
         private int _curPlayerLifePoints;
         [SerializeField] private int maxPlayerLifePoints = 100;
 
