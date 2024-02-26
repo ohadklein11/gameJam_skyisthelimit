@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d75900e3c68008744bfc4ad73b1c2518
+guid: b80e4d39c6b6f1a42b88d5d05d5c384b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jack spritesheet_0
+      name: jack goose_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,20 +131,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0c7fa3d92124614f9eb7cf0e2bf4d1c
-      internalID: 51870739
+      spriteID: 8dd8637f922cf784590c39d5c98e33dd
+      internalID: -1850709132
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_1
+      name: jack goose_1
       rect:
         serializedVersion: 2
         x: 512
@@ -152,20 +152,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5df3fbf5dba54bc42b56924b9bc5bf57
-      internalID: -2118648497
+      spriteID: bf69f02cbd2dc044487901b319077a24
+      internalID: 241171777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_2
+      name: jack goose_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -173,20 +173,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0331d5acb604134498d8f48a72aab23
-      internalID: 1480265438
+      spriteID: 97011e0382cb66a4a9f7c0e0a2adc29e
+      internalID: -1454294211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_3
+      name: jack goose_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -194,20 +194,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4be554599e7a28648a76b5be004b9c1e
-      internalID: -259688243
+      spriteID: 0ead6a6ea6d1c96408dc1b751b2ab39b
+      internalID: 899706795
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_4
+      name: jack goose_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -215,20 +215,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82a5acf0b4a01ce4389325ec8361614c
-      internalID: 519687468
+      spriteID: 577917a19a8c33e4c99f7ae5ca3f6d4d
+      internalID: -1753936456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_5
+      name: jack goose_5
       rect:
         serializedVersion: 2
         x: 2560
@@ -236,20 +236,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b03b259176adeae42abfd4848b9a589f
-      internalID: 2126648154
+      spriteID: 489809c597c4e7743af9a6c9edd65789
+      internalID: -885130724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_6
+      name: jack goose_6
       rect:
         serializedVersion: 2
         x: 0
@@ -257,20 +257,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57766eedb0cd4954fba8e927fedb0472
-      internalID: -1931473850
+      spriteID: 05f659b05f0243144b47f9ed69354e0f
+      internalID: -1744293241
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_7
+      name: jack goose_7
       rect:
         serializedVersion: 2
         x: 512
@@ -278,20 +278,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1534f74c6d2997741830a51214d037d6
-      internalID: 772600119
+      spriteID: 63d6ebefbd44c794da302e40abfcb453
+      internalID: -1042763226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_8
+      name: jack goose_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -299,20 +299,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bec00c8fbc7a0e24ab6bd94f5dbfac95
-      internalID: 86583235
+      spriteID: 833431c830ce6cf4483bfd9471bb3720
+      internalID: 1812736968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_9
+      name: jack goose_9
       rect:
         serializedVersion: 2
         x: 1536
@@ -320,20 +320,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58e830fc4ee3ddf42bdae4788d5de88c
-      internalID: 476248431
+      spriteID: 9fff6d8c88b1a104fa4a6ed916346851
+      internalID: 474182095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_10
+      name: jack goose_10
       rect:
         serializedVersion: 2
         x: 2048
@@ -341,20 +341,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22d03f02b89a26f47be016ffc0438b76
-      internalID: -142070834
+      spriteID: ff13ed15d3ef7ce42a07d35593af22c0
+      internalID: -80401795
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_11
+      name: jack goose_11
       rect:
         serializedVersion: 2
         x: 2560
@@ -362,20 +362,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca6bc3de24678a64b86af03907b98780
-      internalID: 1925514617
+      spriteID: 6c525ccd626d98348baa2bfdd35ee325
+      internalID: 1352040397
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_12
+      name: jack goose_12
       rect:
         serializedVersion: 2
         x: 0
@@ -383,20 +383,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dc2770b3f69f7f4789dfc4f5275d66d
-      internalID: -870637454
+      spriteID: 129deb68f4feeed48a8331e0a6cfd3f7
+      internalID: 501288256
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_13
+      name: jack goose_13
       rect:
         serializedVersion: 2
         x: 512
@@ -404,41 +404,41 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: adc7161f7c237a64993c7fb94e6260f7
-      internalID: -214527540
+      spriteID: e5de6409b57607049839967f418387a1
+      internalID: -1593180380
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_14
+      name: jack goose_14
       rect:
         serializedVersion: 2
-        x: 1013
+        x: 1024
         y: 1536
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51f74d9731abc4048a912aa77b803e78
-      internalID: -2089361347
+      spriteID: 80aab4f129bdfab44905cfca1b3878d7
+      internalID: 1140723039
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_15
+      name: jack goose_15
       rect:
         serializedVersion: 2
         x: 1536
@@ -446,20 +446,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f95d9f2747835d47951b3652ee3de1d
-      internalID: -967323517
+      spriteID: ae74fac751894e64984eb7643285ee79
+      internalID: -84677191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_16
+      name: jack goose_16
       rect:
         serializedVersion: 2
         x: 2048
@@ -467,20 +467,167 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e57170d49b0548946901fa1b29a4ea64
-      internalID: 1879762483
+      spriteID: eaef0a5bea089f74d903dc80f29d9c09
+      internalID: -1914232210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jack spritesheet_17
+      name: jack goose_17
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4b70a59c31c1fb458de62089cc212e9
+      internalID: -1196716445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jack goose_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c304e67343bb2964caf155d842ccc967
+      internalID: -1021567296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jack goose_19
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a713c09822a42d4b9aaf928d0f88e00
+      internalID: -852749099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jack goose_20
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a079cb3bc9ee2ec4cb9fd0b0683f4806
+      internalID: -1109746828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jack goose_21
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 333b83ebd181d744cac746aeb209035a
+      internalID: -1378014083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jack goose_22
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86e9184eabb95034395c3ba515f04cdb
+      internalID: 413913556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jack goose_23
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9d3762ddb8a93b4e8b22719b539971d
+      internalID: 1885221027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jack goose_24
       rect:
         serializedVersion: 2
         x: 1536
@@ -488,14 +635,14 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14bf5945e23d1f745b407984905d7d8a
-      internalID: -1951478525
+      spriteID: bf8588d3eba41124eae74f84a785a71d
+      internalID: 94559677
       vertices: []
       indices: 
       edges: []
@@ -503,7 +650,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 20e94ed0ddbe3c841a41b11ea65c9eab
+    spriteID: 9a8312d9ccde80047b0e1b6522ab893d
     internalID: 0
     vertices: []
     indices: 
@@ -511,26 +658,33 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      jack spritesheet_0: 51870739
-      jack spritesheet_1: -2118648497
-      jack spritesheet_10: -142070834
-      jack spritesheet_11: 1925514617
-      jack spritesheet_12: -870637454
-      jack spritesheet_13: -214527540
-      jack spritesheet_14: -2089361347
-      jack spritesheet_15: -967323517
-      jack spritesheet_16: 1879762483
-      jack spritesheet_17: -1951478525
-      jack spritesheet_2: 1480265438
-      jack spritesheet_3: -259688243
-      jack spritesheet_4: 519687468
-      jack spritesheet_5: 2126648154
-      jack spritesheet_6: -1931473850
-      jack spritesheet_7: 772600119
-      jack spritesheet_8: 86583235
-      jack spritesheet_9: 476248431
+      jack goose_0: -1850709132
+      jack goose_1: 241171777
+      jack goose_10: -80401795
+      jack goose_11: 1352040397
+      jack goose_12: 501288256
+      jack goose_13: -1593180380
+      jack goose_14: 1140723039
+      jack goose_15: -84677191
+      jack goose_16: -1914232210
+      jack goose_17: -1196716445
+      jack goose_18: -1021567296
+      jack goose_19: -852749099
+      jack goose_2: -1454294211
+      jack goose_20: -1109746828
+      jack goose_21: -1378014083
+      jack goose_22: 413913556
+      jack goose_23: 1885221027
+      jack goose_24: 94559677
+      jack goose_3: 899706795
+      jack goose_4: -1753936456
+      jack goose_5: -885130724
+      jack goose_6: -1744293241
+      jack goose_7: -1042763226
+      jack goose_8: 1812736968
+      jack goose_9: 474182095
   mipmapLimitGroupName: 
-  pSDRemoveMatte: 0
+  pSDRemoveMatte: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
