@@ -1476,6 +1476,7 @@ GameObject:
   - component: {fileID: 48291946}
   - component: {fileID: 48291948}
   - component: {fileID: 48291949}
+  - component: {fileID: 48291950}
   m_Layer: 14
   m_Name: Player
   m_TagString: Player
@@ -1603,7 +1604,9 @@ MonoBehaviour:
   _platformLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  _gunType: 0
   canShoot: 1
+  isLoading: 0
 --- !u!114 &48291947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1693,6 +1696,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &48291950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48291940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09671854fe76c94ab4331e24356e337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &59908214
 GameObject:
   m_ObjectHideFlags: 0

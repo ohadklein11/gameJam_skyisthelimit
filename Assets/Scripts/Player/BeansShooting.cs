@@ -34,12 +34,13 @@ public class BeansShooting : MonoBehaviour
     private GameObject _beanPrefab;
     private GameObject _eggPrefab;
 
-    private GunType _gunType;
+    public GunType _gunType;
     private Camera _mainCamera;
     private Rigidbody2D _rigidBody;
     private float _shootingCooldownWait;
     private SpriteRenderer _playerSpriteRenderer;
     public bool canShoot = true;
+    public bool isLoading = false;
 
 
     void Awake()
@@ -75,19 +76,27 @@ public class BeansShooting : MonoBehaviour
         _shootingCooldownWait -= Time.deltaTime;
         if (Input.GetButtonDown("Fire1"))
         {
-            _shootingForce= minShootingForce;
+            if (_shootingCooldownWait <= 0)
+            {
+                isLoading = true;
+                _shootingForce = minShootingForce;
+            }
         }
 
         if (Input.GetButton("Fire1"))
         {
-            if (_shootingForce < maxShootingForce)
-                _shootingForce += Time.deltaTime*shootingSpeedChange;
+            if (_shootingCooldownWait <= 0)
+            {
+                if (_shootingForce < maxShootingForce)
+                    _shootingForce += Time.deltaTime * shootingSpeedChange;
+            }
         }
 
         if (Input.GetButtonUp("Fire1"))
         {
             if (_shootingCooldownWait<=0)
             {
+                isLoading = false;
                 InstantiateBullet(_beanPrefab);
                 _shootingCooldownWait = beanShootingCooldown;
             }
