@@ -86,11 +86,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
-  groundCheckRadius: 0
-  groundCheck: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &-8508232956666062973
 MonoBehaviour:
   m_ObjectHideFlags: 0

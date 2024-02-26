@@ -7,9 +7,6 @@ public class EnemyMovement : MonoBehaviour
 {
 
     [SerializeField] private float _speed = 2f;
-    [SerializeField] private float groundCheckRadius;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask whatIsGround;
 
     private bool _canMove = true;
     private float _originalSpeed;
@@ -19,11 +16,17 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 _positionBefore1Frame;
     private Vector3 _positionBefore2Frames;
     
+    private bool _isVertical = false;
+    private float _originalGravityScale;
+    
     private Transform _player;
+    
+    public bool Grounded { get; set; }
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _originalGravityScale = _rb.gravityScale;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _positionBefore1Frame = transform.position;
         _positionBefore2Frames = transform.position;
@@ -34,26 +37,65 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         if (!_canMove) return;
-        if (Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f)
+        if (NeedsToTurnAround())
         {
             TurnAround();
         }
 
         _positionBefore2Frames = _positionBefore1Frame;
         _positionBefore1Frame = transform.position;
+        if (_isVertical)
+        {
+            MoveVertical();
+        }
+        else if (Grounded)
+        {
+            MoveHorizontal();
+        }
+        
+        // also check if the enemy is on the ground
+        var bounds = _spriteRenderer.bounds;
+        var raycastOrigin = transform.position + new Vector3(0, -bounds.size.y / 2 - .1f, 0);
+        var hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .4f, LayerMask.GetMask("Ground"));
+        Grounded = hit.collider != null;
+    }
+
+    private void MoveVertical()
+    {
+        var aboveHead = new Vector2(transform.position.x, transform.position.y + _spriteRenderer.bounds.size.y / 2 + .1f);
+        RaycastHit2D hit = Physics2D.Raycast(aboveHead, Vector2.up, .1f, LayerMask.GetMask("Climable"));
+        if (hit.collider != null)
+        {
+            _rb.velocity = new Vector2(0, _speed/2); 
+        }
+        else
+        {
+            _rb.velocity = Vector2.zero;
+        }
+    }
+
+    private void MoveHorizontal()
+    {
         // raycast to check if there is ground in front of the enemy
         var bounds = _spriteRenderer.bounds;
-        Vector3 raycastOrigin =
+        var raycastOrigin =
             transform.position + new Vector3(_direction * bounds.size.x / 2, -bounds.size.y / 2 - .1f, 0);
-        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .6f, LayerMask.GetMask("Ground"));
+        var hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .6f, LayerMask.GetMask("Ground"));
         Debug.DrawRay(raycastOrigin, Vector3.down * .6f, Color.red);
         if (hit.collider == null)
         {
             TurnAround();
         }
-
         _rb.velocity = new Vector2(_speed * _direction, _rb.velocity.y);
     }
+
+    private bool NeedsToTurnAround()
+    {
+        if (_isVertical)
+            return false;
+        return Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f;
+    }
+
 
     private void TurnAround()
     {
@@ -91,6 +133,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Push()
     {
+        _rb.gravityScale = 1;
         _rb.constraints = RigidbodyConstraints2D.None;
         _rb.AddForce(new Vector2(5, 0), ForceMode2D.Impulse);
     }
@@ -102,18 +145,33 @@ public class EnemyMovement : MonoBehaviour
     
     public void FacePlayer()
     {
-        int direction;
+        int facingDirection;
         if (_player.position.x < transform.position.x)
         {
-            direction = -1;
+            facingDirection = -1;
         }
         else
         {
-            direction = 1;
+            facingDirection = 1;
         }
-        if (direction != _direction)
+        if (facingDirection != _direction)
         {
             TurnAround();
         }
+    }
+    
+    public void StartClimbing()
+    {
+        _isVertical = true;
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+        _rb.gravityScale = 0;
+    }
+    
+    public void StopClimbing()
+    {
+        _isVertical = false;
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _rb.gravityScale = _originalGravityScale;
+        _rb.velocity = Vector2.zero;
     }
 }
