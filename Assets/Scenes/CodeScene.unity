@@ -1508,6 +1508,7 @@ MonoBehaviour:
   fullFriction: {fileID: 6200000, guid: fafd4a3d7955c2f4f913bd7db1e32678, type: 2}
   climbSpeed: 3
   minNumFramesForClimbing: 5
+  loadingBar: {fileID: 326723477}
   highJumpGravity: 0.75
   jumpGravity: 1.5
   fallGravity: 2.5
@@ -73198,7 +73199,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 330585546}
   - {fileID: 410087041}
-  - {fileID: 48291942}
   - {fileID: 1436032561}
   - {fileID: 129073819}
   - {fileID: 1231257956}
@@ -73210,3 +73210,4 @@ SceneRoots:
   - {fileID: 1250573362}
   - {fileID: 2017489305}
   - {fileID: 1316376514}
+  - {fileID: 48291942}

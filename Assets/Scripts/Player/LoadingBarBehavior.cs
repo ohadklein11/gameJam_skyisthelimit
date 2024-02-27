@@ -15,10 +15,21 @@ public class LoadingBarBehavior : MonoBehaviour
     [SerializeField] private BeansShooting beansShooting;
     
     private bool _fullCharge = false;
+    private int _direction = 1;
     private TweenerCore<Color,Color,ColorOptions> tween;
 
     void Update()
     {
+        Vector3 localScale;
+        var transform1 = transform;
+        if ((int)Mathf.Sign(transform1.parent.localScale.x) != (int)Mathf.Sign(transform1.localScale.x))
+        {
+            var scale = transform1.localScale;
+            localScale = new Vector3(-scale.x, (localScale = scale).y, localScale.z);
+            scale = localScale;
+            transform1.localScale = scale;
+        }
+        
         float percentage = 0f;
         if (beansShooting.isLoading)
         {
