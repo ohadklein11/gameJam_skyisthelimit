@@ -40,7 +40,8 @@ public class BeansShooting : MonoBehaviour
     private float _shootingCooldownWait;
     private SpriteRenderer _playerSpriteRenderer;
     public bool canShoot = true;
-    public bool isLoading = false;
+    public bool isLoading => _shootingForce >= minShootingForce;
+    public bool IsOnCooldown => _shootingCooldownWait > 0;
 
 
     void Awake()
@@ -78,7 +79,6 @@ public class BeansShooting : MonoBehaviour
         {
             if (_shootingCooldownWait <= 0)
             {
-                isLoading = true;
                 _shootingForce = minShootingForce;
             }
         }
@@ -96,9 +96,9 @@ public class BeansShooting : MonoBehaviour
         {
             if (_shootingCooldownWait<=0)
             {
-                isLoading = false;
                 InstantiateBullet(_beanPrefab);
                 _shootingCooldownWait = beanShootingCooldown;
+                _shootingForce = 0;
             }
             
         }
@@ -139,5 +139,17 @@ public class BeansShooting : MonoBehaviour
         _gunType = gunType;
     }
     
+    public float GetShootingForcePercentage()
+    {
+        if (_gunType != GunType.BeansGun)
+            return 0f;
+        return _shootingForce / maxShootingForce;
+    }
     
+    public float GetCooldownPercentage()
+    {
+        if (_gunType != GunType.BeansGun)
+            return 0f;
+        return Mathf.Max(0, _shootingCooldownWait) / beanShootingCooldown;
+    }
 }
