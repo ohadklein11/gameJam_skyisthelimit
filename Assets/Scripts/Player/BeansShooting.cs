@@ -33,6 +33,7 @@ public class BeansShooting : MonoBehaviour
     // private GameObject[] trajectoryPoints;
     private GameObject _beanPrefab;
     private GameObject _eggPrefab;
+    private Rigidbody2D _playerRb;
 
     public GunType _gunType;
     private Camera _mainCamera;
@@ -54,6 +55,10 @@ public class BeansShooting : MonoBehaviour
         _eggPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Egg");
     }
 
+    void Start()
+    {
+        _playerRb = _playerSpriteRenderer.gameObject.GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
@@ -110,7 +115,7 @@ public class BeansShooting : MonoBehaviour
             Instantiate(bulletPrefab, shootingPoint.transform.position, bulletPrefab.transform.rotation);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         Vector3 direction = (transform.localScale.x >= 0) ? Vector2.right : Vector2.left;
-        rb.velocity=direction * _shootingForce;
+        rb.velocity=(direction * _shootingForce)+new Vector3(_playerRb.velocity.x,0,0);
     }
 
     void ShootEggs()
