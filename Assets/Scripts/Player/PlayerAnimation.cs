@@ -37,6 +37,15 @@ public class PlayerAnimation : MonoBehaviour
             _animator.SetBool("isJumping", _playerMovement.jumping);
         } 
     }
+    public void PlayShootingGooseAnimation()
+    {
+        if ((Mathf.Abs(_rb.velocity.x) >= 0.1f))
+            _animator.Play("runEggShoot");
+        else
+        {
+            _animator.Play("IdleEggShoot");
+        }
+    }
 
     public void SwitchToGooseAnimation()
     {

@@ -110,6 +110,9 @@ public class GrowVineScript : MonoBehaviour
                 gameObj.GetComponent<PlayerMovement>().enabled = true;
                 gameObj.GetComponent<BeansShooting>().enabled = true;
                 gameObj.GetComponent<Collider2D>().enabled = true;
+                gameObj.GetComponent<Animator>().enabled = true;
+                gameObj.GetComponent<PlayerAnimation>().enabled = true;
+
                 child.SetParent(null);
             }
         }
