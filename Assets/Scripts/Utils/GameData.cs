@@ -11,6 +11,9 @@ namespace Utils
 
         private int _curPlayerLifePoints;
         public int maxPlayerLifePoints = 100;
+        public int GetPlayerHealth() => _curPlayerLifePoints;
+        public void RestartPlayerHealth() => _curPlayerLifePoints = maxPlayerLifePoints;
+
 
         private void Awake()
         {
@@ -21,6 +24,7 @@ namespace Utils
             _curPlayerLifePoints = maxPlayerLifePoints;
         
         }
+        
         
         private void PlayerGotHit(object damage)
         {
