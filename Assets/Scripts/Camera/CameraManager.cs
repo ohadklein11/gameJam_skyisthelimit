@@ -58,7 +58,10 @@ public class CameraManager : MonoBehaviour
             endValue = afterGiantFightZoom;
             cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 0;
             cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = false;
-            // cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().GetComponent<CinemachineComposer>().m_TrackedObjectOffset = new Vector3(0,0,0);
+            cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0,0,0);
+            
+            
+            
         }
         iTween.ValueTo(gameObject, iTween.Hash(
             "from", startValue,
