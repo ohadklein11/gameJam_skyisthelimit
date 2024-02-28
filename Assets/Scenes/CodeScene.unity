@@ -3621,7 +3621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dustVFX: {fileID: 3030171427042367463, guid: 7e80f7955c09c444db2cf7f965cd2816, type: 3}
-  beanDustVFX: {fileID: 2192770369436959653, guid: 25b0f1920972b2d4fb3748e9d2c7f6e0,
+  beanDustVFX: {fileID: 2360266565260114778, guid: 31f622aae2cc705498995e230515fa66,
     type: 3}
   leavesVFX: {fileID: 1878191255095618823, guid: 0b4404157bb51504983e74e25b22fe64,
     type: 3}
