@@ -48,28 +48,47 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
 
     private Transform LookAtPlayer()
     {
+        // get player with layer
+        var player = GameObject.FindWithTag("Player");
+        if (player == null) return null;
         var direction = _enemyMovement.GetDirection();
-        var enemyBounds = _spriteRenderer.bounds;
-        var position = transform.position;
-        Vector2 enemyTop = new Vector2(position.x, position.y + enemyBounds.size.y / 2);
-        Vector2 enemyCenter = new Vector2(position.x, position.y);
-        Vector2 enemyBottom = new Vector2(position.x, position.y - enemyBounds.size.y / 2);
-        RaycastHit2D playerHitTop = Physics2D.Raycast(enemyTop, Vector2.right * direction, viewDistance, LayerMask.GetMask("Player"));
-        RaycastHit2D playerHitCenter = Physics2D.Raycast(enemyCenter, Vector2.right * direction, viewDistance, LayerMask.GetMask("Player"));
-        RaycastHit2D playerHitBottom = Physics2D.Raycast(enemyBottom, Vector2.right * direction, viewDistance, LayerMask.GetMask("Player"));
-        if (playerHitTop.collider != null)
+        if (direction == 1 
+            && player.transform.position.x - transform.position.x > 0
+            && player.transform.position.x - transform.position.x < viewDistance)
         {
-            return playerHitTop.transform;
-        }
-        if (playerHitCenter.collider != null)
+            return player.transform;
+        } 
+        if (direction == -1 
+            && transform.position.x - player.transform.position.x > 0
+            && transform.position.x - player.transform.position.x < viewDistance)
         {
-            return playerHitCenter.transform;
-        }
-        if (playerHitBottom.collider != null)
-        {
-            return playerHitBottom.transform;
+            return player.transform;
         }
         return null;
+        
+        
+        // var direction = _enemyMovement.GetDirection();
+        // var enemyBounds = _spriteRenderer.bounds;
+        // var position = transform.position;
+        // Vector2 enemyTop = new Vector2(position.x, position.y + enemyBounds.size.y / 2);
+        // Vector2 enemyCenter = new Vector2(position.x, position.y);
+        // Vector2 enemyBottom = new Vector2(position.x, position.y - enemyBounds.size.y / 2);
+        // RaycastHit2D playerHitTop = Physics2D.Raycast(enemyTop, Vector2.right * direction, viewDistance, LayerMask.GetMask("Player"));
+        // RaycastHit2D playerHitCenter = Physics2D.Raycast(enemyCenter, Vector2.right * direction, viewDistance, LayerMask.GetMask("Player"));
+        // RaycastHit2D playerHitBottom = Physics2D.Raycast(enemyBottom, Vector2.right * direction, viewDistance, LayerMask.GetMask("Player"));
+        // if (playerHitTop.collider != null)
+        // {
+        //     return playerHitTop.transform;
+        // }
+        // if (playerHitCenter.collider != null)
+        // {
+        //     return playerHitCenter.transform;
+        // }
+        // if (playerHitBottom.collider != null)
+        // {
+        //     return playerHitBottom.transform;
+        // }
+        // return null;
     }
 
     private IEnumerator ThrowAtPlayer()

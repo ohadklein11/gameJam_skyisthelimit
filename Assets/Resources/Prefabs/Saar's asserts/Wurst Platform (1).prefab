@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4788622769214779214}
   - component: {fileID: 7938592394991548977}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,8 +76,26 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 24.679214, y: 2.1704712}
-      - {x: -24.393051, y: 2.3696442}
+    - - {x: 28.542591, y: -0.36636162}
+      - {x: 29.490833, y: -0.04942894}
+      - {x: 24.564274, y: 1.0466633}
+      - {x: 24.528282, y: 2.0423527}
+      - {x: 22.092333, y: 2.414936}
+      - {x: 20.425728, y: 2.9115238}
+      - {x: 17.950764, y: 2.950468}
+      - {x: 17.996548, y: 3.5407314}
+      - {x: 17.858747, y: 5.3282948}
+      - {x: 14.959545, y: 5.263159}
+      - {x: 12.948287, y: 3.3421726}
+      - {x: 8.228897, y: 3.5765724}
+      - {x: 3.0360565, y: 3.8866005}
+      - {x: -2.1734772, y: 3.8535728}
+      - {x: -10.457703, y: 3.434658}
+      - {x: -12.533478, y: 3.4252586}
+      - {x: -17.375748, y: 3.0557747}
+      - {x: -21.526657, y: 3.1512604}
+      - {x: -24.337952, y: 2.6768112}
+      - {x: -28.486008, y: -0.3848381}
       - {x: 1.8745804, y: -4.907465}
   m_UseDelaunayMesh: 0
 --- !u!1001 &6019434959795172908
@@ -138,6 +156,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 7c4e2d84fee97f448926e1d66d22279f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5117700066308340382, guid: 7c4e2d84fee97f448926e1d66d22279f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -4683669308469848369, guid: 7c4e2d84fee97f448926e1d66d22279f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -163,6 +191,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 39e4c08e239036c4983c60f03c29cdc2, type: 2}
+    - target: {fileID: -241861608055726361, guid: 7c4e2d84fee97f448926e1d66d22279f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 117214286460000749, guid: 7c4e2d84fee97f448926e1d66d22279f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 776046731749314290, guid: 7c4e2d84fee97f448926e1d66d22279f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -173,11 +211,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wurst Platform (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7c4e2d84fee97f448926e1d66d22279f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5509654439515443377, guid: 7c4e2d84fee97f448926e1d66d22279f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4f3fcc52d00d9ed4db8ac1e2e4ba64f6, type: 2}
+    - target: {fileID: 6443852219947562045, guid: 7c4e2d84fee97f448926e1d66d22279f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582293574316785276, guid: 7c4e2d84fee97f448926e1d66d22279f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582295624248286909, guid: 7c4e2d84fee97f448926e1d66d22279f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4544993355945447604}
   - component: {fileID: 2397647523625215846}
   - component: {fileID: 651269055499784804}
+  - component: {fileID: 6954707930332413612}
   m_Layer: 12
   m_Name: ThrowerThrowable
   m_TagString: Untagged
@@ -162,3 +163,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6954707930332413612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547306582909305030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5285c6f7509f4344f9c735d2d4e184c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10

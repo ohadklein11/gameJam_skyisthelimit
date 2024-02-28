@@ -6,6 +6,8 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private float giantFightZoomOut = 76f;
+    [SerializeField] private float afterGiantFightZoom;
+
     [SerializeField] private CameraPath cameraPath;
     private float _giantFightZoomOutStartValue;
     [SerializeField] private bool _turnOffCameraPath;
@@ -14,6 +16,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private Transform doorPivot;
     [SerializeField] private StartCameraPath startCameraPath;
+    
     
 
 
@@ -51,7 +54,7 @@ public class CameraManager : MonoBehaviour
         else
         {
             startValue = giantFightZoomOut;
-            endValue = _giantFightZoomOutStartValue;
+            endValue = afterGiantFightZoom;
             cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 0;
             cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = false;
 

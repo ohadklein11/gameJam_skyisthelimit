@@ -15,6 +15,7 @@ namespace Giant
         private GameObject _player;
         private PlayerMovement _playerMovement;
         private const float Epsilon = 0.01f;
+        [SerializeField] private int stoneDamage;
 
         private void Awake()
         {
@@ -34,6 +35,10 @@ namespace Giant
             if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 return;
+            }
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerGotHit, stoneDamage);
             }
             if (!_released)
             {

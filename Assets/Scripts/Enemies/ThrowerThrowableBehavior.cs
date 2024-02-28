@@ -15,6 +15,7 @@ namespace Enemies
         private GameObject _player;
         private PlayerMovement _playerMovement;
         private const float Epsilon = 0.01f;
+        
 
         private void Awake()
         {
@@ -35,6 +36,7 @@ namespace Enemies
             {
                 return;
             }
+
             if (!_released)
             {
                 _throwablePool.Release(gameObject);

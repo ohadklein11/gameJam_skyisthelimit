@@ -12,6 +12,9 @@ public class ClimberBehavior : MonoBehaviour
     [SerializeField] private float _stonePushHeight;
     [SerializeField] private float _appearDuration;
     [SerializeField] private float _movementSpeed;
+
+    
+    [SerializeField] private Material StoneMaterialTransparent;
     
     private GameObject _player;
     private PlayerMovement _playerMovement;
@@ -27,6 +30,9 @@ public class ClimberBehavior : MonoBehaviour
     private bool _appearing;
     private bool _appeared;
     private bool _isClimbing;
+    private Transform _curVine;
+    private Transform _targetVine;
+    private bool _shouldFacePlayer = true;
 
     // Start is called before the first frame update
     void Start()
@@ -51,28 +57,56 @@ public class ClimberBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_enemyHealth == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
         var vine = _player.transform.parent;
         bool playerClimbing = vine != null  // vine
                               && vine.parent != null  // vine holder 
-                              && (_isClimbing? _player.transform.parent.parent.parent == transform.parent.parent.parent : 
-                                  _player.transform.parent.parent.parent == transform.parent)
+                              && vine.parent.parent == transform.parent
                               && _playerMovement.climbing;
         if (_appeared)
         {
+            if (_shouldFacePlayer)
+            {
+                _enemyMovement.FacePlayer();
+            }
+
             if (playerClimbing)
             {
-                if ( Mathf.Abs(vine.transform.position.x - _body.transform.position.x) < .1f)
-                { // climb on the vine
-                    Debug.Log("Climbing");
-                    _isClimbing = true;
-                }
-                else
+                _targetVine = vine;
+                if (_isClimbing)
                 {
-                    _isClimbing = false;
+                    _shouldFacePlayer = true;
+                    if (vine != _curVine)
+                    {
+                        // get down from vine
+                        _isClimbing = false;
+                        _enemyMovement.StopClimbing();
+                    }
                 }
             }
-            _enemyMovement.FacePlayer();
+
+            if (!_isClimbing)
+            {
+                var targetX = _targetVine != null ? _targetVine.position.x : _player.transform.position.x;  
+                _shouldFacePlayer = Mathf.Abs(targetX - _body.transform.position.x) > 3f; // will go towards vine even if player is not climbing
+
+                if (Mathf.Abs(targetX - _body.transform.position.x) < .3f)
+                {
+                    _isClimbing = true;
+                    _curVine = _targetVine;
+                    var position = _body.transform.position;
+                    position = new Vector3(targetX, position.y, position.z);
+                    _body.transform.position = position;
+                    _enemyMovement.StartClimbing();
+                }
+            }
         }
+
         if (!_appeared && !_appearing && playerClimbing)
         {
             StartCoroutine(Appear());
@@ -84,6 +118,7 @@ public class ClimberBehavior : MonoBehaviour
         _appearing = true;
         _enemyMovement.FacePlayer();
         transform.DOMoveY(transform.position.y + _appearHeight, _appearDuration).SetEase(Ease.OutSine);
+        _stoneAboveHead.GetComponent<MeshRenderer>().material = StoneMaterialTransparent;
         _stoneAboveHead.transform.parent = null;
         _stoneAboveHead.transform.DOMoveY(_stoneAboveHead.transform.position.y + _appearHeight + _stonePushHeight, _appearDuration).SetEase(Ease.OutSine);
         _stoneMeshRenderer.materials[0].DOFade(0, _appearDuration);
@@ -98,4 +133,5 @@ public class ClimberBehavior : MonoBehaviour
         _appeared = true;
         
     }
+    
 }

@@ -24,25 +24,20 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(_playerMovement.climbing) {
-            _animator.SetBool("isClimbing", true);
-        } else {
-            _animator.SetBool("isClimbing", false);
+        if(_playerMovement.climbing != _animator.GetBool("isClimbing")) {
+            _animator.SetBool("isClimbing", _playerMovement.climbing);
         }
-        if (_rb.velocity.magnitude >= 0.1f) {
-            _animator.SetBool("isMoving", true);
-        } else {
-            _animator.SetBool("isMoving", false);
+        if ((Mathf.Abs(_rb.velocity.x) >= 0.1f)!= _animator.GetBool("isMoving")){
+            _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.x) >= 0.1f));
         }
-        if (_beansShooting._gunType == GunType.BeansGun) {
-            _animator.SetBool("beans", true);
-        } else {
-            _animator.SetBool("beans", false);
+        // if ((_beansShooting._gunType == GunType.BeansGun)!= _animator.GetBool("beans")) {
+        //     _animator.SetBool("beans", (_beansShooting._gunType == GunType.BeansGun));
+        // }
+        if(_beansShooting.isLoading != _animator.GetBool("isLoading")) {
+            _animator.SetBool("isLoading", _beansShooting.isLoading);
         }
-        if(_beansShooting.isLoading) {
-            _animator.SetBool("isLoading", true);
-        } else {
-            _animator.SetBool("isLoading", false);
-        }
+        if(_playerMovement.jumping != _animator.GetBool("isJumping")) {
+            _animator.SetBool("isJumping", _playerMovement.jumping);
+        } 
     }
 }

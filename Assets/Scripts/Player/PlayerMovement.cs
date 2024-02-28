@@ -26,6 +26,7 @@ namespace Player
         [SerializeField] private PhysicsMaterial2D fullFriction;
         [SerializeField] private float climbSpeed;
         [SerializeField] private int minNumFramesForClimbing;
+        [SerializeField] private Transform loadingBar;
 
         private float _xInput;
         private float _yInput;
@@ -380,9 +381,13 @@ namespace Player
         private void Flip()
         {
             _facingDirection *= -1;
-            Vector3 flipScale = transform.localScale;
+            var transform1 = transform;
+            Vector3 flipScale = transform1.localScale;
             flipScale.x *= -1;
-            transform.localScale = flipScale;
+            transform1.localScale = flipScale;
+            var localScale = loadingBar.localScale;
+            localScale = new Vector3(localScale.x * -1, localScale.y, localScale.z);
+            loadingBar.localScale = localScale;
         }
 
         public void StopClimbing()
