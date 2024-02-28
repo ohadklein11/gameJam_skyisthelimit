@@ -30,14 +30,22 @@ public class PlayerAnimation : MonoBehaviour
         if ((Mathf.Abs(_rb.velocity.x) >= 0.1f)!= _animator.GetBool("isMoving")){
             _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.x) >= 0.1f));
         }
-        // if ((_beansShooting._gunType == GunType.BeansGun)!= _animator.GetBool("beans")) {
-        //     _animator.SetBool("beans", (_beansShooting._gunType == GunType.BeansGun));
-        // }
         if(_beansShooting.isLoading != _animator.GetBool("isLoading")) {
             _animator.SetBool("isLoading", _beansShooting.isLoading);
         }
         if(_playerMovement.jumping != _animator.GetBool("isJumping")) {
             _animator.SetBool("isJumping", _playerMovement.jumping);
         } 
+    }
+
+    public void SwitchToGooseAnimation()
+    {
+        Debug.Log("Switching to goose animation");
+        _animator.SetBool("isClimbing",false);
+        _animator.SetBool("beans", false);
+        _animator.SetBool("isMoving", false);
+        _animator.SetBool("isLoading", false);
+        _animator.SetBool("isJumping", false); 
+        _animator.Play("IdleEgg");
     }
 }
