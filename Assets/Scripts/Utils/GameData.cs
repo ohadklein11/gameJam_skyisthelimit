@@ -10,7 +10,7 @@ namespace Utils
         public static bool isGameStopped=true;
 
         private int _curPlayerLifePoints;
-        [SerializeField] private int maxPlayerLifePoints = 100;
+        public int maxPlayerLifePoints = 100;
 
         private void Awake()
         {

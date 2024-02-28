@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 902334812458458439}
   - component: {fileID: 4748916684504413146}
   - component: {fileID: 7930485986402198111}
+  - component: {fileID: 1926246864614423719}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -52,11 +53,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
-  groundCheckRadius: 0
-  groundCheck: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!212 &4105769800206716913
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -185,6 +181,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 3
+--- !u!114 &1926246864614423719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2842438761846239210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5285c6f7509f4344f9c735d2d4e184c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &4061376756953529945
 GameObject:
   m_ObjectHideFlags: 0

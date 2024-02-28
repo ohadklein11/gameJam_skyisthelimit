@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private float _speed = 2f;
 
+
     private bool _canMove = true;
     private float _originalSpeed;
     private Rigidbody2D _rb;
@@ -174,4 +175,6 @@ public class EnemyMovement : MonoBehaviour
         _rb.gravityScale = _originalGravityScale;
         _rb.velocity = Vector2.zero;
     }
+
+    
 }

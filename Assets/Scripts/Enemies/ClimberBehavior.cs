@@ -12,6 +12,7 @@ public class ClimberBehavior : MonoBehaviour
     [SerializeField] private float _stonePushHeight;
     [SerializeField] private float _appearDuration;
     [SerializeField] private float _movementSpeed;
+
     
     [SerializeField] private Material StoneMaterialTransparent;
     
@@ -132,4 +133,5 @@ public class ClimberBehavior : MonoBehaviour
         _appeared = true;
         
     }
+    
 }
