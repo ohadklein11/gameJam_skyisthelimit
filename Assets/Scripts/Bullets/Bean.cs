@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public class Bean : MonoBehaviour
 {
@@ -129,4 +130,8 @@ public class Bean : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        VFXManager.PlayBeanDustVFX(transform.position);
+    }
 }
