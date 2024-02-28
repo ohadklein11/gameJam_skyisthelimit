@@ -266,7 +266,7 @@ MonoBehaviour:
   throwable: {fileID: 7567359212462748516, guid: 37a0601795ecc664cb9a5547f5d5c946,
     type: 3}
   timeToThrow: 2.2
-  velocityX: -20
+  velocityX: -10
   velocityY: -10
 --- !u!1001 &13439559
 PrefabInstance:
@@ -3531,6 +3531,7 @@ GameObject:
   - component: {fileID: 129073820}
   - component: {fileID: 129073821}
   - component: {fileID: 129073822}
+  - component: {fileID: 129073823}
   m_Layer: 0
   m_Name: Utils
   m_TagString: Untagged
@@ -3607,6 +3608,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpSlider: {fileID: 1343058090}
   hpText: {fileID: 1020426375}
+--- !u!114 &129073823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129073817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3a3546f9dc41a4f9e184d3d9f470fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dustVFX: {fileID: 3030171427042367463, guid: 7e80f7955c09c444db2cf7f965cd2816, type: 3}
+  beanDustVFX: {fileID: 2360266565260114778, guid: 31f622aae2cc705498995e230515fa66,
+    type: 3}
+  leavesVFX: {fileID: 1878191255095618823, guid: 0b4404157bb51504983e74e25b22fe64,
+    type: 3}
+  shinyVFX: {fileID: 3283953264046258741, guid: 38791287571f0724a819662a8a97c9b3,
+    type: 3}
+  stonePiecesVFX: {fileID: 2360266565260114778, guid: 6575825fac1fd9344bea19ff9dada66d,
+    type: 3}
 --- !u!1 &131899253
 GameObject:
   m_ObjectHideFlags: 0

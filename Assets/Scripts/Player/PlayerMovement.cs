@@ -110,6 +110,7 @@ namespace Player
 
             if (!_wasGrounded && _isGrounded)
             {
+                // VFXManager.PlayDustVFX(transform.position);
                 if (_wasFalling)
                 {
                     TakeFallDamage();
@@ -326,12 +327,16 @@ namespace Player
 
         private void Jump()
         {
-            if (_canJump)
+             if (_canJump)
             {
                 _canJump = false;
                 _isJumping = true;
                 var newJumpForce = _isGrounded ? jumpForce - _newVelocity.y * .8f : jumpForce;
                 _newForce.Set(0.0f, newJumpForce);
+                if (_rb.velocity.y > 0 && !_isOnSlope)
+                {
+                    _rb.velocity = new Vector2(_rb.velocity.x, 0);
+                }
                 _rb.AddForce(_newForce, ForceMode2D.Impulse);
             }
         }

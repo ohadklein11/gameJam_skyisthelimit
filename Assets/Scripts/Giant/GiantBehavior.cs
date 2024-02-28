@@ -94,7 +94,8 @@ namespace Giant
             _crying = true;
 
             giantFightManager.EndGiantFight();
-        
+            _throwAtPlayerBehavior.enabled = false;
+
             yield return new WaitForSeconds(5f);
         }
 

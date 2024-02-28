@@ -34,10 +34,10 @@ public class StonesGenerator : MonoBehaviour
                 o.SetActive(true);
                 float spawnY = _camera.transform.position.y + _camera.orthographicSize +
                                throwable.GetComponent<MeshRenderer>().bounds.size.y;
-                float spawnYOffset= Random.Range(spawnY, spawnY+10);
+                float spawnYOffset= Random.Range(spawnY, spawnY);
 
                 float spawnX = _camera.transform.position.x + _camera.orthographicSize * _camera.aspect;
-                float spawnXOffset= Random.Range(spawnX+10, spawnX+15);
+                float spawnXOffset= Random.Range(spawnX, spawnX+4);
                 o.GetComponent<FallingStoneBehaviour>().Init(_throwablePool);
                 Vector3 playerPosition = _player.transform.position;
                 o.transform.position = new Vector3(spawnXOffset, spawnYOffset, playerPosition.z);

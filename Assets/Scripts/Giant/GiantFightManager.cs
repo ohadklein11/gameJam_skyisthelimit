@@ -75,6 +75,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         _pathFromGoose.gameObject.SetActive(true);
         _startEscapeTrigger.SetActive(true);
         _beansShooting.SetGunType(GunType.EggsGun);
+        _player.GetComponent<PlayerAnimation>().SwitchToGooseAnimation();
     }
     
     public void StartEscape()

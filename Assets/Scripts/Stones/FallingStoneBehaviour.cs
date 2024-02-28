@@ -56,20 +56,20 @@ public class FallingStoneBehaviour : MonoBehaviour
         bool destory = false;
         // if camera is 1.5 screens on the left of the Stone, destroy the Stone
         if (transform.position.x <
-            _mainCamera.transform.position.x - _mainCamera.orthographicSize * _mainCamera.aspect * 2.5f)
+            _mainCamera.transform.position.x - _mainCamera.orthographicSize * _mainCamera.aspect * 1.5f)
         {
             destory = true;
         }
 
         // if camera is 1.5 screens on the right of the Stone, destroy the Stone
         if (transform.position.x >
-            _mainCamera.transform.position.x + _mainCamera.orthographicSize * _mainCamera.aspect * 2.5f)
+            _mainCamera.transform.position.x + _mainCamera.orthographicSize * _mainCamera.aspect * 1.5f)
         {
             destory = true;
         }
 
         // if camera is 1.5 screens above the Stone, destroy the Stone
-        if (transform.position.y > _mainCamera.transform.position.y + _mainCamera.orthographicSize * 2.5f)
+        if (transform.position.y > _mainCamera.transform.position.y + _mainCamera.orthographicSize * 1.5f)
         {
             destory = true;
         }
