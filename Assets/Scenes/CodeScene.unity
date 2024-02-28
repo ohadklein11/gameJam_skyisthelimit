@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,7 +266,7 @@ MonoBehaviour:
   throwable: {fileID: 7567359212462748516, guid: 37a0601795ecc664cb9a5547f5d5c946,
     type: 3}
   timeToThrow: 2.2
-  velocityX: -20
+  velocityX: -10
   velocityY: -10
 --- !u!1001 &13439559
 PrefabInstance:
