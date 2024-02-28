@@ -34,7 +34,6 @@ public class BeansShooting : MonoBehaviour
     private GameObject _beanPrefab;
     private GameObject _eggPrefab;
     private Rigidbody2D _playerRb;
-
     public GunType _gunType;
     private Camera _mainCamera;
     private Rigidbody2D _rigidBody;
@@ -77,8 +76,11 @@ public class BeansShooting : MonoBehaviour
     void ShootBeans()
     {
         if (!canShoot)
+        {
+            _shootingForce = 0;
             return;
-        
+        }
+
         _shootingCooldownWait -= Time.deltaTime;
         if (Input.GetButtonDown("Fire1"))
         {
@@ -130,11 +132,9 @@ public class BeansShooting : MonoBehaviour
         {
             if (_shootingCooldownWait <= 0)
             {
+                GetComponent<PlayerAnimation>().PlayShootingGooseAnimation();
                 InstantiateBullet(_eggPrefab);
                 _shootingCooldownWait = eggShootingCooldown;
-            }
-            else
-            {
             }
         }
     }
