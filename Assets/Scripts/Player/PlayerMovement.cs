@@ -110,6 +110,7 @@ namespace Player
 
             if (!_wasGrounded && _isGrounded)
             {
+                // VFXManager.PlayDustVFX(transform.position);
                 if (_wasFalling)
                 {
                     TakeFallDamage();

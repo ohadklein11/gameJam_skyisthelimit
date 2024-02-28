@@ -14,6 +14,7 @@ namespace Utils
         [SerializeField] private ParticleSystem shinyVFX;
         [SerializeField] private ParticleSystem stonePiecesVFX;
     
+        private ObjectPool<ParticleSystem> _dustVFXs;
         private ObjectPool<ParticleSystem> _beanDustVFXs;
         
         private static VFXManager Instance { get; set; }
@@ -22,7 +23,13 @@ namespace Utils
         
         void Start()
         {
-            _beanDustVFXs = new ObjectPool<ParticleSystem>(() => Instantiate(beanDustVFX, transform, true),
+            _dustVFXs = InitObjectPool(dustVFX);
+            _beanDustVFXs = InitObjectPool(beanDustVFX);
+        }
+
+        private ObjectPool<ParticleSystem> InitObjectPool(ParticleSystem vfxPS)
+        {
+            return new ObjectPool<ParticleSystem>(() => Instantiate(vfxPS, transform, true),
                 (vfx) =>
                 {
                     vfx.gameObject.SetActive(true);
@@ -33,24 +40,24 @@ namespace Utils
                     vfx.gameObject.SetActive(false);
                 });
         }
+        
+        private IEnumerator VFXCoroutine(ObjectPool<ParticleSystem> pool, Vector3 position)
+        {
+            var vfx = pool.Get();
+            vfx.gameObject.transform.position = position;
+            yield return new WaitForSeconds(vfx.main.duration);
+            pool.Release(vfx);
+        }
 
         private void DustVFX(Vector3 position)
         {
-            dustVFX.transform.position = position;
-            dustVFX.Play();
+            StartCoroutine(VFXCoroutine(_dustVFXs, position));
+
         }
         
         private void BeanDustVFX(Vector3 position)
         {
-            StartCoroutine(BeanDustVFXCoroutine(position));
-        }
-
-        private IEnumerator BeanDustVFXCoroutine(Vector3 position)
-        {
-            var vfx = _beanDustVFXs.Get();
-            vfx.gameObject.transform.position = position;
-            yield return new WaitForSeconds(vfx.main.duration + 2f);
-            _beanDustVFXs.Release(vfx);
+            StartCoroutine(VFXCoroutine(_beanDustVFXs, position));
         }
 
         private void LeavesVFX(Vector3 position)
