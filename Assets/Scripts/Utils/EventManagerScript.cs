@@ -10,6 +10,8 @@ public class EventManagerScript : Singleton<EventManagerScript>
 	public const string GiantAttitude = "GiantAttitude";
 	public const string PlayerGotHit = "PlayerGotHit";
 	public const string HealthRecovery = "HealthRecovery";
+	public const string PlayerWin = "PlayerWin";
+
 
 
 	protected EventManagerScript()

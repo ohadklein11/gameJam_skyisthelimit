@@ -30,9 +30,9 @@ public class PlayerAnimation : MonoBehaviour
         if ((Mathf.Abs(_rb.velocity.x) >= 0.1f)!= _animator.GetBool("isMoving")){
             _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.x) >= 0.1f));
         }
-        if ((_beansShooting._gunType == GunType.BeansGun)!= _animator.GetBool("beans")) {
-            _animator.SetBool("beans", (_beansShooting._gunType == GunType.BeansGun));
-        }
+        // if ((_beansShooting._gunType == GunType.BeansGun)!= _animator.GetBool("beans")) {
+        //     _animator.SetBool("beans", (_beansShooting._gunType == GunType.BeansGun));
+        // }
         if(_beansShooting.isLoading != _animator.GetBool("isLoading")) {
             _animator.SetBool("isLoading", _beansShooting.isLoading);
         }
