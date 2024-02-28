@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ee3a3546f9dc41a4f9e184d3d9f470fb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - dustVFX: {fileID: 3030171427042367463, guid: 7e80f7955c09c444db2cf7f965cd2816,
+      type: 3}
+  - beanDustVFX: {fileID: 2192770369436959653, guid: 25b0f1920972b2d4fb3748e9d2c7f6e0,
+      type: 3}
+  - leavesVFX: {fileID: 1878191255095618823, guid: 0b4404157bb51504983e74e25b22fe64,
+      type: 3}
+  - shinyVFX: {fileID: 3283953264046258741, guid: 38791287571f0724a819662a8a97c9b3,
+      type: 3}
+  - stonePiecesVFX: {fileID: 2360266565260114778, guid: 6575825fac1fd9344bea19ff9dada66d,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
