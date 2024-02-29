@@ -28,7 +28,7 @@ namespace Utils
         
         private void PlayerGotHit(object damage)
         {
-            _curPlayerLifePoints -= (int)damage;
+            _curPlayerLifePoints = Math.Max(_curPlayerLifePoints-(int)damage,0);
             Debug.Log("player took " + damage + " damage, " + _curPlayerLifePoints + " life points left");
 
             if (_curPlayerLifePoints <= 0)
