@@ -37,13 +37,17 @@ public class PlayerAnimation : MonoBehaviour
             _animator.SetBool("isJumping", _playerMovement.jumping);
         } 
     }
-    public void PlayShootingGooseAnimation()
+    /**
+     shootingType: 0 for bean shooting, 1 for egg shooting
+     */
+    public void PlayShootingAnimation(int shootingType)
     {
+        string animationName = shootingType == 0 ? "Bean" : "Egg";
         if ((Mathf.Abs(_rb.velocity.x) >= 0.1f))
-            _animator.Play("runEggShoot");
+            _animator.Play("run"+animationName+"Shoot");
         else
         {
-            _animator.Play("IdleEggShoot");
+            _animator.Play("Idle"+animationName+"Shoot");
         }
     }
 

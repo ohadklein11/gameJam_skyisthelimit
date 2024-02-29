@@ -103,6 +103,7 @@ public class BeansShooting : MonoBehaviour
         {
             if (_shootingCooldownWait<=0)
             {
+                GetComponent<PlayerAnimation>().PlayShootingAnimation(0);
                 InstantiateBullet(_beanPrefab);
                 _shootingCooldownWait = beanShootingCooldown;
                 _shootingForce = 0;
@@ -132,7 +133,7 @@ public class BeansShooting : MonoBehaviour
         {
             if (_shootingCooldownWait <= 0)
             {
-                GetComponent<PlayerAnimation>().PlayShootingGooseAnimation();
+                GetComponent<PlayerAnimation>().PlayShootingAnimation(1);
                 InstantiateBullet(_eggPrefab);
                 _shootingCooldownWait = eggShootingCooldown;
             }
