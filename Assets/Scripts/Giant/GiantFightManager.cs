@@ -19,6 +19,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private GameObject _startEscapeTrigger;
     [SerializeField] private SpriteRenderer _giantSpriteRenderer;
     [SerializeField] private BeansShooting _beansShooting;
+    [SerializeField] private GameObject _blockExit;
 
 
     private void Update()
@@ -36,9 +37,9 @@ public class GiantFightManager : Singleton<MonoBehaviour>
 
     private void OpenDoor()
     {
-
         iTween.RotateTo(_doorPivot.gameObject, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
         _doorCollider.enabled = false;
+        _blockExit.SetActive(!_blockExit.activeSelf);
     }
     
     private void CloseDoor()
