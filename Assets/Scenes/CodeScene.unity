@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1637,6 +1637,7 @@ MonoBehaviour:
   highJumpGravity: 0.75
   jumpGravity: 1.5
   fallGravity: 2.5
+  minFallHeightForDust: 0.8
 --- !u!70 &48291948
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -81394,6 +81395,7 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 129073819}
+  - {fileID: 48291942}
   - {fileID: 1231257956}
   - {fileID: 867887620}
   - {fileID: 1945351338}
@@ -81407,7 +81409,6 @@ SceneRoots:
   - {fileID: 1250573362}
   - {fileID: 2017489305}
   - {fileID: 1316376514}
-  - {fileID: 48291942}
   - {fileID: 1491269965}
   - {fileID: 682579202}
   - {fileID: 492797993}

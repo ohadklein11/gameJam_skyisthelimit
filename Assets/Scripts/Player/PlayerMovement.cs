@@ -47,7 +47,7 @@ namespace Player
         private bool _isClimbing;
         private bool _isEnteringClimbing;
         private bool _wasFalling;
-        private bool _wasGrounded;
+        private bool _wasGrounded = true;
         private int _numFramesSinceEnteringClimbing;
         private IClimbable _climbable;
 
@@ -72,7 +72,8 @@ namespace Player
         public bool grounded => _isGrounded;
 
         public bool jumping => _isJumping;
-
+        [SerializeField] private float minFallHeightForDust = .8f;
+        private float _fallingFirstHeight;
 
         private void Start()
         {
@@ -101,6 +102,7 @@ namespace Player
         {
             if (!_wasFalling && IsFalling)
             {
+                _fallingFirstHeight = transform.position.y;
                 _fallingMaxHeight = transform.position.y;
             }
             else if (IsFalling && transform.position.y > _fallingMaxHeight)
@@ -110,8 +112,11 @@ namespace Player
 
             if (!_wasGrounded && _isGrounded)
             {
-                var position = transform.position;
-                VFXManager.PlayDustVFX(new Vector3(position.x, position.y - _spriteRenderer.bounds.size.y, position.z));
+                if (_fallingFirstHeight - transform.position.y >= minFallHeightForDust)
+                {
+                    var position = transform.position;
+                    VFXManager.PlayDustVFX(new Vector3(position.x, position.y - _spriteRenderer.bounds.size.y + .1f, position.z));
+                }
                 if (_wasFalling)
                 {
                     TakeFallDamage();
