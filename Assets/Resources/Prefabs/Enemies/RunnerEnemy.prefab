@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2192640947593667269}
   - component: {fileID: 1512028308466641654}
   - component: {fileID: 177500017981711938}
+  - component: {fileID: -2842220672170062089}
   - component: {fileID: 4105769800206716913}
   - component: {fileID: 902334812458458439}
   - component: {fileID: 4748916684504413146}
@@ -68,6 +69,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewDistance: 5
   chaseSpeed: 5
+--- !u!114 &-2842220672170062089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2842438761846239210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6ebb283c9a4e7bb5cf1d7db0938d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slopeCheckDistance: 0.6
+  maxSlopeAngle: 40
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  fullFriction: {fileID: 6200000, guid: fafd4a3d7955c2f4f913bd7db1e32678, type: 2}
+  noFriction: {fileID: 6200000, guid: a4bdca4b67f40e44b92cd2769f40204e, type: 2}
 --- !u!212 &4105769800206716913
 SpriteRenderer:
   m_ObjectHideFlags: 0

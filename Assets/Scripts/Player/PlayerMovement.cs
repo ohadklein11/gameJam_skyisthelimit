@@ -17,31 +17,23 @@ namespace Player
 
         [SerializeField] private float groundCheckRadius;
         [SerializeField] private float jumpForce;
-        [SerializeField] private float slopeCheckDistance;
-        [SerializeField] private float maxSlopeAngle;
         [SerializeField] private Transform groundCheck;
         [SerializeField] private LayerMask whatIsGround;
         [SerializeField] private LayerMask whatIsVine;
-        [SerializeField] private PhysicsMaterial2D noFriction;
-        [SerializeField] private PhysicsMaterial2D fullFriction;
         [SerializeField] private float climbSpeed;
         [SerializeField] private int minNumFramesForClimbing;
         [SerializeField] private Transform loadingBar;
 
         private float _xInput;
         private float _yInput;
-        private float _slopeDownAngle;
-        private float _slopeSideAngle;
-        private float _lastSlopeAngle;
         private float _playerXradius;
         private float _fallingMaxHeight;
 
         private int _facingDirection = 1;
 
+        private SlopeChecker _slopeChecker;
         private bool _isGrounded;
-        private bool _isOnSlope;
         private bool _isJumping;
-        private bool _canWalkOnSlope;
         private bool _canJump;
         private bool _canClimb;
         private bool _isClimbing;
@@ -57,9 +49,7 @@ namespace Player
 
         private Vector2 _newVelocity;
         private Vector2 _newForce;
-
-        private Vector2 _slopeNormalPerp;
-
+        
         private Rigidbody2D _rb;
         private SpriteRenderer _spriteRenderer;
         private float _velocityMultiplier = 1f;
@@ -79,6 +69,7 @@ namespace Player
         {
             _rb = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            _slopeChecker = GetComponent<SlopeChecker>();
             _playerXradius = _spriteRenderer.bounds.extents.x;
             _timeMultiplier = 0;
         }
@@ -102,8 +93,9 @@ namespace Player
         {
             if (!_wasFalling && IsFalling)
             {
-                _fallingFirstHeight = transform.position.y;
-                _fallingMaxHeight = transform.position.y;
+                var position = transform.position;
+                _fallingFirstHeight = position.y;
+                _fallingMaxHeight = position.y;
             }
             else if (IsFalling && transform.position.y > _fallingMaxHeight)
             {
@@ -224,7 +216,7 @@ namespace Player
                 _isJumping = false;
             }
 
-            if (!_isJumping && (_isClimbing || (_isGrounded && _slopeDownAngle <= maxSlopeAngle)))
+            if (!_isJumping && (_isClimbing || (_isGrounded && _slopeChecker.GetSlopeDownAngle() <= _slopeChecker.GetMaxSlopeAngle())))
             {
                 _canJump = true;
             }
@@ -234,75 +226,7 @@ namespace Player
         {
             Bounds spriteBounds = _spriteRenderer.bounds;
             Vector2 checkPos = transform.position - new Vector3(0, (spriteBounds.max.y - spriteBounds.min.y) / 2, 0);
-            // Debug.Log((spriteBounds.max.y - spriteBounds.min.y) / 2);
-
-            SlopeCheckHorizontal(checkPos);
-            SlopeCheckVertical(checkPos);
-        }
-
-        private void SlopeCheckHorizontal(Vector2 checkPos)
-        {
-            RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
-            RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
-
-            if (slopeHitFront)
-            {
-                _isOnSlope = true;
-
-                _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
-            }
-            else if (slopeHitBack)
-            {
-                _isOnSlope = true;
-
-                _slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
-            }
-            else
-            {
-                _slopeSideAngle = 0.0f;
-                _isOnSlope = false;
-            }
-        }
-
-        private void SlopeCheckVertical(Vector2 checkPos)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
-            Debug.DrawRay(checkPos, Vector2.down, Color.red);
-
-            if (hit)
-            {
-                _slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
-
-                _slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
-
-                if (_slopeDownAngle != _lastSlopeAngle)
-                {
-                    _isOnSlope = true;
-                }
-
-                _lastSlopeAngle = _slopeDownAngle;
-
-                Debug.DrawRay(hit.point, _slopeNormalPerp, Color.blue);
-                Debug.DrawRay(hit.point, hit.normal, Color.green);
-            }
-
-            if (_slopeDownAngle > maxSlopeAngle || _slopeSideAngle > maxSlopeAngle)
-            {
-                _canWalkOnSlope = false;
-            }
-            else
-            {
-                _canWalkOnSlope = true;
-            }
-
-            if (_isOnSlope && _canWalkOnSlope && _xInput == 0.0f)
-            {
-                _rb.sharedMaterial = fullFriction;
-            }
-            else
-            {
-                _rb.sharedMaterial = noFriction;
-            }
+            _slopeChecker.SlopeCheck(checkPos, _facingDirection, _xInput);
         }
 
         private void CheckClimb()
@@ -342,7 +266,7 @@ namespace Player
                 var velocity = _rb.velocity;
                 if (velocity.y > 0)
                 { 
-                    _rb.velocity = new Vector2(velocity.x, _isOnSlope? Mathf.Min(.3f, velocity.y) : 0);
+                    _rb.velocity = new Vector2(velocity.x, _slopeChecker.IsOnSlope()? Mathf.Min(.3f, velocity.y) : 0);
                 }
                 _rb.AddForce(_newForce, ForceMode2D.Impulse);
             }
@@ -367,15 +291,15 @@ namespace Player
             }
 
             _velocityMultiplier *= _timeMultiplier;
-            if (_isGrounded && !_isOnSlope && !_isJumping) //if not on slope
+            if (_isGrounded && !_slopeChecker.IsOnSlope() && !_isJumping) //if not on slope
             {
                 _newVelocity.Set(movementSpeed * _velocityMultiplier, 0.0f);
                 _rb.velocity = _newVelocity;
             }
-            else if (_isGrounded && _isOnSlope && _canWalkOnSlope && !_isJumping) //If on slope
+            else if (_isGrounded && _slopeChecker.IsOnSlope() && _slopeChecker.CanWalkOnSlope() && !_isJumping) //If on slope
             {
-                _newVelocity.Set(movementSpeed * _slopeNormalPerp.x * -_velocityMultiplier,
-                    movementSpeed * _slopeNormalPerp.y * -_velocityMultiplier);
+                _newVelocity.Set(movementSpeed * _slopeChecker.GetSlopeNormalPerp().x * -_velocityMultiplier,
+                    movementSpeed * _slopeChecker.GetSlopeNormalPerp().y * -_velocityMultiplier);
                 _rb.velocity = _newVelocity;
             }
             else if (!_isGrounded && !_isClimbing) //If in air

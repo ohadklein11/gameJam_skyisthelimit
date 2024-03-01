@@ -1,18 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
+using Utils;
 
 public class EnemyMovement : MonoBehaviour
 {
 
     [SerializeField] private float _speed = 2f;
-
+    private Vector2 _slopeNormalPerp;
 
     private bool _canMove = true;
     private float _originalSpeed;
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
+    private SlopeChecker _slopeChecker;
     private int _direction = 1;
     private Vector3 _positionBefore1Frame;
     private Vector3 _positionBefore2Frames;
@@ -33,6 +36,14 @@ public class EnemyMovement : MonoBehaviour
         _positionBefore2Frames = transform.position;
         _originalSpeed = _speed;
         _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _slopeChecker = GetComponent<SlopeChecker>();
+    }
+
+    private bool CheckUnwalkableSlopeInFront()
+    {
+        var bounds = _spriteRenderer.bounds;
+        var checkPos = transform.position + new Vector3(_direction * (bounds.max.x - bounds.min.x) / 2, - (bounds.max.y - bounds.min.y) / 4);
+        return _slopeChecker.CheckUnwalkableSlopeInFront(checkPos, _direction);
     }
 
     private void Update()
@@ -77,16 +88,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void MoveHorizontal()
     {
-        // raycast to check if there is ground in front of the enemy
-        var bounds = _spriteRenderer.bounds;
-        var raycastOrigin =
-            transform.position + new Vector3(_direction * bounds.size.x / 2, -bounds.size.y / 2 - .1f, 0);
-        var hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .6f, LayerMask.GetMask("Ground"));
-        Debug.DrawRay(raycastOrigin, Vector3.down * .6f, Color.red);
-        if (hit.collider == null)
-        {
-            TurnAround();
-        }
         _rb.velocity = new Vector2(_speed * _direction, _rb.velocity.y);
     }
 
@@ -94,7 +95,28 @@ public class EnemyMovement : MonoBehaviour
     {
         if (_isVertical)
             return false;
-        return Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f;
+        if (Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f)  // can't move
+        {
+            return true;
+        }
+        // check if not walking on slope
+        if (CheckUnwalkableSlopeInFront())
+        {
+            return true;
+        }
+        
+        // check if can move forward
+        var bounds = _spriteRenderer.bounds;
+        var raycastOrigin =
+            transform.position + new Vector3(_direction * bounds.size.x / 2, -bounds.size.y / 2 - .1f, 0);
+        var hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .6f, LayerMask.GetMask("Ground"));
+        Debug.DrawRay(raycastOrigin, Vector3.down * .6f, Color.red);
+        if (hit.collider == null)
+        {
+            return true;
+        }
+
+        return false;
     }
 
 
