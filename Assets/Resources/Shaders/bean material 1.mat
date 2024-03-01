@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: bean material
+  m_Name: bean material 1
   m_Shader: {fileID: -6465566751694194690, guid: 7493a0daee7cf1b42ae6edf205a4a882,
     type: 3}
   m_Parent: {fileID: 0}
@@ -40,7 +40,10 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    m_Colors:
+    - _light: {r: 0.6901961, g: 0.7372549, b: 0.20392157, a: 0}
+    - _shadow: {r: 0.48745984, g: 0.5169811, b: 0.18240654, a: 0}
+    - _sunlight: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6300759217330866904
 MonoBehaviour:
