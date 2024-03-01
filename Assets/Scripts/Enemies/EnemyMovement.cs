@@ -9,7 +9,6 @@ public class EnemyMovement : MonoBehaviour
 {
 
     [SerializeField] private float _speed = 2f;
-    private Vector2 _slopeNormalPerp;
 
     private bool _canMove = true;
     private float _originalSpeed;
@@ -93,7 +92,7 @@ public class EnemyMovement : MonoBehaviour
 
     private bool NeedsToTurnAround()
     {
-        if (_isVertical)
+        if (_isVertical || !_canMove || !Grounded)
             return false;
         if (Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f)  // can't move
         {
