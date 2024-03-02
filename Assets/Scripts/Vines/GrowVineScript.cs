@@ -19,6 +19,7 @@ public class GrowVineScript : MonoBehaviour
     [SerializeField] private int regularStemCount;
     private bool _hitCeiling = false;
     private bool _growing;
+    public bool growing => _growing;
     private const float Epsilon = .05f;
     
 

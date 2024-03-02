@@ -49,7 +49,6 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
         // if player falls below last ground point, kill player
         if (_lastGroundPoint.y - player.transform.position.y > teleportDistance)
         {
-            Debug.Log("Player fell too far");
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerGotHit,fallingDamage);
             player.transform.position = _lastGroundPoint;

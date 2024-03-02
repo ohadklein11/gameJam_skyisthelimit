@@ -2,6 +2,7 @@ using System.Collections;
 using Giant;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utils;
 
 public class GiantFightManager : Singleton<MonoBehaviour>
 {
@@ -60,6 +61,8 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         _giantSpriteRenderer.color = Color.green;  // temp
         _pathToGoose.gameObject.SetActive(true);
         _beansShooting.canShoot = false;
+        GameData.Instance.EndGiantFight();
+        
     }
 
     public void OpenGiantDoors()

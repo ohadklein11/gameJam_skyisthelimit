@@ -40,6 +40,7 @@ namespace Player
         private bool _isEnteringClimbing;
         private bool _wasFalling;
         private bool _wasGrounded = true;
+        private bool _firstClimbWithGrowingVine;
         private int _numFramesSinceEnteringClimbing;
         private IClimbable _climbable;
 
@@ -143,11 +144,11 @@ namespace Player
                 Flip();
             }
 
-            // if (Input.GetButtonDown("Jump") && _yInput > 0 && _isClimbing)
-            // {
-            //     // _yInput = 0;
-            //     _isClimbing = false;
-            // }
+            if (Input.GetButtonDown("Jump") && _yInput > 0 && _isClimbing)
+            {
+                _yInput = 0;
+                // _isClimbing = false;
+            }
             else
                 HandleClimbing();
             if (Input.GetButtonDown("Jump"))
@@ -171,7 +172,14 @@ namespace Player
                 try
                 {
                     var xPosition = _climbable.GetXPosition();
-                    var yMaxPosition = _climbable.GetHeadYPosition()-_spriteRenderer.bounds.extents.y;
+                    var yTopPosition = _climbable.GetHeadYPosition() - _spriteRenderer.bounds.extents.y;
+                    var yMaxPosition = _climbable.IsGrowing()?Mathf.Infinity:yTopPosition;
+                    Debug.Log("position.y: "+position.y+" yTopPosition: "+yTopPosition +"_firstClimbWithGrowingVine: "+_firstClimbWithGrowingVine);
+                    if (position.y > yTopPosition && _firstClimbWithGrowingVine)
+                        yMaxPosition = position.y;
+                    else
+                        _firstClimbWithGrowingVine = false;
+
                     position = new Vector3(xPosition, Math.Min(position.y,yMaxPosition), position.z); 
                     transform.position = position;
                     // prevent climbing up when reaching end of vine
@@ -249,6 +257,9 @@ namespace Player
             {
                 var climbable = climbableLeft ?? climbableRight;
                 _canClimb = true;
+                if (_climbable != climbable)
+                    _firstClimbWithGrowingVine = climbable.IsGrowing();
+
                 _climbable = climbable;
             }
             else
