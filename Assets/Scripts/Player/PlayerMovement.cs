@@ -143,8 +143,13 @@ namespace Player
                 Flip();
             }
 
-            HandleClimbing();
-
+            // if (Input.GetButtonDown("Jump") && _yInput > 0 && _isClimbing)
+            // {
+            //     // _yInput = 0;
+            //     _isClimbing = false;
+            // }
+            else
+                HandleClimbing();
             if (Input.GetButtonDown("Jump"))
             {
                 Jump();
@@ -170,7 +175,7 @@ namespace Player
                     position = new Vector3(xPosition, Math.Min(position.y,yMaxPosition), position.z); 
                     transform.position = position;
                     // prevent climbing up when reaching end of vine
-                    if (_yInput > 0 && !Input.GetButton("Jump"))
+                    if (_yInput > 0)
                     {
                         float playerHalfHeight = _spriteRenderer.bounds.size.y / 2;
                         RaycastHit2D vineHitUp = Physics2D.Raycast(
@@ -260,6 +265,12 @@ namespace Player
                 _canJump = false;
                 _isJumping = true;
                 var newJumpForce = _isGrounded ? jumpForce - _newVelocity.y * .8f : jumpForce;
+                if (_yInput < 0)
+                {
+                    _yInput = 0;
+                    newJumpForce = -newJumpForce;
+                }
+
                 _newForce.Set(0.0f, newJumpForce);
                 var velocity = _rb.velocity;
                 if (velocity.y > 0)

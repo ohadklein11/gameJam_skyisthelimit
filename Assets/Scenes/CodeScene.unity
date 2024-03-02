@@ -3825,7 +3825,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 48291940}
-  killTime: 1
+  fallingDamage: 5
+  teleportDistance: 5
 --- !u!114 &129073821
 MonoBehaviour:
   m_ObjectHideFlags: 0

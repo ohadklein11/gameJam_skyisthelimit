@@ -13,7 +13,7 @@ namespace Utils
         public int maxPlayerLifePoints = 100;
         public int GetPlayerHealth() => _curPlayerLifePoints;
         public void RestartPlayerHealth() => _curPlayerLifePoints = maxPlayerLifePoints;
-
+        public bool isGiantFightOver=false;
 
         private void Awake()
         {
@@ -51,6 +51,7 @@ namespace Utils
         public void EndGiantFight()
         {
             IsGiantFight = false;
+            isGiantFightOver = true;
         }
 
         private void OnRestart()
