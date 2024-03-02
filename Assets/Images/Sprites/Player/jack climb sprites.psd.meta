@@ -127,11 +127,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1398
-        width: 650
-        height: 650
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 1368
+        width: 680
+        height: 680
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,12 +147,12 @@ TextureImporter:
       name: jack climb sprites_1
       rect:
         serializedVersion: 2
-        x: 650
-        y: 1398
-        width: 650
-        height: 650
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 680
+        y: 1368
+        width: 680
+        height: 680
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: jack climb sprites_2
       rect:
         serializedVersion: 2
-        x: 1300
-        y: 1398
-        width: 650
-        height: 650
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1362
+        y: 1366
+        width: 680
+        height: 680
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,48 +181,6 @@ TextureImporter:
       bones: []
       spriteID: 0b87f3f8e2dbad64dbef8681b9c7acfe
       internalID: 422956196
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack climb sprites_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 748
-        width: 650
-        height: 650
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b3afa32d29aa03c4c95463d35e59483b
-      internalID: 572102260
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jack climb sprites_4
-      rect:
-        serializedVersion: 2
-        x: 1300
-        y: 748
-        width: 650
-        height: 650
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a7723eb26772124cb744e698799e3de
-      internalID: 252630744
       vertices: []
       indices: 
       edges: []
@@ -241,8 +199,6 @@ TextureImporter:
       jack climb sprites_0: 1755912396
       jack climb sprites_1: -655062036
       jack climb sprites_2: 422956196
-      jack climb sprites_3: 572102260
-      jack climb sprites_4: 252630744
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
