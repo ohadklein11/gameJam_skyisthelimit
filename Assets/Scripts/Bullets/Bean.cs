@@ -54,7 +54,7 @@ public class Bean : MonoBehaviour
     //
     // }
 
-    void Update()
+    void FixedUpdate()
     {
         CheckGrounded();
         CheckSpeed();
@@ -124,7 +124,7 @@ public class Bean : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Ground"))
         {
             Destroy(gameObject);
         }

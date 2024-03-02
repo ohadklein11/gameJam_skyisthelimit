@@ -9,6 +9,7 @@ public class PlayerAnimation : MonoBehaviour
     private Rigidbody2D _rb;
     private PlayerMovement _playerMovement;
     private BeansShooting _beansShooting;
+    private bool _isShootingBeans;
 
     
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class PlayerAnimation : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
         _beansShooting = GetComponent<BeansShooting>();
         _animator.SetBool("beans", true);
+        _isShootingBeans= true;
     }
 
     // Update is called once per frame
@@ -29,6 +31,9 @@ public class PlayerAnimation : MonoBehaviour
         }
         if ((Mathf.Abs(_rb.velocity.x) >= 0.1f)!= _animator.GetBool("isMoving")){
             _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.x) >= 0.1f));
+        }
+        if ((Mathf.Abs(_rb.velocity.y) >= 0.1f)!= _animator.GetBool("isMovingVertically")){
+            _animator.SetBool("isMovingVertically", (Mathf.Abs(_rb.velocity.y) >= 0.1f));
         }
         if(_beansShooting.isLoading != _animator.GetBool("isLoading")) {
             _animator.SetBool("isLoading", _beansShooting.isLoading);
@@ -45,9 +50,14 @@ public class PlayerAnimation : MonoBehaviour
         string animationName = shootingType == 0 ? "Bean" : "Egg";
         if ((Mathf.Abs(_rb.velocity.x) >= 0.1f))
             _animator.Play("run"+animationName+"Shoot");
+        else if(_playerMovement.climbing)
+        {
+            _animator.Play("climb"+animationName+"Shoot");
+        }
         else
         {
             _animator.Play("Idle"+animationName+"Shoot");
+
         }
     }
 
@@ -59,6 +69,7 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool("isMoving", false);
         _animator.SetBool("isLoading", false);
         _animator.SetBool("isJumping", false); 
+        _isShootingBeans = false;
         _animator.Play("IdleEgg");
     }
 }

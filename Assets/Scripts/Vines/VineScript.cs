@@ -9,6 +9,11 @@ namespace Vines
             return transform.position.x;
         }
         
+        public float GetHeadYPosition()
+        {
+            return transform.position.x;
+        }
+        
         public Transform GetParentTransform()
         {
             return transform.parent.transform;

@@ -166,6 +166,7 @@ namespace Player
                 try
                 {
                     var xPosition = _climbable.GetXPosition();
+                    
                     position = new Vector3(xPosition, position.y, position.z);
                     transform.position = position;
                     // prevent climbing up when reaching end of vine
@@ -231,20 +232,17 @@ namespace Player
 
         private void CheckClimb()
         {
-            // RaycastHit2D vineHit = Physics2D.Raycast(
-            //     new Vector2(transform.position.x - _playerXradius * _facingDirection, transform.position.y), 
-            //     Vector2.right * _facingDirection, 2*_playerXradius, whatIsVine);
             RaycastHit2D vineHitLeft = Physics2D.Raycast(
                 new Vector2(transform.position.x, transform.position.y),
                 Vector2.right * _facingDirection, _playerXradius, whatIsVine);
             RaycastHit2D vineHitRight = Physics2D.Raycast(
                 new Vector2(transform.position.x, transform.position.y),
                 Vector2.left * _facingDirection, _playerXradius, whatIsVine);
-            IClimbable climbable1 = null, climbable2 = null;
-            if ((vineHitLeft.collider != null && vineHitLeft.collider.TryGetComponent(out climbable1)) ||
-                (vineHitRight.collider != null && vineHitRight.collider.TryGetComponent(out climbable2)))
+            IClimbable climbableLeft = null, climbableRight = null;
+            if ((vineHitLeft.collider != null && vineHitLeft.collider.TryGetComponent(out climbableLeft)) ||
+                (vineHitRight.collider != null && vineHitRight.collider.TryGetComponent(out climbableRight)))
             {
-                var climbable = climbable1 ?? climbable2;
+                var climbable = climbableLeft ?? climbableRight;
                 _canClimb = true;
                 _climbable = climbable;
             }
