@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
@@ -15,10 +13,13 @@ public class StartScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void StartButton()
+    public void Update()
     {
-        GameData.isGameStopped = false;
-        startPanel.SetActive(false);
-        Time.timeScale = 1f;
+        if (Input.anyKey && GameData.isGameStopped)
+        {
+            GameData.isGameStopped = false;
+            startPanel.SetActive(false);
+            Time.timeScale = 1f;
+        }
     }
 }

@@ -11,7 +11,8 @@ namespace Vines
         
         public float GetHeadYPosition()
         {
-            return transform.position.x;
+            Transform firstStem = transform.parent.GetChild(0).transform;
+            return firstStem.position.y + firstStem.GetComponent<Collider2D>().bounds.extents.y;
         }
         
         public Transform GetParentTransform()

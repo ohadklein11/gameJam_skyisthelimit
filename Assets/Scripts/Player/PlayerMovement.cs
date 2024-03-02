@@ -166,16 +166,16 @@ namespace Player
                 try
                 {
                     var xPosition = _climbable.GetXPosition();
-                    
-                    position = new Vector3(xPosition, position.y, position.z);
+                    var yMaxPosition = _climbable.GetHeadYPosition()-_spriteRenderer.bounds.extents.y;
+                    position = new Vector3(xPosition, Math.Min(position.y,yMaxPosition), position.z); 
                     transform.position = position;
                     // prevent climbing up when reaching end of vine
                     if (_yInput > 0 && !Input.GetButton("Jump"))
                     {
                         float playerHalfHeight = _spriteRenderer.bounds.size.y / 2;
                         RaycastHit2D vineHitUp = Physics2D.Raycast(
-                            new Vector2(transform.position.x, transform.position.y + playerHalfHeight + 0.1f),
-                            Vector2.up, .1f, whatIsVine);
+                            new Vector2(transform.position.x, transform.position.y + playerHalfHeight),
+                            Vector2.up, .01f, whatIsVine);
                         if (!vineHitUp)
                         {
                             _yInput = 0;
