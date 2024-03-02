@@ -12,7 +12,8 @@ public class ClimberBehavior : MonoBehaviour
     [SerializeField] private float _stonePushHeight;
     [SerializeField] private float _appearDuration;
     [SerializeField] private float _movementSpeed;
-
+    [SerializeField] private float _forcedTurnAroundCooldown = 3f;
+    private float _forcedTurnAroundCooldownTimer = 0f;
     
     [SerializeField] private Material StoneMaterialTransparent;
     
@@ -93,8 +94,15 @@ public class ClimberBehavior : MonoBehaviour
             if (!_isClimbing)
             {
                 var targetX = _targetVine != null ? _targetVine.position.x : _player.transform.position.x;  
-                _shouldFacePlayer = Mathf.Abs(targetX - _body.transform.position.x) > 3f; // will go towards vine even if player is not climbing
-
+                if (_forcedTurnAroundCooldownTimer > 0)
+                {
+                    _shouldFacePlayer = false;
+                }
+                else
+                {
+                    _shouldFacePlayer = Mathf.Abs(targetX - _body.transform.position.x) > 3f; // will go towards vine even if player is not climbingZ
+                }
+                
                 if (Mathf.Abs(targetX - _body.transform.position.x) < .3f)
                 {
                     _isClimbing = true;
@@ -104,6 +112,15 @@ public class ClimberBehavior : MonoBehaviour
                     _body.transform.position = position;
                     _enemyMovement.StartClimbing();
                 }
+            }
+            
+            if (_forcedTurnAroundCooldownTimer > 0)
+            {
+                _forcedTurnAroundCooldownTimer -= Time.deltaTime;
+            }
+            else if (_enemyMovement.ForcedTurnAround())
+            {
+                _forcedTurnAroundCooldownTimer = _forcedTurnAroundCooldown;
             }
         }
 

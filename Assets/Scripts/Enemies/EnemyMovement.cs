@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
     private float _originalGravityScale;
     
     private Transform _player;
-    
+
     public bool Grounded { get; set; }
 
     private void Awake()
@@ -43,6 +43,15 @@ public class EnemyMovement : MonoBehaviour
         var bounds = _spriteRenderer.bounds;
         var checkPos = transform.position + new Vector3(_direction * (bounds.max.x - bounds.min.x) / 2, - (bounds.max.y - bounds.min.y) / 4);
         return _slopeChecker.CheckUnwalkableSlopeInFront(checkPos, _direction);
+    }
+    
+    private bool CheckAnotherEnemyInFront()
+    {
+        var bounds = _spriteRenderer.bounds;
+        var transform1 = transform;
+        var checkPos = transform1.position + new Vector3(_direction * ((bounds.max.x - bounds.min.x) / 2 + .1f), 0);
+        var hit = Physics2D.Raycast(checkPos, transform1.right * _direction, 0.5f, LayerMask.GetMask("Enemy"));
+        return hit.collider != null && hit.collider.gameObject != gameObject;
     }
 
     private void Update()
@@ -94,12 +103,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (_isVertical || !_canMove || !Grounded)
             return false;
-        if (Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f)  // can't move
-        {
-            return true;
-        }
-        // check if not walking on slope
-        if (CheckUnwalkableSlopeInFront())
+        if (ForcedTurnAround())  // can't move
         {
             return true;
         }
@@ -118,6 +122,10 @@ public class EnemyMovement : MonoBehaviour
         return false;
     }
 
+    public bool ForcedTurnAround()
+    {
+        return Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f || CheckUnwalkableSlopeInFront() || CheckAnotherEnemyInFront();
+    }
 
     private void TurnAround()
     {
