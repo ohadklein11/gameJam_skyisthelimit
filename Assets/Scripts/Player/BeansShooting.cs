@@ -77,6 +77,7 @@ public class BeansShooting : MonoBehaviour
     {
         if (!canShoot)
         {
+            _shootingCooldownWait = 0;
             _shootingForce = 0;
             return;
         }
