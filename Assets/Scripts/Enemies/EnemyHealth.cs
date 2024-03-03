@@ -11,8 +11,12 @@ namespace Enemies
         private int _currentHealth;
 
         private EnemyMovement _enemyMovement;
-        private SpriteRenderer _spriteRenderer;
         
+        private SpriteRenderer _spriteRenderer;
+        private Animator _animator;
+        private static readonly int AnimHit = Animator.StringToHash("Hit");
+        private static readonly int AnimDead = Animator.StringToHash("Dead");
+
         public bool CanTakeDamage { get; set; } = true;
 
         public bool IsDead => _currentHealth <= 0;
@@ -22,35 +26,37 @@ namespace Enemies
             _enemyMovement = GetComponent<EnemyMovement>();
             _currentHealth = _maxHealth;
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
         }
 
         public void TakeDamage(int damage)
         {
             _currentHealth -= damage;
-            StartCoroutine(ColorChange());
             if (_currentHealth <= 0)
             {
                 StartCoroutine(Die());
             }
+            else
+            {
+                StartCoroutine(TakeDamageCoroutine());
+            }
         }
 
-        private IEnumerator ColorChange()
+        private IEnumerator TakeDamageCoroutine()
         {
-            var originalColor = _spriteRenderer.color;
-            _spriteRenderer.DOColor(Color.green, .1f);
-            yield return new WaitForSeconds(.1f);
-            _spriteRenderer.DOColor(originalColor, .1f);
+            _enemyMovement.StopMovement();
+            _animator.SetTrigger(AnimHit);
+            yield return new WaitForSeconds(.5f);
+            _enemyMovement.StartMovement();
         }
 
         private IEnumerator Die()
         {
             _enemyMovement.StopMovement();
-            _enemyMovement.Push();
-            
+            _animator.SetBool(AnimDead, true);
             yield return new WaitForSeconds(1f);
             _spriteRenderer.DOFade(0, 1f);
             yield return new WaitForSeconds(1f);
-            
             Destroy(gameObject);
         }
 

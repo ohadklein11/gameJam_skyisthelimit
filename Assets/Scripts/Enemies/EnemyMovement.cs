@@ -23,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
     private float _originalGravityScale;
     
     private Transform _player;
+    public bool ReachedTop { get; private set; }
 
     public bool Grounded { get; set; }
 
@@ -91,6 +92,7 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             _rb.velocity = Vector2.zero;
+            ReachedTop = true;
         }
     }
 
@@ -193,6 +195,7 @@ public class EnemyMovement : MonoBehaviour
     public void StartClimbing()
     {
         _isVertical = true;
+        ReachedTop = false;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
         _rb.gravityScale = 0;
     }
@@ -200,6 +203,7 @@ public class EnemyMovement : MonoBehaviour
     public void StopClimbing()
     {
         _isVertical = false;
+        ReachedTop = false;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         _rb.gravityScale = _originalGravityScale;
         _rb.velocity = Vector2.zero;
