@@ -11,14 +11,17 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
 
     [SerializeField] private int fallingDamage = 5;
     [SerializeField] private float teleportDistance = 5;
+    [SerializeField] private float saveNewTeleportPointY = 2;
 
-    // [SerializeField] private float killTime = 0.5f;
+
+    [SerializeField] private float fallingTimeUntillTeleport = 0.5f;
     private GameData _gameData;
     private PlayerMovement _playerMovement;
     private Vector3 _lastGroundPoint;
     private SpriteRenderer _playerSpriteRenderer;
+    private bool _hitSolidGround;
 
-    // private float _timeleftToKillWhileFalling;
+    private float _timeleftToTeleport;
 
     private void Start()
     {
@@ -29,45 +32,71 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(_gameData.isGiantFightOver) return;
         if (_playerMovement.grounded)
         {
-            var halfSize = _playerSpriteRenderer.bounds.extents;
-            var raycastOriginLeft =
-                transform.position + new Vector3(-halfSize.x-.5f, -halfSize.y - .1f, 0);
-            var raycastOriginRight =
-                transform.position + new Vector3(halfSize.x+.5f, -halfSize.y - .1f, 0);
-            var hitLeft = Physics2D.Raycast(raycastOriginLeft, Vector3.down, .3f, LayerMask.GetMask("Ground"));
-            var hitRight = Physics2D.Raycast(raycastOriginRight, Vector3.down, .3f, LayerMask.GetMask("Ground"));
-
-            if (hitLeft && hitRight)
-            {
-                _lastGroundPoint = player.transform.position;
-            }
+            // var halfSize = _playerSpriteRenderer.bounds.extents;
+            // var raycastOriginLeft =
+            //     transform.position + new Vector3(-halfSize.x-.5f, -halfSize.y - .1f, 0);
+            // var raycastOriginRight =
+            //     transform.position + new Vector3(halfSize.x+.5f, -halfSize.y - .1f, 0);
+            // var hitLeft = Physics2D.Raycast(raycastOriginLeft, Vector3.down, .3f, LayerMask.GetMask("Ground"));
+            // var hitRight = Physics2D.Raycast(raycastOriginRight, Vector3.down, .3f, LayerMask.GetMask("Ground"));
+            // draw raycast
+            // _hitSolidGround = hitLeft && hitRight;
+            if (_playerMovement.grounded)
+                _hitSolidGround = true;
+            
         }
+        if (_gameData.isGiantFightOver)
+            teleportOnDescend();
+        else
+            teleportOnAscend();
+    }
 
+    private void teleportOnAscend()
+    {
+        if (_hitSolidGround && player.transform.position.y-_lastGroundPoint.y>=saveNewTeleportPointY)
+        {
+            _lastGroundPoint = player.transform.position;
+        }
         // if player falls below last ground point, kill player
         if (_lastGroundPoint.y - player.transform.position.y > teleportDistance)
         {
-            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerGotHit,fallingDamage);
-            player.transform.position = _lastGroundPoint;
+            Teleport();
         }
-        
-        
+    }
+
+    void Update()
+    {
+        _timeleftToTeleport -= Time.deltaTime;
+
+    }
+
+    private void teleportOnDescend()
+    {
         // check if no ground below player with raycast
-        // RaycastHit2D hit = Physics2D.Raycast(player.transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
-        // if (!hit)
-        // {
-        //     if (_timeleftToKillWhileFalling <= 0)
-        //     {
-        //         EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerGotHit,_gameData.maxPlayerLifePoints);
-        //     }
-        //     _timeleftToKillWhileFalling -= Time.fixedDeltaTime;
-        // }
-        // else
-        // {
-        //     _timeleftToKillWhileFalling = killTime;
-        // }
+        RaycastHit2D hitGroundBeneath = Physics2D.Raycast(player.transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+        if (_hitSolidGround && _lastGroundPoint.y - player.transform.position.y>=saveNewTeleportPointY)
+        {
+            _lastGroundPoint = player.transform.position;
+        }
+        else if (!hitGroundBeneath)
+        {
+            if (_timeleftToTeleport <= 0)
+            {
+                Teleport();
+            }
+        }
+        else
+        {
+            _timeleftToTeleport = fallingTimeUntillTeleport;
+        }
+    }
+
+    void Teleport()
+    {
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerGotHit,fallingDamage);
+        player.transform.position = _lastGroundPoint;
     }
 }

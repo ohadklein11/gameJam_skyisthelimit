@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2947786685254682727}
   - component: {fileID: 7739629793127529774}
   - component: {fileID: 955580200407072414}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: stoneAboveHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 4789428986721855467}
   - component: {fileID: 1524533672667713560}
   - component: {fileID: 6493690554303740105}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ClimberEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,6 +472,7 @@ MonoBehaviour:
   _stonePushHeight: 0.5
   _appearDuration: 1
   _movementSpeed: 5
+  _forcedTurnAroundCooldown: 3
   StoneMaterialTransparent: {fileID: 2100000, guid: 0e1ea22044c2f5a4bbeec32a4be16aad,
     type: 2}
 --- !u!114 &6493690554303740105

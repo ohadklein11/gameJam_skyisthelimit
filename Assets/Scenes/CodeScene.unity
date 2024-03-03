@@ -3830,6 +3830,8 @@ MonoBehaviour:
   player: {fileID: 48291940}
   fallingDamage: 5
   teleportDistance: 5
+  saveNewTeleportPointY: 0
+  fallingTimeUntillTeleport: 0.5
 --- !u!114 &129073821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11906,6 +11908,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 480704476}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &481663753
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 191.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 42.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4356895597200472635, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthRecover
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6cbd1d6246ff5dd4fa1219c5807991b8, type: 3}
 --- !u!1 &483654060
 GameObject:
   m_ObjectHideFlags: 0
@@ -80337,3 +80407,4 @@ SceneRoots:
   - {fileID: 682579202}
   - {fileID: 492797993}
   - {fileID: 1871671593}
+  - {fileID: 481663753}
