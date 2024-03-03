@@ -147,7 +147,6 @@ namespace Player
             if (Input.GetButtonDown("Jump") && _yInput > 0 && _isClimbing)
             {
                 _yInput = 0;
-                // _isClimbing = false;
             }
             else
                 HandleClimbing();
@@ -172,9 +171,9 @@ namespace Player
                 try
                 {
                     var xPosition = _climbable.GetXPosition();
-                    var yTopPosition = _climbable.GetHeadYPosition() - _spriteRenderer.bounds.extents.y;
-                    if (GetComponent<BeansShooting>().IsShootingBeans())
-                        yTopPosition += 1.7f;
+                    // if (GetComponent<BeansShooting>().IsShootingBeans())
+                    //     xPosition -=_facingDirection * 0.2f;
+                    var yTopPosition = _climbable.GetHeadYPosition()-0.5f;
                     var yMaxPosition = _climbable.IsGrowing()?Mathf.Infinity:yTopPosition;
                     if (position.y > yTopPosition && _firstClimbWithGrowingVine)
                         yMaxPosition = position.y;
@@ -186,9 +185,8 @@ namespace Player
                     // prevent climbing up when reaching end of vine
                     if (_yInput > 0)
                     {
-                        float playerHalfHeight = _spriteRenderer.bounds.size.y / 2;
                         RaycastHit2D vineHitUp = Physics2D.Raycast(
-                            new Vector2(transform.position.x, transform.position.y + playerHalfHeight),
+                            new Vector2(transform.position.x, transform.position.y + .5f),
                             Vector2.up, .01f, whatIsVine);
                         if (!vineHitUp)
                         {

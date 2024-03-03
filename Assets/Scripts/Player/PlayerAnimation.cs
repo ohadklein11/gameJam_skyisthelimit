@@ -11,7 +11,7 @@ public class PlayerAnimation : MonoBehaviour
     private Rigidbody2D _rb;
     private PlayerMovement _playerMovement;
     private BeansShooting _beansShooting;
-    private bool _isShootingBeans;
+    private bool IsShootingBeans => _beansShooting.IsShootingBeans();
     [SerializeField] private GameObject groundCheck;
     private float _groundCheckXOffest = 0.54f;
     private float _groundCheckYOffest = -0.27f;
@@ -36,14 +36,13 @@ public class PlayerAnimation : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
         _beansShooting = GetComponent<BeansShooting>();
         _animator.SetBool("beans", true);
-        _isShootingBeans= true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if(_playerMovement.climbing != _animator.GetBool("isClimbing")) {
-            if (_isShootingBeans && _playerMovement.climbing)
+            if (IsShootingBeans && _playerMovement.climbing)
             {
                 // give offset to player collider
                 _playerCollider.offset += new Vector2(_colliderXOffest, _colliderXYOffest);
@@ -51,7 +50,7 @@ public class PlayerAnimation : MonoBehaviour
                 groundCheck.transform.localPosition += new Vector3(_groundCheckXOffest, _groundCheckYOffest, 0);
                 loadingCanvas.transform.localPosition += new Vector3(_loadingXOffest, _loadingYOffest, 0);
             }
-            else if (_isShootingBeans && !_playerMovement.climbing)
+            else if (IsShootingBeans && !_playerMovement.climbing)
             {
                 _playerCollider.offset -= new Vector2(_colliderXOffest, _colliderXYOffest);
                 shootingPoint.transform.localPosition -= new Vector3(_shootingXOffest, _shootingYOffest, 0);
@@ -61,12 +60,19 @@ public class PlayerAnimation : MonoBehaviour
             }
             _animator.SetBool("isClimbing", _playerMovement.climbing);
         }
+        
         if ((Mathf.Abs(_rb.velocity.x) >= 0.1f)!= _animator.GetBool("isMoving")){
             _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.x) >= 0.1f));
         }
         if ((Mathf.Abs(_rb.velocity.y) >= 0.1f)!= _animator.GetBool("isMovingVertically")){
             _animator.SetBool("isMovingVertically", (Mathf.Abs(_rb.velocity.y) >= 0.1f));
         }
+
+        if (_beansShooting.IsShootingBeans() != _animator.GetBool("beans"))
+        {
+            _animator.SetBool("beans", _beansShooting.IsShootingBeans());
+        }
+
         if(_beansShooting.isLoading != _animator.GetBool("isLoading")) {
             _animator.SetBool("isLoading", _beansShooting.isLoading);
         }
@@ -74,6 +80,7 @@ public class PlayerAnimation : MonoBehaviour
             _animator.SetBool("isJumping", _playerMovement.jumping);
         } 
     }
+        
     /**
      shootingType: 0 for bean shooting, 1 for egg shooting
      */
@@ -101,7 +108,6 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool("isMoving", false);
         _animator.SetBool("isLoading", false);
         _animator.SetBool("isJumping", false); 
-        _isShootingBeans = false;
         _animator.Play("IdleEgg");
     }
 }
