@@ -173,8 +173,9 @@ namespace Player
                 {
                     var xPosition = _climbable.GetXPosition();
                     var yTopPosition = _climbable.GetHeadYPosition() - _spriteRenderer.bounds.extents.y;
+                    if (GetComponent<BeansShooting>().IsShootingBeans())
+                        yTopPosition += 1.7f;
                     var yMaxPosition = _climbable.IsGrowing()?Mathf.Infinity:yTopPosition;
-                    Debug.Log("position.y: "+position.y+" yTopPosition: "+yTopPosition +"_firstClimbWithGrowingVine: "+_firstClimbWithGrowingVine);
                     if (position.y > yTopPosition && _firstClimbWithGrowingVine)
                         yMaxPosition = position.y;
                     else

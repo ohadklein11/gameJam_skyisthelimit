@@ -5,16 +5,32 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
+
+
     private Animator _animator;
     private Rigidbody2D _rb;
     private PlayerMovement _playerMovement;
     private BeansShooting _beansShooting;
     private bool _isShootingBeans;
+    [SerializeField] private GameObject groundCheck;
+    private float _groundCheckXOffest = 0.54f;
+    private float _groundCheckYOffest = -0.27f;
+    private float _colliderXOffest = 1.02f;
+    private float _colliderXYOffest = -0.2f;
+    [SerializeField] private GameObject shootingPoint;
+    private float _shootingXOffest = 2.133f;
+    private float _shootingYOffest = -3.995f;
+    [SerializeField] private GameObject loadingCanvas;
+    private float _loadingXOffest = 1.09f;
+    private float _loadingYOffest = -0.39f;
 
+
+    private Collider2D _playerCollider;
     
     // Start is called before the first frame update
     void Start()
     {
+        _playerCollider = GetComponent<Collider2D>();
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _playerMovement = GetComponent<PlayerMovement>();
@@ -27,6 +43,22 @@ public class PlayerAnimation : MonoBehaviour
     void FixedUpdate()
     {
         if(_playerMovement.climbing != _animator.GetBool("isClimbing")) {
+            if (_isShootingBeans && _playerMovement.climbing)
+            {
+                // give offset to player collider
+                _playerCollider.offset += new Vector2(_colliderXOffest, _colliderXYOffest);
+                shootingPoint.transform.localPosition += new Vector3(_shootingXOffest, _shootingYOffest, 0);
+                groundCheck.transform.localPosition += new Vector3(_groundCheckXOffest, _groundCheckYOffest, 0);
+                loadingCanvas.transform.localPosition += new Vector3(_loadingXOffest, _loadingYOffest, 0);
+            }
+            else if (_isShootingBeans && !_playerMovement.climbing)
+            {
+                _playerCollider.offset -= new Vector2(_colliderXOffest, _colliderXYOffest);
+                shootingPoint.transform.localPosition -= new Vector3(_shootingXOffest, _shootingYOffest, 0);
+                groundCheck.transform.localPosition -= new Vector3(_groundCheckXOffest, _groundCheckYOffest, 0);
+                loadingCanvas.transform.localPosition -= new Vector3(_loadingXOffest, _loadingYOffest, 0);
+
+            }
             _animator.SetBool("isClimbing", _playerMovement.climbing);
         }
         if ((Mathf.Abs(_rb.velocity.x) >= 0.1f)!= _animator.GetBool("isMoving")){

@@ -54,6 +54,11 @@ public class BeansShooting : MonoBehaviour
         _eggPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Egg");
     }
 
+    public bool IsShootingBeans()
+    {
+        return _gunType == GunType.BeansGun;
+    }
+
     void Start()
     {
         _playerRb = _playerSpriteRenderer.gameObject.GetComponent<Rigidbody2D>();
