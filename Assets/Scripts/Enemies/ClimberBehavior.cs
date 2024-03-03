@@ -34,6 +34,9 @@ public class ClimberBehavior : MonoBehaviour
     private Transform _curVine;
     private Transform _targetVine;
     private bool _shouldFacePlayer = true;
+    private readonly int _groundedMax = 3;
+    private int _groundedCount = 0;
+    private bool GroundedWell => _groundedCount == _groundedMax;
 
     // Start is called before the first frame update
     void Start()
@@ -118,9 +121,17 @@ public class ClimberBehavior : MonoBehaviour
             {
                 _forcedTurnAroundCooldownTimer -= Time.deltaTime;
             }
-            else if (_enemyMovement.ForcedTurnAround())
+            else if (GroundedWell && _enemyMovement.ForcedTurnAround())
             {
                 _forcedTurnAroundCooldownTimer = _forcedTurnAroundCooldown;
+            }
+            if (_enemyMovement.Grounded && _groundedCount < _groundedMax)
+            {
+                _groundedCount++;
+            }
+            else if (!_enemyMovement.Grounded)
+            {
+                _groundedCount = 0;
             }
         }
 
