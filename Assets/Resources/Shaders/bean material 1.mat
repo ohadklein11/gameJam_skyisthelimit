@@ -40,6 +40,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _normal_sunlight: 0.15
     m_Colors:
     - _light: {r: 0.6901961, g: 0.7372549, b: 0.20392157, a: 0}
     - _shadow: {r: 0.48745984, g: 0.5169811, b: 0.18240654, a: 0}
