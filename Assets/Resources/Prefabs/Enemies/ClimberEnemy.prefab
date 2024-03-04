@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 1636445915207426754}
   - component: {fileID: 6247029212529250054}
   - component: {fileID: 7906962581362195798}
+  - component: {fileID: 4729679874497519193}
   m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
@@ -354,6 +355,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4729679874497519193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483225187669674268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5285c6f7509f4344f9c735d2d4e184c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &5214441271015760089
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +378,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4789428986721855467}
   - component: {fileID: 1524533672667713560}
-  - component: {fileID: 6493690554303740105}
   m_Layer: 11
   m_Name: ClimberEnemy
   m_TagString: Untagged
@@ -409,16 +422,3 @@ MonoBehaviour:
   StoneMaterialTransparent: {fileID: 2100000, guid: 0e1ea22044c2f5a4bbeec32a4be16aad,
     type: 2}
   _distanceToTargetVine: 3
---- !u!114 &6493690554303740105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5214441271015760089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5285c6f7509f4344f9c735d2d4e184c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15

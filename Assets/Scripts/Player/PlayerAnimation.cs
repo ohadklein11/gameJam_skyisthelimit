@@ -30,6 +30,7 @@ public class PlayerAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EventManagerScript.Instance.StartListening(EventManagerScript.PlayerDead, PlayDeadAnimation);
         _playerCollider = GetComponent<Collider2D>();
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
@@ -98,6 +99,12 @@ public class PlayerAnimation : MonoBehaviour
             _animator.Play("Idle"+animationName+"Shoot");
 
         }
+    }
+
+    public void PlayDeadAnimation(object arg0)
+    {
+        string type =_beansShooting.IsShootingBeans()? "Bean" : "Egg";
+        _animator.Play("dead"+type);
     }
 
     public void SwitchToGooseAnimation()

@@ -23,6 +23,8 @@ namespace Player
         [SerializeField] private float climbSpeed;
         [SerializeField] private int minNumFramesForClimbing;
         [SerializeField] private Transform loadingBar;
+        [SerializeField] private PlayerHealthManager playerHealthManager;
+
 
         private float _xInput;
         private float _yInput;
@@ -44,7 +46,7 @@ namespace Player
         private int _numFramesSinceEnteringClimbing;
         private IClimbable _climbable;
 
-        private bool IsFalling => (!_isGrounded && !_isClimbing && _rb.velocity.y < 0.0f);
+        private bool IsFalling => (!_isGrounded && !_isClimbing);
 
         private bool IsTryingToClimb => (_isGrounded && _yInput > 0.0f) || (!_isGrounded && _yInput != 0.0f);
 
@@ -61,6 +63,8 @@ namespace Player
         
         public bool climbing => _isClimbing;
         public bool grounded => _isGrounded;
+        public bool falling => IsFalling;
+
 
         public bool jumping => _isJumping;
         [SerializeField] private float minFallHeightForDust = .8f;
@@ -77,7 +81,7 @@ namespace Player
 
         private void Update()
         {
-            if (GameData.isGameStopped) return;
+            if (GameData.isGameStopped || playerHealthManager.IsDead) return;
             CheckInput();
         }
 

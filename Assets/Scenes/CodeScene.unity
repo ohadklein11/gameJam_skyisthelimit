@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1597,6 +1597,7 @@ MonoBehaviour:
   eggShootingSpeed: 10
   eggShootingCooldown: 0.15
   beanShootingCooldown: 0.6
+  playerHealthManager: {fileID: 129073824}
   shootingPoint: {fileID: 1492824685}
   gun: {fileID: 1037843130}
   _platformLayerMask:
@@ -1631,6 +1632,7 @@ MonoBehaviour:
   climbSpeed: 3
   minNumFramesForClimbing: 5
   loadingBar: {fileID: 326723477}
+  playerHealthManager: {fileID: 129073824}
   highJumpGravity: 0.75
   jumpGravity: 1.5
   fallGravity: 2.5
@@ -3855,6 +3857,7 @@ GameObject:
   - component: {fileID: 129073821}
   - component: {fileID: 129073822}
   - component: {fileID: 129073823}
+  - component: {fileID: 129073824}
   m_Layer: 0
   m_Name: Utils
   m_TagString: Untagged
@@ -3906,7 +3909,7 @@ MonoBehaviour:
   fallingDamage: 5
   teleportDistance: 5
   saveNewTeleportPointY: 0
-  fallingTimeUntillTeleport: 0.5
+  fallingTimeUntillTeleport: 1.5
 --- !u!114 &129073821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3954,6 +3957,19 @@ MonoBehaviour:
     type: 3}
   stonePiecesVFX: {fileID: 2360266565260114778, guid: 6575825fac1fd9344bea19ff9dada66d,
     type: 3}
+--- !u!114 &129073824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129073817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94b5ca2edf6ed24cb5c89358bd7b046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 48291941}
 --- !u!1 &131899253
 GameObject:
   m_ObjectHideFlags: 0

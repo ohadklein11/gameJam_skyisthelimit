@@ -24,6 +24,8 @@ public class BeansShooting : MonoBehaviour
     [SerializeField] private float eggShootingSpeed = 10f;
     [SerializeField] private float eggShootingCooldown = 0.4f;
     [SerializeField] private float beanShootingCooldown = 0.3f;
+    [SerializeField] private PlayerHealthManager playerHealthManager;
+
 
     [SerializeField] private GameObject shootingPoint;
     [SerializeField] private GameObject gun;
@@ -66,7 +68,7 @@ public class BeansShooting : MonoBehaviour
 
     private void Update()
     {
-        if (GameData.isGameStopped) return;
+        if (GameData.isGameStopped || playerHealthManager.IsDead) return;
 
         if (_gunType == GunType.BeansGun)
             ShootBeans();

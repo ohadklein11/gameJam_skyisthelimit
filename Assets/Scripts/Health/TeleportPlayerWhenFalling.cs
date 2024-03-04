@@ -32,21 +32,7 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (_playerMovement.grounded)
-        {
-            // var halfSize = _playerSpriteRenderer.bounds.extents;
-            // var raycastOriginLeft =
-            //     transform.position + new Vector3(-halfSize.x-.5f, -halfSize.y - .1f, 0);
-            // var raycastOriginRight =
-            //     transform.position + new Vector3(halfSize.x+.5f, -halfSize.y - .1f, 0);
-            // var hitLeft = Physics2D.Raycast(raycastOriginLeft, Vector3.down, .3f, LayerMask.GetMask("Ground"));
-            // var hitRight = Physics2D.Raycast(raycastOriginRight, Vector3.down, .3f, LayerMask.GetMask("Ground"));
-            // draw raycast
-            // _hitSolidGround = hitLeft && hitRight;
-            if (_playerMovement.grounded)
-                _hitSolidGround = true;
-            
-        }
+        _hitSolidGround = _playerMovement.grounded && !_playerMovement.falling && !_playerMovement.climbing;
         if (_gameData.isGiantFightOver)
             teleportOnDescend();
         else

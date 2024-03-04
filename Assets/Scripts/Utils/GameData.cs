@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,37 +13,22 @@ namespace Utils
         private int _curPlayerLifePoints;
         public int maxPlayerLifePoints = 100;
         public int GetPlayerHealth() => _curPlayerLifePoints;
+
         public void RestartPlayerHealth() => _curPlayerLifePoints = maxPlayerLifePoints;
         public bool isGiantFightOver=false;
 
         private void Awake()
         {
-            EventManagerScript.Instance.StartListening(EventManagerScript.PlayerGotHit, PlayerGotHit);
-            EventManagerScript.Instance.StartListening(EventManagerScript.HealthRecovery, HealthPointsFiller);
-
             IsGiantFight = false;
             _curPlayerLifePoints = maxPlayerLifePoints;
         
         }
         
-        
-        private void PlayerGotHit(object damage)
+        public void SetPlayerHealth(int health)
         {
-            _curPlayerLifePoints = Math.Max(_curPlayerLifePoints-(int)damage,0);
-            Debug.Log("player took " + damage + " damage, " + _curPlayerLifePoints + " life points left");
-
-            if (_curPlayerLifePoints <= 0)
-            {
-                Debug.Log("Player died");
-                SceneManager.LoadScene("LostScene");
-            }
+            _curPlayerLifePoints = health;
         }
-        private void HealthPointsFiller(object healthPoints)
-        {
-            _curPlayerLifePoints = Math.Min(maxPlayerLifePoints,_curPlayerLifePoints+(int)healthPoints);
-            Debug.Log("player recovered " + healthPoints + " health points, " + _curPlayerLifePoints + " life points left");
 
-        }
         public void StartGiantFight()
         {
             IsGiantFight = true;
@@ -60,5 +46,7 @@ namespace Utils
             _curPlayerLifePoints = maxPlayerLifePoints;
         }
         public static void Restart() => Instance.OnRestart();
+        
+        
     }
 }
