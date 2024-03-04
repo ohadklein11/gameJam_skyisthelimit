@@ -31,8 +31,6 @@ public class CameraManager : MonoBehaviour
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, ZoomInOnDoorOpen);
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantAttitude, ZoomInOnGiant);
         EventManagerScript.Instance.StartListening(EventManagerScript.LeavingGiantTemple, SetGiantBattleCamera);
-
-
     }
 
     
@@ -48,21 +46,26 @@ public class CameraManager : MonoBehaviour
         {
             startValue = _giantFightZoomOutStartValue;
             endValue= giantFightZoomOut;
-            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = true;
+            // StartCoroutine(EnableCinfiner());
             cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 5f;
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = true;
+            // iTween.ValueTo(gameObject, iTween.Hash(
+            //     "from", 1.53f,
+            //     "to", 3.85f,
+            //     "time", 2,
+            //     "onupdate", "UpdateTrackedObjectOffset",
+            //     "easetype", iTween.EaseType.easeInOutSine));
+            
         }
         else
         {
-            
             startValue = giantFightZoomOut;
             endValue = afterGiantFightZoom;
-            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 0;
             cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = false;
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 0;
             cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0,0,0);
-            
-            
-            
         }
+
         iTween.ValueTo(gameObject, iTween.Hash(
             "from", startValue,
             "to", endValue,
@@ -72,9 +75,19 @@ public class CameraManager : MonoBehaviour
 
     }
 
+    IEnumerator EnableCinfiner()
+    {
+        yield return new WaitForSeconds(1.8f);
+        cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = true;
+        cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 5f;
+    }
     void UpdateGiantBattleCamera(float value)
     {
         cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView= value;
+    }
+    void UpdateTrackedObjectOffset(float value)
+    {
+        cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(-0.4f,value,0);
     }
     
     void ZoomIn(Transform transformToZoom, float fieldOfView)

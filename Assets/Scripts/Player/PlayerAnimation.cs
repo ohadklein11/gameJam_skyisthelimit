@@ -78,7 +78,6 @@ public class PlayerAnimation : MonoBehaviour
     public void SwitchToClimbingAnimation(bool switchToClimb)
     {
         if (switchToClimb == _isClimbBeanSettings) return;
-        Debug.Log("Switching to climbing animation: "+switchToClimb);
         float offset = switchToClimb ? 1 : -1;
         _playerCollider.offset += new Vector2(_colliderXOffest, _colliderXYOffest)*offset;
         shootingPoint.transform.localPosition += new Vector3(_shootingXOffest, _shootingYOffest, 0)*offset;

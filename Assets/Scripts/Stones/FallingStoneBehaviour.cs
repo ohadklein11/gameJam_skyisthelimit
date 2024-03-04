@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using DG.Tweening;
 using Giant;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -35,7 +36,7 @@ public class FallingStoneBehaviour : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            // Debug.Log("Stone hit the ground");
+            StartCoroutine(SelfDestroyTimer());
             _virtualCamera.GetComponent<CameraShake>().Shake(shakeMagnitude, shakeDuration);
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Player") &&
@@ -49,6 +50,14 @@ public class FallingStoneBehaviour : MonoBehaviour
             }
             // TODO: break the stone
         }
+    }
+
+    IEnumerator SelfDestroyTimer()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.GetComponent<MeshRenderer>().material.DOFade(0, 1f);
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 
     void Update()

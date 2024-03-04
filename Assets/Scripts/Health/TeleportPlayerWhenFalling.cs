@@ -79,8 +79,6 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
         if (_hitSolidGround && (_lastGroundPoint.y - player.transform.position.y>=saveNewTeleportPointY || _currGround!=_lastGround))
         {
             _lastGroundPoint = player.transform.position+new Vector3(0,1f,0);
-            Debug.Log(_lastGroundPoint);
-
         }
         else if (!hitGroundBeneath && _playerMovement.falling)
         {
