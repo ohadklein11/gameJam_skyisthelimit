@@ -65,6 +65,7 @@ public class PlayerHealthManager : MonoBehaviour
             "time", 1,
             "onupdate", "UpdatePlayerColor",
             "easetype", iTween.EaseType.easeInOutSine));
+        yield return new WaitForSeconds(1f);
         _canPlayerTakeDamage = true;
     }
     

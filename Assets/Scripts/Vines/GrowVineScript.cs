@@ -113,6 +113,7 @@ public class GrowVineScript : MonoBehaviour
                 gameObj.GetComponent<Collider2D>().enabled = true;
                 gameObj.GetComponent<Animator>().enabled = true;
                 gameObj.GetComponent<PlayerAnimation>().enabled = true;
+                child.GetComponent<PlayerAnimation>().SwitchToClimbingAnimation(false);
 
                 child.SetParent(null);
             }

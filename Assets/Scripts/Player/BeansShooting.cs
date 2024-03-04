@@ -150,6 +150,7 @@ public class BeansShooting : MonoBehaviour
     
     public void SetGunType(GunType gunType)
     {
+        Debug.Log("Setting gun type to " + gunType);
         _gunType = gunType;
     }
     

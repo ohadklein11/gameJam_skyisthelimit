@@ -23,6 +23,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private GameObject loadingCanvas;
     private float _loadingXOffest = 1.09f;
     private float _loadingYOffest = -0.39f;
+    private bool _isClimbBeanSettings = false;
 
 
     private Collider2D _playerCollider;
@@ -45,19 +46,11 @@ public class PlayerAnimation : MonoBehaviour
         if(_playerMovement.climbing != _animator.GetBool("isClimbing")) {
             if (IsShootingBeans && _playerMovement.climbing)
             {
-                // give offset to player collider
-                _playerCollider.offset += new Vector2(_colliderXOffest, _colliderXYOffest);
-                shootingPoint.transform.localPosition += new Vector3(_shootingXOffest, _shootingYOffest, 0);
-                groundCheck.transform.localPosition += new Vector3(_groundCheckXOffest, _groundCheckYOffest, 0);
-                loadingCanvas.transform.localPosition += new Vector3(_loadingXOffest, _loadingYOffest, 0);
+                SwitchToClimbingAnimation(true);   
             }
             else if (IsShootingBeans && !_playerMovement.climbing)
             {
-                _playerCollider.offset -= new Vector2(_colliderXOffest, _colliderXYOffest);
-                shootingPoint.transform.localPosition -= new Vector3(_shootingXOffest, _shootingYOffest, 0);
-                groundCheck.transform.localPosition -= new Vector3(_groundCheckXOffest, _groundCheckYOffest, 0);
-                loadingCanvas.transform.localPosition -= new Vector3(_loadingXOffest, _loadingYOffest, 0);
-
+                SwitchToClimbingAnimation(false); 
             }
             _animator.SetBool("isClimbing", _playerMovement.climbing);
         }
@@ -80,6 +73,18 @@ public class PlayerAnimation : MonoBehaviour
         if(_playerMovement.jumping != _animator.GetBool("isJumping")) {
             _animator.SetBool("isJumping", _playerMovement.jumping);
         } 
+    }
+    
+    public void SwitchToClimbingAnimation(bool switchToClimb)
+    {
+        if (switchToClimb == _isClimbBeanSettings) return;
+        Debug.Log("Switching to climbing animation: "+switchToClimb);
+        float offset = switchToClimb ? 1 : -1;
+        _playerCollider.offset += new Vector2(_colliderXOffest, _colliderXYOffest)*offset;
+        shootingPoint.transform.localPosition += new Vector3(_shootingXOffest, _shootingYOffest, 0)*offset;
+        groundCheck.transform.localPosition += new Vector3(_groundCheckXOffest, _groundCheckYOffest, 0)*offset;
+        loadingCanvas.transform.localPosition += new Vector3(_loadingXOffest, _loadingYOffest, 0)*offset;
+        _isClimbBeanSettings = switchToClimb;
     }
         
     /**

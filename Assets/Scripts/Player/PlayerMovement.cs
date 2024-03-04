@@ -15,9 +15,9 @@ namespace Player
         private int
             numFramesUntilMaxSlowdown; // e.g. after 20 frames of moving, the player will slide to a stop upon releasing the movement key
 
-        [SerializeField] private float groundCheckRadius;
+        [SerializeField] public float groundCheckRadius;
         [SerializeField] private float jumpForce;
-        [SerializeField] private Transform groundCheck;
+        [SerializeField] public Transform groundCheck;
         [SerializeField] private LayerMask whatIsGround;
         [SerializeField] private LayerMask whatIsVine;
         [SerializeField] private float climbSpeed;

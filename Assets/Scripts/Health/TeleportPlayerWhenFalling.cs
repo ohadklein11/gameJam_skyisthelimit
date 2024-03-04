@@ -20,6 +20,9 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     private Vector3 _lastGroundPoint;
     private SpriteRenderer _playerSpriteRenderer;
     private bool _hitSolidGround;
+    private GameObject _lastGround;
+    private GameObject _currGround;
+    private Collider2D _hit;
 
     private float _timeleftToTeleport;
 
@@ -32,18 +35,29 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        _hitSolidGround = _playerMovement.grounded && !_playerMovement.falling && !_playerMovement.climbing;
+        RaycastHit2D hitLeft = Physics2D.Raycast(player.transform.position, Vector2.left, .3f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hitRight = Physics2D.Raycast(player.transform.position, Vector2.right, .3f, LayerMask.GetMask("Ground"));
+ 
+        _hitSolidGround = _playerMovement.grounded && !_playerMovement.falling && !_playerMovement.climbing && !hitLeft && !hitRight;
+        _hit =Physics2D.OverlapCircle(_playerMovement.groundCheck.position, _playerMovement.groundCheckRadius, LayerMask.GetMask("Ground"));
+        if (_hit)
+        {
+            _currGround = _hit.gameObject;
+        }
         if (_gameData.isGiantFightOver)
             teleportOnDescend();
         else
             teleportOnAscend();
+        _lastGround = _currGround;
     }
 
     private void teleportOnAscend()
     {
         if (_hitSolidGround && player.transform.position.y-_lastGroundPoint.y>=saveNewTeleportPointY)
         {
-            _lastGroundPoint = player.transform.position;
+            _lastGroundPoint = player.transform.position + new Vector3(0,1f,0);
+            Debug.Log(_lastGroundPoint);
+
         }
         // if player falls below last ground point, kill player
         if (_lastGroundPoint.y - player.transform.position.y > teleportDistance)
@@ -62,11 +76,13 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     {
         // check if no ground below player with raycast
         RaycastHit2D hitGroundBeneath = Physics2D.Raycast(player.transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
-        if (_hitSolidGround && _lastGroundPoint.y - player.transform.position.y>=saveNewTeleportPointY)
+        if (_hitSolidGround && (_lastGroundPoint.y - player.transform.position.y>=saveNewTeleportPointY || _currGround!=_lastGround))
         {
-            _lastGroundPoint = player.transform.position;
+            _lastGroundPoint = player.transform.position+new Vector3(0,1f,0);
+            Debug.Log(_lastGroundPoint);
+
         }
-        else if (!hitGroundBeneath)
+        else if (!hitGroundBeneath && _playerMovement.falling)
         {
             if (_timeleftToTeleport <= 0)
             {
