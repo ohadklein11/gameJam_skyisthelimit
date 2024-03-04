@@ -24,6 +24,7 @@ public class PlayerAnimation : MonoBehaviour
     private float _loadingXOffest = 1.09f;
     private float _loadingYOffest = -0.39f;
     private bool _isClimbBeanSettings = false;
+    private bool _forceRunOnTruck = false;
 
 
     private Collider2D _playerCollider;
@@ -43,6 +44,8 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (_forceRunOnTruck) return;
+        
         if(_playerMovement.climbing != _animator.GetBool("isClimbing")) {
             if (IsShootingBeans && _playerMovement.climbing)
             {
@@ -73,6 +76,21 @@ public class PlayerAnimation : MonoBehaviour
         if(_playerMovement.jumping != _animator.GetBool("isJumping")) {
             _animator.SetBool("isJumping", _playerMovement.jumping);
         } 
+    }
+    
+    public IEnumerator ForceRunOnTruck()
+    {
+        _forceRunOnTruck = true;
+        _animator.SetBool("isJumping", false);
+        _animator.SetBool("isClimbing", false);
+        _animator.SetBool("isMovingVertically", false);
+        _animator.SetBool("isMoving", true);
+        SwitchToClimbingAnimation(false);
+        _forceRunOnTruck = true;
+        yield return new WaitForSeconds(5f);
+        _forceRunOnTruck = false;
+        _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.y) >= 0.1f));
+
     }
     
     public void SwitchToClimbingAnimation(bool switchToClimb)
