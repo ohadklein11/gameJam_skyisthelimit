@@ -44,7 +44,13 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (_forceRunOnTruck) return;
+        if (_forceRunOnTruck)
+        {
+            if (_beansShooting.isLoading != _animator.GetBool("isLoading"))
+                _animator.SetBool("isLoading", _beansShooting.isLoading);
+            return;
+
+        }
         
         if(_playerMovement.climbing != _animator.GetBool("isClimbing")) {
             if (IsShootingBeans && _playerMovement.climbing)
@@ -86,9 +92,9 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool("isMovingVertically", false);
         _animator.SetBool("isMoving", true);
         SwitchToClimbingAnimation(false);
-        _forceRunOnTruck = true;
         yield return new WaitForSeconds(5f);
         _forceRunOnTruck = false;
+        Debug.Log(_forceRunOnTruck);
         _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.y) >= 0.1f));
 
     }
