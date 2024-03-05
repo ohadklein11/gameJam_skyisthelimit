@@ -64,7 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   fallingDamage: 5
-  teleportDistance: 5
+  teleportDistance: 10
   saveNewTeleportPointY: 0
   fallingTimeUntillTeleport: 1.5
 --- !u!114 &7920816359554838693
