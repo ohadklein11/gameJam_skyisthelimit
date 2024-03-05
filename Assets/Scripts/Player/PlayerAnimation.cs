@@ -84,20 +84,28 @@ public class PlayerAnimation : MonoBehaviour
         } 
     }
     
-    public IEnumerator ForceRunOnTruck()
+    private IEnumerator ForceRunOnTruckCoroutine()
     {
         _forceRunOnTruck = true;
+        _playerMovement.forceDirection=true;
         _animator.SetBool("isJumping", false);
         _animator.SetBool("isClimbing", false);
         _animator.SetBool("isMovingVertically", false);
         _animator.SetBool("isMoving", true);
         SwitchToClimbingAnimation(false);
         yield return new WaitForSeconds(5f);
+        _playerMovement.forceDirection=false;
         _forceRunOnTruck = false;
-        Debug.Log(_forceRunOnTruck);
         _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.y) >= 0.1f));
 
     }
+
+    public void ForceRunOnTruck(int direction)
+    {
+        StartCoroutine(ForceRunOnTruckCoroutine());
+        if (_playerMovement._facingDirection != direction) _playerMovement.Flip();
+    }
+    
     
     public void SwitchToClimbingAnimation(bool switchToClimb)
     {

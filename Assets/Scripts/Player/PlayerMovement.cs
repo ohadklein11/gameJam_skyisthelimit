@@ -31,7 +31,8 @@ namespace Player
         private float _playerXradius;
         private float _fallingMaxHeight;
 
-        private int _facingDirection = 1;
+        public int _facingDirection = 1;
+        public bool forceDirection = false;
 
         private SlopeChecker _slopeChecker;
         private bool _isGrounded;
@@ -136,6 +137,7 @@ namespace Player
 
         private void CheckInput()
         {
+            if (forceDirection) return;
             _xInput = Input.GetAxisRaw("Horizontal");
             _yInput = Input.GetAxisRaw("Vertical");
 
@@ -156,7 +158,7 @@ namespace Player
                 HandleClimbing();
             if (Input.GetButtonDown("Jump"))
             {
-                Jump();
+                 Jump();
             }
         }
 
@@ -337,7 +339,7 @@ namespace Player
             _rb.gravityScale = gravity;
         }
 
-        private void Flip()
+        public void Flip()
         {
             _facingDirection *= -1;
             var transform1 = transform;

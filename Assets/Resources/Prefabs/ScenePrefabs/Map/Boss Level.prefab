@@ -2103,6 +2103,7 @@ MonoBehaviour:
   - {fileID: 5518797426359442362}
   - {fileID: 6260238761885317073}
   - {fileID: 4473274124215393201}
+  direction: -1
 --- !u!61 &5885470431591254614
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7182,6 +7183,7 @@ MonoBehaviour:
   - {fileID: 7298421916164356702}
   - {fileID: 4442011597812206563}
   - {fileID: 8246191907522988647}
+  direction: 1
 --- !u!61 &6577940251485995992
 BoxCollider2D:
   m_ObjectHideFlags: 0
