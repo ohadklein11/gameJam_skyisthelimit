@@ -35,18 +35,9 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 playerPos = player.transform.position;
-        Vector3 spriteExtents = _playerSpriteRenderer.bounds.extents;
-        var raycastOriginLeft =
-            playerPos + new Vector3( -spriteExtents.x, -spriteExtents.y - .1f, 0);
-        var raycastOriginRight =
-            playerPos + new Vector3( spriteExtents.x, -spriteExtents.y - .1f, 0);
-        RaycastHit2D hitLeft = Physics2D.Raycast(raycastOriginLeft, Vector2.down, .6f, LayerMask.GetMask("Ground"));
-        RaycastHit2D hitRight = Physics2D.Raycast(raycastOriginRight, Vector2.down, .6f, LayerMask.GetMask("Ground"));
-        Debug.DrawRay(raycastOriginLeft, Vector3.down * .6f, Color.cyan);
-        Debug.DrawRay(raycastOriginRight, Vector3.down * .6f, Color.cyan);
+        var hit=CheckGroundBeneath(0.6f);
 
-        _hitSolidGround = _playerMovement.grounded && !_playerMovement.falling && !_playerMovement.climbing && hitLeft && hitRight;
+        _hitSolidGround = _playerMovement.grounded && !_playerMovement.falling && !_playerMovement.climbing && hit;
         // _hit =Physics2D.OverlapCircle(_playerMovement.groundCheck.position, _playerMovement.groundCheckRadius, LayerMask.GetMask("Ground"));
         // if (_hit)
         // {
@@ -58,13 +49,28 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
             teleportOnAscend();
         // _lastGround = _currGround;
     }
+    
+    private bool CheckGroundBeneath(float distance)
+    {
+        Vector3 playerPos = player.transform.position;
+        Vector3 spriteExtents = _playerSpriteRenderer.bounds.extents;
+        var raycastOriginLeft =
+            playerPos + new Vector3( -spriteExtents.x, -spriteExtents.y - .1f, 0);
+        var raycastOriginRight =
+            playerPos + new Vector3( spriteExtents.x, -spriteExtents.y - .1f, 0);
+        RaycastHit2D hitLeft = Physics2D.Raycast(raycastOriginLeft, Vector2.down, distance, LayerMask.GetMask("Ground"));
+        RaycastHit2D hitRight = Physics2D.Raycast(raycastOriginRight, Vector2.down, distance, LayerMask.GetMask("Ground"));
+        Debug.DrawRay(raycastOriginLeft, Vector3.down * distance, Color.cyan);
+        Debug.DrawRay(raycastOriginRight, Vector3.down * distance, Color.cyan);
+        return hitLeft && hitRight;
+    }
 
     private void teleportOnAscend()
     {
         if (_hitSolidGround && player.transform.position.y-_lastGroundPoint.y>=saveNewTeleportPointY)
         {
             _lastGroundPoint = player.transform.position + new Vector3(0,1f,0);
-            Debug.Log(_lastGroundPoint);
+            Debug.Log("GroundPointOnAscend"+_lastGroundPoint);
 
         }
         // if player falls below last ground point, kill player
@@ -83,15 +89,19 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     private void teleportOnDescend()
     {
         // check if no ground below player with raycast
-        RaycastHit2D hitGroundBeneath = Physics2D.Raycast(player.transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+        var hitGroundBeneath = CheckGroundBeneath(10f);
         if (_hitSolidGround && (_lastGroundPoint.y - player.transform.position.y>=saveNewTeleportPointY))
         {
             _lastGroundPoint = player.transform.position+new Vector3(0,1f,0);
+            Debug.Log("GroundPointOnDescend"+_lastGroundPoint);
+
         }
-        else if (!hitGroundBeneath && _playerMovement.falling)
+        if (!hitGroundBeneath && _playerMovement.falling && !_playerMovement.jumping)
         {
+            Debug.Log("no ground below and falling");
             if (_timeleftToTeleport <= 0)
             {
+                
                 Teleport();
             }
         }
