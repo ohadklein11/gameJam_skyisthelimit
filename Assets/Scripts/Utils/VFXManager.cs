@@ -16,6 +16,8 @@ namespace Utils
     
         private ObjectPool<ParticleSystem> _dustVFXs;
         private ObjectPool<ParticleSystem> _beanDustVFXs;
+        private ObjectPool<ParticleSystem> _stoneVFXs;
+
         
         private static VFXManager Instance { get; set; }
         
@@ -25,6 +27,8 @@ namespace Utils
         {
             _dustVFXs = InitObjectPool(dustVFX);
             _beanDustVFXs = InitObjectPool(beanDustVFX);
+            _stoneVFXs = InitObjectPool(beanDustVFX);
+
         }
 
         private ObjectPool<ParticleSystem> InitObjectPool(ParticleSystem vfxPS)
