@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
@@ -35,6 +36,7 @@ namespace Player
         public bool forceDirection = false;
 
         private SlopeChecker _slopeChecker;
+        private bool _ignoreClimb;
         private bool _isGrounded;
         private bool _isJumping;
         private bool _canJump;
@@ -152,6 +154,8 @@ namespace Player
 
             if (Input.GetButtonDown("Jump") && _yInput > 0 && _isClimbing)
             {
+                StartCoroutine(ForceJump());
+                _isClimbing = false;
                 _yInput = 0;
             }
             else
@@ -162,9 +166,16 @@ namespace Player
             }
         }
 
+        IEnumerator ForceJump()
+        {
+            _ignoreClimb = true;
+            yield return new WaitForSeconds(.3f);
+            _ignoreClimb = false;
+        }
+
         private void HandleClimbing()
         {
-            if (_canClimb && (IsTryingToClimb || (_isClimbing && !_isGrounded && !_isJumping)))
+            if (!_ignoreClimb &&_canClimb && (IsTryingToClimb || (_isClimbing && !_isGrounded && !_isJumping)))
             {
                 // climb
                 if (!_isClimbing)
