@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -898,11 +898,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 724144919171092447, guid: 8b3a7bcc2c98e924f963091d95c45b1d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a12f7fe4ade46bd48b4f137d583a13f5, type: 2}
     - target: {fileID: 6644439402430940178, guid: 8b3a7bcc2c98e924f963091d95c45b1d,
         type: 3}
       propertyPath: m_Name
       value: background
       objectReference: {fileID: 0}
+    - target: {fileID: 8451718079146856395, guid: 8b3a7bcc2c98e924f963091d95c45b1d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a12f7fe4ade46bd48b4f137d583a13f5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1082,6 +1092,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1478138009}
     m_Modifications:
+    - target: {fileID: 573209427881595350, guid: 6bc1719a1a3a89c419953107f1d1fd9a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 27.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378296722710992816, guid: 6bc1719a1a3a89c419953107f1d1fd9a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 100.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378296722710992816, guid: 6bc1719a1a3a89c419953107f1d1fd9a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 32.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5239764739416849255, guid: 6bc1719a1a3a89c419953107f1d1fd9a,
         type: 3}
       propertyPath: m_Name
