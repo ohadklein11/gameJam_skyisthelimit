@@ -5,6 +5,7 @@ using DG.Tweening;
 using Giant;
 using UnityEngine;
 using UnityEngine.Pool;
+using Utils;
 
 public class FallingStoneBehaviour : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class FallingStoneBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        VFXManager.PlayStonePiecesVFX(transform.position);
+
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             StartCoroutine(SelfDestroyTimer());
@@ -43,25 +46,33 @@ public class FallingStoneBehaviour : MonoBehaviour
                  gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > magnitudeStopDamage)
         {
             EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerGotHit, stoneDamage);
-            if (!_released)
-            {
-                _throwablePool.Release(gameObject);
-                _released = true;
-            }
+            
             // TODO: break the stone
         }
+        if (!_released)
+        {
+            _throwablePool.Release(gameObject);
+            _released = true;
+        }
     }
-
+    
     IEnumerator SelfDestroyTimer()
+
     {
+\
         yield return new WaitForSeconds(1f);
+
         gameObject.GetComponent<MeshRenderer>().material.DOFade(0, 1f);
+
         yield return new WaitForSeconds(1f);
+
         Destroy(gameObject);
+
     }
 
-    void Update()
+    void FixedUpdate()
     {
+       
         bool destory = false;
         // if camera is 1.5 screens on the left of the Stone, destroy the Stone
         if (transform.position.x <
@@ -79,6 +90,12 @@ public class FallingStoneBehaviour : MonoBehaviour
 
         // if camera is 1.5 screens above the Stone, destroy the Stone
         if (transform.position.y > _mainCamera.transform.position.y + _mainCamera.orthographicSize * 1.5f)
+        {
+            destory = true;
+        }
+        
+        // if camera is 1.5 screens underneath the Stone, destroy the Stone
+        if (transform.position.y < _mainCamera.transform.position.y - _mainCamera.orthographicSize * 1.5f)
         {
             destory = true;
         }
