@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wood_Tree_Shader_Graph_Material
+  m_Name: Clouds_Shader
   m_Shader: {fileID: -6465566751694194690, guid: 7493a0daee7cf1b42ae6edf205a4a882,
     type: 3}
   m_Parent: {fileID: 0}
@@ -42,8 +42,8 @@ Material:
     - _QueueOffset: 0
     - _normal_sunlight: 0
     m_Colors:
-    - _light: {r: 0.6509804, g: 0.3882353, b: 0.27450982, a: 0}
-    - _shadow: {r: 0.4566037, g: 0.22391348, b: 0.123196825, a: 0}
+    - _light: {r: 0.78113204, g: 0.7531292, b: 0.7531292, a: 0}
+    - _shadow: {r: 1, g: 1, b: 1, a: 0}
     - _sunlight: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6300759217330866904
