@@ -13,12 +13,14 @@ namespace Utils
         [SerializeField] private ParticleSystem leavesVFX;
         [SerializeField] private ParticleSystem shinyVFX;
         [SerializeField] private ParticleSystem stonePiecesVFX;
+        [SerializeField] private ParticleSystem eggPiecesVFX;
     
         private ObjectPool<ParticleSystem> _dustVFXs;
         private ObjectPool<ParticleSystem> _beanDustVFXs;
         private ObjectPool<ParticleSystem> _stoneVFXs;
+        private ObjectPool<ParticleSystem> _eggVFXs;
 
-        
+
         private static VFXManager Instance { get; set; }
         
         private void Awake() => Instance = this;
@@ -28,6 +30,7 @@ namespace Utils
             _dustVFXs = InitObjectPool(dustVFX);
             _beanDustVFXs = InitObjectPool(beanDustVFX);
             _stoneVFXs = InitObjectPool(stonePiecesVFX);
+            _eggVFXs = InitObjectPool(eggPiecesVFX);
         }
 
         private ObjectPool<ParticleSystem> InitObjectPool(ParticleSystem vfxPS)
@@ -78,7 +81,11 @@ namespace Utils
         private void StonePiecesVFX(Vector3 position)
         {
             StartCoroutine(VFXCoroutine(_stoneVFXs, position));
-
+        }
+        
+        private void EggPiecesVFX(Vector3 position)
+        {
+            StartCoroutine(VFXCoroutine(_eggVFXs, position));
         }
         
         public static void PlayDustVFX(Vector3 position) => Instance.DustVFX(position);
@@ -86,5 +93,6 @@ namespace Utils
         public static void PlayLeavesVFX(Vector3 position) => Instance.LeavesVFX(position);
         public static void PlayShinyVFX(Vector3 position) => Instance.ShinyVFX(position);
         public static void PlayStonePiecesVFX(Vector3 position) => Instance.StonePiecesVFX(position);
+        public static void PlayEggPiecesVFX(Vector3 position) => Instance.EggPiecesVFX(position);
     }
 }

@@ -114,6 +114,8 @@ MonoBehaviour:
     type: 3}
   stonePiecesVFX: {fileID: 2360266565260114778, guid: 476590d553cd120449e830b994b42075,
     type: 3}
+  eggPiecesVFX: {fileID: 2360266565260114778, guid: 495dafc6d942f64418fc79393f8330de,
+    type: 3}
 --- !u!114 &3823797751893428333
 MonoBehaviour:
   m_ObjectHideFlags: 0
