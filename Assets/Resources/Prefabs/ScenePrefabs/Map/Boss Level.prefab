@@ -1388,6 +1388,7 @@ MonoBehaviour:
   _beansShooting: {fileID: 0}
   _blockExit: {fileID: 5785706395193660150}
   EButton: {fileID: 0}
+  backwardEnemies: {fileID: 0}
 --- !u!1 &363614169150753207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,6 +2784,7 @@ GameObject:
   - component: {fileID: 6662544081021661711}
   - component: {fileID: 6747910156312260827}
   - component: {fileID: 8016669545644672151}
+  - component: {fileID: 177532024586653756}
   m_Layer: 0
   m_Name: GooseInCage
   m_TagString: Untagged
@@ -2799,7 +2801,7 @@ Transform:
   m_GameObject: {fileID: 766591388482495272}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 234.56, y: 77.53, z: -5.62}
+  m_LocalPosition: {x: 234.56, y: 77.68, z: -5.62}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2847,7 +2849,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f3824ec54d3b40f43bcca337f3d4fffa, type: 3}
+  m_Sprite: {fileID: -651999615, guid: f929e9957ce9a524685b4c6a6d7090fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2906,6 +2908,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   giantFightManager: {fileID: 4551849060862192604}
+--- !u!95 &177532024586653756
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766591388482495272}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca4494334e83786479915c0baeae9f91, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &779147546377100664
 GameObject:
   m_ObjectHideFlags: 0
@@ -3548,7 +3571,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13b28c4574f49a14f919be18ac0b03c1, type: 2}
+  - {fileID: 2100000, guid: 0398d141e55fe1f448262f5a5bb3ca46, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29062,7 +29085,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13b28c4574f49a14f919be18ac0b03c1, type: 2}
+  - {fileID: 2100000, guid: 0398d141e55fe1f448262f5a5bb3ca46, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30284,6 +30307,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Level
       objectReference: {fileID: 0}
+    - target: {fileID: 2359310393338385781, guid: ef433f8c3e8940c4b9128a1f9a3daf0f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6733b9b7ab1ee98498f9e0a0230178e0, type: 2}
     - target: {fileID: 6286831145428163685, guid: ef433f8c3e8940c4b9128a1f9a3daf0f,
         type: 3}
       propertyPath: m_LocalPosition.z
