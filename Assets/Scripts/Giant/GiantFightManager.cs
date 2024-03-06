@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cinemachine;
+using DG.Tweening;
 using Giant;
 using Player;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private SpriteRenderer _giantSpriteRenderer;
     [SerializeField] private BeansShooting _beansShooting;
     [SerializeField] private GameObject _blockExit;
+    [SerializeField] private GameObject EButton;
 
     private void Update()
     {
@@ -68,7 +70,6 @@ public class GiantFightManager : Singleton<MonoBehaviour>
 
     public void OpenGiantDoors()
     {
-        
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantDoorsOpen,"start");
         _player.GetComponent<PlayerMovement>().StopMoving(5f);
         OpenDoor();
@@ -93,7 +94,8 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         _beansShooting.canShoot = true;
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,null);
         StartCoroutine(OpenGiantDoorsDelay());
-
+        EButton.SetActive(true);
+        EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
     }
     
     IEnumerator OpenGiantDoorsDelay()

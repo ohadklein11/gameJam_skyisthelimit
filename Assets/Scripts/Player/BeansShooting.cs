@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
@@ -25,8 +26,7 @@ public class BeansShooting : MonoBehaviour
     [SerializeField] private float eggShootingCooldown = 0.4f;
     [SerializeField] private float beanShootingCooldown = 0.3f;
     [SerializeField] private PlayerHealthManager playerHealthManager;
-
-
+    
     [SerializeField] private GameObject shootingPoint;
     [SerializeField] private GameObject gun;
     // [SerializeField] private GameObject trajectoryPointPrefab;
@@ -44,6 +44,10 @@ public class BeansShooting : MonoBehaviour
     public bool canShoot = true;
     public bool isLoading => _shootingForce >= minShootingForce;
     public bool IsOnCooldown => _shootingCooldownWait > 0;
+    private Animator _animator;
+    private static readonly int EggChange = Animator.StringToHash("eggChange");
+    private static readonly int BeanChange = Animator.StringToHash("beanChange");
+    private bool _canSwitchWeapons = false;
 
 
     void Awake()
@@ -54,6 +58,13 @@ public class BeansShooting : MonoBehaviour
         _gunType= GunType.BeansGun;
         _beanPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Bean");
         _eggPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Egg");
+        _animator = GetComponent<Animator>();
+        EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, EnableWeaponSwitch);
+    }
+
+    private void EnableWeaponSwitch(object arg0)
+    {
+        _canSwitchWeapons = true;
     }
 
     public bool IsShootingBeans()
@@ -74,9 +85,19 @@ public class BeansShooting : MonoBehaviour
             ShootBeans();
         else if(_gunType == GunType.EggsGun)
             ShootEggs();
-        if (Input.GetKeyDown(switchKey))
+        if (_canSwitchWeapons && Input.GetKeyDown(switchKey))
         {
-            _gunType= (_gunType == GunType.BeansGun) ? GunType.EggsGun : GunType.BeansGun;
+            if (_gunType == GunType.BeansGun)
+            {
+                _gunType = GunType.EggsGun;
+                _animator.SetTrigger(EggChange);
+            }
+            else
+            {
+                _shootingForce = 0;
+                _gunType = GunType.BeansGun;
+                _animator.SetTrigger(BeanChange);
+            }
         }
     }
 

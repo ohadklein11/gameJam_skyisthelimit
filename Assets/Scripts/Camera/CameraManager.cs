@@ -48,40 +48,39 @@ public class CameraManager : MonoBehaviour
         {
             ZoomInOnGoose();
             yield return new WaitForSeconds(5f);
-            float startValue, endValue;
-            if (arg0.ToString() == "start")
-            {
-                startValue = _giantFightZoomOutStartValue;
-                endValue= giantFightZoomOut;
-                // StartCoroutine(EnableCinfiner());
-                cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 5f;
-                cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = true;
-                // iTween.ValueTo(gameObject, iTween.Hash(
-                //     "from", 1.53f,
-                //     "to", 3.85f,
-                //     "time", 2,
-                //     "onupdate", "UpdateTrackedObjectOffset",
-                //     "easetype", iTween.EaseType.easeInOutSine));
-            
-            }
-            else
-            {
-                startValue = giantFightZoomOut;
-                endValue = afterGiantFightZoom;
-                cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = false;
-                cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 0;
-                cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0,0,0);
-            }
-
-            iTween.ValueTo(gameObject, iTween.Hash(
-                "from", startValue,
-                "to", endValue,
-                "time", 2,
-                "onupdate", "UpdateGiantBattleCamera",
-                "easetype", iTween.EaseType.easeInOutSine));
-            _firstOpen = false;
         }
-        
+        float startValue, endValue;
+        if (arg0.ToString() == "start")
+        {
+            startValue = _giantFightZoomOutStartValue;
+            endValue= giantFightZoomOut;
+            // StartCoroutine(EnableCinfiner());
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 5f;
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = true;
+            // iTween.ValueTo(gameObject, iTween.Hash(
+            //     "from", 1.53f,
+            //     "to", 3.85f,
+            //     "time", 2,
+            //     "onupdate", "UpdateTrackedObjectOffset",
+            //     "easetype", iTween.EaseType.easeInOutSine));
+            
+        }
+        else
+        {
+            startValue = giantFightZoomOut;
+            endValue = afterGiantFightZoom;
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = false;
+            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 0;
+            cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0,0,0);
+        }
+
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "from", startValue,
+            "to", endValue,
+            "time", 2,
+            "onupdate", "UpdateGiantBattleCamera",
+            "easetype", iTween.EaseType.easeInOutSine));
+        _firstOpen = false;
     }
 
     IEnumerator EnableCinfiner()
