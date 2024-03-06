@@ -26,17 +26,13 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private BeansShooting _beansShooting;
     [SerializeField] private GameObject _blockExit;
     [SerializeField] private GameObject EButton;
+    [SerializeField] private GameObject backwardEnemies;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G)) // temp to teleport to giant doors
         {
             _player.transform.position = _openGiantDoorsTrigger.transform.position + new Vector3(-2, 1, 0);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.D)) // temp to teleport to end of temple
-        {
-            _player.transform.position = _stonesTrigger.transform.position + new Vector3(2, 1, 0);
         }
     }
 
@@ -96,6 +92,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         StartCoroutine(OpenGiantDoorsDelay());
         EButton.SetActive(true);
         EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
+        backwardEnemies.SetActive(true);
     }
     
     IEnumerator OpenGiantDoorsDelay()
