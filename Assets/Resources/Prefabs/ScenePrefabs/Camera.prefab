@@ -773,7 +773,7 @@ Transform:
   m_GameObject: {fileID: 5816125698020324110}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -22.01, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1314,6 +1314,7 @@ MonoBehaviour:
   player: {fileID: 0}
   doorPivot: {fileID: 0}
   startCameraPath: {fileID: 3447233269802487478}
+  gooseCage: {fileID: 0}
 --- !u!1 &8453755094584999526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1344,7 @@ Transform:
   m_GameObject: {fileID: 8453755094584999526}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -22.01, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1552,7 +1553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8752547142480534418}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.052684557, y: -0, z: -0, w: 0.9986113}
+  m_LocalRotation: {x: 0.052684557, y: 0, z: 0, w: 0.9986113}
   m_LocalPosition: {x: -26.08, y: 3.7078962, z: -13.477833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1561,7 +1562,7 @@ Transform:
   - {fileID: 694973627312277557}
   - {fileID: 5919499509771204997}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.04, y: 0, z: 0}
 --- !u!1 &8957597796888017955
 GameObject:
   m_ObjectHideFlags: 0

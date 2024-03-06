@@ -350,6 +350,10 @@ namespace Player
             var gravity = _isClimbing ? 0f :
                 _isJumping ? Input.GetButton("Jump") ? highJumpGravity : jumpGravity : fallGravity;
             _rb.gravityScale = gravity;
+            if (_rb.velocity.y > 6f)
+            {
+                _rb.velocity = new Vector2(_rb.velocity.x, 6f);
+            }
         }
 
         public void Flip()

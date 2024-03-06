@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cinemachine;
+using DG.Tweening;
 using Giant;
 using Player;
 using UnityEngine;
@@ -24,17 +25,14 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private SpriteRenderer _giantSpriteRenderer;
     [SerializeField] private BeansShooting _beansShooting;
     [SerializeField] private GameObject _blockExit;
+    [SerializeField] private GameObject EButton;
+    [SerializeField] private GameObject backwardEnemies;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G)) // temp to teleport to giant doors
         {
             _player.transform.position = _openGiantDoorsTrigger.transform.position + new Vector3(-2, 1, 0);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.D)) // temp to teleport to end of temple
-        {
-            _player.transform.position = _stonesTrigger.transform.position + new Vector3(2, 1, 0);
         }
     }
 
@@ -68,7 +66,6 @@ public class GiantFightManager : Singleton<MonoBehaviour>
 
     public void OpenGiantDoors()
     {
-        
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantDoorsOpen,"start");
         _player.GetComponent<PlayerMovement>().StopMoving(5f);
         OpenDoor();
@@ -93,7 +90,9 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         _beansShooting.canShoot = true;
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,null);
         StartCoroutine(OpenGiantDoorsDelay());
-
+        EButton.SetActive(true);
+        EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
+        backwardEnemies.SetActive(true);
     }
     
     IEnumerator OpenGiantDoorsDelay()
