@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ed651a8b7ed3548a25d7d222a593c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewDistance: 5
+  viewDistance: 8
+  viewDistanceY: 5
   throwable: {fileID: 5547306582909305030, guid: 5ee810d70b41d414cb74490b15dfbe79,
     type: 3}
   minThrowTime: 3

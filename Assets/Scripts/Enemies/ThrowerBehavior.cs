@@ -8,6 +8,7 @@ using Utils;
 public class ThrowerBehavior : MonoBehaviour, IThrower
 {
     [SerializeField] private float viewDistance;
+    [SerializeField] private float viewDistanceY = 5f;
     
     private EnemyMovement _enemyMovement;
     private EnemyHealth _enemyHealth;
@@ -51,6 +52,7 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
         // get player with layer
         var player = GameObject.FindWithTag("Player");
         if (player == null) return null;
+        if (Mathf.Abs(player.transform.position.y - transform.position.y) > viewDistanceY) return null;
         var direction = _enemyMovement.GetDirection();
         if (direction == 1 
             && player.transform.position.x - transform.position.x > 0
