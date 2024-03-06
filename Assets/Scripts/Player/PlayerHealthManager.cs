@@ -73,7 +73,9 @@ public class PlayerHealthManager : MonoBehaviour
     {
         _isDead = true;
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerDead,null);
+        AudioManager.StopCurrentBGM();
+        AudioManager.PlayLoseBackground();
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("LostScene");
+        SceneManager.LoadScene("LostScene");  // todo move to the same scene
     }
 }

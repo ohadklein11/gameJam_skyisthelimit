@@ -22,6 +22,8 @@ public class WinManager : MonoBehaviour
     // Update is called once per frame
     void OnPlayerWin(object arg0)
     {
-        SceneManager.LoadScene("WinScene");
+        AudioManager.StopCurrentBGM();
+        AudioManager.PlayWinBackground();
+        SceneManager.LoadScene("WinScene");  // todo move to the same scene
     }
 }
