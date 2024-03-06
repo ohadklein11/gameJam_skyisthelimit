@@ -61,6 +61,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         _beansShooting.canShoot = false;
         _pathToGoose.gameObject.SetActive(true);
         GameData.Instance.EndGiantFight();
+        AudioManager.StopCurrentBGM();
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantAttitude,_giantSpriteRenderer.gameObject);
     }
 
@@ -68,6 +69,8 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     {
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantDoorsOpen,"start");
         _player.GetComponent<PlayerMovement>().StopMoving(5f);
+        AudioManager.StopCurrentBGM();
+        AudioManager.PlayBossBackground();
         OpenDoor();
     }
 
@@ -93,6 +96,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         EButton.SetActive(true);
         EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
         backwardEnemies.SetActive(true);
+        AudioManager.PlayDownBackground();
     }
     
     IEnumerator OpenGiantDoorsDelay()
