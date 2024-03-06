@@ -72,6 +72,7 @@ namespace Player
         public bool jumping => _isJumping;
         [SerializeField] private float minFallHeightForDust = .8f;
         private float _fallingFirstHeight;
+        private bool _paused;
 
         private void Start()
         {
@@ -84,6 +85,7 @@ namespace Player
 
         private void Update()
         {
+            if (_paused) return;
             if (GameData.isGameStopped || playerHealthManager.IsDead) return;
             CheckInput();
         }
@@ -371,6 +373,19 @@ namespace Player
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+
+        public void StopMoving(float time)
+        {
+            StartCoroutine(StopMovingCoroutine(time));
+        }
+
+        private IEnumerator StopMovingCoroutine(float time)
+        {
+            _paused = true;
+            _xInput = 0;
+            yield return new WaitForSeconds(time);
+            _paused = false;
         }
     }
 }

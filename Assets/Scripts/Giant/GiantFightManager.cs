@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
+using Cinemachine;
 using Giant;
+using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
@@ -21,7 +24,6 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private SpriteRenderer _giantSpriteRenderer;
     [SerializeField] private BeansShooting _beansShooting;
     [SerializeField] private GameObject _blockExit;
-
 
     private void Update()
     {
@@ -45,30 +47,30 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     
     private void CloseDoor()
     {
-        iTween.RotateTo(_doorPivot.gameObject, iTween.Hash("y", 90, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
+        iTween.RotateTo(_doorPivot.gameObject, iTween.Hash("y", -90, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
         _doorCollider.enabled = true;
     }
 
     public void StartGiantFight()
     {
         CloseDoor();
-        giantBehavior.StartGiantFight();
+        StartCoroutine(giantBehavior.StartGiantFight());
     }
     
     public void EndGiantFight()
     {
-        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantAttitude,_giantSpriteRenderer.gameObject);
-        _giantSpriteRenderer.color = Color.green;  // temp
-        _pathToGoose.gameObject.SetActive(true);
+        giantBehavior.EndGiantFight();
         _beansShooting.canShoot = false;
+        _pathToGoose.gameObject.SetActive(true);
         GameData.Instance.EndGiantFight();
-        
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantAttitude,_giantSpriteRenderer.gameObject);
     }
 
     public void OpenGiantDoors()
     {
         
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantDoorsOpen,"start");
+        _player.GetComponent<PlayerMovement>().StopMoving(5f);
         OpenDoor();
     }
 
@@ -84,9 +86,9 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     
     public void StartEscape()
     {
+        giantBehavior.StartEscape();
         _chairCollider.enabled = true;
         _pathFromGoose.gameObject.SetActive(false);
-        _giantSpriteRenderer.color = Color.red;  // temp
         _stonesTrigger.SetActive(true);
         _beansShooting.canShoot = true;
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,null);
@@ -98,5 +100,10 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     {
         yield return new WaitForSeconds(1f);
         OpenDoor();
+    }
+
+    public void HitGiant()
+    {
+        giantBehavior.HitGiant();
     }
 }

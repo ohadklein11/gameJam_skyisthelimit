@@ -27,8 +27,7 @@ namespace Utils
         {
             _dustVFXs = InitObjectPool(dustVFX);
             _beanDustVFXs = InitObjectPool(beanDustVFX);
-            _stoneVFXs = InitObjectPool(beanDustVFX);
-
+            _stoneVFXs = InitObjectPool(stonePiecesVFX);
         }
 
         private ObjectPool<ParticleSystem> InitObjectPool(ParticleSystem vfxPS)
@@ -78,8 +77,8 @@ namespace Utils
         
         private void StonePiecesVFX(Vector3 position)
         {
-            stonePiecesVFX.transform.position = position;
-            stonePiecesVFX.Play();
+            StartCoroutine(VFXCoroutine(_stoneVFXs, position));
+
         }
         
         public static void PlayDustVFX(Vector3 position) => Instance.DustVFX(position);

@@ -1,8 +1,10 @@
 using System;
+using Cinemachine;
 using Player;
 using Stones;
 using UnityEngine;
 using UnityEngine.Pool;
+using Utils;
 using Vines;
 
 namespace Giant
@@ -16,10 +18,16 @@ namespace Giant
         private PlayerMovement _playerMovement;
         private const float Epsilon = 0.01f;
         [SerializeField] private int stoneDamage;
+        private CinemachineVirtualCamera _virtualCamera;
+        [SerializeField] private float shakeDuration = 1f;
+        [SerializeField] private float shakeMagnitude = 2f;
+        
+        [SerializeField]
 
         private void Awake()
         {
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Throwables"), LayerMask.NameToLayer("Enemy"));
+            _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         }
 
         public void Init(ObjectPool<GameObject> throwablePool, GameObject player)
@@ -49,6 +57,7 @@ namespace Giant
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            
             if (other.gameObject.layer == LayerMask.NameToLayer("Climable"))
             {
                 if (Math.Abs(_player.transform.position.x - other.GetComponent<IClimbable>().GetXPosition()) < Epsilon)
@@ -66,6 +75,8 @@ namespace Giant
             }
             if (!_released)
             {
+                VFXManager.PlayStonePiecesVFX(transform.position);
+                _virtualCamera.GetComponent<CameraShake>().Shake(shakeMagnitude, shakeDuration);
                 _throwablePool.Release(gameObject);
                 _released = true;
             }

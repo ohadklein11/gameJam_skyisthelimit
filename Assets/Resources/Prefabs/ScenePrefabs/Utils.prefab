@@ -112,7 +112,7 @@ MonoBehaviour:
     type: 3}
   shinyVFX: {fileID: 3283953264046258741, guid: 38791287571f0724a819662a8a97c9b3,
     type: 3}
-  stonePiecesVFX: {fileID: 2360266565260114778, guid: 6575825fac1fd9344bea19ff9dada66d,
+  stonePiecesVFX: {fileID: 2360266565260114778, guid: 476590d553cd120449e830b994b42075,
     type: 3}
 --- !u!114 &3823797751893428333
 MonoBehaviour:

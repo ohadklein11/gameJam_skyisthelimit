@@ -1,4 +1,5 @@
-﻿using Enemies;
+﻿using System.Collections;
+using Enemies;
 using Stones;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -15,14 +16,21 @@ namespace Utils
         private float _throwableGravityScale;
         
         private float _timeToThrow;
+        private float _throwDuration;
+        private float _throwTime;
+        private bool _paused;
+        private float _throwDelay;
+        public bool Throwing => _throwTime > 0;
         
-        public void Init(GameObject throwable, float minThrowTime, float maxThrowTime, float minThrowAngle, float maxThrowAngle, Transform throwPosition, IThrower thrower)
+        public void Init(GameObject throwable, float minThrowTime, float maxThrowTime, float minThrowAngle, float maxThrowAngle, Transform throwPosition, IThrower thrower, float throwDuration=0, float throwDelay=0)
         {
             _throwable = throwable;
             _player = GameObject.FindWithTag("Player");
             _minThrowTime = minThrowTime;
             _maxThrowTime = maxThrowTime;
             _timeToThrow = _maxThrowTime;
+            _throwDuration = throwDuration;
+            _throwDelay = throwDelay;
             _throwableGravityScale = _throwable.GetComponent<Rigidbody2D>().gravityScale;
             _throwablePool = new ObjectPool<GameObject>(
                 () => Instantiate(throwable, throwPosition.position, Quaternion.identity), 
@@ -40,6 +48,7 @@ namespace Utils
                     }
                     o.GetComponent<Rigidbody2D>().velocity = FindThrowVelocity(
                         position, _player.transform.position, throwAngle);
+                    o.GetComponent<Rigidbody2D>().angularVelocity = -.5f;
                 }, o => o.SetActive(false));;
         }
         
@@ -67,17 +76,50 @@ namespace Utils
         
         private void Update()
         {
+            if (_paused) return;
+            
             if (_timeToThrow <= 0)
             {
-                ThrowThrowable();
+                StartCoroutine(ThrowThrowable());
                 _timeToThrow = Random.Range(_minThrowTime, _maxThrowTime);
+                _throwTime = _throwDuration;
             }
-            _timeToThrow -= Time.deltaTime;
+            if (_throwTime > 0)
+            {
+                _throwTime -= Time.deltaTime;
+            }
+            if (_timeToThrow > 0)
+                _timeToThrow -= Time.deltaTime;
         }
         
-        private void ThrowThrowable()
+        private IEnumerator ThrowThrowable()
         {
+            yield return new WaitForSeconds(_throwDelay);
             _throwablePool.Get();
+        }
+        
+        public void SetMaxThrowTime(float maxThrowTime)
+        {
+            _maxThrowTime = maxThrowTime;
+        }
+        
+        public void PauseThrowing()
+        {
+            _paused = true;
+        }
+        
+        public void ResumeThrowing()
+        {
+            _paused = false;
+        }
+        public bool IsPaused()
+        {
+            return _paused;
+        }
+
+        public void ReleaseAll()
+        { 
+            _throwablePool.Clear();
         }
     }
     
