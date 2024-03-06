@@ -97,12 +97,8 @@ public class ClimberBehavior : MonoBehaviour
                     _shouldFacePlayer = true;
                     if (vine != _curVine)
                     {
-                        // get down from vine
-                        _isClimbing = false;
-                        _animator.SetBool(AnimTop, false);
-                        _animator.SetBool(AnimClimbing, false);
-                        _enemyMovement.StopClimbing();
-                    }
+                       GetDownFromVine();
+                    } 
                 }
             }
 
@@ -118,7 +114,7 @@ public class ClimberBehavior : MonoBehaviour
                     _shouldFacePlayer = Mathf.Abs(targetX - _body.transform.position.x) > _distanceToTargetVine; // will go towards vine even if player is not climbing
                 }
                 
-                if (_targetVine != null && Mathf.Abs(targetX - _body.transform.position.x) < .3f)
+                if (!_playerMovement.grounded && _targetVine != null && Mathf.Abs(targetX - _body.transform.position.x) < .3f)
                 {
                     _isClimbing = true;
                     _animator.SetBool(AnimClimbing, true);
@@ -128,6 +124,9 @@ public class ClimberBehavior : MonoBehaviour
                     _body.transform.position = position;
                     _enemyMovement.StartClimbing();
                 }
+            } else if (_playerMovement.grounded)
+            {
+                GetDownFromVine();
             }
             
             if (_forcedTurnAroundCooldownTimer > 0)
@@ -159,6 +158,14 @@ public class ClimberBehavior : MonoBehaviour
         {
             StartCoroutine(Appear());
         }
+    }
+
+    private void GetDownFromVine()
+    {
+        _isClimbing = false;
+        _animator.SetBool(AnimTop, false);
+        _animator.SetBool(AnimClimbing, false);
+        _enemyMovement.StopClimbing();
     }
 
     private IEnumerator Appear()
