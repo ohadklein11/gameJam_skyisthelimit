@@ -11,6 +11,7 @@ namespace Enemies
         private int _currentHealth;
 
         private EnemyMovement _enemyMovement;
+        private Collider2D _collider2D;
         
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
@@ -27,6 +28,7 @@ namespace Enemies
             _currentHealth = _maxHealth;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
+            _collider2D = GetComponent<Collider2D>();
         }
 
         public void TakeDamage(int damage)
@@ -44,16 +46,20 @@ namespace Enemies
 
         private IEnumerator TakeDamageCoroutine()
         {
-            _enemyMovement.StopMovement();
+            
             _animator.SetTrigger(AnimHit);
+            if (!_enemyMovement.isVertical)
+                _enemyMovement.StopMovement();
             yield return new WaitForSeconds(.5f);
-            _enemyMovement.ResumeMovement();
+            if (!_enemyMovement.isVertical)
+                _enemyMovement.ResumeMovement();
         }
 
         private IEnumerator Die()
         {
-            _enemyMovement.StopMovement();
+            _enemyMovement.StopMovement(freeze:true);
             _animator.SetBool(AnimDead, true);
+            _collider2D.enabled = false;
             yield return new WaitForSeconds(1f);
             _spriteRenderer.DOFade(0, 1f);
             yield return new WaitForSeconds(1f);

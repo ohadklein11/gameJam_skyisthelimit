@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 public class EnemyMovement : MonoBehaviour
@@ -19,7 +20,7 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 _positionBefore1Frame;
     private Vector3 _positionBefore2Frames;
     
-    private bool _isVertical = false;
+    public bool isVertical = false;
     private float _originalGravityScale;
     
     private Transform _player;
@@ -65,9 +66,9 @@ public class EnemyMovement : MonoBehaviour
             TurnAround();
         }
 
-        _positionBefore2Frames = _positionBefore1Frame;
-        _positionBefore1Frame = transform.position;
-        if (_isVertical)
+        // _positionBefore2Frames = _positionBefore1Frame;
+        // _positionBefore1Frame = transform.position;
+        if (isVertical)
         {
             MoveVertical();
         }
@@ -105,7 +106,7 @@ public class EnemyMovement : MonoBehaviour
 
     private bool NeedsToTurnAround()
     {
-        if (_isVertical || !_canMove || !Grounded)
+        if (isVertical || !_canMove || !Grounded)
             return false;
         if (ForcedTurnAround())  // can't move
         {
@@ -128,7 +129,7 @@ public class EnemyMovement : MonoBehaviour
 
     public bool ForcedTurnAround()
     {
-        return Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f || CheckUnwalkableSlopeInFront() || CheckAnotherEnemyInFront();
+        return /*Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f ||*/ CheckUnwalkableSlopeInFront() || CheckAnotherEnemyInFront();
     }
 
     private void TurnAround()
@@ -198,7 +199,7 @@ public class EnemyMovement : MonoBehaviour
     
     public void StartClimbing()
     {
-        _isVertical = true;
+        isVertical = true;
         ReachedTop = false;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
         _rb.gravityScale = 0;
@@ -206,7 +207,7 @@ public class EnemyMovement : MonoBehaviour
     
     public void StopClimbing()
     {
-        _isVertical = false;
+        isVertical = false;
         ReachedTop = false;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         _rb.gravityScale = _originalGravityScale;
