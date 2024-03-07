@@ -15,6 +15,7 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
     private bool _throwingAtPlayer = false;
     private Transform _playerTransform;
     private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
     
     [SerializeField] private GameObject throwable;
     [SerializeField] private float minThrowTime = 3f;
@@ -23,6 +24,8 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
     [SerializeField] private float maxThrowAngle = 120f;
     [SerializeField] private Transform throwPosition;
     private ThrowAtPlayerBehavior _throwAtPlayerBehavior;
+    private bool _throwing;
+    private static readonly int AnimThrow = Animator.StringToHash("throw");
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +34,9 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
         _enemyHealth = GetComponent<EnemyHealth>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _throwAtPlayerBehavior = GetComponent<ThrowAtPlayerBehavior>();
-        _throwAtPlayerBehavior.Init(throwable, minThrowTime, maxThrowTime, minThrowAngle, maxThrowAngle, throwPosition, this);
+        _throwAtPlayerBehavior.Init(throwable, minThrowTime, maxThrowTime, minThrowAngle, maxThrowAngle, throwPosition, this, 1f, .5f);
         _throwAtPlayerBehavior.enabled = false;
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -107,10 +111,18 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
                 _throwingAtPlayer = false;
                 _throwAtPlayerBehavior.enabled = false;
                 yield break;
-            } else
+            } 
+            var playerTransform = LookAtPlayer();
+            seeingPlayer = playerTransform != null;
+            if (!_throwing && _throwAtPlayerBehavior.Throwing)
             {
-                var playerTransform = LookAtPlayer();
-                seeingPlayer = playerTransform != null;
+                Debug.Log("Throwing");
+                _animator.SetTrigger(AnimThrow);
+                _throwing = true;
+            }
+            if (_throwing && !_throwAtPlayerBehavior.Throwing)
+            {
+                _throwing = false;
             }
             yield return null;
         } while (seeingPlayer);

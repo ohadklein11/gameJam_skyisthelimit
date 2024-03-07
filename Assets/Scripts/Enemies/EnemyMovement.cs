@@ -23,6 +23,8 @@ public class EnemyMovement : MonoBehaviour
     private float _originalGravityScale;
     
     private Transform _player;
+    private Vector2 _prevVelocity;
+    private RigidbodyConstraints2D _prevConstraints;
     public bool ReachedTop { get; private set; }
 
     public bool Grounded { get; set; }
@@ -141,6 +143,8 @@ public class EnemyMovement : MonoBehaviour
     public void StopMovement(bool freeze = false)
     {
         _canMove = false;
+        _prevVelocity = _rb.velocity;
+        _prevConstraints = _rb.constraints;
         _rb.velocity = Vector2.zero;
         if (freeze)
         {
@@ -209,5 +213,10 @@ public class EnemyMovement : MonoBehaviour
         _rb.velocity = Vector2.zero;
     }
 
-    
+
+    public void ResumeMovement()
+    {
+        _rb.velocity = _prevVelocity;
+        _rb.constraints = _prevConstraints;
+    }
 }

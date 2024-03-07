@@ -47,7 +47,7 @@ namespace Enemies
             _enemyMovement.StopMovement();
             _animator.SetTrigger(AnimHit);
             yield return new WaitForSeconds(.5f);
-            _enemyMovement.StartMovement();
+            _enemyMovement.ResumeMovement();
         }
 
         private IEnumerator Die()
