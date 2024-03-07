@@ -66,8 +66,8 @@ public class EnemyMovement : MonoBehaviour
             TurnAround();
         }
 
-        // _positionBefore2Frames = _positionBefore1Frame;
-        // _positionBefore1Frame = transform.position;
+        _positionBefore2Frames = _positionBefore1Frame;
+        _positionBefore1Frame = transform.position;
         if (isVertical)
         {
             MoveVertical();
@@ -129,7 +129,7 @@ public class EnemyMovement : MonoBehaviour
 
     public bool ForcedTurnAround()
     {
-        return /*Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f ||*/ CheckUnwalkableSlopeInFront() || CheckAnotherEnemyInFront();
+        return (!isVertical && Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f) || CheckUnwalkableSlopeInFront() || CheckAnotherEnemyInFront();
     }
 
     private void TurnAround()

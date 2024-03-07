@@ -51,7 +51,7 @@ namespace Enemies
             if (!_enemyMovement.isVertical)
                 _enemyMovement.StopMovement();
             yield return new WaitForSeconds(.5f);
-            if (!_enemyMovement.isVertical)
+            if (!_enemyMovement.isVertical && _collider2D.enabled)
                 _enemyMovement.ResumeMovement();
         }
 

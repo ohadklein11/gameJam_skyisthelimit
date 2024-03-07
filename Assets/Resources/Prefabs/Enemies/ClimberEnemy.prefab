@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7582189489661193823}
   - component: {fileID: 2947786685254682727}
   - component: {fileID: 7739629793127529774}
-  - component: {fileID: 955580200407072414}
   m_Layer: 11
   m_Name: stoneAboveHead
   m_TagString: Untagged
@@ -31,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 8211625120176581898}
   m_Father: {fileID: 4789428986721855467}
   m_LocalEulerAnglesHint: {x: 3.896, y: 0, z: 94.025}
 --- !u!33 &2947786685254682727
@@ -84,13 +84,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!60 &955580200407072414
+--- !u!1 &3668303513312945251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8211625120176581898}
+  - component: {fileID: 8738831745140240236}
+  m_Layer: 11
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8211625120176581898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668303513312945251}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.001, y: 0.001, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7582189489661193823}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &8738831745140240236
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67779719732703983}
+  m_GameObject: {fileID: 3668303513312945251}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -128,13 +160,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.003742041, y: 0.013069021}
-      - {x: -0.0023405056, y: 0.013056638}
-      - {x: -0.0059559103, y: 0.002961086}
-      - {x: -0.0041232575, y: -0.004102017}
-      - {x: -0.0013923201, y: -0.010612167}
-      - {x: 0.00667098, y: -0.0101523865}
-      - {x: 0.007564057, y: 0.0024663603}
+    - - {x: 4.846502, y: 6.0786924}
+      - {x: -0.17062704, y: 6.7248707}
+      - {x: -0.68057907, y: -7.6894}
+      - {x: 4.0368533, y: -9.417075}
+      - {x: 7.356179, y: -7.367738}
+      - {x: 7.5694346, y: 0.526373}
   m_UseDelaunayMesh: 0
 --- !u!1 &4483225187669674268
 GameObject:
@@ -302,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 6
+  isVertical: 0
 --- !u!114 &1636445915207426754
 MonoBehaviour:
   m_ObjectHideFlags: 0
