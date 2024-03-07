@@ -218,5 +218,6 @@ public class EnemyMovement : MonoBehaviour
     {
         _rb.velocity = _prevVelocity;
         _rb.constraints = _prevConstraints;
+        _canMove = true;
     }
 }

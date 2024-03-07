@@ -16,6 +16,7 @@ public class RunnerBehavior : MonoBehaviour
     private Transform _playerTransform;
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
+    private Animator _animator;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class RunnerBehavior : MonoBehaviour
         _enemyHealth = GetComponent<EnemyHealth>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
