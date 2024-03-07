@@ -1207,31 +1207,6 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 48291942}
-    - target: {fileID: 231812482145492535, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: m_Lens.FieldOfView
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 694973627312277557, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -20.839998
-      objectReference: {fileID: 0}
-    - target: {fileID: 694973627312277557, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.511562
-      objectReference: {fileID: 0}
-    - target: {fileID: 694973627312277557, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.15993863
-      objectReference: {fileID: 0}
-    - target: {fileID: 967823852423958981, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: m_Damping
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 967823852423958981, guid: 7fc8826beccdf56448a83c15311659cb,
         type: 3}
       propertyPath: m_BoundingShape2D
@@ -1287,26 +1262,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1258238568563246843, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -20.839998
-      objectReference: {fileID: 0}
-    - target: {fileID: 1258238568563246843, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.511562
-      objectReference: {fileID: 0}
-    - target: {fileID: 1258238568563246843, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.15993863
-      objectReference: {fileID: 0}
-    - target: {fileID: 2417055624747336116, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: field of view
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 4514992917562614503, guid: 7fc8826beccdf56448a83c15311659cb,
         type: 3}
       propertyPath: player
@@ -1327,11 +1282,6 @@ PrefabInstance:
       propertyPath: gooseCage
       value: 
       objectReference: {fileID: 1104879035}
-    - target: {fileID: 6200496622994152642, guid: 7fc8826beccdf56448a83c15311659cb,
-        type: 3}
-      propertyPath: m_TrackedObjectOffset.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8752547142480534418, guid: 7fc8826beccdf56448a83c15311659cb,
         type: 3}
       propertyPath: m_Name
