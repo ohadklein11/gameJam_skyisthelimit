@@ -19,6 +19,7 @@ namespace Enemies
         private static readonly int AnimDead = Animator.StringToHash("Dead");
 
         public bool CanTakeDamage { get; set; } = true;
+        public bool Hit { get; private set; }
 
         public bool IsDead => _currentHealth <= 0;
 
@@ -46,14 +47,16 @@ namespace Enemies
 
         private IEnumerator TakeDamageCoroutine()
         {
-            
+            Hit = true;
             _animator.SetTrigger(AnimHit);
             if (!_enemyMovement.isVertical)
                 _enemyMovement.StopMovement();
             yield return new WaitForSeconds(.5f);
             if (!_enemyMovement.isVertical && _collider2D.enabled)
                 _enemyMovement.ResumeMovement();
+            Hit = false;
         }
+
 
         private IEnumerator Die()
         {

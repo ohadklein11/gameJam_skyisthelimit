@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Enemies;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RunnerBehavior : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class RunnerBehavior : MonoBehaviour
     
     private EnemyMovement _enemyMovement;
     private EnemyHealth _enemyHealth;
-    private bool _chasingPlayer = false;
+    public bool chasingPlayer = false;
     private Transform _playerTransform;
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
     private Animator _animator;
+    public float noticeTime = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,7 @@ public class RunnerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_chasingPlayer) return;
+        if (chasingPlayer) return;
         var playerTransform = LookAtPlayer();
         if (playerTransform != null)
         {
@@ -69,10 +71,10 @@ public class RunnerBehavior : MonoBehaviour
     private IEnumerator ChasePlayer()
     {
         if (_enemyHealth.IsDead) yield break;
-        _chasingPlayer = true;
+        chasingPlayer = true;
         _enemyMovement.StopMovement(freeze: true);
-        _spriteRenderer.DOColor(new Color(215f/255f, 49f/255f, 38f/255f), 1f);
-        yield return new WaitForSeconds(1f);
+        _spriteRenderer.DOColor(new Color(215f/255f, 49f/255f, 38f/255f), noticeTime);
+        yield return new WaitForSeconds(noticeTime);
         _enemyMovement.StartMovement(chaseSpeed);
         // tween to change color to red
         
@@ -90,7 +92,7 @@ public class RunnerBehavior : MonoBehaviour
             }
             yield return null;
         } while (seeingPlayer);
-        _chasingPlayer = false;
+        chasingPlayer = false;
         _spriteRenderer.DOColor(_originalColor, 1f);
         _enemyMovement.StartMovement();
     }
