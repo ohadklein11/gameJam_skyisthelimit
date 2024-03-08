@@ -68,7 +68,7 @@ namespace Player
         
         public bool climbing => _isClimbing;
         public bool grounded => _isGrounded;
-        public bool falling => IsFalling;
+        public bool falling => (!_isGrounded && !_isClimbing && _rb.velocity.y < 0.0f);
 
 
         public bool jumping => _isJumping;
@@ -105,13 +105,13 @@ namespace Player
 
         private void CheckFalling()
         {
-            if (!_wasFalling && IsFalling)
+            if (!_wasFalling && falling)
             {
                 var position = transform.position;
                 _fallingFirstHeight = position.y;
                 _fallingMaxHeight = position.y;
             }
-            else if (IsFalling && transform.position.y > _fallingMaxHeight)
+            else if (falling && transform.position.y > _fallingMaxHeight)
             {
                 _fallingMaxHeight = transform.position.y;
             }
@@ -129,7 +129,7 @@ namespace Player
                 }
             }
 
-            _wasFalling = IsFalling;
+            _wasFalling = falling;
             _wasGrounded = _isGrounded;
         }
 
