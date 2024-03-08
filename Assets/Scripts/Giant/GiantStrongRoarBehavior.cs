@@ -1,11 +1,12 @@
 using Cinemachine;
 using DG.Tweening;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Utils
+namespace Giant
 {
-    public class ShakeGameObject : StateMachineBehaviour
+    public class GiantStrongRoarBehavior : StateMachineBehaviour
     {
         private PlayerMovement _playerMovement;
         [SerializeField] private float shakeDuration = 1f;
@@ -13,12 +14,14 @@ namespace Utils
         private CinemachineVirtualCamera _virtualCamera;
         [SerializeField] private float cameraShakeDuration = 1f;
         [SerializeField] private float cameraShakeMagnitude = 2f;
+        [SerializeField] private float _climbCooldown = 1f;
+
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             animator.gameObject.transform.DOShakePosition(shakeDuration, shakeStrength, 30, 90, false, false);
             _virtualCamera.GetComponent<CameraShake>().Shake(cameraShakeMagnitude, cameraShakeDuration);
-            _playerMovement.StopClimbing();
+            _playerMovement.StopClimbing(cooldown: _climbCooldown);
         }
 	
 

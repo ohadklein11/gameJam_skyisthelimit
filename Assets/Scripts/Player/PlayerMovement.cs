@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
@@ -75,6 +76,7 @@ namespace Player
         private float _fallingFirstHeight;
         private bool _paused;
         private bool _startWalking;
+        private float _climbCooldown;
 
         private void Start()
         {
@@ -265,6 +267,11 @@ namespace Player
 
         private void CheckClimb()
         {
+            if (_climbCooldown > 0)
+            {
+                _climbCooldown -= Time.deltaTime;
+                return;
+            }
             RaycastHit2D vineHitLeft = Physics2D.Raycast(
                 new Vector2(transform.position.x, transform.position.y),
                 Vector2.right * _facingDirection, _playerXradius, whatIsVine);
@@ -379,10 +386,11 @@ namespace Player
             loadingBar.localScale = localScale;
         }
 
-        public void StopClimbing()
+        public void StopClimbing(float cooldown = 0)
         {
             _canClimb = false;
             _isClimbing = false;
+            _climbCooldown = cooldown;
         }
 
         private void OnDrawGizmos()

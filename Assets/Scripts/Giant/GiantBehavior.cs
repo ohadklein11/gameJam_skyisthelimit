@@ -57,7 +57,7 @@ namespace Giant
         {
             _animator = GetComponent<Animator>();
             var playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
-            _animator.GetBehaviour<ShakeGameObject>().Init(playerMovement);
+            _animator.GetBehaviour<GiantStrongRoarBehavior>().Init(playerMovement);
             _throwAtPlayerBehavior = GetComponent<ThrowAtPlayerBehavior>();
             _throwAtPlayerBehavior.Init(throwable, minThrowTime, maxThrowTime, minThrowAngle, maxThrowAngle, throwPosition, this, minThrowTime, throwDelay);
             _throwAtPlayerBehavior.enabled = false;
