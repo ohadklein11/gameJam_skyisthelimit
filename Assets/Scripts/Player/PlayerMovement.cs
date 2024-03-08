@@ -12,6 +12,7 @@ namespace Player
         [SerializeField] private float minFallDamage;
         [SerializeField] private float movementSpeed;
 
+        [SerializeField] private int numFramesUntilFullSpeed;
         [SerializeField]
         private int
             numFramesUntilMaxSlowdown; // e.g. after 20 frames of moving, the player will slide to a stop upon releasing the movement key
@@ -73,6 +74,7 @@ namespace Player
         [SerializeField] private float minFallHeightForDust = .8f;
         private float _fallingFirstHeight;
         private bool _paused;
+        private bool _startWalking;
 
         private void Start()
         {
@@ -315,7 +317,16 @@ namespace Player
             if (_xInput != 0)
             {
                 _velocityMultiplier = _xInput;
-                _timeMultiplier = Mathf.Min(1f, _timeMultiplier + 1f / numFramesUntilMaxSlowdown);
+                if (!_startWalking && _timeMultiplier <= 0 )
+                {
+                    _startWalking = true;
+                } else if (_startWalking && _timeMultiplier >= 1)
+                {
+                    _startWalking = false;
+                }
+
+                var nFrames = _startWalking ? numFramesUntilFullSpeed : numFramesUntilMaxSlowdown;
+                _timeMultiplier = Mathf.Min(1f, _timeMultiplier + 1f / nFrames);
             }
             else
             {

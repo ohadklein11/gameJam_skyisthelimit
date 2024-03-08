@@ -363,9 +363,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minFallDamage: 7
   movementSpeed: 5
+  numFramesUntilFullSpeed: 5
   numFramesUntilMaxSlowdown: 20
   groundCheckRadius: 0.25
-  jumpForce: 5
+  jumpForce: 6
   groundCheck: {fileID: 7089929107311810936}
   whatIsGround:
     serializedVersion: 2
