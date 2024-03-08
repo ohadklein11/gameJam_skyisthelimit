@@ -34,7 +34,7 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
         _enemyHealth = GetComponent<EnemyHealth>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _throwAtPlayerBehavior = GetComponent<ThrowAtPlayerBehavior>();
-        _throwAtPlayerBehavior.Init(throwable, minThrowTime, maxThrowTime, minThrowAngle, maxThrowAngle, throwPosition, this, 1f, .5f);
+        _throwAtPlayerBehavior.Init(throwable, minThrowTime, maxThrowTime, minThrowAngle, maxThrowAngle, throwPosition, this, 1f, .33f);
         _throwAtPlayerBehavior.enabled = false;
         _animator = GetComponent<Animator>();
     }

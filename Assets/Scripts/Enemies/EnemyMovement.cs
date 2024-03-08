@@ -79,8 +79,9 @@ public class EnemyMovement : MonoBehaviour
         
         // also check if the enemy is on the ground
         var bounds = _spriteRenderer.bounds;
-        var raycastOrigin = transform.position + new Vector3(0, -bounds.size.y / 2 - .1f, 0);
-        var hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .4f, LayerMask.GetMask("Ground"));
+        var raycastOrigin = transform.position + new Vector3(0, -bounds.size.y / 2 + .1f, 0);
+        var hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .5f, LayerMask.GetMask("Ground"));
+        Debug.DrawRay(raycastOrigin, Vector3.down * .4f, Color.red);
         Grounded = hit.collider != null;
     }
 
@@ -116,7 +117,7 @@ public class EnemyMovement : MonoBehaviour
         // check if can move forward
         var bounds = _spriteRenderer.bounds;
         var raycastOrigin =
-            transform.position + new Vector3(_direction * bounds.size.x / 2, -bounds.size.y / 2 - .1f, 0);
+            transform.position + new Vector3(_direction * bounds.size.x / 2, -bounds.size.y / 2 + .1f, 0);
         var hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .6f, LayerMask.GetMask("Ground"));
         Debug.DrawRay(raycastOrigin, Vector3.down * .6f, Color.red);
         if (hit.collider == null)
