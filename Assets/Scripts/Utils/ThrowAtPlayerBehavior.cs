@@ -121,6 +121,18 @@ namespace Utils
         { 
             _throwablePool.Clear();
         }
+
+        public void PauseThrow(float pauseTime)
+        {
+            StartCoroutine(PauseThrowCoroutine(pauseTime));
+        }
+
+        private IEnumerator PauseThrowCoroutine(float pauseTime)
+        {
+            PauseThrowing();
+            yield return new WaitForSeconds(pauseTime);
+            ResumeThrowing();
+        }
     }
     
 }

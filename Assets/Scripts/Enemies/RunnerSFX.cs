@@ -26,7 +26,7 @@ public class RunnerSFX : MonoBehaviour
     void Update()
     {
         if (_dead) return;
-        if (! _runnerBehavior.chasingPlayer) _chase = false;
+        if (!_runnerBehavior.chasingPlayer) _chase = false;
         if (_enemyHealth.IsDead)
         {
             MuteGlobalSounds();
@@ -87,4 +87,5 @@ public class RunnerSFX : MonoBehaviour
         yield return new WaitForSeconds(.7f);
         _hit = false;
     }
+    
 }

@@ -9,7 +9,6 @@ public class RunnerBehavior : MonoBehaviour
 {
     [SerializeField] private float viewDistance;
     [SerializeField] private float chaseSpeed;
-
     
     private EnemyMovement _enemyMovement;
     private EnemyHealth _enemyHealth;

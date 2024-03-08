@@ -5,6 +5,7 @@ using DG.Tweening;
 using Enemies;
 using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ClimberBehavior : MonoBehaviour
 {
@@ -27,8 +28,8 @@ public class ClimberBehavior : MonoBehaviour
     private EnemyHealth _enemyHealth;
     private Rigidbody2D _rigidbody2D;
 
-    private bool _appearing;
-    private bool _appeared;
+    public bool appearing;
+    public bool appeared;
     private bool _isClimbing;
     private Transform _curVine;
     private Transform _targetVine;
@@ -48,7 +49,7 @@ public class ClimberBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _appeared = false;
+        appeared = false;
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerMovement = _player.GetComponent<PlayerMovement>();
 
@@ -79,7 +80,7 @@ public class ClimberBehavior : MonoBehaviour
                               && vine.parent != null  // vine holder 
                               && vine.parent.parent == transform.parent
                               && _playerMovement.climbing;
-        if (_appeared)
+        if (appeared)
         {
             if (_shouldFacePlayer)
             {
@@ -154,7 +155,7 @@ public class ClimberBehavior : MonoBehaviour
             }
         }
 
-        if (!_appeared && !_appearing && playerClimbing)
+        if (!appeared && !appearing && playerClimbing)
         {
             StartCoroutine(Appear());
         }
@@ -170,7 +171,7 @@ public class ClimberBehavior : MonoBehaviour
 
     private IEnumerator Appear()
     {
-        _appearing = true;
+        appearing = true;
         _enemyMovement.FacePlayer();
         var position = transform.position;
         transform.DOMoveY(position.y + _appearHeight, _appearDuration).SetEase(Ease.OutSine);
@@ -186,8 +187,8 @@ public class ClimberBehavior : MonoBehaviour
         _animator.SetBool(AnimAppeared, true);
         _enemyMovement.StartMovement(_movementSpeed);
         _rigidbody2D.simulated = true;
-        _appearing = false;
-        _appeared = true;
+        appearing = false;
+        appeared = true;
         
     }
     
