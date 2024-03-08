@@ -12,6 +12,7 @@ public class EventManagerScript : Singleton<EventManagerScript>
 	public const string HealthRecovery = "HealthRecovery";
 	public const string PlayerWin = "PlayerWin";
 	public const string PlayerDead = "PlayerDead";
+	public const string FirstVine = "FirstVine";
 
 
 

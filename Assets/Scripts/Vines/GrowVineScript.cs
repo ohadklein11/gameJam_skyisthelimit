@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class GrowVineScript : MonoBehaviour
 {
+    private static bool _firstVine = true;
     [SerializeField] private float vineGrowthSpeed = 1f;
     private GameObject _vineBodyPrefab;
     private Camera _mainCamera;
@@ -37,6 +38,11 @@ public class GrowVineScript : MonoBehaviour
         _headHeight = _lastStem.GetComponent<SpriteRenderer>().bounds.size.y;
         _stemHeight = _vineBodyPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
         _growing = true;
+        if (_firstVine)
+        {
+            _firstVine = false;
+            EventManagerScript.Instance.TriggerEvent(EventManagerScript.FirstVine, null);
+        }
     }
 
     void Update()
