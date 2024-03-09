@@ -52,19 +52,14 @@ public class PlayerHealthManager : MonoBehaviour
     IEnumerator CooldownTimer()
     {
         _canPlayerTakeDamage = false;
-        iTween.ValueTo(gameObject, iTween.Hash(
-            "from", Color.white,
-            "to", Color.red,
-            "time", 1,
-            "onupdate", "UpdatePlayerColor",
-            "easetype", iTween.EaseType.easeInOutSine));
+        spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(1f);
         iTween.ValueTo(gameObject, iTween.Hash(
             "from", Color.red,
             "to", Color.white,
             "time", 1,
             "onupdate", "UpdatePlayerColor",
-            "easetype", iTween.EaseType.easeInOutSine));
+            "easetype", iTween.EaseType.easeOutSine));
         yield return new WaitForSeconds(1f);
         _canPlayerTakeDamage = true;
     }

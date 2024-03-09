@@ -56,7 +56,6 @@ public class Bean : MonoBehaviour
 
     void FixedUpdate()
     {
-        CheckGrounded();
         CheckSpeed();
     }
 
@@ -88,6 +87,7 @@ public class Bean : MonoBehaviour
             GrowVine(hit);
             Grounded = true;
         }
+        Destroy(gameObject);
     }
     
     private void GrowVine(RaycastHit2D bottomPlatform)
@@ -110,7 +110,7 @@ public class Bean : MonoBehaviour
             GameObject vine = BuildVine(bottomPlatform); 
             vine.transform.SetParent(bottomPlatform.transform,true); 
         }
-        Destroy(gameObject);
+
 
     }
     GameObject BuildVine(RaycastHit2D bottomPlatform)
@@ -127,6 +127,10 @@ public class Bean : MonoBehaviour
         if (collision.gameObject.layer != LayerMask.NameToLayer("Ground"))
         {
             Destroy(gameObject);
+        }
+        else
+        {
+            CheckGrounded();
         }
     }
 

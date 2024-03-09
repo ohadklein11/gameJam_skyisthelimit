@@ -41,12 +41,12 @@ public class BeansShooting : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private float _shootingCooldownWait;
     private SpriteRenderer _playerSpriteRenderer;
-    public bool canShoot = true;
+    public bool canShoot = false;
     public bool isLoading => _shootingForce >= minShootingForce;
     public bool IsOnCooldown => _shootingCooldownWait > 0;
     private Animator _animator;
     private static readonly int EggChange = Animator.StringToHash("eggChange");
-    private static readonly int BeanChange = Animator.StringToHash("beanChange");
+    public static readonly int BeanChange = Animator.StringToHash("beanChange");
     private bool _canSwitchWeapons = false;
 
 
@@ -152,6 +152,8 @@ public class BeansShooting : MonoBehaviour
 
     void ShootEggs()
     {
+        if (!canShoot) return;
+        
         _shootingCooldownWait -= Time.deltaTime;
 
         if (Input.GetButtonDown("Fire1"))
