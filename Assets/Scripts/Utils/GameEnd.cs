@@ -40,7 +40,12 @@ public class GameEnd : MonoBehaviour
             "time", 3,
             "onupdate", "FadeScreenIn",
             "easetype", iTween.EaseType.easeOutSine));
-            
+        yield return new WaitForSeconds(3f);
+        //disable all prefabs in Resources/Prefabs/Enemies
+        // foreach (var enemy in Resources.LoadAll<GameObject>("Prefabs/Enemies"))
+        // {
+        //     enemy.SetActive(false);
+        // }
     }
         
     void FadeScreenIn(float alpha)
