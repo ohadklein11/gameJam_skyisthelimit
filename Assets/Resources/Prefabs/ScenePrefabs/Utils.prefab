@@ -68,6 +68,8 @@ MonoBehaviour:
   fallingDamage: 5
   teleportDistance: 10
   saveNewTeleportPointY: 0
+  bossPlatform: {fileID: 0}
+  playerHome: {fileID: 0}
   fallingTimeUntillTeleport: 1.5
 --- !u!114 &7920816359554838693
 MonoBehaviour:
@@ -745,7 +747,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5df0853c961e71a419147e4b810b5102, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
