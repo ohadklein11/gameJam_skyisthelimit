@@ -14,6 +14,7 @@ public class PlayerHealthManager : MonoBehaviour
     public bool IsDead => _isDead;
     private GameData _gameData;
     private bool _canPlayerTakeDamage = true;
+    public bool Hit => !_canPlayerTakeDamage;
     
     // Start is called before the first frame update
     void Start()

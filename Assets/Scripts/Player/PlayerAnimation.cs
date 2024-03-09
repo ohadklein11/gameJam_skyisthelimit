@@ -28,7 +28,13 @@ public class PlayerAnimation : MonoBehaviour
 
 
     private Collider2D _playerCollider;
-    
+    private static readonly int Beans = Animator.StringToHash("beans");
+    private static readonly int IsLoading = Animator.StringToHash("isLoading");
+    private static readonly int IsClimbing = Animator.StringToHash("isClimbing");
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
+    private static readonly int IsMovingVertically = Animator.StringToHash("isMovingVertically");
+    private static readonly int IsJumping = Animator.StringToHash("isJumping");
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +44,7 @@ public class PlayerAnimation : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _playerMovement = GetComponent<PlayerMovement>();
         _beansShooting = GetComponent<BeansShooting>();
-        _animator.SetBool("beans", true);
+        _animator.SetBool(Beans, true);
     }
 
     // Update is called once per frame
@@ -46,57 +52,60 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (_forceRunOnTruck)
         {
-            if (_beansShooting.isLoading != _animator.GetBool("isLoading"))
-                _animator.SetBool("isLoading", _beansShooting.isLoading);
+            if (_beansShooting.isLoading != _animator.GetBool(IsLoading))
+                _animator.SetBool(IsLoading, _beansShooting.isLoading);
             return;
 
         }
         
-        if(_playerMovement.climbing != _animator.GetBool("isClimbing")) {
-            if (IsShootingBeans && _playerMovement.climbing)
+        if(_playerMovement.Climbing != _animator.GetBool(IsClimbing)) {
+            if (IsShootingBeans && _playerMovement.Climbing)
             {
                 SwitchToClimbingAnimation(true);   
             }
-            else if (IsShootingBeans && !_playerMovement.climbing)
+            else if (IsShootingBeans && !_playerMovement.Climbing)
             {
                 SwitchToClimbingAnimation(false); 
             }
-            _animator.SetBool("isClimbing", _playerMovement.climbing);
+            _animator.SetBool(IsClimbing, _playerMovement.Climbing);
         }
         
-        if ((Mathf.Abs(_rb.velocity.x) >= 0.1f)!= _animator.GetBool("isMoving")){
-            _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.x) >= 0.1f));
+        if ((Mathf.Abs(_rb.velocity.x) >= 0.1f)!= _animator.GetBool(IsMoving)){
+            _animator.SetBool(IsMoving, (Mathf.Abs(_rb.velocity.x) >= 0.1f));
         }
-        if ((Mathf.Abs(_rb.velocity.y) >= 0.1f)!= _animator.GetBool("isMovingVertically")){
-            _animator.SetBool("isMovingVertically", (Mathf.Abs(_rb.velocity.y) >= 0.1f));
+        if ((Mathf.Abs(_rb.velocity.y) >= 0.1f)!= _animator.GetBool(IsMovingVertically)){
+            _animator.SetBool(IsMovingVertically, (Mathf.Abs(_rb.velocity.y) >= 0.1f));
         }
 
-        if (_beansShooting.IsShootingBeans() != _animator.GetBool("beans"))
+        if (_beansShooting.IsShootingBeans() != _animator.GetBool(Beans))
         {
-            _animator.SetBool("beans", _beansShooting.IsShootingBeans());
+            _animator.SetBool(Beans, _beansShooting.IsShootingBeans());
         }
 
-        if(_beansShooting.isLoading != _animator.GetBool("isLoading")) {
-            _animator.SetBool("isLoading", _beansShooting.isLoading);
+        if(_beansShooting.isLoading != _animator.GetBool(IsLoading)) {
+            _animator.SetBool(IsLoading, _beansShooting.isLoading);
         }
-        if(_playerMovement.jumping != _animator.GetBool("isJumping")) {
-            _animator.SetBool("isJumping", _playerMovement.jumping);
+        if(_playerMovement.Jumping && !_animator.GetBool(IsJumping)) {
+            _animator.SetBool(IsJumping, true);
         } 
+        else if(!_playerMovement.Jumping && !_playerMovement.Falling && _animator.GetBool(IsJumping)) {
+            _animator.SetBool(IsJumping, false);
+        }
     }
     
     private IEnumerator ForceRunOnTruckCoroutine()
     {
         _forceRunOnTruck = true;
         _playerMovement.forceDirection=true;
-        _animator.SetBool("isJumping", false);
-        _animator.SetBool("isClimbing", false);
-        _animator.SetBool("isMovingVertically", false);
-        _animator.SetBool("isMoving", true);
+        _animator.SetBool(IsJumping, false);
+        _animator.SetBool(IsClimbing, false);
+        _animator.SetBool(IsMovingVertically, false);
+        _animator.SetBool(IsMoving, true);
         SwitchToClimbingAnimation(false);
         yield return new WaitForSeconds(5f);
         _playerMovement.forceDirection=false;
         _forceRunOnTruck = false;
-        _animator.SetBool("isMoving", (Mathf.Abs(_rb.velocity.y) >= 0.1f));
+        _animator.SetBool(IsMoving, (Mathf.Abs(_rb.velocity.y) >= 0.1f));
 
     }
 
@@ -126,7 +135,7 @@ public class PlayerAnimation : MonoBehaviour
         string animationName = shootingType == 0 ? "Bean" : "Egg";
         if ((Mathf.Abs(_rb.velocity.x) >= 0.1f))
             _animator.Play("run"+animationName+"Shoot");
-        else if(_playerMovement.climbing)
+        else if(_playerMovement.Climbing)
         {
             _animator.Play("climb"+animationName+"Shoot");
         }

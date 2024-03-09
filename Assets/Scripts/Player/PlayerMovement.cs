@@ -66,12 +66,12 @@ namespace Player
         [SerializeField] private float jumpGravity;
         [SerializeField] private float fallGravity;
         
-        public bool climbing => _isClimbing;
-        public bool grounded => _isGrounded;
-        public bool falling => (!_isGrounded && !_isClimbing && _rb.velocity.y < 0.0f);
-
-
-        public bool jumping => _isJumping;
+        public bool Climbing => _isClimbing;
+        public bool Grounded => _isGrounded;
+        public bool Falling => (!_isGrounded && !_isClimbing && _rb.velocity.y < 0.0f);
+        public bool Walking => Grounded && _xInput != 0;
+        public bool ActivelyClimbing => Climbing && _yInput != 0;
+        public bool Jumping => _isJumping;
         [SerializeField] private float minFallHeightForDust = .8f;
         private float _fallingFirstHeight;
         private bool _paused;
@@ -105,13 +105,13 @@ namespace Player
 
         private void CheckFalling()
         {
-            if (!_wasFalling && falling)
+            if (!_wasFalling && Falling)
             {
                 var position = transform.position;
                 _fallingFirstHeight = position.y;
                 _fallingMaxHeight = position.y;
             }
-            else if (falling && transform.position.y > _fallingMaxHeight)
+            else if (Falling && transform.position.y > _fallingMaxHeight)
             {
                 _fallingMaxHeight = transform.position.y;
             }
@@ -129,7 +129,7 @@ namespace Player
                 }
             }
 
-            _wasFalling = falling;
+            _wasFalling = Falling;
             _wasGrounded = _isGrounded;
         }
 

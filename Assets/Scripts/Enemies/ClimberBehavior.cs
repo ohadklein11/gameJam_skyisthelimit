@@ -79,7 +79,7 @@ public class ClimberBehavior : MonoBehaviour
         bool playerClimbing = vine != null  // vine
                               && vine.parent != null  // vine holder 
                               && vine.parent.parent == transform.parent
-                              && _playerMovement.climbing;
+                              && _playerMovement.Climbing;
         if (appeared)
         {
             if (_shouldFacePlayer)
@@ -115,7 +115,7 @@ public class ClimberBehavior : MonoBehaviour
                     _shouldFacePlayer = Mathf.Abs(targetX - _body.transform.position.x) > _distanceToTargetVine; // will go towards vine even if player is not climbing
                 }
                 
-                if (!_playerMovement.grounded && _targetVine != null && Mathf.Abs(targetX - _body.transform.position.x) < .3f)
+                if (!_playerMovement.Grounded && _targetVine != null && Mathf.Abs(targetX - _body.transform.position.x) < .3f)
                 {
                     _isClimbing = true;
                     _animator.SetBool(AnimClimbing, true);
@@ -125,7 +125,7 @@ public class ClimberBehavior : MonoBehaviour
                     _body.transform.position = position;
                     _enemyMovement.StartClimbing();
                 }
-            } else if (_playerMovement.grounded)
+            } else if (_playerMovement.Grounded)
             {
                 GetDownFromVine();
             }

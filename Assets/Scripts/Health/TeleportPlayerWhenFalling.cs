@@ -37,7 +37,7 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     {
         var hit=CheckGroundBeneath(0.6f);
 
-        _hitSolidGround = _playerMovement.grounded && !_playerMovement.falling && !_playerMovement.climbing && hit;
+        _hitSolidGround = _playerMovement.Grounded && !_playerMovement.Falling && !_playerMovement.Climbing && hit;
         // _hit =Physics2D.OverlapCircle(_playerMovement.groundCheck.position, _playerMovement.groundCheckRadius, LayerMask.GetMask("Ground"));
         // if (_hit)
         // {
@@ -97,7 +97,7 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
             Debug.Log("GroundPointOnDescend"+_lastGroundPoint);  //too many logs
 
         }
-        if (!hitGroundBeneath && _playerMovement.falling && !_playerMovement.jumping)
+        if (!hitGroundBeneath && _playerMovement.Falling && !_playerMovement.Jumping)
         {
             Debug.Log("no ground below and falling");
             if (_timeleftToTeleport <= 0)
