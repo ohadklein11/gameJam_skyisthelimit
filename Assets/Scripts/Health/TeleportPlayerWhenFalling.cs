@@ -12,8 +12,8 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     [SerializeField] private int fallingDamage = 5;
     [SerializeField] private float teleportDistance = 5;
     [SerializeField] private float saveNewTeleportPointY = 2;
-
-
+    [SerializeField] private GameObject bossPlatform;
+    [SerializeField] private GameObject playerHome;
     [SerializeField] private float fallingTimeUntillTeleport = 0.5f;
     private GameData _gameData;
     private PlayerMovement _playerMovement;
@@ -58,16 +58,17 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
             playerPos + new Vector3( -spriteExtents.x, -spriteExtents.y - .1f, 0);
         var raycastOriginRight =
             playerPos + new Vector3( spriteExtents.x, -spriteExtents.y - .1f, 0);
+        var raycastOriginCenter =
+            playerPos + new Vector3(0, -spriteExtents.y - .1f, 0);
         RaycastHit2D hitLeft = Physics2D.Raycast(raycastOriginLeft, Vector2.down, distance, LayerMask.GetMask("Ground"));
         RaycastHit2D hitRight = Physics2D.Raycast(raycastOriginRight, Vector2.down, distance, LayerMask.GetMask("Ground"));
-        Debug.DrawRay(raycastOriginLeft, Vector3.down * distance, Color.cyan);
-        Debug.DrawRay(raycastOriginRight, Vector3.down * distance, Color.cyan);
-        return hitLeft && hitRight;
+        RaycastHit2D hitCenter = Physics2D.Raycast(raycastOriginCenter, Vector2.down, distance, LayerMask.GetMask("Ground"));
+        return hitLeft && hitRight && hitCenter;
     }
 
     private void teleportOnAscend()
     {
-        if (_hitSolidGround && player.transform.position.y-_lastGroundPoint.y>=saveNewTeleportPointY)
+        if (_hitSolidGround && Vector3.Distance(bossPlatform.transform.position,player.transform.position)<Vector3.Distance(bossPlatform.transform.position,_lastGroundPoint))
         {
             _lastGroundPoint = player.transform.position + new Vector3(0,1f,0);
             Debug.Log("GroundPointOnAscend"+_lastGroundPoint);
@@ -90,10 +91,10 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
     {
         // check if no ground below player with raycast
         var hitGroundBeneath = CheckGroundBeneath(10f);
-        if (_hitSolidGround && (_lastGroundPoint.y - player.transform.position.y>=saveNewTeleportPointY))
+        if (_hitSolidGround && Vector3.Distance(playerHome.transform.position,player.transform.position)<Vector3.Distance(playerHome.transform.position,_lastGroundPoint))
         {
             _lastGroundPoint = player.transform.position+new Vector3(0,1f,0);
-            // Debug.Log("GroundPointOnDescend"+_lastGroundPoint);  too many logs
+            Debug.Log("GroundPointOnDescend"+_lastGroundPoint);  //too many logs
 
         }
         if (!hitGroundBeneath && _playerMovement.falling && !_playerMovement.jumping)
