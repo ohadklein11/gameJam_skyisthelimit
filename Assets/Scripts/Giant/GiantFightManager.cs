@@ -27,6 +27,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private GameObject _blockExit;
     [SerializeField] private GameObject EButton;
     [SerializeField] private GameObject backwardEnemies;
+    [SerializeField] private GooseInCageBehavior _gooseInCage;
 
     private void Update()
     {
@@ -71,6 +72,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         _player.GetComponent<PlayerMovement>().StopMoving(5f);
         AudioManager.StopCurrentBGM();
         AudioManager.PlayBossBackground();
+        _gooseInCage.audioGoose.Play(44100*3);
         OpenDoor();
     }
 

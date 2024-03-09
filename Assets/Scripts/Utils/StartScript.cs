@@ -4,6 +4,7 @@ using Utils;
 public class StartScript : MonoBehaviour
 {
     public GameObject startPanel;
+    [SerializeField] private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class StartScript : MonoBehaviour
         {
             GameData.isGameStopped = false;
             startPanel.SetActive(false);
+            audioSource.Play();
         }
     }
 }

@@ -53,6 +53,7 @@ public class BeansShooting : MonoBehaviour
     public static readonly int BeanChange = Animator.StringToHash("beanChange");
     private bool _canSwitchWeapons = false;
     private float _originalVolume;
+    [SerializeField] private AudioSource audioCollect;
 
 
     void Awake()
@@ -93,6 +94,7 @@ public class BeansShooting : MonoBehaviour
             ShootEggs();
         if (_canSwitchWeapons && Input.GetKeyDown(switchKey))
         {
+            audioCollect.Play();
             if (_gunType == GunType.BeansGun)
             {
                 audioPeaShoot.volume = 0.2f;

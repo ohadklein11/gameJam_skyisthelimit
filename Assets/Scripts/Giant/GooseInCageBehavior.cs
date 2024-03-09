@@ -1,18 +1,38 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Utils;
+using UnityEngine.Serialization;
 
-public class GooseInCageBehavior : MonoBehaviour
+namespace Giant
 {
-    [SerializeField] private GiantFightManager giantFightManager;
-    
-    private void OnTriggerEnter2D(Collider2D other)
+    public class GooseInCageBehavior : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        [SerializeField] private GiantFightManager giantFightManager;
+        [SerializeField] public AudioSource audioGoose;
+        private SpriteRenderer _spriteRenderer;
+        private Collider2D _collider2D;
+    
+        private void Awake()
         {
-            giantFightManager.TookGoose();
-            gameObject.SetActive(false);
+            _collider2D = GetComponent<Collider2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+    
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                giantFightManager.TookGoose();
+                StartCoroutine(Release());
+            }
+        }
+    
+        private IEnumerator Release()
+        {
+            audioGoose.Play();
+            _spriteRenderer.enabled = false;
+            _collider2D.enabled = false;
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
         }
     }
 }

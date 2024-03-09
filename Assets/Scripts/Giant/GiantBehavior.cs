@@ -162,7 +162,8 @@ namespace Giant
             _animator.SetTrigger(Hit);
             _throwAtPlayerBehavior.ReleaseAll();
         }
-        
+
+
         public void StartEscape()
         {
             _polygonCollider.enabled = false;
