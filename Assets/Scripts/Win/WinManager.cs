@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using DG.Tweening;
+
 
 public class WinManager : MonoBehaviour
 {
     [SerializeField] private GameObject winTrigger;
+    [SerializeField] private GameObject player;
+    private Animator _playerAnimator;
+    private BeansShooting _beansShootingScript;
+    private static readonly int NoGunChange = Animator.StringToHash("noGunChange");
+
+    
     // Start is called before the first frame update
     void Start()
     {
        EventManagerScript.Instance.StartListening(EventManagerScript.PlayerWin, OnPlayerWin); 
        EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, ActivateWinTrigger); 
-
+       _playerAnimator = player.GetComponent<Animator>();
+       _beansShootingScript = player.GetComponent<BeansShooting>();
     }
 
     private void ActivateWinTrigger(object arg0)
@@ -24,6 +32,11 @@ public class WinManager : MonoBehaviour
     {
         AudioManager.StopCurrentBGM();
         AudioManager.PlayWinBackground();
-        SceneManager.LoadScene("WinScene");  // todo move to the same scene
+        
+        _playerAnimator.SetTrigger(NoGunChange);
+        _beansShootingScript.canShoot = false;
+        
     }
+    
+    
 }

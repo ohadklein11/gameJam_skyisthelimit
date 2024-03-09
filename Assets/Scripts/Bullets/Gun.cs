@@ -8,7 +8,6 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BeansShooting beansShootingScript; 
-    [SerializeField] private GameObject gunNotPickedUpBarrier;
 
 
     void Start()
@@ -21,9 +20,7 @@ public class Gun : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            gunNotPickedUpBarrier.SetActive(false);
             playerAnimator.SetTrigger(BeansShooting.BeanChange);
-            // playerAnimator.Play("IdleBean");
             beansShootingScript.canShoot = true;
             Destroy(gameObject);
         }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5945695775545213795}
   - component: {fileID: 3823797751893428333}
   - component: {fileID: 4614142689733721098}
+  - component: {fileID: 4815004651005007655}
   m_Layer: 0
   m_Name: Utils
   m_TagString: Untagged
@@ -84,6 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winTrigger: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &6084446583708313001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +161,21 @@ MonoBehaviour:
   - {fileID: 4398744521037785683}
   runningSounds: []
   jumpSounds: []
+--- !u!114 &4815004651005007655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399148348744229765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce79caecaaf30da4398116a6a8e237b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverScreen: {fileID: 0}
+  winImage: {fileID: 0}
+  loseImage: {fileID: 0}
 --- !u!1 &2223665259964285869
 GameObject:
   m_ObjectHideFlags: 0

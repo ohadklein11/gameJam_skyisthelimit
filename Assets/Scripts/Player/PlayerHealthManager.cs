@@ -72,6 +72,5 @@ public class PlayerHealthManager : MonoBehaviour
         AudioManager.StopCurrentBGM();
         AudioManager.PlayLoseBackground();
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("LostScene");  // todo move to the same scene
     }
 }

@@ -135,3 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 3373096775703445808, guid: a16659e89ee13a84e9ad28a66abb95c2,
     type: 3}
+  beansShootingScript: {fileID: 0}
+  gunNotPickedUpBarrier: {fileID: 0}

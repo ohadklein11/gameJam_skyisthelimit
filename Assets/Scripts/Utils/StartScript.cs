@@ -9,7 +9,6 @@ public class StartScript : MonoBehaviour
     {
         GameData.isGameStopped = true;
         startPanel.SetActive(true);
-        Time.timeScale = 0;
     }
 
     // Update is called once per frame
@@ -19,7 +18,6 @@ public class StartScript : MonoBehaviour
         {
             GameData.isGameStopped = false;
             startPanel.SetActive(false);
-            Time.timeScale = 1f;
         }
     }
 }
