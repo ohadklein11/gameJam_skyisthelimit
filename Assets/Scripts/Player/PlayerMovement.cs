@@ -194,8 +194,8 @@ namespace Player
                 try
                 {
                     var xPosition = _climbable.GetXPosition();
-                    // if (GetComponent<BeansShooting>().IsShootingBeans())
-                    //     xPosition -=_facingDirection * 0.2f;
+                    if (GetComponent<BeansShooting>().IsShootingBeans())
+                        xPosition -=_facingDirection * 0.2f;
                     var yTopPosition = _climbable.GetHeadYPosition()-0.5f;
                     var yMaxPosition = _climbable.IsGrowing()?Mathf.Infinity:yTopPosition;
                     if (position.y > yTopPosition && _firstClimbWithGrowingVine)
@@ -209,7 +209,7 @@ namespace Player
                     if (_yInput > 0)
                     {
                         RaycastHit2D vineHitUp = Physics2D.Raycast(
-                            new Vector2(transform.position.x, transform.position.y + .5f),
+                            new Vector2(transform.position.x + _facingDirection*.2f, transform.position.y + .5f),
                             Vector2.up, .01f, whatIsVine);
                         if (!vineHitUp)
                         {
