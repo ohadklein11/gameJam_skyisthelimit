@@ -34,6 +34,7 @@ public class PlayerAnimation : MonoBehaviour
     private static readonly int IsMoving = Animator.StringToHash("isMoving");
     private static readonly int IsMovingVertically = Animator.StringToHash("isMovingVertically");
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
+    private float _climbCooldown = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,7 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (_climbCooldown > 0f) _climbCooldown -= Time.deltaTime;
         if (_forceRunOnTruck)
         {
             if (_beansShooting.isLoading != _animator.GetBool(IsLoading))
@@ -58,7 +60,7 @@ public class PlayerAnimation : MonoBehaviour
 
         }
         
-        if(_playerMovement.Climbing != _animator.GetBool(IsClimbing)) {
+        if(_playerMovement.Climbing != _animator.GetBool(IsClimbing) && _climbCooldown <= 0f) {
             if (IsShootingBeans && _playerMovement.Climbing)
             {
                 SwitchToClimbingAnimation(true);   
@@ -68,6 +70,7 @@ public class PlayerAnimation : MonoBehaviour
                 SwitchToClimbingAnimation(false); 
             }
             _animator.SetBool(IsClimbing, _playerMovement.Climbing);
+            _climbCooldown = .2f;
         }
         
         if ((Mathf.Abs(_rb.velocity.x) >= 0.1f)!= _animator.GetBool(IsMoving)){
@@ -155,11 +158,11 @@ public class PlayerAnimation : MonoBehaviour
     public void SwitchToGooseAnimation()
     {
         Debug.Log("Switching to goose animation");
-        _animator.SetBool("isClimbing",false);
-        _animator.SetBool("beans", false);
-        _animator.SetBool("isMoving", false);
-        _animator.SetBool("isLoading", false);
-        _animator.SetBool("isJumping", false); 
+        _animator.SetBool(IsClimbing,false);
+        _animator.SetBool(Beans, false);
+        _animator.SetBool(IsMoving, false);
+        _animator.SetBool(IsLoading, false);
+        _animator.SetBool(IsJumping, false); 
         _animator.Play("IdleEgg");
     }
 }
