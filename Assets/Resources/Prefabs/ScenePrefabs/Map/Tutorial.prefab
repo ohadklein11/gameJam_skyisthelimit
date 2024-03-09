@@ -10,10 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7995603119895983312}
   - component: {fileID: 5119182303442316060}
-  - component: {fileID: 8414150569642735963}
-  - component: {fileID: 8896044169244983140}
-  - component: {fileID: 3602059784456264825}
-  - component: {fileID: 5498445472840567754}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -42,58 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5119182303442316060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940089631337843060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 124fd1c187a994045aaaf3cf2f21c5eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  climbArrows: {fileID: 2553085036911000501}
---- !u!114 &8414150569642735963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940089631337843060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 124fd1c187a994045aaaf3cf2f21c5eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  climbArrows: {fileID: 2553085036911000501}
---- !u!114 &8896044169244983140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940089631337843060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 124fd1c187a994045aaaf3cf2f21c5eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  climbArrows: {fileID: 2553085036911000501}
---- !u!114 &3602059784456264825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940089631337843060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 124fd1c187a994045aaaf3cf2f21c5eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  climbArrows: {fileID: 2553085036911000501}
---- !u!114 &5498445472840567754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
