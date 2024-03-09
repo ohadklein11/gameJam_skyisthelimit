@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5119182303442316060}
   - component: {fileID: 8414150569642735963}
   - component: {fileID: 8896044169244983140}
+  - component: {fileID: 3602059784456264825}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -66,6 +67,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   climbArrows: {fileID: 2553085036911000501}
 --- !u!114 &8896044169244983140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940089631337843060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124fd1c187a994045aaaf3cf2f21c5eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbArrows: {fileID: 2553085036911000501}
+--- !u!114 &3602059784456264825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -967,6 +981,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7995603119895983312}
     m_Modifications:
+    - target: {fileID: 3639315951799786174, guid: 4a748083cd0eaa74a89bf18a2cc354da,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: -0.000201119
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639315951799786174, guid: 4a748083cd0eaa74a89bf18a2cc354da,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: 0.00837217
+      objectReference: {fileID: 0}
     - target: {fileID: 4892986670476998754, guid: 4a748083cd0eaa74a89bf18a2cc354da,
         type: 3}
       propertyPath: m_Name
