@@ -32,6 +32,10 @@ public class BeansShooting : MonoBehaviour
     // [SerializeField] private GameObject trajectoryPointPrefab;
     // [SerializeField] private int trajectoryPointsCount = 20;
     [SerializeField] private LayerMask _platformLayerMask;
+    
+    [SerializeField] private AudioSource audioPeaShoot;
+    [SerializeField] private AudioSource audioEggShoot;
+
     // private GameObject[] trajectoryPoints;
     private GameObject _beanPrefab;
     private GameObject _eggPrefab;
@@ -48,6 +52,7 @@ public class BeansShooting : MonoBehaviour
     private static readonly int EggChange = Animator.StringToHash("eggChange");
     public static readonly int BeanChange = Animator.StringToHash("beanChange");
     private bool _canSwitchWeapons = false;
+    private float _originalVolume;
 
 
     void Awake()
@@ -59,6 +64,7 @@ public class BeansShooting : MonoBehaviour
         _beanPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Bean");
         _eggPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Egg");
         _animator = GetComponent<Animator>();
+        _originalVolume = audioPeaShoot.volume;
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, EnableWeaponSwitch);
     }
 
@@ -89,11 +95,13 @@ public class BeansShooting : MonoBehaviour
         {
             if (_gunType == GunType.BeansGun)
             {
+                audioPeaShoot.volume = 0.2f;
                 _gunType = GunType.EggsGun;
                 _animator.SetTrigger(EggChange);
             }
             else
             {
+                audioPeaShoot.volume = _originalVolume;
                 _shootingForce = 0;
                 _gunType = GunType.BeansGun;
                 _animator.SetTrigger(BeanChange);
@@ -136,6 +144,7 @@ public class BeansShooting : MonoBehaviour
                 InstantiateBullet(_beanPrefab);
                 _shootingCooldownWait = beanShootingCooldown;
                 _shootingForce = 0;
+                audioPeaShoot.Play();
             }
             
         }
@@ -167,6 +176,9 @@ public class BeansShooting : MonoBehaviour
                 GetComponent<PlayerAnimation>().PlayShootingAnimation(1);
                 InstantiateBullet(_eggPrefab);
                 _shootingCooldownWait = eggShootingCooldown;
+                audioPeaShoot.Play();
+                if (!audioEggShoot.isPlaying)
+                    audioEggShoot.Play();
             }
         }
     }
