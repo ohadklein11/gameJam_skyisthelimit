@@ -30,6 +30,8 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private GooseInCageBehavior _gooseInCage;
     [SerializeField] private AudioSource doorOpenSound;
     [SerializeField] private AudioSource doorCloseSound;
+    [SerializeField] private CameraShake cameraShake;
+    private bool _escaping;
 
     private void Update()
     {
@@ -37,6 +39,15 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         {
             _player.transform.position = _openGiantDoorsTrigger.transform.position + new Vector3(-2, 1, 0);
         }
+
+        if (_escaping)
+        {
+            var intensity = 3 - Mathf.Abs(_player.transform.position.x - giantBehavior.gameObject.transform.position.x) / 15f;
+            if (intensity > 0)
+            {
+                cameraShake.Shake(intensity, 0.1f);
+            }
+         }
     }
 
     private void OpenDoor()
@@ -107,6 +118,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
         backwardEnemies.SetActive(true);
         AudioManager.PlayDownBackground();
+        _escaping = true;
     }
     
     IEnumerator OpenGiantDoorsDelay()

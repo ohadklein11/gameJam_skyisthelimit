@@ -54,6 +54,7 @@ public class BeansShooting : MonoBehaviour
     private bool _canSwitchWeapons = true; // todo false
     private float _originalVolume;
     [SerializeField] private AudioSource audioCollect;
+    [SerializeField] private CameraShake cameraShake;
 
 
     void Awake()
@@ -145,6 +146,7 @@ public class BeansShooting : MonoBehaviour
                 GetComponent<PlayerAnimation>().PlayShootingAnimation(0);
                 InstantiateBullet(_beanPrefab);
                 _shootingCooldownWait = beanShootingCooldown;
+                cameraShake.Shake(_shootingForce / (maxShootingForce*2f), .3f);
                 _shootingForce = 0;
                 audioPeaShoot.Play();
             }

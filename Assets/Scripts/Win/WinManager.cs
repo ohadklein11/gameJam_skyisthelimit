@@ -52,7 +52,7 @@ public class WinManager : MonoBehaviour
 
     private IEnumerator PlayGoose()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         gooseAudio.Play();
     }
 }

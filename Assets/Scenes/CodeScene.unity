@@ -213,6 +213,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7754149957972804038}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &606908532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5555976085035914342, guid: 7fc8826beccdf56448a83c15311659cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6801397343960255116}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e764b56d92e1ff4e891ab36610c18ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &690921113 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 867319649867385399, guid: a16659e89ee13a84e9ad28a66abb95c2,
@@ -520,6 +532,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1386272421102480873, guid: a16659e89ee13a84e9ad28a66abb95c2,
+        type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 606908532}
     - target: {fileID: 1386272421102480873, guid: a16659e89ee13a84e9ad28a66abb95c2,
         type: 3}
       propertyPath: playerHealthManager
@@ -1480,6 +1497,11 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 48291940}
+    - target: {fileID: 4551849060862192604, guid: 9dec0a8296862ed49bbfd79b58bd623a,
+        type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 606908532}
     - target: {fileID: 4551849060862192604, guid: 9dec0a8296862ed49bbfd79b58bd623a,
         type: 3}
       propertyPath: _beansShooting

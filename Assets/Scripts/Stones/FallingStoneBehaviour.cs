@@ -113,7 +113,8 @@ public class FallingStoneBehaviour : MonoBehaviour
         _meshRenderer.enabled = false;
         _collider2D.enabled = false;
         yield return new WaitForSeconds(1f);
-        _throwablePool.Release(gameObject);
+        if (_throwablePool != null && gameObject != null)
+            _throwablePool.Release(gameObject);
         _released = true;
         _meshRenderer.enabled = true;
         _collider2D.enabled = true;
