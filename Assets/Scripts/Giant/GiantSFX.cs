@@ -10,6 +10,8 @@ namespace Giant
         [SerializeField] private AudioSource audioCry;
         
         [SerializeField] private Animator _animator;
+        [SerializeField] private ParticleSystem tearsLeft;
+        [SerializeField] private ParticleSystem tearsRight;
 
         private bool _roar;
         private bool _hit;
@@ -73,6 +75,8 @@ namespace Giant
                 {
                     _cry = true;
                     audioCry.mute = false;
+                    tearsLeft.Play();
+                    tearsRight.Play();
                 }
             }
             else
@@ -84,6 +88,8 @@ namespace Giant
                 if (!_standRoar)
                 {
                     audioCry.mute = true;
+                    tearsLeft.Stop();
+                    tearsRight.Stop();
                     _standRoar = true;
                     audioRoar.loop = true;
                     audioRoar.Play();
