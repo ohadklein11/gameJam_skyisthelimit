@@ -18,7 +18,8 @@ namespace Bullets
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider2D = GetComponent<Collider2D>();
             // make transform float up and down
-            transform.DOLocalMoveY(transform.localPosition.y + 0.2f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+            // transform.DOLocalMoveY(transform.localPosition.y + 0.2f, 5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+            transform.DOScale(new Vector3(.35f, .35f, 1f), 1.25f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
             
             // create Color 58B158
             Color endColor = new Color(0.345098f, 0.6941177f, 0.345098f, 1f);
