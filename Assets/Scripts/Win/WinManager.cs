@@ -13,6 +13,7 @@ public class WinManager : MonoBehaviour
     private Animator _playerAnimator;
     private BeansShooting _beansShootingScript;
     private static readonly int NoGunChange = Animator.StringToHash("noGunChange");
+    [SerializeField] private AudioSource doorCloseSound;
 
     
     // Start is called before the first frame update
@@ -43,6 +44,7 @@ public class WinManager : MonoBehaviour
         goose.transform.position = new Vector3(player.transform.position.x -1, goosePosition.y, goosePosition.z);
         // close the door
         iTween.RotateTo(playerHouseDoor, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
+        doorCloseSound.Play();
         playerHouseDoor.GetComponentInChildren<BoxCollider2D>().enabled = true;
         
     }
