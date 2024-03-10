@@ -51,7 +51,7 @@ public class BeansShooting : MonoBehaviour
     private Animator _animator;
     private static readonly int EggChange = Animator.StringToHash("eggChange");
     public static readonly int BeanChange = Animator.StringToHash("beanChange");
-    private bool _canSwitchWeapons = false;
+    private bool _canSwitchWeapons = true; // todo false
     private float _originalVolume;
     [SerializeField] private AudioSource audioCollect;
 
