@@ -9,6 +9,7 @@ public class WinManager : MonoBehaviour
     [SerializeField] private GameObject winTrigger;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject goose;
+    [SerializeField] private GameObject playerHouseDoor;
     private Animator _playerAnimator;
     private BeansShooting _beansShootingScript;
     private static readonly int NoGunChange = Animator.StringToHash("noGunChange");
@@ -40,6 +41,10 @@ public class WinManager : MonoBehaviour
         goose.SetActive(true);
         Vector3 goosePosition = goose.transform.position;
         goose.transform.position = new Vector3(player.transform.position.x -1, goosePosition.y, goosePosition.z);
+        // close the door
+        iTween.RotateTo(playerHouseDoor, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
+        playerHouseDoor.GetComponentInChildren<BoxCollider2D>().enabled = true;
+        
     }
     
     

@@ -23,6 +23,7 @@ public class GameEnd : MonoBehaviour
 
     private void OnPlayerLose(object arg0)
     {
+        player.GetComponent<Rigidbody2D>().bodyType =RigidbodyType2D.Static ;
         loseImage.SetActive(true);
         StartCoroutine(OnGameEnd(2f));
     }
@@ -36,10 +37,8 @@ public class GameEnd : MonoBehaviour
     IEnumerator OnGameEnd(float time)
     {
         yield return new WaitForSeconds(time);
-        GameData.isGameStopped = true;
         gameOverScreen.SetActive(true);
         EventSystem.current.SetSelectedGameObject(restartButton);
-        player.GetComponent<Rigidbody2D>().bodyType =RigidbodyType2D.Static ;
         iTween.ValueTo(gameObject, iTween.Hash(
             "from", 0,
             "to", 1,
@@ -47,6 +46,8 @@ public class GameEnd : MonoBehaviour
             "onupdate", "FadeScreenIn",
             "easetype", iTween.EaseType.easeOutSine));
         yield return new WaitForSeconds(3f);
+        GameData.isGameStopped = true;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         enemies.SetActive(false);
     }
         

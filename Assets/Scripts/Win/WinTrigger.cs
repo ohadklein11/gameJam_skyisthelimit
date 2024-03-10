@@ -11,6 +11,7 @@ public class WinTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerWin,null);
+            gameObject.SetActive(false);
         }
     }
 }

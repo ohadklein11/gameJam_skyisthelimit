@@ -177,7 +177,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4910608915652948921}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 371673347}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f94b5ca2edf6ed24cb5c89358bd7b046, type: 3}
@@ -195,6 +195,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6592512460851996735}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &371673347 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 399148348744229765, guid: f700af0de43d66e41a20b7b6be39af5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4910608915652948921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &371673356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371673347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0970fdae626820744995a989a62c7cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightSlider: {fileID: 879424123}
+  player: {fileID: 48291940}
+  bossLevel: {fileID: 519890071}
 --- !u!114 &451082984 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7446895270277902647, guid: abbb03c84bd858f4e9caffe36c6f8196,
@@ -207,6 +228,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &519890071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7462353165891270835, guid: 9dec0a8296862ed49bbfd79b58bd623a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7912225647902008079}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &567830936 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6208600169913848199, guid: 6bc1719a1a3a89c419953107f1d1fd9a,
@@ -231,16 +258,16 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1217741902747467014}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1017257831 stripped
+--- !u!114 &879424123 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 576702907259746032, guid: abbb03c84bd858f4e9caffe36c6f8196,
+  m_CorrespondingSourceObject: {fileID: 8226778963356147722, guid: abbb03c84bd858f4e9caffe36c6f8196,
     type: 3}
   m_PrefabInstance: {fileID: 1217741902747467014}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1104879035 stripped
@@ -255,18 +282,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1217741902747467014}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1154691423 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8129140701314644869, guid: abbb03c84bd858f4e9caffe36c6f8196,
-    type: 3}
-  m_PrefabInstance: {fileID: 1217741902747467014}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154691421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1231507239 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2729880615485561244, guid: c0e749eee2e863647b9df3a2259d2169,
@@ -615,21 +630,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 576702907259746032, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 576702907259746032, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_Navigation.m_SelectOnUp
-      value: 
-      objectReference: {fileID: 1154691423}
-    - target: {fileID: 576702907259746032, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitButton
-      objectReference: {fileID: 0}
     - target: {fileID: 5654399045481535485, guid: abbb03c84bd858f4e9caffe36c6f8196,
         type: 3}
       propertyPath: m_Pivot.x
@@ -735,31 +735,6 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1405458121}
-    - target: {fileID: 6635070891148423999, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129140701314644869, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_Transition
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129140701314644869, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8129140701314644869, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_Navigation.m_SelectOnDown
-      value: 
-      objectReference: {fileID: 1017257831}
-    - target: {fileID: 9107288450673507181, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1039,10 +1014,19 @@ PrefabInstance:
       propertyPath: winTrigger
       value: 
       objectReference: {fileID: 758824436}
+    - target: {fileID: 7920816359554838693, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
+      propertyPath: playerHouseDoor
+      value: 
+      objectReference: {fileID: 1231507239}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 399148348744229765, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 371673356}
   m_SourcePrefab: {fileID: 100100000, guid: f700af0de43d66e41a20b7b6be39af5b, type: 3}
 --- !u!1001 &5329860172892372540
 PrefabInstance:
@@ -1251,11 +1235,6 @@ PrefabInstance:
     - target: {fileID: 7486468096901443906, guid: c0e749eee2e863647b9df3a2259d2169,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8390612796149029596, guid: c0e749eee2e863647b9df3a2259d2169,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
