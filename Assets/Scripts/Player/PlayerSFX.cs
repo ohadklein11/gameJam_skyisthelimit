@@ -9,7 +9,6 @@ namespace Player
         [SerializeField] private AudioSource audioWalk;
         [SerializeField] private AudioSource audioClimb;
         [SerializeField] private AudioSource audioJump;
-        [SerializeField] private AudioSource audioLand;
         [SerializeField] private AudioSource audioHit;
         [SerializeField] private AudioSource audioDead;
     
@@ -43,17 +42,11 @@ namespace Player
             if (!_jump && playerMovement.Jumping)
             {
                 _jump = true;
-                _land = false;
                 audioJump.Play();
             }
-            if (_jump && !playerMovement.Jumping && !playerMovement.Falling)
+            if (_jump && !playerMovement.Jumping && playerMovement.Falling)
             {
                 _jump = false;
-                if (!_land)
-                {
-                    _land = true;
-                    audioLand.Play();
-                }
             }
             if (!_climb && playerMovement.ActivelyClimbing)
             {

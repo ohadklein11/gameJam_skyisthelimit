@@ -213,6 +213,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7754149957972804038}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &690921113 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 867319649867385399, guid: a16659e89ee13a84e9ad28a66abb95c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1015261927855212322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &700361184 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6654656153108765380, guid: 7576c602cf2cd8240828bbc841b0f0d1,
@@ -391,6 +397,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 530421405471654564}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1660310084 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9204382536180585381, guid: abbb03c84bd858f4e9caffe36c6f8196,
+    type: 3}
+  m_PrefabInstance: {fileID: 1217741902747467014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!60 &1713757464 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 53966264373487916, guid: 9dec0a8296862ed49bbfd79b58bd623a,
@@ -568,6 +580,11 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 129073824}
+    - target: {fileID: 5728918614816335898, guid: a16659e89ee13a84e9ad28a66abb95c2,
+        type: 3}
+      propertyPath: audioLand
+      value: 
+      objectReference: {fileID: 690921113}
     - target: {fileID: 5728918614816335898, guid: a16659e89ee13a84e9ad28a66abb95c2,
         type: 3}
       propertyPath: playerHealthManager
@@ -955,6 +972,11 @@ PrefabInstance:
       propertyPath: hpSlider
       value: 
       objectReference: {fileID: 451082984}
+    - target: {fileID: 6084446583708313001, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
+      propertyPath: hpTransform
+      value: 
+      objectReference: {fileID: 1660310084}
     - target: {fileID: 7920816359554838693, guid: f700af0de43d66e41a20b7b6be39af5b,
         type: 3}
       propertyPath: goose

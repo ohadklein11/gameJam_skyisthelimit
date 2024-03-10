@@ -77,6 +77,7 @@ namespace Player
         private bool _paused;
         private bool _startWalking;
         private float _climbCooldown;
+        [SerializeField] private AudioSource audioLand;
 
         private void Start()
         {
@@ -122,6 +123,7 @@ namespace Player
                 if (_fallingFirstHeight - transform.position.y >= minFallHeightForDust)
                 {
                     var position = transform.position;
+                    audioLand.Play();
                     VFXManager.PlayDustVFX(new Vector3(position.x, position.y - _spriteRenderer.bounds.size.y + .1f,
                         position.z));
                 }
