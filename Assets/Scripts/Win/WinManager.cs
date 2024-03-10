@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using DG.Tweening;
+
 
 public class WinManager : MonoBehaviour
 {
     [SerializeField] private GameObject winTrigger;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject goose;
+    [SerializeField] private GameObject playerHouseDoor;
+    private Animator _playerAnimator;
+    private BeansShooting _beansShootingScript;
+    private static readonly int NoGunChange = Animator.StringToHash("noGunChange");
+
+    
     // Start is called before the first frame update
     void Start()
     {
        EventManagerScript.Instance.StartListening(EventManagerScript.PlayerWin, OnPlayerWin); 
        EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, ActivateWinTrigger); 
-
+       _playerAnimator = player.GetComponent<Animator>();
+       _beansShootingScript = player.GetComponent<BeansShooting>();
     }
 
     private void ActivateWinTrigger(object arg0)
@@ -24,6 +34,18 @@ public class WinManager : MonoBehaviour
     {
         AudioManager.StopCurrentBGM();
         AudioManager.PlayWinBackground();
-        SceneManager.LoadScene("WinScene");  // todo move to the same scene
+        
+        _playerAnimator.SetTrigger(NoGunChange);
+        _beansShootingScript.canShoot = false;
+        // put goose next to player
+        goose.SetActive(true);
+        Vector3 goosePosition = goose.transform.position;
+        goose.transform.position = new Vector3(player.transform.position.x -1, goosePosition.y, goosePosition.z);
+        // close the door
+        iTween.RotateTo(playerHouseDoor, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
+        playerHouseDoor.GetComponentInChildren<BoxCollider2D>().enabled = true;
+        
     }
+    
+    
 }

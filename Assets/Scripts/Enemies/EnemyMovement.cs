@@ -29,6 +29,7 @@ public class EnemyMovement : MonoBehaviour
     public bool ReachedTop { get; private set; }
 
     public bool Grounded { get; set; }
+    public bool Moving => _rb.velocity != Vector2.zero;
 
     private void Awake()
     {

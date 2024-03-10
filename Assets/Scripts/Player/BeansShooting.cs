@@ -32,6 +32,10 @@ public class BeansShooting : MonoBehaviour
     // [SerializeField] private GameObject trajectoryPointPrefab;
     // [SerializeField] private int trajectoryPointsCount = 20;
     [SerializeField] private LayerMask _platformLayerMask;
+    
+    [SerializeField] private AudioSource audioPeaShoot;
+    [SerializeField] private AudioSource audioEggShoot;
+
     // private GameObject[] trajectoryPoints;
     private GameObject _beanPrefab;
     private GameObject _eggPrefab;
@@ -41,13 +45,15 @@ public class BeansShooting : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private float _shootingCooldownWait;
     private SpriteRenderer _playerSpriteRenderer;
-    public bool canShoot = true;
+    public bool canShoot = false;
     public bool isLoading => _shootingForce >= minShootingForce;
     public bool IsOnCooldown => _shootingCooldownWait > 0;
     private Animator _animator;
     private static readonly int EggChange = Animator.StringToHash("eggChange");
-    private static readonly int BeanChange = Animator.StringToHash("beanChange");
+    public static readonly int BeanChange = Animator.StringToHash("beanChange");
     private bool _canSwitchWeapons = false;
+    private float _originalVolume;
+    [SerializeField] private AudioSource audioCollect;
 
 
     void Awake()
@@ -59,6 +65,7 @@ public class BeansShooting : MonoBehaviour
         _beanPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Bean");
         _eggPrefab = Resources.Load<GameObject>("Prefabs/BulletsTypes/Egg");
         _animator = GetComponent<Animator>();
+        _originalVolume = audioPeaShoot.volume;
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, EnableWeaponSwitch);
     }
 
@@ -87,13 +94,16 @@ public class BeansShooting : MonoBehaviour
             ShootEggs();
         if (_canSwitchWeapons && Input.GetKeyDown(switchKey))
         {
+            audioCollect.Play();
             if (_gunType == GunType.BeansGun)
             {
+                audioPeaShoot.volume = 0.2f;
                 _gunType = GunType.EggsGun;
                 _animator.SetTrigger(EggChange);
             }
             else
             {
+                audioPeaShoot.volume = _originalVolume;
                 _shootingForce = 0;
                 _gunType = GunType.BeansGun;
                 _animator.SetTrigger(BeanChange);
@@ -136,6 +146,7 @@ public class BeansShooting : MonoBehaviour
                 InstantiateBullet(_beanPrefab);
                 _shootingCooldownWait = beanShootingCooldown;
                 _shootingForce = 0;
+                audioPeaShoot.Play();
             }
             
         }
@@ -152,6 +163,8 @@ public class BeansShooting : MonoBehaviour
 
     void ShootEggs()
     {
+        if (!canShoot) return;
+        
         _shootingCooldownWait -= Time.deltaTime;
 
         if (Input.GetButtonDown("Fire1"))
@@ -165,6 +178,9 @@ public class BeansShooting : MonoBehaviour
                 GetComponent<PlayerAnimation>().PlayShootingAnimation(1);
                 InstantiateBullet(_eggPrefab);
                 _shootingCooldownWait = eggShootingCooldown;
+                audioPeaShoot.Play();
+                if (!audioEggShoot.isPlaying)
+                    audioEggShoot.Play();
             }
         }
     }

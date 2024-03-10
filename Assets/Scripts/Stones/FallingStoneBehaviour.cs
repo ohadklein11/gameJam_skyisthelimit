@@ -20,11 +20,18 @@ public class FallingStoneBehaviour : MonoBehaviour
 
 
     private bool _released;
+    private CameraShake _cameraShake;
+    [SerializeField] private AudioSource audioSmash;
+    private MeshRenderer _meshRenderer;
+    private Collider2D _collider2D;
 
     void Awake()
     {
         _mainCamera = Camera.main;
         _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        _cameraShake = _virtualCamera.GetComponent<CameraShake>();
+        _meshRenderer = GetComponent<MeshRenderer>();
+        _collider2D = GetComponent<Collider2D>();
     }
 
     public void Init(ObjectPool<GameObject> throwablePool)
@@ -35,25 +42,22 @@ public class FallingStoneBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        VFXManager.PlayStonePiecesVFX(transform.position);
-
+        VFXManager.PlayDustVFX(transform.position);
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             StartCoroutine(SelfDestroyTimer());
-            _virtualCamera.GetComponent<CameraShake>().Shake(shakeMagnitude, shakeDuration);
+            _cameraShake.Shake(shakeMagnitude, shakeDuration);
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Player") &&
                  gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > magnitudeStopDamage)
         {
             EventManagerScript.Instance.TriggerEvent(EventManagerScript.PlayerGotHit, stoneDamage);
 
-            // TODO: break the stone
         }
 
         if (!_released)
         {
-            _throwablePool.Release(gameObject);
-            _released = true;
+            StartCoroutine(Release());
         }
     }
 
@@ -98,8 +102,20 @@ public class FallingStoneBehaviour : MonoBehaviour
 
         if (!_released && destory)
         {
-            _throwablePool.Release(gameObject);
-            _released = true;
+            StartCoroutine(Release());
         }
+    }
+    private IEnumerator Release()
+    {
+        VFXManager.PlayStonePiecesVFX(transform.position);
+        _cameraShake.Shake(shakeMagnitude, shakeDuration);
+        audioSmash.Play();
+        _meshRenderer.enabled = false;
+        _collider2D.enabled = false;
+        yield return new WaitForSeconds(1f);
+        _throwablePool.Release(gameObject);
+        _released = true;
+        _meshRenderer.enabled = true;
+        _collider2D.enabled = true;
     }
 }

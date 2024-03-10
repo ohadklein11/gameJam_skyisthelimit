@@ -5,6 +5,7 @@ using DG.Tweening;
 using Enemies;
 using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ClimberBehavior : MonoBehaviour
 {
@@ -27,8 +28,8 @@ public class ClimberBehavior : MonoBehaviour
     private EnemyHealth _enemyHealth;
     private Rigidbody2D _rigidbody2D;
 
-    private bool _appearing;
-    private bool _appeared;
+    public bool appearing;
+    public bool appeared;
     private bool _isClimbing;
     private Transform _curVine;
     private Transform _targetVine;
@@ -48,7 +49,7 @@ public class ClimberBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _appeared = false;
+        appeared = false;
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerMovement = _player.GetComponent<PlayerMovement>();
 
@@ -78,8 +79,8 @@ public class ClimberBehavior : MonoBehaviour
         bool playerClimbing = vine != null  // vine
                               && vine.parent != null  // vine holder 
                               && vine.parent.parent == transform.parent
-                              && _playerMovement.climbing;
-        if (_appeared)
+                              && _playerMovement.Climbing;
+        if (appeared)
         {
             if (_shouldFacePlayer)
             {
@@ -114,7 +115,7 @@ public class ClimberBehavior : MonoBehaviour
                     _shouldFacePlayer = Mathf.Abs(targetX - _body.transform.position.x) > _distanceToTargetVine; // will go towards vine even if player is not climbing
                 }
                 
-                if (!_playerMovement.grounded && _targetVine != null && Mathf.Abs(targetX - _body.transform.position.x) < .3f)
+                if (!_playerMovement.Grounded && _targetVine != null && Mathf.Abs(targetX - _body.transform.position.x) < .3f)
                 {
                     _isClimbing = true;
                     _animator.SetBool(AnimClimbing, true);
@@ -124,7 +125,7 @@ public class ClimberBehavior : MonoBehaviour
                     _body.transform.position = position;
                     _enemyMovement.StartClimbing();
                 }
-            } else if (_playerMovement.grounded)
+            } else if (_playerMovement.Grounded)
             {
                 GetDownFromVine();
             }
@@ -154,7 +155,7 @@ public class ClimberBehavior : MonoBehaviour
             }
         }
 
-        if (!_appeared && !_appearing && playerClimbing)
+        if (!appeared && !appearing && playerClimbing)
         {
             StartCoroutine(Appear());
         }
@@ -170,7 +171,7 @@ public class ClimberBehavior : MonoBehaviour
 
     private IEnumerator Appear()
     {
-        _appearing = true;
+        appearing = true;
         _enemyMovement.FacePlayer();
         var position = transform.position;
         transform.DOMoveY(position.y + _appearHeight, _appearDuration).SetEase(Ease.OutSine);
@@ -186,8 +187,8 @@ public class ClimberBehavior : MonoBehaviour
         _animator.SetBool(AnimAppeared, true);
         _enemyMovement.StartMovement(_movementSpeed);
         _rigidbody2D.simulated = true;
-        _appearing = false;
-        _appeared = true;
+        appearing = false;
+        appeared = true;
         
     }
     

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Cinemachine;
 using Player;
 using Stones;
@@ -21,13 +22,19 @@ namespace Giant
         private CinemachineVirtualCamera _virtualCamera;
         [SerializeField] private float shakeDuration = 1f;
         [SerializeField] private float shakeMagnitude = 2f;
-        
-        [SerializeField]
+
+        [SerializeField] private AudioSource audioSmash;
+        private MeshRenderer _meshRenderer;
+        private Collider2D _collider2D;
+        private CameraShake _cameraShake;
 
         private void Awake()
         {
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Throwables"), LayerMask.NameToLayer("Enemy"));
             _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            _meshRenderer = GetComponent<MeshRenderer>();
+            _collider2D = GetComponent<Collider2D>();
+            _cameraShake = _virtualCamera.GetComponent<CameraShake>();
         }
 
         public void Init(ObjectPool<GameObject> throwablePool, GameObject player)
@@ -50,8 +57,7 @@ namespace Giant
             }
             if (!_released)
             {
-                _throwablePool.Release(gameObject);
-                _released = true;
+                StartCoroutine(Release());
             }
         }
 
@@ -75,11 +81,21 @@ namespace Giant
             }
             if (!_released)
             {
-                VFXManager.PlayStonePiecesVFX(transform.position);
-                _virtualCamera.GetComponent<CameraShake>().Shake(shakeMagnitude, shakeDuration);
-                _throwablePool.Release(gameObject);
-                _released = true;
+                StartCoroutine(Release());
             }
+        }
+        private IEnumerator Release()
+        {
+            VFXManager.PlayStonePiecesVFX(transform.position);
+            _cameraShake.Shake(shakeMagnitude, shakeDuration);
+            audioSmash.Play();
+            _meshRenderer.enabled = false;
+            _collider2D.enabled = false;
+            yield return new WaitForSeconds(1f);
+            _throwablePool.Release(gameObject);
+            _released = true;
+            _meshRenderer.enabled = true;
+            _collider2D.enabled = true;
         }
     }
 }

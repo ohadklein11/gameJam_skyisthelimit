@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Player;
 using Stones;
 using UnityEngine;
@@ -15,11 +16,15 @@ namespace Enemies
         private GameObject _player;
         private PlayerMovement _playerMovement;
         private const float Epsilon = 0.01f;
+        [SerializeField] private AudioSource audioThrow;
+        private SpriteRenderer _spriteRenderer;
+        private Collider2D _collider2D;
         
-
         private void Awake()
         {
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Throwables"), LayerMask.NameToLayer("Enemy"));
+            _collider2D = GetComponent<Collider2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         public void Init(ObjectPool<GameObject> throwablePool, GameObject player)
@@ -39,8 +44,7 @@ namespace Enemies
 
             if (!_released)
             {
-                _throwablePool.Release(gameObject);
-                _released = true;
+                StartCoroutine(Release());
             }
         }
 
@@ -52,9 +56,20 @@ namespace Enemies
             }
             if (!_released)
             {
-                _throwablePool.Release(gameObject);
-                _released = true;
+                StartCoroutine(Release());
             }
+        }
+
+        private IEnumerator Release()
+        {
+            audioThrow.Play();
+            _spriteRenderer.enabled = false;
+            _collider2D.enabled = false;
+            yield return new WaitForSeconds(.5f);
+            _throwablePool.Release(gameObject);
+            _released = true;
+            _spriteRenderer.enabled = true;
+            _collider2D.enabled = true;
         }
     }
 }

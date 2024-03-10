@@ -42,7 +42,12 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
     // Update is called once per frame
     void Update()
     {
-        if (_throwingAtPlayer) return;
+        if (_throwingAtPlayer)
+        {
+            if (!_throwAtPlayerBehavior.IsPaused() && _enemyHealth.Hit)
+                _throwAtPlayerBehavior.PauseThrow(1f);
+            return;
+        }
         var playerTransform = LookAtPlayer();
         if (playerTransform != null)
         {
@@ -116,7 +121,6 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
             seeingPlayer = playerTransform != null;
             if (!_throwing && _throwAtPlayerBehavior.Throwing)
             {
-                Debug.Log("Throwing");
                 _animator.SetTrigger(AnimThrow);
                 _throwing = true;
             }
@@ -128,6 +132,10 @@ public class ThrowerBehavior : MonoBehaviour, IThrower
         } while (seeingPlayer);
         _throwingAtPlayer = false;
         _throwAtPlayerBehavior.enabled = false;
+        while (_animator.GetCurrentAnimatorStateInfo(0).IsName("throw") || _animator.GetCurrentAnimatorStateInfo(0).IsName("throw1"))
+        {
+            yield return null;
+        }
         _enemyMovement.StartMovement();
     }
 
