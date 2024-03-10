@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -231,12 +231,42 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1217741902747467014}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1017257831 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 576702907259746032, guid: abbb03c84bd858f4e9caffe36c6f8196,
+    type: 3}
+  m_PrefabInstance: {fileID: 1217741902747467014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1104879035 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5111241048999152143, guid: 9dec0a8296862ed49bbfd79b58bd623a,
     type: 3}
   m_PrefabInstance: {fileID: 7912225647902008079}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1154691421 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 129797141463989958, guid: abbb03c84bd858f4e9caffe36c6f8196,
+    type: 3}
+  m_PrefabInstance: {fileID: 1217741902747467014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1154691423 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8129140701314644869, guid: abbb03c84bd858f4e9caffe36c6f8196,
+    type: 3}
+  m_PrefabInstance: {fileID: 1217741902747467014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154691421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1231507239 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2729880615485561244, guid: c0e749eee2e863647b9df3a2259d2169,
@@ -390,6 +420,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6635070891148423999, guid: abbb03c84bd858f4e9caffe36c6f8196,
     type: 3}
   m_PrefabInstance: {fileID: 1217741902747467014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1903078313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5239764739416849255, guid: 6bc1719a1a3a89c419953107f1d1fd9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7754149957972804038}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1945912558 stripped
 GameObject:
@@ -697,6 +733,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 576702907259746032, guid: abbb03c84bd858f4e9caffe36c6f8196,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 576702907259746032, guid: abbb03c84bd858f4e9caffe36c6f8196,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1154691423}
+    - target: {fileID: 576702907259746032, guid: abbb03c84bd858f4e9caffe36c6f8196,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitButton
+      objectReference: {fileID: 0}
     - target: {fileID: 5654399045481535485, guid: abbb03c84bd858f4e9caffe36c6f8196,
         type: 3}
       propertyPath: m_Pivot.x
@@ -802,6 +853,31 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1405458121}
+    - target: {fileID: 6635070891148423999, guid: abbb03c84bd858f4e9caffe36c6f8196,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129140701314644869, guid: abbb03c84bd858f4e9caffe36c6f8196,
+        type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129140701314644869, guid: abbb03c84bd858f4e9caffe36c6f8196,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129140701314644869, guid: abbb03c84bd858f4e9caffe36c6f8196,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 1017257831}
+    - target: {fileID: 9107288450673507181, guid: abbb03c84bd858f4e9caffe36c6f8196,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1033,6 +1109,16 @@ PrefabInstance:
       objectReference: {fileID: 48291941}
     - target: {fileID: 4815004651005007655, guid: f700af0de43d66e41a20b7b6be39af5b,
         type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 48291940}
+    - target: {fileID: 4815004651005007655, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
+      propertyPath: enemies
+      value: 
+      objectReference: {fileID: 1903078313}
+    - target: {fileID: 4815004651005007655, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
       propertyPath: winImage
       value: 
       objectReference: {fileID: 64716999}
@@ -1041,6 +1127,11 @@ PrefabInstance:
       propertyPath: loseImage
       value: 
       objectReference: {fileID: 869515227}
+    - target: {fileID: 4815004651005007655, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
+      propertyPath: restartButton
+      value: 
+      objectReference: {fileID: 1154691421}
     - target: {fileID: 4815004651005007655, guid: f700af0de43d66e41a20b7b6be39af5b,
         type: 3}
       propertyPath: gameOverScreen

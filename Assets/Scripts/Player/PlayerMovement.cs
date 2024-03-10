@@ -96,6 +96,7 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (GameData.isGameStopped || playerHealthManager.IsDead) return;
             CheckGround();
             SlopeCheck();
             CheckClimb();
