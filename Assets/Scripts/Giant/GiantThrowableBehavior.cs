@@ -72,11 +72,11 @@ namespace Giant
                 }
                 if (other.transform.parent != null)
                 {
-                    Destroy(other.transform.parent.gameObject);
+                    StartCoroutine(other.transform.parent.GetComponent<GrowVineScript>().DestroyVine());
                 }
                 else
                 {
-                    Destroy(other.gameObject);
+                    StartCoroutine(other.GetComponent<GrowVineScript>().DestroyVine());
                 }
             }
             if (!_released)

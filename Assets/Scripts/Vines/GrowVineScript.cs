@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using DG.Tweening;
 using Player;
 using UnityEngine;
 using Utils;
@@ -22,7 +24,10 @@ public class GrowVineScript : MonoBehaviour
     private bool _growing;
     public bool growing => _growing;
     private const float Epsilon = .05f;
-    
+    [SerializeField] private AudioSource growAudio;
+    [SerializeField] private AudioSource destroyedAudio;
+    [SerializeField] private Sprite destroyedHeadSprite;
+    [SerializeField] private Sprite destroyedStemSprite;
 
     void Awake()
     {
@@ -49,6 +54,8 @@ public class GrowVineScript : MonoBehaviour
     {
         if (!_growing || _hitCeiling)
         {
+            if (growAudio.isPlaying)
+                growAudio.DOFade(0, .3f).OnComplete(() => growAudio.Stop());
             return;
         }
         
@@ -106,9 +113,12 @@ public class GrowVineScript : MonoBehaviour
         return newStem;
     }
 
-    private void OnDestroy()
+    public IEnumerator DestroyVine()
     {
-        // remove player from children
+        if (growAudio.isPlaying)
+            growAudio.DOFade(0, .3f).OnComplete(() => growAudio.Stop());
+        destroyedAudio.Play();
+        _growing = false;
         foreach (Transform child in transform)
         {
             if (child.CompareTag("Player"))
@@ -120,9 +130,20 @@ public class GrowVineScript : MonoBehaviour
                 gameObj.GetComponent<Animator>().enabled = true;
                 gameObj.GetComponent<PlayerAnimation>().enabled = true;
                 child.GetComponent<PlayerAnimation>().SwitchToClimbingAnimation(false);
-
                 child.SetParent(null);
             }
+            else if (child.name == "VineTop")
+            {
+                child.GetComponent<SpriteRenderer>().sprite = destroyedHeadSprite;
+                child.GetComponent<BoxCollider2D>().enabled = false;
+            }
+            else if (child.name.Contains("VineBody"))
+            {
+                child.GetComponent<SpriteRenderer>().sprite = destroyedStemSprite;
+                child.GetComponent<BoxCollider2D>().enabled = false;
+            }
         }
+        yield return new WaitForSeconds(.3f);
+        Destroy(gameObject);
     }
 }
