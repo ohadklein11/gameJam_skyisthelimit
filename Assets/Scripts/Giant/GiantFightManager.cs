@@ -28,6 +28,8 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private GameObject EButton;
     [SerializeField] private GameObject backwardEnemies;
     [SerializeField] private GooseInCageBehavior _gooseInCage;
+    [SerializeField] private AudioSource doorOpenSound;
+    [SerializeField] private AudioSource doorCloseSound;
 
     private void Update()
     {
@@ -42,12 +44,18 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         iTween.RotateTo(_doorPivot.gameObject, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
         _doorCollider.enabled = false;
         _blockExit.SetActive(!_blockExit.activeSelf);
+        var volume = Mathf.Abs(_player.transform.position.x - _doorPivot.position.x) < 10 ? 1 : 0.5f;
+        doorOpenSound.volume = volume;
+        doorOpenSound.Play();
     }
     
     private void CloseDoor()
     {
         iTween.RotateTo(_doorPivot.gameObject, iTween.Hash("y", -90, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
         _doorCollider.enabled = true;
+        var volume = Mathf.Abs(_player.transform.position.x - _doorPivot.position.x) < 10 ? 1 : 0.5f;
+        doorCloseSound.volume = volume;
+        doorCloseSound.Play();
     }
 
     public void StartGiantFight()
