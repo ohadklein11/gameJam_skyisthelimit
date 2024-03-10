@@ -14,8 +14,9 @@ public class WinManager : MonoBehaviour
     private BeansShooting _beansShootingScript;
     private static readonly int NoGunChange = Animator.StringToHash("noGunChange");
     [SerializeField] private AudioSource doorCloseSound;
+    [SerializeField] private AudioSource gooseAudio;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +47,12 @@ public class WinManager : MonoBehaviour
         iTween.RotateTo(playerHouseDoor, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
         doorCloseSound.Play();
         playerHouseDoor.GetComponentInChildren<BoxCollider2D>().enabled = true;
-        
+        StartCoroutine(PlayGoose());
     }
-    
-    
+
+    private IEnumerator PlayGoose()
+    {
+        yield return new WaitForSeconds(2);
+        gooseAudio.Play();
+    }
 }
