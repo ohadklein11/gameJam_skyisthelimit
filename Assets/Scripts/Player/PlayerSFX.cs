@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Utils;
 
 namespace Player
 {
@@ -14,6 +15,7 @@ namespace Player
     
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private PlayerHealthManager playerHealth;
+        [SerializeField] private ParticleSystem leavesVFX;
         private bool _hit;
         private bool _dead;
         private bool _jump;
@@ -52,10 +54,12 @@ namespace Player
             {
                 _climb = true;
                 audioClimb.mute = false;
+                leavesVFX.Play();
             } else if (_climb && !playerMovement.ActivelyClimbing)
             {
                 _climb = false;
                 audioClimb.mute = true;
+                leavesVFX.Stop();
             }
             if (!_walk && playerMovement.Walking)
             {

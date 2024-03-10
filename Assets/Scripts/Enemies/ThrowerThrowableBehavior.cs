@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Player;
 using Stones;
 using UnityEngine;
 using UnityEngine.Pool;
-using Vines;
+using Utils;
 
 namespace Enemies
 {
@@ -62,6 +61,7 @@ namespace Enemies
 
         private IEnumerator Release()
         {
+            VFXManager.PlayMushVFX(transform.position);
             audioThrow.Play();
             _spriteRenderer.enabled = false;
             _collider2D.enabled = false;
