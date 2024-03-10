@@ -19,6 +19,11 @@ namespace Bullets
             _collider2D = GetComponent<Collider2D>();
             // make transform float up and down
             transform.DOLocalMoveY(transform.localPosition.y + 0.2f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+            
+            // create Color 58B158
+            Color endColor = new Color(0.345098f, 0.6941177f, 0.345098f, 1f);
+            GetComponent<SpriteRenderer>().DOBlendableColor(endColor, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+
         }
         // Start is called before the first frame update
         void OnTriggerEnter2D(Collider2D other)

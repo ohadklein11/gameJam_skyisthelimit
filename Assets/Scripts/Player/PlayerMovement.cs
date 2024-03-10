@@ -14,8 +14,8 @@ namespace Player
         [SerializeField] private float movementSpeed;
 
         [SerializeField] private int numFramesUntilFullSpeed;
-        [SerializeField]
-        private int
+
+        [SerializeField] private int
             numFramesUntilMaxSlowdown; // e.g. after 20 frames of moving, the player will slide to a stop upon releasing the movement key
 
         [SerializeField] public float groundCheckRadius;
@@ -57,7 +57,7 @@ namespace Player
 
         private Vector2 _newVelocity;
         private Vector2 _newForce;
-        
+
         private Rigidbody2D _rb;
         private SpriteRenderer _spriteRenderer;
         private float _velocityMultiplier = 1f;
@@ -65,7 +65,7 @@ namespace Player
         [SerializeField] private float highJumpGravity;
         [SerializeField] private float jumpGravity;
         [SerializeField] private float fallGravity;
-        
+
         public bool Climbing => _isClimbing;
         public bool Grounded => _isGrounded;
         public bool Falling => (!_isGrounded && !_isClimbing && _rb.velocity.y < 0.0f);
@@ -122,8 +122,10 @@ namespace Player
                 if (_fallingFirstHeight - transform.position.y >= minFallHeightForDust)
                 {
                     var position = transform.position;
-                    VFXManager.PlayDustVFX(new Vector3(position.x, position.y - _spriteRenderer.bounds.size.y + .1f, position.z));
+                    VFXManager.PlayDustVFX(new Vector3(position.x, position.y - _spriteRenderer.bounds.size.y + .1f,
+                        position.z));
                 }
+
                 if (_wasFalling)
                 {
                     TakeFallDamage();
@@ -167,9 +169,10 @@ namespace Player
             }
             else
                 HandleClimbing();
+
             if (Input.GetButtonDown("Jump"))
             {
-                 Jump();
+                Jump();
             }
         }
 
@@ -182,7 +185,7 @@ namespace Player
 
         private void HandleClimbing()
         {
-            if (!_ignoreClimb &&_canClimb && (IsTryingToClimb || (_isClimbing && !_isGrounded && !_isJumping)))
+            if (!_ignoreClimb && _canClimb && (IsTryingToClimb || (_isClimbing && !_isGrounded && !_isJumping)))
             {
                 // climb
                 if (!_isClimbing)
@@ -196,21 +199,28 @@ namespace Player
                 {
                     var xPosition = _climbable.GetXPosition();
                     if (GetComponent<BeansShooting>().IsShootingBeans())
-                        xPosition -=_facingDirection * 0.2f;
-                    var yTopPosition = _climbable.GetHeadYPosition()-0.5f;
-                    var yMaxPosition = _climbable.IsGrowing()?Mathf.Infinity:yTopPosition;
+                        xPosition -= _facingDirection * 0.2f;
+                    else
+                    {
+                        xPosition += _facingDirection * 0.23f;
+                    }
+
+                    var yTopPosition = _climbable.GetHeadYPosition() - 0.5f;
+                    var yMaxPosition = _climbable.IsGrowing() ? Mathf.Infinity : yTopPosition;
                     if (position.y > yTopPosition && _firstClimbWithGrowingVine)
                         yMaxPosition = position.y;
                     else
                         _firstClimbWithGrowingVine = false;
 
-                    position = new Vector3(xPosition, Math.Min(position.y,yMaxPosition), position.z); 
+                    position = new Vector3(xPosition, Math.Min(position.y, yMaxPosition), position.z);
                     transform.position = position;
                     // prevent climbing up when reaching end of vine
                     if (_yInput > 0)
                     {
+                        float playerOffset = GetComponent<BeansShooting>().IsShootingBeans()
+                            ? _facingDirection * .2f:-_facingDirection * .23f;
                         RaycastHit2D vineHitUp = Physics2D.Raycast(
-                            new Vector2(transform.position.x + _facingDirection*.2f, transform.position.y + .5f),
+                            new Vector2(transform.position.x +playerOffset, transform.position.y + .5f),
                             Vector2.up, .01f, whatIsVine);
                         if (!vineHitUp)
                         {
@@ -253,7 +263,8 @@ namespace Player
                 _isJumping = false;
             }
 
-            if (!_isJumping && (_isClimbing || (_isGrounded && _slopeChecker.GetSlopeDownAngle() <= _slopeChecker.GetMaxSlopeAngle())))
+            if (!_isJumping && (_isClimbing ||
+                                (_isGrounded && _slopeChecker.GetSlopeDownAngle() <= _slopeChecker.GetMaxSlopeAngle())))
             {
                 _canJump = true;
             }
@@ -273,6 +284,7 @@ namespace Player
                 _climbCooldown -= Time.deltaTime;
                 return;
             }
+
             RaycastHit2D vineHitLeft = Physics2D.Raycast(
                 new Vector2(transform.position.x, transform.position.y),
                 Vector2.right * _facingDirection, _playerXradius, whatIsVine);
@@ -299,7 +311,7 @@ namespace Player
 
         private void Jump()
         {
-             if (_canJump)
+            if (_canJump)
             {
                 _canJump = false;
                 _isJumping = true;
@@ -313,9 +325,10 @@ namespace Player
                 _newForce.Set(0.0f, newJumpForce);
                 var velocity = _rb.velocity;
                 if (velocity.y > 0)
-                { 
-                    _rb.velocity = new Vector2(velocity.x, _slopeChecker.IsOnSlope()? Mathf.Min(.3f, velocity.y) : 0);
+                {
+                    _rb.velocity = new Vector2(velocity.x, _slopeChecker.IsOnSlope() ? Mathf.Min(.3f, velocity.y) : 0);
                 }
+
                 _rb.AddForce(_newForce, ForceMode2D.Impulse);
             }
         }
@@ -325,10 +338,11 @@ namespace Player
             if (_xInput != 0)
             {
                 _velocityMultiplier = _xInput;
-                if (!_startWalking && _timeMultiplier <= 0 )
+                if (!_startWalking && _timeMultiplier <= 0)
                 {
                     _startWalking = true;
-                } else if (_startWalking && _timeMultiplier >= 1)
+                }
+                else if (_startWalking && _timeMultiplier >= 1)
                 {
                     _startWalking = false;
                 }
@@ -353,7 +367,8 @@ namespace Player
                 _newVelocity.Set(movementSpeed * _velocityMultiplier, 0.0f);
                 _rb.velocity = _newVelocity;
             }
-            else if (_isGrounded && _slopeChecker.IsOnSlope() && _slopeChecker.CanWalkOnSlope() && !_isJumping) //If on slope
+            else if (_isGrounded && _slopeChecker.IsOnSlope() && _slopeChecker.CanWalkOnSlope() &&
+                     !_isJumping) //If on slope
             {
                 _newVelocity.Set(movementSpeed * _slopeChecker.GetSlopeNormalPerp().x * -_velocityMultiplier,
                     movementSpeed * _slopeChecker.GetSlopeNormalPerp().y * -_velocityMultiplier);
