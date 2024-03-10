@@ -8,6 +8,7 @@ public class WinManager : MonoBehaviour
 {
     [SerializeField] private GameObject winTrigger;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject goose;
     private Animator _playerAnimator;
     private BeansShooting _beansShootingScript;
     private static readonly int NoGunChange = Animator.StringToHash("noGunChange");
@@ -35,7 +36,10 @@ public class WinManager : MonoBehaviour
         
         _playerAnimator.SetTrigger(NoGunChange);
         _beansShootingScript.canShoot = false;
-        
+        // put goose next to player
+        goose.SetActive(true);
+        Vector3 goosePosition = goose.transform.position;
+        goose.transform.position = new Vector3(player.transform.position.x -1, goosePosition.y, goosePosition.z);
     }
     
     

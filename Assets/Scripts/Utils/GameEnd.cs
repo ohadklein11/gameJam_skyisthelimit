@@ -30,7 +30,7 @@ public class GameEnd : MonoBehaviour
     private void OnPlayerWin(object arg0)
     {
         winImage.SetActive(true);
-        StartCoroutine(OnGameEnd(0));
+        StartCoroutine(OnGameEnd(3f));
     }
 
     IEnumerator OnGameEnd(float time)
