@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -177,6 +177,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1217741902747467014}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &116500069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3678541340137716212, guid: abbb03c84bd858f4e9caffe36c6f8196,
+    type: 3}
+  m_PrefabInstance: {fileID: 1217741902747467014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &116936488 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8390612796149029596, guid: c0e749eee2e863647b9df3a2259d2169,
@@ -210,6 +222,28 @@ MonoBehaviour:
   heightSlider: {fileID: 1105370441}
   player: {fileID: 48291940}
   bossLevel: {fileID: 517823591}
+--- !u!114 &129073835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27864256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412e033ce0a30544f9dabed258fd0fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 192973445}
+  startPanel: {fileID: 1911197084}
+  text: {fileID: 116500069}
+  pauseKey: 116
+--- !u!1 &192973445 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1840419056599265175, guid: abbb03c84bd858f4e9caffe36c6f8196,
+    type: 3}
+  m_PrefabInstance: {fileID: 1217741902747467014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &198337540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7486468096901443906, guid: c0e749eee2e863647b9df3a2259d2169,
@@ -469,6 +503,12 @@ PolygonCollider2D:
 --- !u!1 &1789675459 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6635070891148423999, guid: abbb03c84bd858f4e9caffe36c6f8196,
+    type: 3}
+  m_PrefabInstance: {fileID: 1217741902747467014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1911197084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 555061286655187432, guid: abbb03c84bd858f4e9caffe36c6f8196,
     type: 3}
   m_PrefabInstance: {fileID: 1217741902747467014}
   m_PrefabAsset: {fileID: 0}
@@ -1067,6 +1107,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 129073826}
+    - targetCorrespondingSourceObject: {fileID: 399148348744229765, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 129073835}
   m_SourcePrefab: {fileID: 100100000, guid: f700af0de43d66e41a20b7b6be39af5b, type: 3}
 --- !u!1001 &5329860172892372540
 PrefabInstance:
