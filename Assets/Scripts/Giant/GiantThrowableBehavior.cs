@@ -72,11 +72,17 @@ namespace Giant
                 }
                 if (other.transform.parent != null)
                 {
-                    StartCoroutine(other.transform.parent.GetComponent<GrowVineScript>().DestroyVine());
+                    if (!other.transform.parent.GetComponent<GrowVineScript>().destroyed)
+                    {
+                        StartCoroutine(other.transform.parent.GetComponent<GrowVineScript>().DestroyVine());
+                    }
                 }
                 else
                 {
-                    StartCoroutine(other.GetComponent<GrowVineScript>().DestroyVine());
+                    if (!other.GetComponent<GrowVineScript>().destroyed)
+                    {
+                        StartCoroutine(other.GetComponent<GrowVineScript>().DestroyVine());
+                    }
                 }
             }
             if (!_released)
