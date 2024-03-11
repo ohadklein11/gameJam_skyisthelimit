@@ -31,7 +31,6 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private AudioSource doorOpenSound;
     [SerializeField] private AudioSource doorCloseSound;
     [SerializeField] private CameraShake cameraShake;
-    private bool _escaping;
 
     private void Update()
     {
@@ -45,7 +44,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
             giantBehavior.gameObject.GetComponentInChildren<GiantEyeBehavior>().SetCurrentHealth(1);
         }
 
-        if (_escaping)
+        if (GameData.Instance.escaping)
         {
             var intensity = 3 - Mathf.Abs(_player.transform.position.x - giantBehavior.gameObject.transform.position.x) / 15f;
             if (intensity > 0)
@@ -123,7 +122,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
         backwardEnemies.SetActive(true);
         AudioManager.PlayDownBackground();
-        _escaping = true;
+        GameData.Instance.escaping = true;
     }
     
     IEnumerator OpenGiantDoorsDelay()

@@ -16,6 +16,7 @@ namespace Utils
 
         public void RestartPlayerHealth() => _curPlayerLifePoints = maxPlayerLifePoints;
         public bool isGiantFightOver=false;
+        public bool escaping = false;
         
 
         private void Awake()

@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using Utils;
 
@@ -19,6 +20,11 @@ public class ShaderManager : MonoBehaviour
     
     [SerializeField] private Light directionalLight;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private Transform player;
+
+    [SerializeField] private float yBottomLimitCold;
+    [SerializeField] private float yTopLimit;
+    [SerializeField] private float yBottomLimitWarm;
     
     private Color _originalLightFilter;
     private float _originalLightTemperature;
@@ -26,6 +32,8 @@ public class ShaderManager : MonoBehaviour
     private Color _originalCameraBackground;
     private Color _originalFog;
     private float _originalFogDensity;
+    private bool _cold;
+    private bool _warm;
     
     private void Start()
     {
@@ -41,7 +49,53 @@ public class ShaderManager : MonoBehaviour
     {
         if (!GameData.Instance.IsGiantFight && !GameData.Instance.isGiantFightOver)
         {  // COLD
-            return;
+            // lerp between original at the bottom to cold at the top
+            var t = (player.transform.position.y - yBottomLimitCold) / (yTopLimit - yBottomLimitCold);
+            if (t<0) t = 0;
+            if (t>1) t = 1;
+            directionalLight.color = Color.Lerp(_originalLightFilter, coldLightFilter, t);
+            directionalLight.colorTemperature = Mathf.Lerp(_originalLightTemperature, coldLightTemperature, t);
+            directionalLight.intensity = Mathf.Lerp(_originalLightIntensity, coldLightIntensity, t);
+            mainCamera.backgroundColor = Color.Lerp(_originalCameraBackground, coldCameraBackground, t);
+            RenderSettings.fogColor = Color.Lerp(_originalFog, coldFog, t);
+            _cold = true;
+        } else if (GameData.Instance.IsGiantFight && _cold)
+        {
+            directionalLight.DOColor(_originalLightFilter, 1f);
+            DOTween.To(() => directionalLight.colorTemperature, x => directionalLight.colorTemperature = x, _originalLightTemperature, 1f);
+            directionalLight.DOIntensity(_originalLightIntensity, 1f);
+            mainCamera.DOColor(_originalCameraBackground, 1f);
+            DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, _originalFog, 1f);
+            _cold = false;
+        } else if (GameData.Instance.escaping && !_warm)
+        {  // WARM
+            directionalLight.DOColor(warmLightFilter, 3f);
+            DOTween.To(() => directionalLight.colorTemperature, x => directionalLight.colorTemperature = x, warmLightTemperature, 3f);
+            directionalLight.DOIntensity(warmLightIntensity, 3f);
+            mainCamera.DOColor(warmCameraBackground, 3f);
+            DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, warmFog, 3f);
+            DOTween.To(() => RenderSettings.fogDensity, x => RenderSettings.fogDensity = x, warmFogDensity, 3f);
+            _warm = true;
+        } else if (_warm)
+        {
+            if (GameData.Instance.escaping)
+            {
+                // lerp between warm at the bottom to original at the top
+                var t = (player.transform.position.y - yBottomLimitWarm) / (yTopLimit - yBottomLimitWarm);
+                if (t < 0) t = 0;
+                if (t > 1) t = 1;
+                RenderSettings.fogDensity = Mathf.Lerp(warmFogDensity, _originalFogDensity, t);
+            }
+            else
+            {  // home - win
+                directionalLight.DOColor(_originalLightFilter, 2f);
+                DOTween.To(() => directionalLight.colorTemperature, x => directionalLight.colorTemperature = x, _originalLightTemperature, 2f);
+                directionalLight.DOIntensity(_originalLightIntensity, 2f);
+                mainCamera.DOColor(_originalCameraBackground, 2f);
+                DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, _originalFog, 2f);
+                DOTween.To(() => RenderSettings.fogDensity, x => RenderSettings.fogDensity = x, _originalFogDensity, 2f);
+                _warm = false;
+            }
         }
     }
 }

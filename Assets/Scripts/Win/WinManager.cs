@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Utils;
 
 
 public class WinManager : MonoBehaviour
@@ -34,6 +35,7 @@ public class WinManager : MonoBehaviour
     // Update is called once per frame
     void OnPlayerWin(object arg0)
     {
+        GameData.Instance.escaping = false;
         AudioManager.StopCurrentBGM();
         AudioManager.PlayWinBackground();
         

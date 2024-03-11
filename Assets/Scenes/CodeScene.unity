@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -238,6 +238,35 @@ MonoBehaviour:
   startPanel: {fileID: 1911197084}
   text: {fileID: 116500069}
   pauseKey: 27
+--- !u!114 &129073836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27864256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ded2f1f0e66f14fa2a2a46cebaa014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coldLightFilter: {r: 0.4509804, g: 0.8117647, b: 0.96862745, a: 1}
+  coldLightTemperature: 20000
+  coldLightIntensity: 4
+  coldCameraBackground: {r: 0.40392157, g: 0.64705884, b: 0.7294118, a: 1}
+  coldFog: {r: 0.33333334, g: 0.49411765, b: 0.5411765, a: 1}
+  warmLightFilter: {r: 0.26666668, g: 0.07058824, b: 0.078431375, a: 1}
+  warmLightTemperature: 1500
+  warmLightIntensity: 4
+  warmCameraBackground: {r: 0.3647059, g: 0.13333334, b: 0.12941177, a: 1}
+  warmFog: {r: 0.26666668, g: 0.101960786, b: 0.09803922, a: 1}
+  warmFogDensity: 0.05
+  directionalLight: {fileID: 5409031998315318190}
+  mainCamera: {fileID: 6801397343960255117}
+  player: {fileID: 48291942}
+  yBottomLimitCold: 19.76249
+  yTopLimit: 51.91629
+  yBottomLimitWarm: 0.810342
 --- !u!1 &192973445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1840419056599265175, guid: abbb03c84bd858f4e9caffe36c6f8196,
@@ -1185,6 +1214,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 129073835}
+    - targetCorrespondingSourceObject: {fileID: 399148348744229765, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 129073836}
   m_SourcePrefab: {fileID: 100100000, guid: f700af0de43d66e41a20b7b6be39af5b, type: 3}
 --- !u!1001 &5329860172892372540
 PrefabInstance:
@@ -1337,6 +1370,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b3a7bcc2c98e924f963091d95c45b1d, type: 3}
+--- !u!108 &5409031998315318190 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 2735950678040379172, guid: 8b3a7bcc2c98e924f963091d95c45b1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5409031998315318189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6592512460851996735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1553,6 +1592,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fc8826beccdf56448a83c15311659cb, type: 3}
+--- !u!20 &6801397343960255117 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2417055624747336116, guid: 7fc8826beccdf56448a83c15311659cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6801397343960255116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7754149957972804038
 PrefabInstance:
   m_ObjectHideFlags: 0
