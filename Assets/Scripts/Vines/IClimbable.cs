@@ -7,6 +7,7 @@ namespace Vines
         public bool IsGrowing();
         public float GetXPosition();
         public float GetHeadYPosition();
+        public float GetBottomYPosition();
 
         public Transform GetParentTransform();
     }

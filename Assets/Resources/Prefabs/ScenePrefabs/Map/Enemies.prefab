@@ -1421,7 +1421,12 @@ PrefabInstance:
     - target: {fileID: 7930485986402198111, guid: f9d8d5e6f5117e549ac70fb4bfd43c54,
         type: 3}
       propertyPath: _maxHealth
-      value: 50
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885543342200178513, guid: f9d8d5e6f5117e549ac70fb4bfd43c54,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5657050188542594214, guid: f9d8d5e6f5117e549ac70fb4bfd43c54, type: 3}

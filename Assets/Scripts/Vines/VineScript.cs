@@ -22,6 +22,21 @@ namespace Vines
             return firstStem.position.y + firstStem.GetComponent<Collider2D>().bounds.extents.y;
         }
         
+        public float GetBottomYPosition()
+        {
+            // find lowest stem y
+            var lowestY = float.MaxValue;
+            foreach (Transform stem in transform.parent)
+            {
+                var stemY = stem.position.y;
+                if (stemY < lowestY)
+                {
+                    lowestY = stemY;
+                }
+            }
+            return lowestY;
+        }
+        
         public bool IsGrowing()
         {
             return _growVineScript.growing;;

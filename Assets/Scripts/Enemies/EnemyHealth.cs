@@ -67,8 +67,8 @@ namespace Enemies
             _rigidBody.simulated = false;
             _collider2D.enabled = false;
             yield return new WaitForSeconds(1f);
-            _spriteRenderer.DOFade(0, 1f);
-            yield return new WaitForSeconds(1f);
+            _spriteRenderer.DOFade(0, .5f);
+            yield return new WaitForSeconds(.5f);
             Destroy(gameObject);
         }
 

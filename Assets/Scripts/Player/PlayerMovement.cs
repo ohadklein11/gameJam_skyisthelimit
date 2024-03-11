@@ -68,6 +68,10 @@ namespace Player
         [SerializeField] private float jumpGravity;
         [SerializeField] private float fallGravity;
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        private CinemachineFramingTransposer _transposer;
+        private float _originalYCameraOffset;
+        private float _climbHeight;
+        private float _climbStartHeight;
         
         public bool Climbing => _isClimbing;
         public bool Grounded => _isGrounded;
@@ -89,8 +93,10 @@ namespace Player
             _slopeChecker = GetComponent<SlopeChecker>();
             _playerXradius = _spriteRenderer.bounds.extents.x;
             _timeMultiplier = 0;
-            // _transposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-            // originalYCameraOffset = _transposer.m_TrackedObjectOffset.y; todo remove
+            _transposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            _originalYCameraOffset = _transposer.m_TrackedObjectOffset.y;
+            _climbHeight = 0;
+            _climbStartHeight = 0;
         }
 
         private void Update()
@@ -176,12 +182,28 @@ namespace Player
             }
             else
                 HandleClimbing();
-
+            HandleClimbingCamOffset();
             if (Input.GetButtonDown("Jump"))
             {
                 Jump();
             }
         }
+
+        public float maxYOffset = 10f;
+        private void HandleClimbingCamOffset()
+        {
+            if (_isClimbing)
+            {
+                _transposer.m_TrackedObjectOffset.y = Mathf.Min(_originalYCameraOffset, _originalYCameraOffset - Mathf.Min(maxYOffset, _climbHeight));
+            }
+            else
+            {
+                _climbStartHeight = 0;
+                _climbHeight = 0;
+                _transposer.m_TrackedObjectOffset.y = _originalYCameraOffset;
+            }
+        }
+
 
         IEnumerator ForceJump()
         {
@@ -198,7 +220,11 @@ namespace Player
                 if (!_isClimbing)
                 {
                     _numFramesSinceEnteringClimbing = minNumFramesForClimbing;
-                    // LockYAxis();
+                    _climbStartHeight = _climbable.GetBottomYPosition() + .3f;
+                    if (transform.position.y - _climbStartHeight < 1.5f)
+                    {
+                        _climbStartHeight = transform.position.y;
+                    }
                 }
 
                 _isClimbing = true;
@@ -237,6 +263,8 @@ namespace Player
                     }
 
                     _rb.velocity = new Vector2(0, _yInput * climbSpeed);
+                    
+                    _climbHeight = transform.position.y - _climbStartHeight;
                 }
                 catch (MissingReferenceException e)
                 {
@@ -433,13 +461,6 @@ namespace Player
             _xInput = 0;
             yield return new WaitForSeconds(time);
             _paused = false;
-        }
-
-        private void LockYAxis()
-        {
-            var lockY = new LockCameraY();
-            lockY.m_YPosition = transform.position.y;
-            virtualCamera.AddExtension(lockY);
         }
     }
 }
