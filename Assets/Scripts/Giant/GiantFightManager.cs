@@ -39,6 +39,11 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         {
             _player.transform.position = _openGiantDoorsTrigger.transform.position + new Vector3(-2, 1, 0);
         }
+        
+        if (Input.GetKeyDown(KeyCode.P)) // todo temp to decrease giant life to 1
+        {
+            giantBehavior.gameObject.GetComponentInChildren<GiantEyeBehavior>().SetCurrentHealth(1);
+        }
 
         if (_escaping)
         {

@@ -12,6 +12,10 @@ public class GiantEyeBehavior : MonoBehaviour
     public bool CanGetHit => animator.GetCurrentAnimatorStateInfo(0).IsName("sit") 
                              || animator.GetCurrentAnimatorStateInfo(0).IsName("roar");
     private int _currentHealth;
+    public void SetCurrentHealth(int health) // todo delete this
+    {
+        _currentHealth = health;
+    }
 
     private void Start()
     {
