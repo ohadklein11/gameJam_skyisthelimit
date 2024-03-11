@@ -17,7 +17,7 @@ public class BeansShooting : MonoBehaviour
     // [SerializeField] private float gunShootingDistance = 20f;
     private float _shootingForce;
     // private bool _shootingForceRising;
-    [SerializeField] private KeyCode switchKey = KeyCode.Q;
+    [SerializeField] private KeyCode switchKey;
 
     [SerializeField] private float minShootingForce = 10f;
     [SerializeField] private float maxShootingForce = 20f;
@@ -51,7 +51,7 @@ public class BeansShooting : MonoBehaviour
     private Animator _animator;
     private static readonly int EggChange = Animator.StringToHash("eggChange");
     public static readonly int BeanChange = Animator.StringToHash("beanChange");
-    private bool _canSwitchWeapons = true; // todo false
+    private bool _canSwitchWeapons = false;
     private float _originalVolume;
     [SerializeField] private AudioSource audioCollect;
     [SerializeField] private CameraShake cameraShake;

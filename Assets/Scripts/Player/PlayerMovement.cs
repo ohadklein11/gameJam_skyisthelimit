@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
 using Vines;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Player
 {
@@ -65,7 +67,8 @@ namespace Player
         [SerializeField] private float highJumpGravity;
         [SerializeField] private float jumpGravity;
         [SerializeField] private float fallGravity;
-
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        
         public bool Climbing => _isClimbing;
         public bool Grounded => _isGrounded;
         public bool Falling => (!_isGrounded && !_isClimbing && _rb.velocity.y < 0.0f);
@@ -86,6 +89,8 @@ namespace Player
             _slopeChecker = GetComponent<SlopeChecker>();
             _playerXradius = _spriteRenderer.bounds.extents.x;
             _timeMultiplier = 0;
+            // _transposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            // originalYCameraOffset = _transposer.m_TrackedObjectOffset.y; todo remove
         }
 
         private void Update()
@@ -193,6 +198,7 @@ namespace Player
                 if (!_isClimbing)
                 {
                     _numFramesSinceEnteringClimbing = minNumFramesForClimbing;
+                    // LockYAxis();
                 }
 
                 _isClimbing = true;
@@ -427,6 +433,13 @@ namespace Player
             _xInput = 0;
             yield return new WaitForSeconds(time);
             _paused = false;
+        }
+
+        private void LockYAxis()
+        {
+            var lockY = new LockCameraY();
+            lockY.m_YPosition = transform.position.y;
+            virtualCamera.AddExtension(lockY);
         }
     }
 }

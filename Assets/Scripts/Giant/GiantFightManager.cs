@@ -35,7 +35,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) // temp to teleport to giant doors
+        if (Input.GetKeyDown(KeyCode.G)) // todo temp to teleport to giant doors
         {
             _player.transform.position = _openGiantDoorsTrigger.transform.position + new Vector3(-2, 1, 0);
         }

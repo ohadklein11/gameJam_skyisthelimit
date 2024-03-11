@@ -17,6 +17,7 @@ namespace Enemies
         private Animator _animator;
         private static readonly int AnimHit = Animator.StringToHash("Hit");
         private static readonly int AnimDead = Animator.StringToHash("Dead");
+        private Rigidbody2D _rigidBody;
 
         public bool CanTakeDamage { get; set; } = true;
         public bool Hit { get; private set; }
@@ -30,6 +31,7 @@ namespace Enemies
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
             _collider2D = GetComponent<Collider2D>();
+            _rigidBody = GetComponent<Rigidbody2D>();
         }
 
         public void TakeDamage(int damage)
@@ -48,11 +50,11 @@ namespace Enemies
         private IEnumerator TakeDamageCoroutine()
         {
             Hit = true;
-            _animator.SetTrigger(AnimHit);
-            if (!_enemyMovement.isVertical)
-                _enemyMovement.StopMovement();
+            _animator.SetBool(AnimHit, true);
+            _enemyMovement.StopMovement();
             yield return new WaitForSeconds(.5f);
-            if (!_enemyMovement.isVertical && _collider2D.enabled)
+            _animator.SetBool(AnimHit, false);
+            if (_collider2D.enabled)
                 _enemyMovement.ResumeMovement();
             Hit = false;
         }
@@ -60,8 +62,9 @@ namespace Enemies
 
         private IEnumerator Die()
         {
-            _enemyMovement.StopMovement(freeze:true);
             _animator.SetBool(AnimDead, true);
+            _enemyMovement.enabled = false;
+            _rigidBody.simulated = false;
             _collider2D.enabled = false;
             yield return new WaitForSeconds(1f);
             _spriteRenderer.DOFade(0, 1f);

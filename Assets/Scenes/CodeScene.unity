@@ -403,6 +403,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 530421405471654564}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1614357824 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 231812482145492535, guid: 7fc8826beccdf56448a83c15311659cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6801397343960255116}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1660310084 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9204382536180585381, guid: abbb03c84bd858f4e9caffe36c6f8196,
@@ -591,6 +603,11 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 129073824}
+    - target: {fileID: 5728918614816335898, guid: a16659e89ee13a84e9ad28a66abb95c2,
+        type: 3}
+      propertyPath: virtualCamera
+      value: 
+      objectReference: {fileID: 1614357824}
     - target: {fileID: 5728918614816335898, guid: a16659e89ee13a84e9ad28a66abb95c2,
         type: 3}
       propertyPath: playerHealthManager
@@ -1431,6 +1448,16 @@ PrefabInstance:
     - target: {fileID: 6208600169913848199, guid: 6bc1719a1a3a89c419953107f1d1fd9a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945553999266216600, guid: 6bc1719a1a3a89c419953107f1d1fd9a,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076250601320368143, guid: 6bc1719a1a3a89c419953107f1d1fd9a,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
