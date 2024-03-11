@@ -26,11 +26,13 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private BeansShooting _beansShooting;
     [SerializeField] private GameObject _blockExit;
     [SerializeField] private GameObject EButton;
+    [SerializeField] private GameObject CTRLButton;
     [SerializeField] private GameObject backwardEnemies;
     [SerializeField] private GooseInCageBehavior _gooseInCage;
     [SerializeField] private AudioSource doorOpenSound;
     [SerializeField] private AudioSource doorCloseSound;
     [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private ShaderManager shaderManager;
 
     private void Update()
     {
@@ -97,6 +99,16 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         AudioManager.PlayBossBackground();
         _gooseInCage.audioGoose.Play(44100*3);
         OpenDoor();
+        GameData.Instance.openedGiantDoors = true;
+        StartCoroutine(CutsceneShaders());
+    }
+
+    private IEnumerator CutsceneShaders()
+    {
+        yield return new WaitForSeconds(1f);
+        shaderManager.ColdToOriginal(1.5f);
+        yield return new WaitForSeconds(4f);
+        shaderManager.OriginalToCold(0f);
     }
 
     public void TookGoose()
@@ -119,7 +131,9 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,null);
         StartCoroutine(OpenGiantDoorsDelay());
         EButton.SetActive(true);
+        CTRLButton.SetActive(true);
         EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
+        CTRLButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
         backwardEnemies.SetActive(true);
         AudioManager.PlayDownBackground();
         GameData.Instance.escaping = true;

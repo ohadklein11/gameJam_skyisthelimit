@@ -18,6 +18,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private StartCameraPath startCameraPath;
     [SerializeField] private GameObject gooseCage;
     private bool _firstOpen = true;
+    [SerializeField] private ShaderManager shaderManager;
 
     void Start()
     {
@@ -48,6 +49,7 @@ public class CameraManager : MonoBehaviour
         {
             ZoomInOnGoose();
             yield return new WaitForSeconds(5f);
+            shaderManager.OriginalToCold(0f);
         }
         float startValue, endValue;
         if (arg0.ToString() == "start")

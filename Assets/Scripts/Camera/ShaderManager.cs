@@ -47,7 +47,7 @@ public class ShaderManager : MonoBehaviour
 
     private void Update()
     {
-        if (!GameData.Instance.IsGiantFight && !GameData.Instance.isGiantFightOver)
+        if (!GameData.Instance.openedGiantDoors && !GameData.Instance.isGiantFightOver)
         {  // COLD
             // lerp between original at the bottom to cold at the top
             var t = (player.transform.position.y - yBottomLimitCold) / (yTopLimit - yBottomLimitCold);
@@ -61,11 +61,7 @@ public class ShaderManager : MonoBehaviour
             _cold = true;
         } else if (GameData.Instance.IsGiantFight && _cold)
         {
-            directionalLight.DOColor(_originalLightFilter, 1f);
-            DOTween.To(() => directionalLight.colorTemperature, x => directionalLight.colorTemperature = x, _originalLightTemperature, 1f);
-            directionalLight.DOIntensity(_originalLightIntensity, 1f);
-            mainCamera.DOColor(_originalCameraBackground, 1f);
-            DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, _originalFog, 1f);
+            ColdToOriginal(1f);
             _cold = false;
         } else if (GameData.Instance.escaping && !_warm)
         {  // WARM
@@ -74,14 +70,13 @@ public class ShaderManager : MonoBehaviour
             directionalLight.DOIntensity(warmLightIntensity, 3f);
             mainCamera.DOColor(warmCameraBackground, 3f);
             DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, warmFog, 3f);
-            DOTween.To(() => RenderSettings.fogDensity, x => RenderSettings.fogDensity = x, warmFogDensity, 3f);
-            _warm = true;
+            DOTween.To(() => RenderSettings.fogDensity, x => RenderSettings.fogDensity = x, warmFogDensity, 3f).OnComplete(() => _warm = true);
         } else if (_warm)
         {
             if (GameData.Instance.escaping)
             {
                 // lerp between warm at the bottom to original at the top
-                var t = (player.transform.position.y - yBottomLimitWarm) / (yTopLimit - yBottomLimitWarm);
+                var t = 1 - (player.transform.position.y - yBottomLimitWarm) / (yTopLimit - yBottomLimitWarm);
                 if (t < 0) t = 0;
                 if (t > 1) t = 1;
                 RenderSettings.fogDensity = Mathf.Lerp(warmFogDensity, _originalFogDensity, t);
@@ -97,5 +92,23 @@ public class ShaderManager : MonoBehaviour
                 _warm = false;
             }
         }
+    }
+
+    public void ColdToOriginal(float time)
+    {
+        directionalLight.DOColor(_originalLightFilter, time);
+        DOTween.To(() => directionalLight.colorTemperature, x => directionalLight.colorTemperature = x, _originalLightTemperature, time);
+        directionalLight.DOIntensity(_originalLightIntensity, time);
+        mainCamera.DOColor(_originalCameraBackground, time);
+        DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, _originalFog, time);
+    }
+    
+    public void OriginalToCold(float time)
+    {
+        directionalLight.DOColor(coldLightFilter, time);
+        DOTween.To(() => directionalLight.colorTemperature, x => directionalLight.colorTemperature = x, coldLightTemperature, time);
+        directionalLight.DOIntensity(coldLightIntensity, time);
+        mainCamera.DOColor(coldCameraBackground, time);
+        DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, coldFog, time);
     }
 }

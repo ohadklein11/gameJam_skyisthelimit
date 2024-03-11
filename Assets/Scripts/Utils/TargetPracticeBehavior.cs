@@ -7,7 +7,11 @@ namespace Utils
     public class TargerPracticeBehavior : MonoBehaviour
     {
         [SerializeField] private BeansShooting beansShooting;
-
+        [SerializeField] private Animator animator;
+        [SerializeField] private AudioSource smashSound;
+        [SerializeField] private AudioSource finishSound;
+        private static readonly int Hit = Animator.StringToHash("Hit");
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Bullets"))
@@ -20,7 +24,10 @@ namespace Utils
 
         private IEnumerator Release()
         {
-            // later animate
+            animator.SetTrigger(Hit);
+            smashSound.Play();
+            yield return new WaitForSeconds(0.5f);
+            finishSound.Play();
             Destroy(transform.parent.gameObject);
             yield return null;
         }

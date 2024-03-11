@@ -24,6 +24,7 @@ public class FallingStoneBehaviour : MonoBehaviour
     [SerializeField] private AudioSource audioSmash;
     private MeshRenderer _meshRenderer;
     private Collider2D _collider2D;
+    private bool _startedDestroy;
 
     void Awake()
     {
@@ -45,6 +46,7 @@ public class FallingStoneBehaviour : MonoBehaviour
         VFXManager.PlayDustVFX(transform.position);
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            _startedDestroy = true;
             StartCoroutine(SelfDestroyTimer());
             _cameraShake.Shake(shakeMagnitude, shakeDuration);
         }
@@ -55,8 +57,9 @@ public class FallingStoneBehaviour : MonoBehaviour
 
         }
 
-        if (!_released)
+        if (!_released && !_startedDestroy)
         {
+            _startedDestroy = true;
             StartCoroutine(Release());
         }
     }
@@ -68,6 +71,7 @@ public class FallingStoneBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        VFXManager.PlayStonePiecesVFX(transform.position);
         Destroy(gameObject);
     }
 
@@ -100,8 +104,9 @@ public class FallingStoneBehaviour : MonoBehaviour
             destory = true;
         }
 
-        if (!_released && destory)
+        if (!_released && destory && !_startedDestroy)
         {
+            _startedDestroy = true;
             StartCoroutine(Release());
         }
     }
