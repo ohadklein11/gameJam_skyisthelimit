@@ -528,6 +528,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform 2 fix (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1807684460583221525, guid: 261166c4a5a800e4cbe02372b931d76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -620,6 +625,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform 2 fix (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807684460583221525, guid: 261166c4a5a800e4cbe02372b931d76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1416,6 +1426,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform 2 fix (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1807684460583221525, guid: 261166c4a5a800e4cbe02372b931d76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1504,6 +1519,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform 2 fix (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807684460583221525, guid: 261166c4a5a800e4cbe02372b931d76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4263175920648976825, guid: 261166c4a5a800e4cbe02372b931d76d,
         type: 3}
@@ -1598,6 +1618,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform 2 fix (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807684460583221525, guid: 261166c4a5a800e4cbe02372b931d76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4263175920648976825, guid: 261166c4a5a800e4cbe02372b931d76d,
         type: 3}
@@ -1981,6 +2006,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform 2 fix (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 1807684460583221525, guid: 261166c4a5a800e4cbe02372b931d76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2148,6 +2178,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform 2 fix (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807684460583221525, guid: 261166c4a5a800e4cbe02372b931d76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4263175920648976825, guid: 261166c4a5a800e4cbe02372b931d76d,
         type: 3}
@@ -2426,6 +2461,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform 2 fix (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1807684460583221525, guid: 261166c4a5a800e4cbe02372b931d76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2514,6 +2554,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform 2 fix (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807684460583221525, guid: 261166c4a5a800e4cbe02372b931d76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
