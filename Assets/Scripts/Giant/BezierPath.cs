@@ -15,7 +15,7 @@ public class BezierPath : MonoBehaviour
         {
             other.GetComponent<PlayerAnimation>().ForceRunOnTruck(direction);
             // if we want player to control the movement, we can use PutOnPath instead
-            iTween.MoveTo(other.gameObject, iTween.Hash("path", points, "time", 5, "easetype", iTween.EaseType.linear));
+            iTween.MoveTo(other.gameObject, iTween.Hash("path", points, "time", 4, "easetype", iTween.EaseType.linear));
         }
     }
 

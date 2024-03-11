@@ -20,7 +20,7 @@ public class BeansShooting : MonoBehaviour
     [SerializeField] private KeyCode switchKey;
 
     [SerializeField] private float minShootingForce = 10f;
-    [SerializeField] private float maxShootingForce = 20f;
+    [SerializeField] public float maxShootingForce = 20f;
     [SerializeField] private float shootingSpeedChange = 0.5f;
     [SerializeField] private float eggShootingSpeed = 10f;
     [SerializeField] private float eggShootingCooldown = 0.4f;

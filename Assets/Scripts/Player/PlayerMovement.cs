@@ -189,12 +189,13 @@ namespace Player
             }
         }
 
-        public float maxYOffset = 10f;
+        public float maxYOffset = 3f;
         private void HandleClimbingCamOffset()
         {
             if (_isClimbing)
             {
                 _transposer.m_TrackedObjectOffset.y = Mathf.Min(_originalYCameraOffset, _originalYCameraOffset - Mathf.Min(maxYOffset, _climbHeight));
+                Debug.Log(_climbHeight);
             }
             else
             {
@@ -221,10 +222,6 @@ namespace Player
                 {
                     _numFramesSinceEnteringClimbing = minNumFramesForClimbing;
                     _climbStartHeight = _climbable.GetBottomYPosition() + .3f;
-                    if (transform.position.y - _climbStartHeight < 1.5f)
-                    {
-                        _climbStartHeight = transform.position.y;
-                    }
                 }
 
                 _isClimbing = true;

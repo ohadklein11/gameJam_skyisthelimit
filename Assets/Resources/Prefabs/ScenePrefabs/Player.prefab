@@ -659,8 +659,10 @@ MonoBehaviour:
   highJumpGravity: 0.75
   jumpGravity: 1.5
   fallGravity: 2.5
+  virtualCamera: {fileID: 0}
   minFallHeightForDust: 0.8
   audioLand: {fileID: 867319649867385399}
+  maxYOffset: 2
 --- !u!114 &3803056219058540739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,7 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   switchKey: 101
   minShootingForce: 0.2
-  maxShootingForce: 12
+  maxShootingForce: 11
   shootingSpeedChange: 11.8
   eggShootingSpeed: 10
   eggShootingCooldown: 0.15

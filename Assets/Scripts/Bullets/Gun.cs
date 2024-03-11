@@ -1,6 +1,8 @@
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Bullets
 {
@@ -11,6 +13,7 @@ namespace Bullets
         [SerializeField] private AudioSource audioCollect;
         private SpriteRenderer _spriteRenderer;
         private Collider2D _collider2D;
+        [SerializeField] private GameObject shadow;
 
 
         void Start()
@@ -41,6 +44,7 @@ namespace Bullets
             audioCollect.Play();
             _spriteRenderer.enabled = false;
             _collider2D.enabled = false;
+            shadow.SetActive(false);
             yield return new WaitForSeconds(1f);
             Destroy(gameObject);
         }

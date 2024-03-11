@@ -25,6 +25,7 @@ public class Bean : MonoBehaviour
 
     private Camera _mainCamera;
     private bool _hasGravity = false;
+    public float StartVelocity { get; private set; }
 
     void Awake()
     {
@@ -38,11 +39,13 @@ public class Bean : MonoBehaviour
         _curSpeedInterval = 1f;
     }
 
+
     void Start()
     {
         GetComponent<Rigidbody2D>().gravityScale = 0;
         _maxSpeed = _rigidbody2D.velocity.x;
         _minSpeed = _maxSpeed * minSpeedMultiplier;
+        StartVelocity = _maxSpeed;
     }
 
 
