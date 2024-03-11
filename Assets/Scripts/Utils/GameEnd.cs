@@ -23,7 +23,7 @@ public class GameEnd : MonoBehaviour
 
     private void OnPlayerLose(object arg0)
     {
-        player.GetComponent<Rigidbody2D>().bodyType =RigidbodyType2D.Static ;
+        player.GetComponent<Rigidbody2D>().constraints =RigidbodyConstraints2D.FreezeAll;
         loseImage.SetActive(true);
         StartCoroutine(OnGameEnd(2f));
     }

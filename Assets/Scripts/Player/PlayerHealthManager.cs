@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -9,7 +12,8 @@ using Utils;
 public class PlayerHealthManager : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
-
+    [SerializeField] private Collider2D damageCollider;
+    private TweenerCore<Color, Color, ColorOptions> valTween;
     private bool _isDead;
     public bool IsDead => _isDead;
     private GameData _gameData;
@@ -24,10 +28,12 @@ public class PlayerHealthManager : MonoBehaviour
         EventManagerScript.Instance.StartListening(EventManagerScript.PlayerGotHit, PlayerGotHit);
         EventManagerScript.Instance.StartListening(EventManagerScript.HealthRecovery, HealthPointsFiller);
 
+
     }
     private void PlayerGotHit(object damage)
     {
         if (!_canPlayerTakeDamage) return;
+        Debug.Log(_canPlayerTakeDamage);
         StartCoroutine(CooldownTimer());
         _gameData.SetPlayerHealth( Math.Max(_gameData.GetPlayerHealth()-(int)damage,0));
         Debug.Log("player took " + damage + " damage, " + _gameData.GetPlayerHealth() + " life points left");
@@ -53,16 +59,16 @@ public class PlayerHealthManager : MonoBehaviour
     IEnumerator CooldownTimer()
     {
         _canPlayerTakeDamage = false;
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(1f);
-        iTween.ValueTo(gameObject, iTween.Hash(
-            "from", Color.red,
-            "to", Color.white,
-            "time", 1,
-            "onupdate", "UpdatePlayerColor",
-            "easetype", iTween.EaseType.easeOutSine));
-        yield return new WaitForSeconds(1f);
+        damageCollider.enabled = false;
+        valTween?.Kill();
+        Debug.Log("Player is invulnerable");
+        valTween=spriteRenderer.DOColor(Color.red,1f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutSine);
+        
+
+        yield return new WaitForSeconds(2f);
+        damageCollider.enabled = true;
         _canPlayerTakeDamage = true;
+        // Debug.Log("Player is vulnerable" + (Time.deltaTime-time));
     }
     
     IEnumerator PlayDeadPlayer()
