@@ -14,7 +14,10 @@ public class StartScript : MonoBehaviour
     {
         GameData.isGameStopped = true;
         startPanel.SetActive(true);
-        logo.DOFade(1, 3f).SetEase(Ease.OutFlash);
+        logo.DOFade(1, 3f).SetEase(Ease.OutSine);
+        // tween the logo's size from size 0 to current size
+        logo.transform.DOScale(new Vector3(1, 1, 1), 3f).SetEase(Ease.OutCubic);
+        
 
     }
 
