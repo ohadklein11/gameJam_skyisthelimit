@@ -201,7 +201,7 @@ namespace Player
             {
                 _climbStartHeight = 0;
                 _climbHeight = 0;
-                _transposer.m_TrackedObjectOffset.y = _originalYCameraOffset;
+                _transposer.m_TrackedObjectOffset.y = Mathf.Lerp(_transposer.m_TrackedObjectOffset.y, _originalYCameraOffset, .05f);
             }
         }
 
