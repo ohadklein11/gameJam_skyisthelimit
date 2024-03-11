@@ -195,7 +195,7 @@ namespace Player
             if (_isClimbing)
             {
                 _transposer.m_TrackedObjectOffset.y = Mathf.Min(_originalYCameraOffset, _originalYCameraOffset - Mathf.Min(maxYOffset, _climbHeight));
-                Debug.Log(_climbHeight);
+                // Debug.Log(_climbHeight);
             }
             else
             {
@@ -209,7 +209,7 @@ namespace Player
         IEnumerator ForceJump()
         {
             _ignoreClimb = true;
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(.05f);
             _ignoreClimb = false;
         }
 
