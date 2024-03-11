@@ -12,7 +12,6 @@ using Utils;
 public class PlayerHealthManager : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Collider2D damageCollider;
     private TweenerCore<Color, Color, ColorOptions> valTween;
     private bool _isDead;
     public bool IsDead => _isDead;
@@ -59,14 +58,11 @@ public class PlayerHealthManager : MonoBehaviour
     IEnumerator CooldownTimer()
     {
         _canPlayerTakeDamage = false;
-        damageCollider.enabled = false;
         valTween?.Kill();
         Debug.Log("Player is invulnerable");
         valTween=spriteRenderer.DOColor(Color.red,1f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutSine);
         
-
         yield return new WaitForSeconds(2f);
-        damageCollider.enabled = true;
         _canPlayerTakeDamage = true;
         // Debug.Log("Player is vulnerable" + (Time.deltaTime-time));
     }
