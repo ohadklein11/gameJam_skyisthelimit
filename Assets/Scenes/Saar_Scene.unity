@@ -1192,26 +1192,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 13776483}
     m_Modifications:
-    - target: {fileID: 766344315523675822, guid: 7576c602cf2cd8240828bbc841b0f0d1,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 960560769379452335, guid: 7576c602cf2cd8240828bbc841b0f0d1,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5258281224579090899, guid: 7576c602cf2cd8240828bbc841b0f0d1,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5803180297184964825, guid: 7576c602cf2cd8240828bbc841b0f0d1,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6654656153108765380, guid: 7576c602cf2cd8240828bbc841b0f0d1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1262,35 +1242,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6789986617718007090, guid: 7576c602cf2cd8240828bbc841b0f0d1,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396361155354732908, guid: 7576c602cf2cd8240828bbc841b0f0d1,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7443222577122276022, guid: 7576c602cf2cd8240828bbc841b0f0d1,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7592084830942020126, guid: 7576c602cf2cd8240828bbc841b0f0d1,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8997988720606084611, guid: 7576c602cf2cd8240828bbc841b0f0d1,
         type: 3}
       propertyPath: m_Name
       value: Platforms
-      objectReference: {fileID: 0}
-    - target: {fileID: 9102571605136331928, guid: 7576c602cf2cd8240828bbc841b0f0d1,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
