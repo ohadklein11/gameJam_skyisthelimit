@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SpawnHealthFillerAfterGIantFigth : MonoBehaviour
 {
-    [SerializeField] private GameObject spawnPoint;
-    [SerializeField] private GameObject healthFillerPrefab;
+    [SerializeField] private GameObject spawnPoints;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +14,6 @@ public class SpawnHealthFillerAfterGIantFigth : MonoBehaviour
     // Update is called once per frame
     void SpawnHealthFiller(object obj)
     {
-        Instantiate(healthFillerPrefab, spawnPoint.transform.position, Quaternion.identity);
+        spawnPoints.SetActive(true);
     }
 }

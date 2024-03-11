@@ -41,8 +41,6 @@ public class WinManager : MonoBehaviour
         _beansShootingScript.canShoot = false;
         // put goose next to player
         goose.SetActive(true);
-        Vector3 goosePosition = goose.transform.position;
-        goose.transform.position = new Vector3(player.transform.position.x -1, goosePosition.y, goosePosition.z);
         // close the door
         iTween.RotateTo(playerHouseDoor, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
         doorCloseSound.Play();
