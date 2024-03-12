@@ -17,9 +17,6 @@ GameObject:
   - component: {fileID: 3823797751893428333}
   - component: {fileID: 4614142689733721098}
   - component: {fileID: 4815004651005007655}
-  - component: {fileID: 42443611323460065}
-  - component: {fileID: 2786634708667003543}
-  - component: {fileID: 7939578497377752278}
   m_Layer: 0
   m_Name: Utils
   m_TagString: Untagged
@@ -74,7 +71,7 @@ MonoBehaviour:
   saveNewTeleportPointY: 0
   bossPlatform: {fileID: 0}
   playerHome: {fileID: 0}
-  fallingTimeUntillTeleport: 1
+  fallingTimeUntillTeleport: 1.5
 --- !u!114 &7920816359554838693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dustVFX: {fileID: 8514527680899794822, guid: c716b7523cf4b464682888671370131f, type: 3}
   beanDustVFX: {fileID: 2360266565260114778, guid: 31f622aae2cc705498995e230515fa66,
+    type: 3}
+  leavesVFX: {fileID: 1878191255095618823, guid: 0b4404157bb51504983e74e25b22fe64,
     type: 3}
   shinyVFX: {fileID: 3283953264046258741, guid: 38791287571f0724a819662a8a97c9b3,
     type: 3}
@@ -187,66 +186,6 @@ MonoBehaviour:
   enemies: {fileID: 0}
   player: {fileID: 0}
   restartButton: {fileID: 0}
---- !u!114 &42443611323460065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399148348744229765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0970fdae626820744995a989a62c7cfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heightSlider: {fileID: 0}
-  player: {fileID: 0}
-  bossLevel: {fileID: 0}
---- !u!114 &2786634708667003543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399148348744229765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 412e033ce0a30544f9dabed258fd0fd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pausePanel: {fileID: 0}
-  startPanel: {fileID: 0}
-  text: {fileID: 0}
-  pauseKey: 27
---- !u!114 &7939578497377752278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399148348744229765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ded2f1f0e66f14fa2a2a46cebaa014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coldLightFilter: {r: 0.4509804, g: 0.8117647, b: 0.96862745, a: 1}
-  coldLightTemperature: 20000
-  coldLightIntensity: 4
-  coldCameraBackground: {r: 0.40392157, g: 0.64705884, b: 0.7294118, a: 1}
-  coldFog: {r: 0.33333334, g: 0.49411765, b: 0.5411765, a: 1}
-  warmLightFilter: {r: 0.26666668, g: 0.07058824, b: 0.078431375, a: 1}
-  warmLightTemperature: 1500
-  warmLightIntensity: 4
-  warmCameraBackground: {r: 0.3647059, g: 0.13333334, b: 0.12941177, a: 1}
-  warmFog: {r: 0.26666668, g: 0.101960786, b: 0.09803922, a: 1}
-  warmFogDensity: 0.05
-  directionalLight: {fileID: 0}
-  mainCamera: {fileID: 0}
-  player: {fileID: 0}
-  yBottomLimitCold: 19.76249
-  yTopLimit: 51.91629
-  yBottomLimitWarm: 0.810342
 --- !u!1 &1741057926703177761
 GameObject:
   m_ObjectHideFlags: 0
