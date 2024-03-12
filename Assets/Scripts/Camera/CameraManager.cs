@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -19,10 +20,13 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private GameObject gooseCage;
     private bool _firstOpen = true;
     [SerializeField] private ShaderManager shaderManager;
+    [SerializeField] private CinemachineConfiner2D bossConfiner;
+    private CinemachineFramingTransposer _transposer;
+
 
     void Start()
     {
-        cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = false;
+        bossConfiner.enabled = false;
         startCameraPath.SetActivePath(_turnOffCameraPath);
         _giantFightZoomOutStartValue =
             cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView;
@@ -31,7 +35,7 @@ public class CameraManager : MonoBehaviour
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantAttitude, ZoomInOnGiant);
         EventManagerScript.Instance.StartListening(EventManagerScript.LeavingGiantTemple, SetGiantBattleCamera);
         EventManagerScript.Instance.StartListening(EventManagerScript.PlayerWin, OnPlayerWin);
-
+        _transposer= cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
     private void OnPlayerWin(object arg0)
@@ -70,8 +74,8 @@ public class CameraManager : MonoBehaviour
             startValue = _giantFightZoomOutStartValue;
             endValue= giantFightZoomOut;
             // StartCoroutine(EnableCinfiner());
-            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 5f;
-            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = true;
+            bossConfiner.m_Damping = 5f;
+            bossConfiner.enabled = true;
             // iTween.ValueTo(gameObject, iTween.Hash(
             //     "from", 1.53f,
             //     "to", 3.85f,
@@ -84,8 +88,8 @@ public class CameraManager : MonoBehaviour
         {
             startValue = giantFightZoomOut;
             endValue = afterGiantFightZoom;
-            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().enabled = false;
-            cameraPath.gameObject.GetComponent<CinemachineConfiner2D>().m_Damping = 0;
+            bossConfiner.enabled = false;
+            bossConfiner.m_Damping = 0;
             cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0,0,0);
         }
 
@@ -161,6 +165,20 @@ public class CameraManager : MonoBehaviour
         cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
         cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().LookAt = player.transform;
     }
+
+    private void FixedUpdate()
+    {
+        if (player.transform.position.x < -70)
+        {
+            float maxOffset = -72.56f + 70f;
+            float currOffset= player.transform.position.x+70f;
+            float offset = 0.21f;
+            _transposer.m_ScreenX=Mathf.Min(0.5f, 0.5f - Mathf.Min(offset, (currOffset / maxOffset)*offset));
+        }
+        else
+        {
+            _transposer.m_ScreenX= 0.5f;
     
-    
+        }
+    }
 }
