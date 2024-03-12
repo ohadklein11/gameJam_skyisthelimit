@@ -956,7 +956,7 @@ MonoBehaviour:
   animator: {fileID: 7788632559618300466}
   smashSound: {fileID: 7540732236295156972}
   finishSound: {fileID: 0}
-  collider2d: {fileID: 0}
+  collider2d: {fileID: 219846085747937215}
 --- !u!1 &5296638940928837897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,7 +1223,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6238793934003770669}
   - component: {fileID: 6608612751522119544}
-  - component: {fileID: 7728342934961420235}
   - component: {fileID: 219846085747937215}
   - component: {fileID: 7788632559618300466}
   m_Layer: 0
@@ -1301,23 +1300,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7728342934961420235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5740529443823309826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7071443b34dcc4d9893417feca785c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beansShooting: {fileID: 0}
-  animator: {fileID: 0}
-  smashSound: {fileID: 0}
-  finishSound: {fileID: 0}
-  collider2d: {fileID: 0}
 --- !u!61 &219846085747937215
 BoxCollider2D:
   m_ObjectHideFlags: 0
