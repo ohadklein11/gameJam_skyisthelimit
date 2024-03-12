@@ -5,7 +5,6 @@ using UnityEngine;
 public class StonesTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject _stonesGenerator;
-    [SerializeField] private GameObject tutorial;
     
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -13,7 +12,6 @@ public class StonesTrigger : MonoBehaviour
         {
             EventManagerScript.Instance.TriggerEvent(EventManagerScript.LeavingGiantTemple,"end");
 
-            tutorial.SetActive(false);
             _stonesGenerator.SetActive(true);
             gameObject.SetActive(false);
         }
