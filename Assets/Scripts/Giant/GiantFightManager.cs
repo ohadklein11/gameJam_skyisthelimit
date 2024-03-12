@@ -33,6 +33,8 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private AudioSource doorCloseSound;
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private ShaderManager shaderManager;
+    [SerializeField] private ParticleSystem tearsLeft;
+    [SerializeField] private ParticleSystem tearsRight;
 
     private void Update()
     {
@@ -136,6 +138,8 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
         CTRLButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
         backwardEnemies.SetActive(true);
+        tearsLeft.Stop();
+        tearsRight.Stop();
         AudioManager.PlayDownBackground();
         GameData.Instance.escaping = true;
     }
