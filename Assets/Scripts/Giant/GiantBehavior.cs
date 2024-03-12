@@ -84,10 +84,9 @@ namespace Giant
             if (giantEyeBehavior.CurrentHealth < 3) _shouldEyeFlash = false;
             if (_animator.GetCurrentAnimatorStateInfo(0).IsName("sit"))
             {
-                // use DoFade to fade yoyo the eyeFlash
                 if (_shouldEyeFlash)
                 {
-                    // do following command only if _eyeFlashTween is not on
+                    Debug.Log("Start eye flash");
                     if (_eyeFlashTween == null)
                     {
                         _eyeFlashTween=eyeFlash.DOFade(0.4f, .5f).SetEase(Ease.InCubic).SetLoops(-1, LoopType.Yoyo);
@@ -96,10 +95,12 @@ namespace Giant
             }
             else
             {
+                Debug.Log("Stopping eye flash");
                 Color currentEyeColor = eyeFlash.color;
                 if (_eyeFlashTween != null)
                     eyeFlash.color = new Color(currentEyeColor.r, currentEyeColor.g, currentEyeColor.b, 0);
                 _eyeFlashTween?.Kill();
+                _eyeFlashTween = null;
             }
         }
 
