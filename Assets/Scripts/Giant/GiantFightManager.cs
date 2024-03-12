@@ -44,6 +44,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         if (Input.GetKeyDown(KeyCode.P)) // todo temp to decrease giant life to 1
         {
             giantBehavior.gameObject.GetComponentInChildren<GiantEyeBehavior>().SetCurrentHealth(1);
+            Debug.Log("Giant life decreased to 1");
         }
 
         if (GameData.Instance.escaping)
@@ -53,7 +54,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
             {
                 cameraShake.Shake(intensity, 0.1f);
             }
-         }
+        }
     }
 
     private void OpenDoor()

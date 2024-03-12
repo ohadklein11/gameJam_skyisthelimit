@@ -59,7 +59,7 @@ namespace Player
 
         private Vector2 _newVelocity;
         private Vector2 _newForce;
-
+        private Collider2D _playerCollider;
         private Rigidbody2D _rb;
         private SpriteRenderer _spriteRenderer;
         private float _velocityMultiplier = 1f;
@@ -88,6 +88,7 @@ namespace Player
 
         private void Start()
         {
+            _playerCollider = GetComponent<Collider2D>();
             _rb = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _slopeChecker = GetComponent<SlopeChecker>();
@@ -255,6 +256,26 @@ namespace Player
                             new Vector2(transform.position.x +playerOffset, transform.position.y + .5f),
                             Vector2.up, .01f, whatIsVine);
                         if (!vineHitUp)
+                        {
+                            _yInput = 0;
+                        }
+                    }
+
+                    if (_yInput > 0)
+                    {
+                        Vector2 colliderPos = (Vector2)_playerCollider.transform.position + new Vector2(.6f*_facingDirection,-.1f);
+                        var colliderBounds = _playerCollider.bounds.extents;
+                        RaycastHit2D groundHitRight = Physics2D.Raycast(
+                            colliderPos + new Vector2(colliderBounds.x, colliderBounds.y),
+                            Vector2.up, .1f, whatIsGround);
+                        RaycastHit2D groundHitLeft = Physics2D.Raycast(
+                            colliderPos + new Vector2(-colliderBounds.x, colliderBounds.y),
+                            Vector2.up, .1f, whatIsGround);
+                        // show the raycast
+                        Debug.DrawRay(colliderPos + new Vector2(colliderBounds.x, colliderBounds.y), Vector2.up * .3f, Color.red);
+                        Debug.DrawRay(colliderPos + new Vector2(-colliderBounds.x, colliderBounds.y), Vector2.up * .3f, Color.red);
+
+                        if (groundHitRight || groundHitLeft)
                         {
                             _yInput = 0;
                         }

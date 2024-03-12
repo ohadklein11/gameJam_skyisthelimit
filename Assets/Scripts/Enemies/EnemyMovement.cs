@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
 {
 
     [SerializeField] private float _speed = 2f;
-
+    private bool _canTurnAround = true;
     private bool _canMove = true;
     private float _originalSpeed;
     private Rigidbody2D _rb;
@@ -108,10 +108,12 @@ public class EnemyMovement : MonoBehaviour
 
     private bool NeedsToTurnAround()
     {
-        if (isVertical || !_canMove || !Grounded)
+        if (isVertical || !_canMove || !Grounded|| !_canTurnAround)
             return false;
+        
         if (ForcedTurnAround())  // can't move
         {
+            StartCoroutine(TurnAroundCooldown());
             return true;
         }
         
@@ -123,12 +125,19 @@ public class EnemyMovement : MonoBehaviour
         Debug.DrawRay(raycastOrigin, Vector3.down * .6f, Color.red);
         if (hit.collider == null)
         {
+            StartCoroutine(TurnAroundCooldown());
             return true;
         }
 
         return false;
     }
 
+    private IEnumerator TurnAroundCooldown()
+    {
+        _canTurnAround = false;
+        yield return new WaitForSeconds(1f);
+        _canTurnAround = true;
+    }
     public bool ForcedTurnAround()
     {
         return (!isVertical && Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f) || CheckUnwalkableSlopeInFront() || CheckAnotherEnemyInFront();
