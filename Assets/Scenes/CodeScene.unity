@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -393,18 +393,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7754149957972804038}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &598610151 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6376007540687394931, guid: abbb03c84bd858f4e9caffe36c6f8196,
-    type: 3}
-  m_PrefabInstance: {fileID: 1217741902747467014}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &606908532 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5555976085035914342, guid: 7fc8826beccdf56448a83c15311659cb,
@@ -1005,58 +993,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 555061286655187432, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3678541340137716212, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 3678541340137716212, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: b8a7ee5a996eb42449141a2ce33151b7,
-        type: 2}
-    - target: {fileID: 3678541340137716212, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_fontColor.b
-      value: 0.2627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 3678541340137716212, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_fontColor.g
-      value: 0.69411767
-      objectReference: {fileID: 0}
-    - target: {fileID: 3678541340137716212, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_fontColor.r
-      value: 0.63529414
-      objectReference: {fileID: 0}
-    - target: {fileID: 3678541340137716212, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 3678541340137716212, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5073553964961230742, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -5957997654396432463, guid: b8a7ee5a996eb42449141a2ce33151b7,
-        type: 2}
-    - target: {fileID: 5073553964961230742, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5654399045481535485, guid: abbb03c84bd858f4e9caffe36c6f8196,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1159,19 +1095,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6332431903887665456, guid: abbb03c84bd858f4e9caffe36c6f8196,
         type: 3}
-      propertyPath: logo
-      value: 
-      objectReference: {fileID: 598610151}
-    - target: {fileID: 6332431903887665456, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1405458121}
-    - target: {fileID: 6376007540687394931, guid: abbb03c84bd858f4e9caffe36c6f8196,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

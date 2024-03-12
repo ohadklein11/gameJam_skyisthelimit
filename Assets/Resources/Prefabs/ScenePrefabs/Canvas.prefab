@@ -254,6 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPanel: {fileID: 555061286655187432}
   audioSource: {fileID: 0}
+  logo: {fileID: 6376007540687394931}
 --- !u!1 &555061286655187432
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +400,7 @@ MonoBehaviour:
   m_text: Press any Button to Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8a7ee5a996eb42449141a2ce33151b7, type: 2}
-  m_sharedMaterial: {fileID: 2455274835912805669, guid: f32ec405df2b75944a024195d28207b5,
+  m_sharedMaterial: {fileID: -5957997654396432463, guid: b8a7ee5a996eb42449141a2ce33151b7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -463,7 +464,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1840419056599265175
@@ -966,7 +967,7 @@ RectTransform:
   m_GameObject: {fileID: 3489280135010557582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9084138310842002418}
@@ -997,7 +998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1565,7 +1566,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press T to Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f32ec405df2b75944a024195d28207b5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b8a7ee5a996eb42449141a2ce33151b7, type: 2}
   m_sharedMaterial: {fileID: 2455274835912805669, guid: f32ec405df2b75944a024195d28207b5,
     type: 2}
   m_fontSharedMaterials: []
@@ -1574,7 +1575,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281238652
-  m_fontColor: {r: 0.48627454, g: 0.5176471, b: 0.18039216, a: 1}
+  m_fontColor: {r: 0.63529414, g: 0.69411767, b: 0.2627451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1591,8 +1592,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 110
-  m_fontSizeBase: 110
+  m_fontSize: 128
+  m_fontSizeBase: 128
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1630,7 +1631,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6944078406750364527

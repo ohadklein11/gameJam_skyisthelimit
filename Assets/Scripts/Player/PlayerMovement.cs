@@ -114,6 +114,7 @@ namespace Player
             CheckClimb();
             ApplyMovement();
             CheckFalling();
+            Debug.Log("_isClimbing: "+_isClimbing+", _isJumping: "+_isJumping);
         }
 
         private void CheckFalling()
@@ -180,8 +181,7 @@ namespace Player
                 _isClimbing = false;
                 _yInput = 0;
             }
-            else
-                HandleClimbing();
+            HandleClimbing();
             HandleClimbingCamOffset();
             if (Input.GetButtonDown("Jump"))
             {
@@ -208,6 +208,7 @@ namespace Player
 
         IEnumerator ForceJump()
         {
+            Debug.Log("Forcing jump");
             _ignoreClimb = true;
             yield return new WaitForSeconds(.05f);
             _ignoreClimb = false;
@@ -215,11 +216,14 @@ namespace Player
 
         private void HandleClimbing()
         {
+            
+            // Debug.Log("!ignoreClimb :" + !_ignoreClimb + "&&canClimb:" + _canClimb + "(isTryingToClimb:" + IsTryingToClimb + "&&isClimbing:" + _isClimbing + "&&!isGrounded:" + !_isGrounded + "&&!isJumping" + !_isJumping);
             if (!_ignoreClimb && _canClimb && (IsTryingToClimb || (_isClimbing && !_isGrounded && !_isJumping)))
             {
                 // climb
                 if (!_isClimbing)
                 {
+                    _isJumping = false;
                     _numFramesSinceEnteringClimbing = minNumFramesForClimbing;
                     _climbStartHeight = _climbable.GetBottomYPosition() + .3f;
                 }
