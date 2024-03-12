@@ -28,6 +28,7 @@ public class GrowVineScript : MonoBehaviour
     [SerializeField] private AudioSource destroyedAudio;
     [SerializeField] private Sprite destroyedHeadSprite;
     [SerializeField] private Sprite destroyedStemSprite;
+    private float _defaultGrowingVolume;
     public bool destroyed;
 
     void Awake()
@@ -40,6 +41,8 @@ public class GrowVineScript : MonoBehaviour
 
     void Start()
     {
+        EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightStart, LowerGrowingAudio);
+        EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, RaiseGrowingAudio);
         _lastStem = transform.GetChild(0).gameObject;
         _headHeight = _lastStem.GetComponent<SpriteRenderer>().bounds.size.y;
         _stemHeight = _vineBodyPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
@@ -49,8 +52,19 @@ public class GrowVineScript : MonoBehaviour
             _firstVine = false;
             EventManagerScript.Instance.TriggerEvent(EventManagerScript.FirstVine, null);
         }
+        _defaultGrowingVolume = growAudio.volume;
+
     }
 
+    private void LowerGrowingAudio(object arg0)
+    {
+        growAudio.volume = 0.3f;
+    }
+    private void RaiseGrowingAudio(object arg0)
+    {
+        growAudio.volume = _defaultGrowingVolume;
+    }
+    
     void Update()
     {
         if (!_growing || _hitCeiling)
