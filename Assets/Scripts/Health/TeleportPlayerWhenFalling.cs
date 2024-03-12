@@ -71,7 +71,7 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
         if (_hitSolidGround && Vector3.Distance(bossPlatform.transform.position,player.transform.position)<Vector3.Distance(bossPlatform.transform.position,_lastGroundPoint))
         {
             _lastGroundPoint = player.transform.position + new Vector3(0,1f,0);
-            Debug.Log("GroundPointOnAscend"+_lastGroundPoint);
+            // Debug.Log("GroundPointOnAscend"+_lastGroundPoint);
 
         }
         // if player falls below last ground point, kill player
@@ -94,7 +94,7 @@ public class TeleportPlayerWhenFalling : MonoBehaviour
         if (_hitSolidGround && Vector3.Distance(playerHome.transform.position,player.transform.position)<Vector3.Distance(playerHome.transform.position,_lastGroundPoint))
         {
             _lastGroundPoint = player.transform.position+new Vector3(0,1f,0);
-            Debug.Log("GroundPointOnDescend"+_lastGroundPoint);  //too many logs
+            // Debug.Log("GroundPointOnDescend"+_lastGroundPoint);  //too many logs
 
         }
         if (!hitGroundBeneath && _playerMovement.Falling && !_playerMovement.Jumping)

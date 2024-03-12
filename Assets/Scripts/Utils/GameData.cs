@@ -16,6 +16,8 @@ namespace Utils
 
         public void RestartPlayerHealth() => _curPlayerLifePoints = maxPlayerLifePoints;
         public bool isGiantFightOver=false;
+        public bool escaping = false;
+        public bool openedGiantDoors = false;
         
 
         private void Awake()
@@ -48,6 +50,9 @@ namespace Utils
         private void OnRestart()
         {
             IsGiantFight = false;
+            isGiantFightOver = false;
+            escaping = false;
+            openedGiantDoors = false;
             _curPlayerLifePoints = maxPlayerLifePoints;
         }
         public static void Restart() => Instance.OnRestart();

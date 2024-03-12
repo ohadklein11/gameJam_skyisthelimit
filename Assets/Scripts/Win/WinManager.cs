@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Utils;
 
 
 public class WinManager : MonoBehaviour
@@ -13,8 +14,10 @@ public class WinManager : MonoBehaviour
     private Animator _playerAnimator;
     private BeansShooting _beansShootingScript;
     private static readonly int NoGunChange = Animator.StringToHash("noGunChange");
+    [SerializeField] private AudioSource doorCloseSound;
+    [SerializeField] private AudioSource gooseAudio;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,7 @@ public class WinManager : MonoBehaviour
     // Update is called once per frame
     void OnPlayerWin(object arg0)
     {
+        GameData.Instance.escaping = false;
         AudioManager.StopCurrentBGM();
         AudioManager.PlayWinBackground();
         
@@ -39,13 +43,16 @@ public class WinManager : MonoBehaviour
         _beansShootingScript.canShoot = false;
         // put goose next to player
         goose.SetActive(true);
-        Vector3 goosePosition = goose.transform.position;
-        goose.transform.position = new Vector3(player.transform.position.x -1, goosePosition.y, goosePosition.z);
         // close the door
         iTween.RotateTo(playerHouseDoor, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
+        doorCloseSound.Play();
         playerHouseDoor.GetComponentInChildren<BoxCollider2D>().enabled = true;
-        
+        StartCoroutine(PlayGoose());
     }
-    
-    
+
+    private IEnumerator PlayGoose()
+    {
+        yield return new WaitForSeconds(1.5f);
+        gooseAudio.Play();
+    }
 }

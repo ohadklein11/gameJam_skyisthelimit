@@ -10,15 +10,16 @@ namespace Utils
     {
         [SerializeField] private ParticleSystem dustVFX;
         [SerializeField] private ParticleSystem beanDustVFX;
-        [SerializeField] private ParticleSystem leavesVFX;
         [SerializeField] private ParticleSystem shinyVFX;
         [SerializeField] private ParticleSystem stonePiecesVFX;
         [SerializeField] private ParticleSystem eggPiecesVFX;
+        [SerializeField] private ParticleSystem mushPiecesVFX;
     
         private ObjectPool<ParticleSystem> _dustVFXs;
         private ObjectPool<ParticleSystem> _beanDustVFXs;
         private ObjectPool<ParticleSystem> _stoneVFXs;
         private ObjectPool<ParticleSystem> _eggVFXs;
+        private ObjectPool<ParticleSystem> _mushVFXs;
 
 
         private static VFXManager Instance { get; set; }
@@ -31,6 +32,7 @@ namespace Utils
             _beanDustVFXs = InitObjectPool(beanDustVFX);
             _stoneVFXs = InitObjectPool(stonePiecesVFX);
             _eggVFXs = InitObjectPool(eggPiecesVFX);
+            _mushVFXs = InitObjectPool(mushPiecesVFX);
         }
 
         private ObjectPool<ParticleSystem> InitObjectPool(ParticleSystem vfxPS)
@@ -65,12 +67,6 @@ namespace Utils
         {
             StartCoroutine(VFXCoroutine(_beanDustVFXs, position));
         }
-
-        private void LeavesVFX(Vector3 position)
-        {
-            leavesVFX.transform.position = position;
-            leavesVFX.Play();
-        }
         
         private void ShinyVFX(Vector3 position)
         {
@@ -88,11 +84,16 @@ namespace Utils
             StartCoroutine(VFXCoroutine(_eggVFXs, position));
         }
         
+        private void MushVFX(Vector3 position)
+        {
+            StartCoroutine(VFXCoroutine(_mushVFXs, position));
+        }
+        
         public static void PlayDustVFX(Vector3 position) => Instance.DustVFX(position);
         public static void PlayBeanDustVFX(Vector3 position) => Instance.BeanDustVFX(position);
-        public static void PlayLeavesVFX(Vector3 position) => Instance.LeavesVFX(position);
         public static void PlayShinyVFX(Vector3 position) => Instance.ShinyVFX(position);
         public static void PlayStonePiecesVFX(Vector3 position) => Instance.StonePiecesVFX(position);
         public static void PlayEggPiecesVFX(Vector3 position) => Instance.EggPiecesVFX(position);
+        public static void PlayMushVFX(Vector3 position) => Instance.MushVFX(position);
     }
 }

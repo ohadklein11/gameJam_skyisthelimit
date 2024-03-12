@@ -105,7 +105,9 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool(IsMovingVertically, false);
         _animator.SetBool(IsMoving, true);
         SwitchToClimbingAnimation(false);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
+        Debug.Log("Forcing run on truck");
+
         _playerMovement.forceDirection=false;
         _forceRunOnTruck = false;
         _animator.SetBool(IsMoving, (Mathf.Abs(_rb.velocity.y) >= 0.1f));

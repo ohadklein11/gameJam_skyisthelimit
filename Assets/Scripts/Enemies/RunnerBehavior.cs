@@ -15,8 +15,6 @@ public class RunnerBehavior : MonoBehaviour
     public bool chasingPlayer = false;
     private Transform _playerTransform;
     private SpriteRenderer _spriteRenderer;
-    private Color _originalColor;
-    private Animator _animator;
     public float noticeTime = 1f;
 
     // Start is called before the first frame update
@@ -25,8 +23,6 @@ public class RunnerBehavior : MonoBehaviour
         _enemyMovement = GetComponent<EnemyMovement>();
         _enemyHealth = GetComponent<EnemyHealth>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _originalColor = _spriteRenderer.color;
-        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -72,10 +68,10 @@ public class RunnerBehavior : MonoBehaviour
         if (_enemyHealth.IsDead) yield break;
         chasingPlayer = true;
         _enemyMovement.StopMovement(freeze: true);
-        _spriteRenderer.DOColor(new Color(215f/255f, 49f/255f, 38f/255f), noticeTime);
         yield return new WaitForSeconds(noticeTime);
+        while (_enemyHealth.Hit)
+            yield return null;
         _enemyMovement.StartMovement(chaseSpeed);
-        // tween to change color to red
         
         bool seeingPlayer;
         do
@@ -92,7 +88,6 @@ public class RunnerBehavior : MonoBehaviour
             yield return null;
         } while (seeingPlayer);
         chasingPlayer = false;
-        _spriteRenderer.DOColor(_originalColor, 1f);
         _enemyMovement.StartMovement();
     }
 }

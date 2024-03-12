@@ -17,10 +17,10 @@ public class BeansShooting : MonoBehaviour
     // [SerializeField] private float gunShootingDistance = 20f;
     private float _shootingForce;
     // private bool _shootingForceRising;
-    [SerializeField] private KeyCode switchKey = KeyCode.Q;
+    [SerializeField] private KeyCode switchKey;
 
     [SerializeField] private float minShootingForce = 10f;
-    [SerializeField] private float maxShootingForce = 20f;
+    [SerializeField] public float maxShootingForce = 20f;
     [SerializeField] private float shootingSpeedChange = 0.5f;
     [SerializeField] private float eggShootingSpeed = 10f;
     [SerializeField] private float eggShootingCooldown = 0.4f;
@@ -54,6 +54,7 @@ public class BeansShooting : MonoBehaviour
     private bool _canSwitchWeapons = false;
     private float _originalVolume;
     [SerializeField] private AudioSource audioCollect;
+    [SerializeField] private CameraShake cameraShake;
 
 
     void Awake()
@@ -145,6 +146,7 @@ public class BeansShooting : MonoBehaviour
                 GetComponent<PlayerAnimation>().PlayShootingAnimation(0);
                 InstantiateBullet(_beanPrefab);
                 _shootingCooldownWait = beanShootingCooldown;
+                cameraShake.Shake(_shootingForce / (maxShootingForce*2f), .3f);
                 _shootingForce = 0;
                 audioPeaShoot.Play();
             }

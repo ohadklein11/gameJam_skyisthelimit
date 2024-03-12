@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
 using Vines;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Player
 {
@@ -57,7 +59,7 @@ namespace Player
 
         private Vector2 _newVelocity;
         private Vector2 _newForce;
-
+        private Collider2D _playerCollider;
         private Rigidbody2D _rb;
         private SpriteRenderer _spriteRenderer;
         private float _velocityMultiplier = 1f;
@@ -65,7 +67,12 @@ namespace Player
         [SerializeField] private float highJumpGravity;
         [SerializeField] private float jumpGravity;
         [SerializeField] private float fallGravity;
-
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        private CinemachineFramingTransposer _transposer;
+        private float _originalYCameraOffset;
+        private float _climbHeight;
+        private float _climbStartHeight;
+        
         public bool Climbing => _isClimbing;
         public bool Grounded => _isGrounded;
         public bool Falling => (!_isGrounded && !_isClimbing && _rb.velocity.y < 0.0f);
@@ -77,14 +84,20 @@ namespace Player
         private bool _paused;
         private bool _startWalking;
         private float _climbCooldown;
+        [SerializeField] private AudioSource audioLand;
 
         private void Start()
         {
+            _playerCollider = GetComponent<Collider2D>();
             _rb = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _slopeChecker = GetComponent<SlopeChecker>();
             _playerXradius = _spriteRenderer.bounds.extents.x;
             _timeMultiplier = 0;
+            _transposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            _originalYCameraOffset = _transposer.m_TrackedObjectOffset.y;
+            _climbHeight = 0;
+            _climbStartHeight = 0;
         }
 
         private void Update()
@@ -122,6 +135,7 @@ namespace Player
                 if (_fallingFirstHeight - transform.position.y >= minFallHeightForDust)
                 {
                     var position = transform.position;
+                    audioLand.Play();
                     VFXManager.PlayDustVFX(new Vector3(position.x, position.y - _spriteRenderer.bounds.size.y + .1f,
                         position.z));
                 }
@@ -167,30 +181,49 @@ namespace Player
                 _isClimbing = false;
                 _yInput = 0;
             }
-            else
-                HandleClimbing();
-
+            HandleClimbing();
+            HandleClimbingCamOffset();
             if (Input.GetButtonDown("Jump"))
             {
                 Jump();
             }
         }
 
+        public float maxYOffset = 3f;
+        private void HandleClimbingCamOffset()
+        {
+            if (_isClimbing)
+            {
+                _transposer.m_TrackedObjectOffset.y = Mathf.Min(_originalYCameraOffset, _originalYCameraOffset - Mathf.Min(maxYOffset, _climbHeight));
+                // Debug.Log(_climbHeight);
+            }
+            else
+            {
+                _climbStartHeight = 0;
+                _climbHeight = 0;
+                _transposer.m_TrackedObjectOffset.y = Mathf.Lerp(_transposer.m_TrackedObjectOffset.y, _originalYCameraOffset, .05f);
+            }
+        }
+
+
         IEnumerator ForceJump()
         {
             _ignoreClimb = true;
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(.2f);
             _ignoreClimb = false;
         }
 
         private void HandleClimbing()
         {
+            
             if (!_ignoreClimb && _canClimb && (IsTryingToClimb || (_isClimbing && !_isGrounded && !_isJumping)))
             {
                 // climb
                 if (!_isClimbing)
                 {
+                    _isJumping = false;
                     _numFramesSinceEnteringClimbing = minNumFramesForClimbing;
+                    _climbStartHeight = _climbable.GetBottomYPosition() + .3f;
                 }
 
                 _isClimbing = true;
@@ -228,7 +261,29 @@ namespace Player
                         }
                     }
 
+                    if (_yInput > 0)
+                    {
+                        Vector2 colliderPos = (Vector2)_playerCollider.transform.position + new Vector2(.6f*_facingDirection,-.1f);
+                        var colliderBounds = _playerCollider.bounds.extents;
+                        RaycastHit2D groundHitRight = Physics2D.Raycast(
+                            colliderPos + new Vector2(colliderBounds.x, colliderBounds.y),
+                            Vector2.up, .1f, whatIsGround);
+                        RaycastHit2D groundHitLeft = Physics2D.Raycast(
+                            colliderPos + new Vector2(-colliderBounds.x, colliderBounds.y),
+                            Vector2.up, .1f, whatIsGround);
+                        // show the raycast
+                        Debug.DrawRay(colliderPos + new Vector2(colliderBounds.x, colliderBounds.y), Vector2.up * .3f, Color.red);
+                        Debug.DrawRay(colliderPos + new Vector2(-colliderBounds.x, colliderBounds.y), Vector2.up * .3f, Color.red);
+
+                        if (groundHitRight || groundHitLeft)
+                        {
+                            _yInput = 0;
+                        }
+                    }
+
                     _rb.velocity = new Vector2(0, _yInput * climbSpeed);
+                    
+                    _climbHeight = transform.position.y - _climbStartHeight;
                 }
                 catch (MissingReferenceException e)
                 {

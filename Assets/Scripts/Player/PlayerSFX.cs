@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Utils;
 
 namespace Player
 {
@@ -9,12 +10,12 @@ namespace Player
         [SerializeField] private AudioSource audioWalk;
         [SerializeField] private AudioSource audioClimb;
         [SerializeField] private AudioSource audioJump;
-        [SerializeField] private AudioSource audioLand;
         [SerializeField] private AudioSource audioHit;
         [SerializeField] private AudioSource audioDead;
     
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private PlayerHealthManager playerHealth;
+        [SerializeField] private ParticleSystem leavesVFX;
         private bool _hit;
         private bool _dead;
         private bool _jump;
@@ -43,26 +44,22 @@ namespace Player
             if (!_jump && playerMovement.Jumping)
             {
                 _jump = true;
-                _land = false;
                 audioJump.Play();
             }
-            if (_jump && !playerMovement.Jumping && !playerMovement.Falling)
+            if (_jump && !playerMovement.Jumping && playerMovement.Falling)
             {
                 _jump = false;
-                if (!_land)
-                {
-                    _land = true;
-                    audioLand.Play();
-                }
             }
             if (!_climb && playerMovement.ActivelyClimbing)
             {
                 _climb = true;
                 audioClimb.mute = false;
+                leavesVFX.Play();
             } else if (_climb && !playerMovement.ActivelyClimbing)
             {
                 _climb = false;
                 audioClimb.mute = true;
+                leavesVFX.Stop();
             }
             if (!_walk && playerMovement.Walking)
             {

@@ -26,14 +26,34 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private BeansShooting _beansShooting;
     [SerializeField] private GameObject _blockExit;
     [SerializeField] private GameObject EButton;
+    [SerializeField] private GameObject CTRLButton;
     [SerializeField] private GameObject backwardEnemies;
     [SerializeField] private GooseInCageBehavior _gooseInCage;
+    [SerializeField] private AudioSource doorOpenSound;
+    [SerializeField] private AudioSource doorCloseSound;
+    [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private ShaderManager shaderManager;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) // temp to teleport to giant doors
+        if (Input.GetKeyDown(KeyCode.G)) // todo temp to teleport to giant doors
         {
             _player.transform.position = _openGiantDoorsTrigger.transform.position + new Vector3(-2, 1, 0);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.P)) // todo temp to decrease giant life to 1
+        {
+            giantBehavior.gameObject.GetComponentInChildren<GiantEyeBehavior>().SetCurrentHealth(1);
+            Debug.Log("Giant life decreased to 1");
+        }
+
+        if (GameData.Instance.escaping)
+        {
+            var intensity = 3 - Mathf.Abs(_player.transform.position.x - giantBehavior.gameObject.transform.position.x) / 15f;
+            if (intensity > 0)
+            {
+                cameraShake.Shake(intensity, 0.1f);
+            }
         }
     }
 
@@ -42,12 +62,18 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         iTween.RotateTo(_doorPivot.gameObject, iTween.Hash("y", 180, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
         _doorCollider.enabled = false;
         _blockExit.SetActive(!_blockExit.activeSelf);
+        var volume = Mathf.Abs(_player.transform.position.x - _doorPivot.position.x) < 10 ? 1 : 0.5f;
+        doorOpenSound.volume = volume;
+        doorOpenSound.Play();
     }
     
     private void CloseDoor()
     {
         iTween.RotateTo(_doorPivot.gameObject, iTween.Hash("y", -90, "time", 2, "easetype", iTween.EaseType.easeOutCubic));
         _doorCollider.enabled = true;
+        var volume = Mathf.Abs(_player.transform.position.x - _doorPivot.position.x) < 10 ? 1 : 0.5f;
+        doorCloseSound.volume = volume;
+        doorCloseSound.Play();
     }
 
     public void StartGiantFight()
@@ -74,6 +100,16 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         AudioManager.PlayBossBackground();
         _gooseInCage.audioGoose.Play(44100*3);
         OpenDoor();
+        GameData.Instance.openedGiantDoors = true;
+        StartCoroutine(CutsceneShaders());
+    }
+
+    private IEnumerator CutsceneShaders()
+    {
+        yield return new WaitForSeconds(1f);
+        shaderManager.ColdToOriginal(1.5f);
+        yield return new WaitForSeconds(4f);
+        shaderManager.OriginalToCold(0f);
     }
 
     public void TookGoose()
@@ -96,9 +132,12 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,null);
         StartCoroutine(OpenGiantDoorsDelay());
         EButton.SetActive(true);
+        CTRLButton.SetActive(true);
         EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
+        CTRLButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
         backwardEnemies.SetActive(true);
         AudioManager.PlayDownBackground();
+        GameData.Instance.escaping = true;
     }
     
     IEnumerator OpenGiantDoorsDelay()

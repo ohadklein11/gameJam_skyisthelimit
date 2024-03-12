@@ -33,7 +33,7 @@ public class ClimberBehavior : MonoBehaviour
     private bool _isClimbing;
     private Transform _curVine;
     private Transform _targetVine;
-    private bool _shouldFacePlayer = true;
+    private bool _shouldFacePlayer = false;
     private readonly int _groundedMax = 6;
     private int _groundedCount = 0;
     private bool GroundedWell => _groundedCount == _groundedMax;
@@ -44,6 +44,7 @@ public class ClimberBehavior : MonoBehaviour
     private static readonly int AnimTop = Animator.StringToHash("Top");
     private static readonly int AnimGrounded = Animator.StringToHash("Grounded");
     [SerializeField] private float _distanceToTargetVine;
+    private bool _faced;
 
 
     // Start is called before the first frame update
@@ -82,9 +83,10 @@ public class ClimberBehavior : MonoBehaviour
                               && _playerMovement.Climbing;
         if (appeared)
         {
+            if (_enemyMovement.stay) return;
             if (_shouldFacePlayer)
             {
-                _enemyMovement.FacePlayer();
+                StartCoroutine(FacePlayer());
             }
 
             if (playerClimbing)
@@ -159,6 +161,15 @@ public class ClimberBehavior : MonoBehaviour
         {
             StartCoroutine(Appear());
         }
+    }
+
+    private IEnumerator FacePlayer()
+    {
+        if (_faced) yield break;
+        _faced = true;
+        _enemyMovement.FacePlayer();
+        yield return new WaitForSeconds(1f);
+        _faced = false;
     }
 
     private void GetDownFromVine()

@@ -52,7 +52,8 @@ public class StonesGenerator : MonoBehaviour
         if (_timeToThrowLeft<= 0)
         {
             _timeToThrowLeft = timeToThrow;
-            _throwablePool.Get();
+            if (_throwablePool != null)
+                _throwablePool.Get();
         }
         else
         {

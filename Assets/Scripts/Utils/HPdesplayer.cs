@@ -19,7 +19,9 @@ public class HPdesplayer : MonoBehaviour
     private float _minFill = 0.32f;
     private float _maxFill = 0.946f;
     private float _curFill;
-    private TweenerCore<float,float,FloatOptions> tween;
+    private TweenerCore<float,float,FloatOptions> valTween;
+    private TweenerCore<Vector3,Vector3,VectorOptions> sizeTween;
+    [SerializeField] private Transform hpTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +39,10 @@ public class HPdesplayer : MonoBehaviour
         if (_curHP != curHP)
         {
             var newFill = Mathf.Lerp(_minFill, _maxFill, (float)curHP / _maxHP);
-            tween?.Kill();
-            tween = hpSlider.DOFillAmount(newFill, 1f).SetEase(Ease.OutCubic);
+            valTween?.Kill();
+            sizeTween?.Kill();
+            valTween = hpSlider.DOFillAmount(newFill, 1f).SetEase(Ease.OutCubic);
+            sizeTween = hpTransform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutSine);
             _curHP = curHP;
         }
     }

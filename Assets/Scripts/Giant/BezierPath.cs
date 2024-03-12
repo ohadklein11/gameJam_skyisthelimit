@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 public class BezierPath : MonoBehaviour
@@ -14,8 +15,10 @@ public class BezierPath : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerAnimation>().ForceRunOnTruck(direction);
+            other.GetComponent<PlayerMovement>().StopClimbing();
+
             // if we want player to control the movement, we can use PutOnPath instead
-            iTween.MoveTo(other.gameObject, iTween.Hash("path", points, "time", 5, "easetype", iTween.EaseType.linear));
+            iTween.MoveTo(other.gameObject, iTween.Hash("path", points, "time", 4, "easetype", iTween.EaseType.linear));
         }
     }
 
