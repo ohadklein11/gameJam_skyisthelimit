@@ -172,7 +172,7 @@ public class CameraManager : MonoBehaviour
         {
             float maxOffset = -72.56f + 70f;
             float currOffset= player.transform.position.x+70f;
-            float offset = 0.21f;
+            float offset = 0.225f;
             _transposer.m_ScreenX=Mathf.Min(0.5f, 0.5f - Mathf.Min(offset, (currOffset / maxOffset)*offset));
         }
         else
