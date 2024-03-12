@@ -26,6 +26,7 @@ public class EnemyMovement : MonoBehaviour
     private Transform _player;
     private Vector2 _prevVelocity;
     private RigidbodyConstraints2D _prevConstraints;
+    private bool _stay;
     public bool ReachedTop { get; private set; }
 
     public bool Grounded { get; set; }
@@ -61,10 +62,18 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!_canMove) return;
+        if (!_canMove || _stay) return;
         if (NeedsToTurnAround())
         {
-            TurnAround();
+            if (_canTurnAround)
+            {
+                TurnAround();
+                StartCoroutine(TurnAroundCooldown());
+            }
+            else // stay where you are until you can turn around
+            {
+                StartCoroutine(StayInPlace());
+            }
         }
 
         _positionBefore2Frames = _positionBefore1Frame;
@@ -84,6 +93,19 @@ public class EnemyMovement : MonoBehaviour
         var hit = Physics2D.Raycast(raycastOrigin, Vector3.down, .5f, LayerMask.GetMask("Ground"));
         Debug.DrawRay(raycastOrigin, Vector3.down * .4f, Color.red);
         Grounded = hit.collider != null;
+    }
+
+    private IEnumerator StayInPlace()
+    {
+        _stay = true;
+        StopMovement();
+        while (!_canTurnAround)
+        {
+            yield return null;
+        }
+        _stay = false;
+        TurnAround();
+        ResumeMovement();
     }
 
     private void MoveVertical()
@@ -108,12 +130,11 @@ public class EnemyMovement : MonoBehaviour
 
     private bool NeedsToTurnAround()
     {
-        if (isVertical || !_canMove || !Grounded|| !_canTurnAround)
+        if (isVertical || !_canMove || !Grounded)
             return false;
         
         if (ForcedTurnAround())  // can't move
         {
-            StartCoroutine(TurnAroundCooldown());
             return true;
         }
         
@@ -125,7 +146,6 @@ public class EnemyMovement : MonoBehaviour
         Debug.DrawRay(raycastOrigin, Vector3.down * .6f, Color.red);
         if (hit.collider == null)
         {
-            StartCoroutine(TurnAroundCooldown());
             return true;
         }
 

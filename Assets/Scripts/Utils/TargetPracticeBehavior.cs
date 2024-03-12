@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Utils
 {
@@ -11,7 +11,8 @@ namespace Utils
         [SerializeField] private AudioSource smashSound;
         [SerializeField] private AudioSource finishSound;
         private static readonly int Hit = Animator.StringToHash("Hit");
-        
+        [SerializeField] private Collider2D collider2d;
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Bullets"))
@@ -26,6 +27,7 @@ namespace Utils
         {
             animator.SetTrigger(Hit);
             smashSound.Play();
+            collider2d.enabled = false;
             yield return new WaitForSeconds(0.5f);
             finishSound.Play();
             Destroy(transform.parent.gameObject);
