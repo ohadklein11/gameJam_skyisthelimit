@@ -26,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
     private Transform _player;
     private Vector2 _prevVelocity;
     private RigidbodyConstraints2D _prevConstraints;
-    private bool _stay;
+    public bool stay;
     public bool ReachedTop { get; private set; }
 
     public bool Grounded { get; set; }
@@ -62,7 +62,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!_canMove || _stay) return;
+        if (!_canMove || stay) return;
         if (NeedsToTurnAround())
         {
             if (_canTurnAround)
@@ -82,7 +82,7 @@ public class EnemyMovement : MonoBehaviour
         {
             MoveVertical();
         }
-        else if (Grounded)
+        else if (Grounded && !stay)
         {
             MoveHorizontal();
         }
@@ -97,13 +97,16 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator StayInPlace()
     {
-        _stay = true;
+        stay = true;
         StopMovement();
         while (!_canTurnAround)
         {
             yield return null;
         }
-        _stay = false;
+
+        _positionBefore1Frame = Vector3.zero;
+        _positionBefore2Frames = Vector3.zero;
+        stay = false;
         TurnAround();
         ResumeMovement();
     }
@@ -152,15 +155,15 @@ public class EnemyMovement : MonoBehaviour
         return false;
     }
 
-    private IEnumerator TurnAroundCooldown()
+    private IEnumerator TurnAroundCooldown(float t=1f)
     {
         _canTurnAround = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(t);
         _canTurnAround = true;
     }
     public bool ForcedTurnAround()
     {
-        return (!isVertical && Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f) || CheckUnwalkableSlopeInFront() || CheckAnotherEnemyInFront();
+        return (!stay && !isVertical && Mathf.Abs(transform.position.x - _positionBefore2Frames.x) < 0.01f) || CheckUnwalkableSlopeInFront() || CheckAnotherEnemyInFront();
     }
 
     private void TurnAround()
@@ -170,6 +173,7 @@ public class EnemyMovement : MonoBehaviour
         var localScale = transform1.localScale;
         localScale = new Vector3(_direction * Mathf.Abs(localScale.x), localScale.y, localScale.z);
         transform1.localScale = localScale;
+        StartCoroutine(TurnAroundCooldown(.5f));
     }
 
     public void StopMovement(bool freeze = false)
