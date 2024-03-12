@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using Enemies;
 using Player;
 using UnityEngine;
@@ -23,13 +25,13 @@ namespace Giant
         [SerializeField] private float throwDelay = .5f;
         private ThrowAtPlayerBehavior _throwAtPlayerBehavior;
         [SerializeField] private int collisionDamage = 5;
-        
+        [SerializeField] private SpriteRenderer eyeFlash;
         private Animator _animator;
         private static readonly int Hit = Animator.StringToHash("hit");
 
         private static readonly int Roar = Animator.StringToHash("roar");
         private bool _roaring;
-       
+        private bool _shouldEyeFlash = false;
         private static readonly int Blinking = Animator.StringToHash("blinking");
         [SerializeField] private GiantEyeBehavior giantEyeBehavior;
         [SerializeField] private float minTimeToBlink = 5f;
@@ -39,7 +41,7 @@ namespace Giant
         private float _timeToBlink;
         private float _timeToBlinkEnd;
         private bool _blinking;
-       
+        private TweenerCore<Color, Color, ColorOptions> _eyeFlashTween;
         private static readonly int Throw = Animator.StringToHash("throw");
         [SerializeField] private GameObject floor;  // used for vine count
         private int _vineCount = 1;
@@ -73,6 +75,31 @@ namespace Giant
                 HandleRoaring();
                 HandleThrowing();
                 HandleHit();
+                HandleEyeFlash();
+            }
+        }
+
+        private void HandleEyeFlash()
+        {
+            if (giantEyeBehavior.CurrentHealth < 3) _shouldEyeFlash = false;
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("sit"))
+            {
+                // use DoFade to fade yoyo the eyeFlash
+                if (_shouldEyeFlash)
+                {
+                    // do following command only if _eyeFlashTween is not on
+                    if (_eyeFlashTween == null)
+                    {
+                        _eyeFlashTween=eyeFlash.DOFade(0.4f, .5f).SetEase(Ease.InCubic).SetLoops(-1, LoopType.Yoyo);
+                    }
+                }
+            }
+            else
+            {
+                Color currentEyeColor = eyeFlash.color;
+                if (_eyeFlashTween != null)
+                    eyeFlash.color = new Color(currentEyeColor.r, currentEyeColor.g, currentEyeColor.b, 0);
+                _eyeFlashTween?.Kill();
             }
         }
 
@@ -150,10 +177,19 @@ namespace Giant
             _animator.SetTrigger(Start);
             yield return new WaitForSeconds(2f);
             _throwAtPlayerBehavior.enabled = true;
+            StartCoroutine(EyeFlash());
             _fighting = true;
             _timeToBlink = UnityEngine.Random.Range(minTimeToBlink, maxTimeToBlink);
         }
-        
+
+        IEnumerator EyeFlash()
+        {
+            yield return new WaitForSeconds(3f);
+            if (giantEyeBehavior.CurrentHealth ==3)
+            {
+                _shouldEyeFlash= true;
+            }
+        }
         
         public void EndGiantFight()
         {
