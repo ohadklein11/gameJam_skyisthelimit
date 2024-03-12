@@ -183,7 +183,7 @@ namespace Giant
 
         IEnumerator EyeFlash()
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(30f);
             if (giantEyeBehavior.CurrentHealth ==3)
             {
                 _shouldEyeFlash= true;
