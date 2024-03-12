@@ -30,6 +30,19 @@ public class CameraManager : MonoBehaviour
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantFightEnd, ZoomInOnDoorOpen);
         EventManagerScript.Instance.StartListening(EventManagerScript.GiantAttitude, ZoomInOnGiant);
         EventManagerScript.Instance.StartListening(EventManagerScript.LeavingGiantTemple, SetGiantBattleCamera);
+        EventManagerScript.Instance.StartListening(EventManagerScript.PlayerWin, OnPlayerWin);
+
+    }
+
+    private void OnPlayerWin(object arg0)
+    {
+        // tween the VirtualCameraCinemachine's filef of view to 32
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "from", cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView,
+            "to", 30f,
+            "time", 2,
+            "onupdate", "UpdateGiantBattleCamera",
+            "easetype", iTween.EaseType.easeOutSine));
     }
 
 
@@ -148,4 +161,6 @@ public class CameraManager : MonoBehaviour
         cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
         cameraPath.gameObject.GetComponent<CinemachineVirtualCamera>().LookAt = player.transform;
     }
+    
+    
 }
