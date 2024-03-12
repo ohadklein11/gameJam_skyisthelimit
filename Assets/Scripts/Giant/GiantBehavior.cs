@@ -86,7 +86,6 @@ namespace Giant
             {
                 if (_shouldEyeFlash)
                 {
-                    Debug.Log("Start eye flash");
                     if (_eyeFlashTween == null)
                     {
                         _eyeFlashTween=eyeFlash.DOFade(0.4f, .5f).SetEase(Ease.InCubic).SetLoops(-1, LoopType.Yoyo);
@@ -95,7 +94,6 @@ namespace Giant
             }
             else
             {
-                Debug.Log("Stopping eye flash");
                 Color currentEyeColor = eyeFlash.color;
                 if (_eyeFlashTween != null)
                     eyeFlash.color = new Color(currentEyeColor.r, currentEyeColor.g, currentEyeColor.b, 0);
