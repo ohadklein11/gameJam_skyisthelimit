@@ -1451,6 +1451,8 @@ MonoBehaviour:
   shaderManager: {fileID: 0}
   tearsLeft: {fileID: 8101322297881001123}
   tearsRight: {fileID: 7928693814884391537}
+  tpToGiantDoorsKey: 283
+  decreaseGiantHp: 284
 --- !u!1 &363614169150753207
 GameObject:
   m_ObjectHideFlags: 0
@@ -31366,12 +31368,12 @@ PrefabInstance:
     - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.6
+      value: -19.8
       objectReference: {fileID: 0}
     - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30.11
+      value: 38.1
       objectReference: {fileID: 0}
     - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
         type: 3}
@@ -31609,12 +31611,12 @@ PrefabInstance:
     - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34.968
+      value: 67.106
       objectReference: {fileID: 0}
     - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 52.4
+      value: 63.476
       objectReference: {fileID: 0}
     - target: {fileID: 427923965434013513, guid: 6cbd1d6246ff5dd4fa1219c5807991b8,
         type: 3}
