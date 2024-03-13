@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -128,6 +128,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4778774246798009184, guid: 9dec0a8296862ed49bbfd79b58bd623a,
     type: 3}
   m_PrefabInstance: {fileID: 7912225647902008079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &22301300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8245124610960180263, guid: 7576c602cf2cd8240828bbc841b0f0d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4490442525235482395}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &27864256 stripped
 GameObject:
@@ -261,6 +267,20 @@ MonoBehaviour:
   yBottomLimitCold: 19.76249
   yTopLimit: 51.91629
   yBottomLimitWarm: 0.810342
+--- !u!114 &129073845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27864256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e56f25b4ba30ec4b866a8659c2d2ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 48291942}
+  snow: {fileID: 838962856}
 --- !u!1 &161103944 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8061519904514568013, guid: ad2e06ed4f408ef4d9d9b6082d75a08b,
@@ -326,6 +346,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2821761661271977530, guid: c0e749eee2e863647b9df3a2259d2169,
     type: 3}
   m_PrefabInstance: {fileID: 6592512460851996735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &838962856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3355205859437923552, guid: 9dec0a8296862ed49bbfd79b58bd623a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7912225647902008079}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &920784230 stripped
 GameObject:
@@ -540,12 +566,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 555061286655187432, guid: abbb03c84bd858f4e9caffe36c6f8196,
     type: 3}
   m_PrefabInstance: {fileID: 1217741902747467014}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1945912558 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1940089631337843060, guid: ad2e06ed4f408ef4d9d9b6082d75a08b,
-    type: 3}
-  m_PrefabInstance: {fileID: 5329860172892372540}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1945912559 stripped
 Transform:
@@ -1175,6 +1195,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 129073836}
+    - targetCorrespondingSourceObject: {fileID: 399148348744229765, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 129073845}
   m_SourcePrefab: {fileID: 100100000, guid: f700af0de43d66e41a20b7b6be39af5b, type: 3}
 --- !u!1001 &5329860172892372540
 PrefabInstance:
@@ -1638,6 +1662,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1478138009}
     m_Modifications:
+    - target: {fileID: 2007462689911288073, guid: 9dec0a8296862ed49bbfd79b58bd623a,
+        type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[1]
+      value: 
+      objectReference: {fileID: 22301300}
     - target: {fileID: 3140409873618492095, guid: 9dec0a8296862ed49bbfd79b58bd623a,
         type: 3}
       propertyPath: player
@@ -1648,11 +1677,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Level
       objectReference: {fileID: 0}
-    - target: {fileID: 4252443501416880443, guid: 9dec0a8296862ed49bbfd79b58bd623a,
-        type: 3}
-      propertyPath: tutorial
-      value: 
-      objectReference: {fileID: 1945912558}
     - target: {fileID: 4551849060862192604, guid: 9dec0a8296862ed49bbfd79b58bd623a,
         type: 3}
       propertyPath: EButton
