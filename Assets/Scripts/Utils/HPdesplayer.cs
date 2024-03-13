@@ -42,7 +42,7 @@ public class HPdesplayer : MonoBehaviour
             valTween?.Kill();
             sizeTween?.Kill();
             valTween = hpSlider.DOFillAmount(newFill, 1f).SetEase(Ease.OutCubic);
-            sizeTween = hpTransform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutSine);
+            sizeTween = hpTransform.DOScale(new Vector3(2.4f, 2.4f, 2.4f), 0.5f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutSine);
             _curHP = curHP;
         }
     }
