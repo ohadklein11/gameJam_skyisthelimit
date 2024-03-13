@@ -85,6 +85,7 @@ namespace Player
         private bool _startWalking;
         private float _climbCooldown;
         [SerializeField] private AudioSource audioLand;
+        private float _audioLandVolume;
 
         private void Start()
         {
@@ -98,6 +99,7 @@ namespace Player
             _originalYCameraOffset = _transposer.m_TrackedObjectOffset.y;
             _climbHeight = 0;
             _climbStartHeight = 0;
+            _audioLandVolume = audioLand.volume;
         }
 
         private void Update()
@@ -135,10 +137,15 @@ namespace Player
                 if (_fallingFirstHeight - transform.position.y >= minFallHeightForDust)
                 {
                     var position = transform.position;
-                    audioLand.Play();
                     VFXManager.PlayDustVFX(new Vector3(position.x, position.y - _spriteRenderer.bounds.size.y + .1f,
                         position.z));
+                    audioLand.volume = _audioLandVolume;
                 }
+                else
+                {
+                    audioLand.volume = _audioLandVolume * .75f;
+                }
+                audioLand.Play();
 
                 if (_wasFalling)
                 {

@@ -660,7 +660,7 @@ MonoBehaviour:
   jumpGravity: 1.5
   fallGravity: 2.5
   virtualCamera: {fileID: 0}
-  minFallHeightForDust: 0.8
+  minFallHeightForDust: 2
   audioLand: {fileID: 867319649867385399}
   maxYOffset: 2
 --- !u!114 &3803056219058540739
@@ -1194,7 +1194,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a96533160de746446a4f17205b185cce, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 0.7
   Loop: 0
   Mute: 0
