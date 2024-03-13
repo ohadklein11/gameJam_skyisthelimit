@@ -22,6 +22,7 @@ public class HealthFiller : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             EventManagerScript.Instance.TriggerEvent(EventManagerScript.HealthRecovery, healthValue);
+            AudioManager.PlayHealthUp();
             Destroy(gameObject);
         }
     }

@@ -2074,6 +2074,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 48291942}
+    - target: {fileID: 4614142689733721098, guid: f700af0de43d66e41a20b7b6be39af5b,
+        type: 3}
+      propertyPath: healthSound
+      value: 
+      objectReference: {fileID: 1405458121}
     - target: {fileID: 4815004651005007655, guid: f700af0de43d66e41a20b7b6be39af5b,
         type: 3}
       propertyPath: player

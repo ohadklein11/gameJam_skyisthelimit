@@ -40,6 +40,7 @@ public class AudioManager : MonoBehaviour
     private bool _isLoseBackgroundSoundsNull;
     private bool _isWinBackgroundMusicsNull;
     private bool _isrunningSoundNull;
+    [SerializeField] private AudioSource healthSound;
 
     private static AudioManager Instance { get; set; }
 
@@ -201,6 +202,10 @@ public class AudioManager : MonoBehaviour
         beanSound.volume = Mathf.Max(.2f, .7f - Vector3.Distance(player.position, pos) / 20f);
         beanSound.Play();
     }
+    private void PlayHealthUpSound()
+    {
+       healthSound.Play();
+    }
     
     public static void StopCurrentBGM() => Instance.StopSound(_curAudio);
     public static void PlayStartBackground() => Instance.PlayStartBackgroundMusic();
@@ -218,5 +223,5 @@ public class AudioManager : MonoBehaviour
     public static void PlayJump() => Instance.PlayJumpSound();
 
     public static void PlayBeanHitSFX(Vector3 pos) => Instance.PlayBeanHitSound(pos);
-    
+    public static void PlayHealthUp() => Instance.PlayHealthUpSound();
 }
