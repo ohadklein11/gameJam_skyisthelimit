@@ -33885,6 +33885,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snow
       objectReference: {fileID: 0}
+    - target: {fileID: 6398704857127075362, guid: 5d26c8251ee47774a818534dbc5edc90,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892313669184799691, guid: 5d26c8251ee47774a818534dbc5edc90,
+        type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7892313669184799691, guid: 5d26c8251ee47774a818534dbc5edc90,
         type: 3}
       propertyPath: ShapeModule.type
