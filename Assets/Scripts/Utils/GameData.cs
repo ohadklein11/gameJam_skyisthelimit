@@ -54,6 +54,7 @@ namespace Utils
             escaping = false;
             openedGiantDoors = false;
             _curPlayerLifePoints = maxPlayerLifePoints;
+            Time.timeScale = 1;
         }
         public static void Restart() => Instance.OnRestart();
         

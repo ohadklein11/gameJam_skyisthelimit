@@ -17,12 +17,18 @@ namespace Utils
         }
 
         void Update() {
-            if (Input.GetKeyDown(_restartKey) && !restart) {
-                restart = true;  
-                Debug.Log("Restarted");
-                GameData.Restart();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (Input.GetKeyDown(_restartKey) && !restart)
+            {
+                RestartGame();
             }
+        }
+
+        public void RestartGame()
+        {
+            restart = true;  
+            Debug.Log("Restarted");
+            GameData.Restart();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
