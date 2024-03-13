@@ -198,7 +198,7 @@ public class AudioManager : MonoBehaviour
     
     private void PlayBeanHitSound(Vector3 pos)
     {
-        beanSound.volume = Mathf.Max(0f, .7f - Mathf.Abs(player.position.x - pos.x) / 12f);
+        beanSound.volume = Mathf.Max(.2f, .7f - Vector3.Distance(player.position, pos) / 20f);
         beanSound.Play();
     }
     
