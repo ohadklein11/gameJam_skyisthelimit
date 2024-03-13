@@ -31,6 +31,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource[] jumpSounds;
     [SerializeField] private AudioSource beanSound;
     
+    [SerializeField] private Transform player;
+    
     private bool _isStartBackgroundMusicNull;
     private bool _isUpBackgroundMusicNull;
     private bool _isDownBackgroundMusicNull;
@@ -194,8 +196,9 @@ public class AudioManager : MonoBehaviour
         PlayRandomSound(jumpSounds);
     }
     
-    private void PlayBeanHitSound()
+    private void PlayBeanHitSound(Vector3 pos)
     {
+        beanSound.volume = Mathf.Max(0f, .7f - Mathf.Abs(player.position.x - pos.x) / 12f);
         beanSound.Play();
     }
     
@@ -214,6 +217,6 @@ public class AudioManager : MonoBehaviour
     public static void StopRunning() => Instance.StopRunningSound();
     public static void PlayJump() => Instance.PlayJumpSound();
 
-    public static void PlayBeanHitSFX() => Instance.PlayBeanHitSound();
+    public static void PlayBeanHitSFX(Vector3 pos) => Instance.PlayBeanHitSound(pos);
     
 }

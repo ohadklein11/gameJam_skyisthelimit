@@ -140,6 +140,6 @@ public class Bean : MonoBehaviour
     private void OnDestroy()
     {
         VFXManager.PlayBeanDustVFX(transform.position);
-        AudioManager.PlayBeanHitSFX();
+        AudioManager.PlayBeanHitSFX(transform.position);
     }
 }
