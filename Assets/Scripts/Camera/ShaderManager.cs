@@ -103,12 +103,12 @@ public class ShaderManager : MonoBehaviour
         DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, _originalFog, time);
     }
     
-    public void OriginalToCold(float time)
+    public void OriginalToCold(float time, Ease ease=Ease.Linear)
     {
-        directionalLight.DOColor(coldLightFilter, time);
-        DOTween.To(() => directionalLight.colorTemperature, x => directionalLight.colorTemperature = x, coldLightTemperature, time);
-        directionalLight.DOIntensity(coldLightIntensity, time);
-        mainCamera.DOColor(coldCameraBackground, time);
-        DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, coldFog, time);
+        directionalLight.DOColor(coldLightFilter, time).SetEase(ease);
+        DOTween.To(() => directionalLight.colorTemperature, x => directionalLight.colorTemperature = x, coldLightTemperature, time).SetEase(ease);
+        directionalLight.DOIntensity(coldLightIntensity, time).SetEase(ease);
+        mainCamera.DOColor(coldCameraBackground, time).SetEase(ease);
+        DOTween.To(() => RenderSettings.fogColor, x => RenderSettings.fogColor = x, coldFog, time).SetEase(ease);
     }
 }

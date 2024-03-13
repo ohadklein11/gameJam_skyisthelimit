@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Globalization;
 using Cinemachine;
 using DG.Tweening;
 using Giant;
@@ -114,7 +115,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         yield return new WaitForSeconds(1f);
         shaderManager.ColdToOriginal(1.5f);
         yield return new WaitForSeconds(4f);
-        shaderManager.OriginalToCold(0f);
+        shaderManager.OriginalToCold(.9f, Ease.InCubic);
     }
 
     public void TookGoose()
@@ -134,7 +135,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         _pathFromGoose.gameObject.SetActive(false);
         _stonesTrigger.SetActive(true);
         _beansShooting.canShoot = true;
-        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,null);
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,"end");
         StartCoroutine(OpenGiantDoorsDelay());
         EButton.SetActive(true);
         CTRLButton.SetActive(true);
