@@ -152,6 +152,7 @@ public class CameraManager : MonoBehaviour
         // float fieldOfView= giant.GetComponent<PolygonCollider2D>().bounds.size.y;
 
         ZoomIn(giant.transform,zoomInOnGiant);
+        giant.GetComponent<SpriteRenderer>().sortingOrder = 4;
         gooseShimmer.enabled = true;
         gooseShimmer.spatialBlend = 0;
     }

@@ -115,7 +115,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         yield return new WaitForSeconds(1f);
         shaderManager.ColdToOriginal(1.5f);
         yield return new WaitForSeconds(4f);
-        shaderManager.OriginalToCold(.9f, Ease.InCubic);
+        shaderManager.OriginalToCold(.5f, Ease.InCubic);
     }
 
     public void TookGoose()
