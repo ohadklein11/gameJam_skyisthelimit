@@ -35,15 +35,18 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private ShaderManager shaderManager;
     [SerializeField] private ParticleSystem tearsLeft;
     [SerializeField] private ParticleSystem tearsRight;
+    [SerializeField] private KeyCode tpToGiantDoorsKey = KeyCode.F2;
+    [SerializeField] private KeyCode decreaseGiantHp = KeyCode.F3;
+
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) // todo temp to teleport to giant doors
+        if (Input.GetKeyDown(tpToGiantDoorsKey))
         {
             _player.transform.position = _openGiantDoorsTrigger.transform.position + new Vector3(-2, 1, 0);
         }
         
-        if (Input.GetKeyDown(KeyCode.P)) // todo temp to decrease giant life to 1
+        if (Input.GetKeyDown(decreaseGiantHp))
         {
             giantBehavior.gameObject.GetComponentInChildren<GiantEyeBehavior>().SetCurrentHealth(1);
             Debug.Log("Giant life decreased to 1");
