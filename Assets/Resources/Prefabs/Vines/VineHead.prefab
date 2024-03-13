@@ -224,7 +224,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fb68e49bef4c8ab4eb312877239fbe2c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -363,6 +363,7 @@ MonoBehaviour:
     type: 3}
   destroyedStemSprite: {fileID: 21300000, guid: 9157d200290b50b468f9cf6f996ce628,
     type: 3}
+  destroyed: 0
 --- !u!1 &8330332380926076352
 GameObject:
   m_ObjectHideFlags: 0
