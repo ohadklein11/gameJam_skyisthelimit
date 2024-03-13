@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Globalization;
 using Cinemachine;
 using DG.Tweening;
 using Giant;
@@ -33,15 +34,20 @@ public class GiantFightManager : Singleton<MonoBehaviour>
     [SerializeField] private AudioSource doorCloseSound;
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private ShaderManager shaderManager;
+    [SerializeField] private ParticleSystem tearsLeft;
+    [SerializeField] private ParticleSystem tearsRight;
+    [SerializeField] private KeyCode tpToGiantDoorsKey = KeyCode.F2;
+    [SerializeField] private KeyCode decreaseGiantHp = KeyCode.F3;
+
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) // todo temp to teleport to giant doors
+        if (Input.GetKeyDown(tpToGiantDoorsKey))
         {
             _player.transform.position = _openGiantDoorsTrigger.transform.position + new Vector3(-2, 1, 0);
         }
         
-        if (Input.GetKeyDown(KeyCode.P)) // todo temp to decrease giant life to 1
+        if (Input.GetKeyDown(decreaseGiantHp))
         {
             giantBehavior.gameObject.GetComponentInChildren<GiantEyeBehavior>().SetCurrentHealth(1);
             Debug.Log("Giant life decreased to 1");
@@ -109,7 +115,7 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         yield return new WaitForSeconds(1f);
         shaderManager.ColdToOriginal(1.5f);
         yield return new WaitForSeconds(4f);
-        shaderManager.OriginalToCold(0f);
+        shaderManager.OriginalToCold(.9f, Ease.InCubic);
     }
 
     public void TookGoose()
@@ -129,13 +135,15 @@ public class GiantFightManager : Singleton<MonoBehaviour>
         _pathFromGoose.gameObject.SetActive(false);
         _stonesTrigger.SetActive(true);
         _beansShooting.canShoot = true;
-        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,null);
+        EventManagerScript.Instance.TriggerEvent(EventManagerScript.GiantFightEnd,"end");
         StartCoroutine(OpenGiantDoorsDelay());
         EButton.SetActive(true);
         CTRLButton.SetActive(true);
         EButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
         CTRLButton.GetComponent<SpriteRenderer>().DOFade(1, 1f);
         backwardEnemies.SetActive(true);
+        tearsLeft.Stop();
+        tearsRight.Stop();
         AudioManager.PlayDownBackground();
         GameData.Instance.escaping = true;
     }

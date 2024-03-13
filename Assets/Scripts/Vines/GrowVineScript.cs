@@ -49,8 +49,10 @@ public class GrowVineScript : MonoBehaviour
             _firstVine = false;
             EventManagerScript.Instance.TriggerEvent(EventManagerScript.FirstVine, null);
         }
-    }
 
+        if (GameData.Instance.IsGiantFight) growAudio.volume /= 2;
+    }
+    
     void Update()
     {
         if (!_growing || _hitCeiling)

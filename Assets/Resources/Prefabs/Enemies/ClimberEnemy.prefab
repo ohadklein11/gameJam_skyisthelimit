@@ -335,6 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 6
   isVertical: 0
+  stay: 0
 --- !u!114 &1636445915207426754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,7 +833,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b0e334e63fb95c74fa2fa513e9f9af00, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 369a1159b3a617048bceff734667fadf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 3
@@ -845,7 +846,7 @@ AudioSource:
   MinDistance: 15
   MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

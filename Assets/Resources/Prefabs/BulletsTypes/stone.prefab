@@ -353,6 +353,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeDuration: 0.3
   shakeMagnitude: 1.3
-  magnitudeStopDamage: 5
+  magnitudeStopDamage: 0.5
   stoneDamage: 10
-  audioSmash: {fileID: 0}
+  audioSmash: {fileID: 5324339365844328496}

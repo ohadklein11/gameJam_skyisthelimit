@@ -146,7 +146,8 @@ public class BeansShooting : MonoBehaviour
                 GetComponent<PlayerAnimation>().PlayShootingAnimation(0);
                 InstantiateBullet(_beanPrefab);
                 _shootingCooldownWait = beanShootingCooldown;
-                cameraShake.Shake(_shootingForce / (maxShootingForce*2f), .3f);
+                if (maxShootingForce - _shootingForce < 0.01f)
+                    cameraShake.Shake(.3f, .4f);
                 _shootingForce = 0;
                 audioPeaShoot.Play();
             }

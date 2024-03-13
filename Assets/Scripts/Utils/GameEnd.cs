@@ -49,6 +49,8 @@ public class GameEnd : MonoBehaviour
         GameData.isGameStopped = true;
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         enemies.SetActive(false);
+        Time.timeScale = 0;
+
     }
         
     void FadeScreenIn(float alpha)

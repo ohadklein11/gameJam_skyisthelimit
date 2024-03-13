@@ -5,7 +5,7 @@ namespace Utils
 {
     public class Restarter : MonoBehaviour
     {
-        [SerializeField] private KeyCode _restartKey = KeyCode.R;  // todo disable
+        [SerializeField] private KeyCode _restartKey = KeyCode.F1;
         private bool restart;
     
         //restarts the game to the initial state
@@ -22,9 +22,6 @@ namespace Utils
                 Debug.Log("Restarted");
                 GameData.Restart();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-            if (Input.GetKeyDown(KeyCode.Escape)) {
-                Application.Quit();
             }
         }
     }

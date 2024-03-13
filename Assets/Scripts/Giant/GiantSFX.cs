@@ -88,8 +88,6 @@ namespace Giant
                 if (!_standRoar)
                 {
                     audioCry.mute = true;
-                    tearsLeft.Stop();
-                    tearsRight.Stop();
                     _standRoar = true;
                     audioRoar.loop = true;
                     audioRoar.Play();
